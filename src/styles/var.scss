@@ -1,16 +1,16 @@
 /* 颜色变量 */
 
 /* 行为相关颜色 */
-$uni-color-primary: #007aff;
+$uni-color-primary: #EA3598;
 $uni-color-success: #4cd964;
 $uni-color-warning: #f0ad4e;
 $uni-color-error: #dd524d;
 
 /* 文字基本颜色 */
-$uni-text-color: #333; // 基本色
+$uni-text-color: #3D3D3D; // 基本色
 $uni-text-color-inverse: #fff; // 反色
-$uni-text-color-grey: #999; // 辅助灰色，如加载更多的提示信息
-$uni-text-color-placeholder: #808080;
+$uni-text-color-grey: #9DA7B4; // 辅助灰色，如加载更多的提示信息
+$uni-text-color-placeholder: #7C818D;
 $uni-text-color-disable: #c0c0c0;
 
 /* 背景颜色 */
@@ -25,9 +25,10 @@ $uni-border-color: #c8c7cc;
 /* 尺寸变量 */
 
 /* 文字尺寸 */
-$uni-font-size-sm: 12px;
-$uni-font-size-base: 14px;
-$uni-font-size-lg: 16;
+$uni-font-size-sm: 36rpx;
+$uni-font-size-base: 36rpx;//基础的
+$uni-font-size-lg: 16px;
+
 
 /* 图片尺寸 */
 $uni-img-size-sm: 20px;
