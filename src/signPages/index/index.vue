@@ -11,10 +11,10 @@
         </view>
         <view class="btn-next">下一步</view>
         <view class="picture">
-            <img src="@/static/signIndex/text.png" alt="" />
+            <img class="img-text" src="@/static/signIndex/text.png" alt="" />
             <view>绑定签约抖音账号教程</view>
             <button>点击查看</button>
-            <img src="@/static/signIndex/logo.png" alt="" />
+            <img class="img-logo" src="@/static/signIndex/logo.png" alt="" />
         </view>
     </view>
 </template>
@@ -57,29 +57,58 @@
 .form button {
     position: absolute;
     right: 50rpx;
-    top: 18rpx;
+    top: 10rpx;
     color: $uni-color-primary;
 }
 .btn-next {
-    margin-top: 57rpx;
+    margin: 57rpx auto;
+    // margin-top: 57rpx;
     background-color: $uni-color-primary;
     color: $uni-text-color-inverse;
     font-size: 36rpx;
     text-align: center;
-    height: 80rpx;
-    line-height: 80rpx;
-    border-radius: 40rpx;
+    line-height: 104rpx;
+    border-radius: 783rpx;
     padding-left: 30rpx;
     padding-right: 30rpx;
     z-index: 1;
-    width: 284rpx;
-    height: 82rpx;
+    width: 400rpx;
+    height: 104rpx;
 }
 .picture {
+    position: relative;
     width: 696rpx;
     height: 262rpx;
     background: #e6f1fc;
     border-radius: 44rpx;
     margin-top: 172rpx;
+}
+.img-text {
+    position: absolute;
+    left: 60rpx;
+    top: 40rpx;
+    width: 150rpx;
+}
+.picture view {
+    position: absolute;
+    top: 104rpx;
+    left: 60rpx;
+    font-size: 28rpx;
+    color: $uni-text-color;
+}
+.picture button {
+    position: absolute;
+    top: 172rpx;
+    left: 60rpx;
+    width: 134rpx;
+    height: 50rpx;
+    font-size: 24rpx;
+    border-radius: 448px;
+    background: #037beb;
+    color: $uni-text-color-inverse;
+    line-height: 50rpx;
+}
+.img-logo {
+    z-index: 99;
 }
 </style>
