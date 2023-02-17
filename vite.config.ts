@@ -14,13 +14,14 @@ export default defineConfig({
             "@styles/": pathResolve("src/styles")
         }
     },
-    css: {
-        preprocessorOptions: {
-            scss: {
-                additionalData: `
-                @use "@/styles/var.scss" as *;
-                `
-            }
-        }
-    }
+    // css: {
+    //     preprocessorOptions: {
+    //         scss: {
+    //             additionalData: `
+    //             @use "@/styles/var.scss" as *;
+    //             @use "@/styles/common.scss" as *;
+    //             `
+    //         }
+    //     }
+    // }
 });
