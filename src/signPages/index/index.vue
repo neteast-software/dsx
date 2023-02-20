@@ -58,15 +58,8 @@
     right: 52rpx;
     top: 50%;
     transform: translateY(-50%);
-    // right: 50rpx;
-    // top: 10rpx;
     color: $uni-color-primary;
 }
-// .verify:after {
-//     content: "获取验证码";
-//     color: $uni-color-primary;
-//     font-size: 36rpx;
-// }
 .btn-next {
     margin: 57rpx auto;
     background-color: $uni-color-primary;

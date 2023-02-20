@@ -24,6 +24,12 @@
                     "style": {
                         "navigationBarTitleText": "签约绑定"
                     }
+                },
+                {
+                    "path": "guide/guide",
+                    "style": {
+                        "navigationBarTitleText": "签约教程"
+                    }
                 }
             ]
         }
