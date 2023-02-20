@@ -30,6 +30,12 @@
                     "style": {
                         "navigationBarTitleText": "签约教程"
                     }
+                },
+                {
+                    "path": "success/success",
+                    "style": {
+                        "navigationBarTitleText": "签约成功"
+                    }
                 }
             ]
         }

@@ -29,12 +29,6 @@
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-.container {
-    display: flex;
-    flex-direction: column;
-    // justify-content: center;
-    align-items: center;
-}
 //头像
 .profile {
     margin-top: 36rpx;
