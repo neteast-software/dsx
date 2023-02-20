@@ -35,11 +35,10 @@
     color: $uni-text-color-placeholder;
 }
 .form {
-    width: 662rpx;
     margin-top: 136rpx;
     font-size: 36rpx;
     > view {
-        width: 100%;
+        // width: 100%;
         background-color: #f0f2f5;
         margin-bottom: 44rpx;
         border-radius: 60rpx;
@@ -54,30 +53,33 @@
 .verify {
     position: relative;
 }
-.form button {
+.btn-obtain {
     position: absolute;
-    right: 50rpx;
-    top: 10rpx;
+    right: 52rpx;
+    top: 50%;
+    transform: translateY(-50%);
+    // right: 50rpx;
+    // top: 10rpx;
     color: $uni-color-primary;
 }
+// .verify:after {
+//     content: "获取验证码";
+//     color: $uni-color-primary;
+//     font-size: 36rpx;
+// }
 .btn-next {
     margin: 57rpx auto;
-    // margin-top: 57rpx;
     background-color: $uni-color-primary;
     color: $uni-text-color-inverse;
     font-size: 36rpx;
     text-align: center;
     line-height: 104rpx;
     border-radius: 783rpx;
-    padding-left: 30rpx;
-    padding-right: 30rpx;
     z-index: 1;
     width: 400rpx;
-    height: 104rpx;
 }
 .picture {
     position: relative;
-    width: 696rpx;
     height: 262rpx;
     background: #e6f1fc;
     border-radius: 44rpx;
@@ -109,6 +111,9 @@
     line-height: 50rpx;
 }
 .img-logo {
-    z-index: 99;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 262rpx;
 }
 </style>
