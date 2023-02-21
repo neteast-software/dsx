@@ -54,6 +54,12 @@
                         "navigationBarTitleText": "注册"
                     }
                 },
+                {
+                    "path": "modify/modify",
+                    "style": {
+                        "navigationBarTitleText": "修改密码"
+                    }
+                }
             ]
         }
     ],

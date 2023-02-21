@@ -28,6 +28,10 @@
 //输入验证码
 .verify {
     position: relative;
+    padding-right: 140rpx;
+    input{
+        padding-right: 165rpx;
+    }
     .btn-obtain {
         position: absolute;
         right: 52rpx;
@@ -35,6 +39,7 @@
         transform: translateY(-50%);
         color: $uni-color-primary;
         font-size: $uni-font-size-base;
+        margin-left: 140rpx;
         // font-weight: bold;
     }
 }

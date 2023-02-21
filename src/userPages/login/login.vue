@@ -1,7 +1,7 @@
 <template>
     <view class="wrap">
         <view class="wel">
-            <image src="@/static/login/logo.png" alt=""></image>
+            <image src="@/static/user/logo.png" alt=""></image>
             <view class="text">欢迎来到抖省心</view>
         </view>
         <view class="form">
