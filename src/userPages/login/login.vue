@@ -4,13 +4,16 @@
             <image src="@/static/user/logo.png" alt=""></image>
             <view class="text">欢迎来到抖省心</view>
         </view>
-        <view class="form">
-            <view class="tel"> <input type="text" placeholder="请输入手机号" /> </view>
-            <view class="verify">
+        <uni-forms class="form" ref="form" :modelValue="formData" :rules="formRules">
+            <uni-forms-item class="item" name="phoneNumber">
+                <input v-model="formData.phoneNumber" type="text" placeholder="请输入手机号" />
+                <!-- <uni-easyinput type="text" v-model="formData.phoneNumber" placeholder="请输入手机号"></uni-easyinput> -->
+            </uni-forms-item>
+            <uni-forms-item class="item verify">
                 <input type="text" placeholder="请输入验证码" />
                 <button class="btn-obtain">获取验证码</button>
-            </view>
-        </view>
+            </uni-forms-item>
+        </uni-forms>
         <view class="method">
             <button>密码登陆</button>
         </view>
@@ -18,7 +21,7 @@
             <button>忘记密码</button>
             <button>验证码登录</button>
         </view> -->
-        <view class="btn-login">登陆</view>
+        <button class="btn-login" @click="register">登陆</button>
         <view class="agree">
             <view class="hook">✔</view>
             <view>请您阅读并同意“用户协议”和“隐私政策”</view>
@@ -26,12 +29,36 @@
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import uniForms from "@dcloudio/uni-ui/lib/uni-forms/uni-forms.vue";
+import uniFormsItem from "@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
+import uniEasyinput from "@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue";
+import { reactive, ref } from "vue";
+const formData = reactive({
+    phoneNumber: "",
+    verifyCode: "",
+    password: "",
+    inviteCode: ""
+});
+const formRules = reactive({
+    phoneNumber: {
+        rules: [
+            {
+                required: true,
+                errorMessage: "请输入手机号"
+            }
+        ]
+    }
+});
+const form = ref<any>(null);
+function register() {
+    console.log("表单元素", form.value);
+    form.value.validate();
+    console.log(formData);
+}
+</script>
 
 <style scoped lang="scss">
-// .content {
-//     padding: 0 49rpx;
-// }
 .wel {
     position: relative;
     margin-top: 120rpx;
@@ -66,7 +93,8 @@
     color: $uni-text-color-inverse;
     background: $uni-color-primary;
     border-radius: 454rpx;
-    padding: 25rpx 290rpx;
+    height: 98rpx;
+    line-height: 98rpx;
 }
 .agree {
     display: flex;
