@@ -38,6 +38,23 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "userPages",
+            "pages":[
+                {
+                    "path": "login/login",
+                    "style": {
+                        "navigationBarTitleText": "登录"
+                    }
+                },
+                {
+                    "path": "register/register",
+                    "style": {
+                        "navigationBarTitleText": "注册"
+                    }
+                },
+            ]
         }
     ],
     "globalStyle": {

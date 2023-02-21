@@ -34,32 +34,7 @@
     line-height: 76rpx;
     color: $uni-text-color-placeholder;
 }
-.form {
-    margin-top: 136rpx;
-    font-size: 36rpx;
-    > view {
-        // width: 100%;
-        background-color: #f0f2f5;
-        margin-bottom: 44rpx;
-        border-radius: 60rpx;
-        padding: 22rpx 64rpx;
-        > input {
-            height: 76rpx;
-            line-height: 76rpx;
-            color: $uni-text-color-grey;
-        }
-    }
-}
-.verify {
-    position: relative;
-}
-.btn-obtain {
-    position: absolute;
-    right: 52rpx;
-    top: 50%;
-    transform: translateY(-50%);
-    color: $uni-color-primary;
-}
+
 .btn-next {
     margin: 57rpx auto;
     background-color: $uni-color-primary;
