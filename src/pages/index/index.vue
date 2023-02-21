@@ -15,12 +15,12 @@ const title = ref("Hello");
 const toSign = () => {
     console.log("toSign");
     uni.navigateTo({
-        url: "/signPages/index/index",
+        url: "/signPages/index/index"
     });
 };
 function toLog() {
     uni.navigateTo({
-        url: "/pages/log/log",
+        url: "/pages/log/log"
     });
 }
 </script>
