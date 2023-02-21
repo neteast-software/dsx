@@ -12,13 +12,13 @@
             </view>
         </view>
         <view class="method">
-            <button>密码登录</button>
+            <button>密码登陆</button>
         </view>
         <!-- <view class="method">
             <button>忘记密码</button>
             <button>验证码登录</button>
         </view> -->
-        <view class="btn-login">登录</view>
+        <view class="btn-login">登陆</view>
         <view class="agree">
             <view class="hook">✔</view>
             <view>请您阅读并同意“用户协议”和“隐私政策”</view>

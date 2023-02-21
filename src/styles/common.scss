@@ -22,12 +22,7 @@
         background-color: #f0f2f5;
         margin-bottom: 44rpx;
         border-radius: 60rpx;
-        padding: 22rpx 64rpx;
-        > input {
-            height: 76rpx;
-            line-height: 76rpx;
-            color: $uni-color-primary;
-        }
+        padding: 29rpx 36rpx;
     }
 }
 //输入验证码
@@ -40,5 +35,6 @@
         transform: translateY(-50%);
         color: $uni-color-primary;
         font-size: $uni-font-size-base;
+        // font-weight: bold;
     }
 }
