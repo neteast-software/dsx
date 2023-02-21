@@ -1,4 +1,10 @@
 {
+    // "easycom": {
+    //     "autoscan": true,
+    //     "custom": {
+    //         "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue"
+    //     }
+    // },
     "pages": [
         //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
         {
@@ -41,7 +47,7 @@
         },
         {
             "root": "userPages",
-            "pages":[
+            "pages": [
                 {
                     "path": "login/login",
                     "style": {
@@ -53,7 +59,7 @@
                     "style": {
                         "navigationBarTitleText": "注册"
                     }
-                },
+                }
             ]
         }
     ],
