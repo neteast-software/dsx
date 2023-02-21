@@ -26,9 +26,6 @@
 }
 .password {
     position: relative;
-    input {
-        padding-right: 90rpx;
-    }
 }
 .password::after {
     content: "";
