@@ -22,8 +22,9 @@
                 <input type="text" placeholder="请输入验证码" />
                 <button class="btn-obtain">获取验证码</button>
             </uni-forms-item>
-            <uni-forms-item class="item">
+            <uni-forms-item class="item password">
                 <input password type="text" placeholder="设置登录密码(6-20位数字或字母)" />
+                <img src="@/static/user/invisible.png" alt="" />
             </uni-forms-item>
             <uni-forms-item class="item">
                 <input type="text" placeholder="请输入邀请码" />
@@ -79,6 +80,19 @@ function register() {
         color: $uni-text-color;
         // font-weight: bold;
     }
+}
+.password {
+    position: relative;
+}
+.password img {
+    position: absolute;
+    top: 50%;
+    right: 32rpx;
+    transform: translateY(-50%);
+    width: 56rpx;
+    height: 56rpx;
+
+    z-index: 2;
 }
 .btn-register {
     margin-top: 334rpx;
