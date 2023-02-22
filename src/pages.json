@@ -14,6 +14,19 @@
             }
         },
         {
+            "path": "pages/course/course",
+            "style": {
+                "navigationBarTitleText": "省心学院"
+            }
+        },
+        {
+            "path": "pages/my/my",
+            "style": {
+                "navigationBarTitleText": "我的",
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "path": "pages/log/log",
             "style": {
                 "navigationBarTitleText": "日志"
@@ -75,6 +88,30 @@
             ]
         }
     ],
+    "tabBar": {
+        "color": "#7B7379",
+        "selectedColor": "#EA3598",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "static/tabbar/index.png",
+                "selectedIconPath": "static/tabbar/index-active.png",
+                "text": "首页"
+            },
+            {
+                "pagePath": "pages/course/course",
+                "iconPath": "static/tabbar/course.png",
+                "selectedIconPath": "static/tabbar/course-active.png",
+                "text": "省心学院"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "iconPath": "static/tabbar/my.png",
+                "selectedIconPath": "static/tabbar/my-active.png",
+                "text": "我的"
+            }
+        ]
+    },
     "globalStyle": {
         "navigationBarTextStyle": "black",
         "navigationBarTitleText": "uni-app",

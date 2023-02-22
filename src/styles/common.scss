@@ -1,9 +1,15 @@
 @use "@/styles/var.scss" as *;
 // 整体距左右边框44rpx
 .wrap {
+    position: relative;
     padding: 0 48rpx;
+    height: 100%;
+    overflow-y: auto;
     &.small {
         padding: 0 32rpx;
+    }
+    &.grey {
+        background-color: #f7f8fa;
     }
 }
 .relative {
@@ -53,4 +59,13 @@
         // font-weight: bold;
     }
 }
-//输入验证码
+.font-middle {
+    font-size: $uni-font-size-middle;
+}
+.bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
