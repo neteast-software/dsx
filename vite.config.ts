@@ -24,4 +24,15 @@ export default defineConfig({
     //         }
     //     }
     // }
+    server: {
+        cors: true,
+        proxy: {
+            "^/api": {
+                target: "http://192.168.3.106:8080",
+                changeOrigin: true,
+                secure: false,
+                rewrite: (path) => path.replace(/^\/api/, "")
+            }
+        }
+    }
 });
