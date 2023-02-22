@@ -19,8 +19,8 @@
             </view>
             <view v-if="showPassword" class="item-wrap">
                 <uni-forms-item class="item password" name="password">
-                    <input type="text" v-model="formData.password" placeholder="设置登录密码(6-20位数字或字母)" />
-                </uni-forms-item>
+                    <input type="text" v-model="formData.password" placeholder="设置登录密码(6-20位数字或字母)"
+                /></uni-forms-item>
                 <image
                     class="eye"
                     src="@/static/user/visible.png"
@@ -57,6 +57,7 @@
 <script setup lang="ts">
 import uniForms from "@dcloudio/uni-ui/lib/uni-forms/uni-forms.vue";
 import uniFormsItem from "@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
+// import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { reactive, ref, computed, toRaw } from "vue";
 import { formRules } from "./register";
 import { usePassword, useCountDown } from "../form";
