@@ -18,6 +18,12 @@
             "style": {
                 "navigationBarTitleText": "日志"
             }
+        },
+        {
+            "path": "pages/manage/manage",
+            "style": {
+                "navigationBarTitleText": "签约管理"
+            }
         }
     ],
     "subPackages": [

@@ -1,6 +1,6 @@
 <template>
     <view class="container">
-        <img class="profile" src="@/static/guide/profile.png" alt="" mode="aspectFill" />
+        <image class="profile" src="@/static/guide/profile.png" alt="" mode="aspectFill"></image>
         <view class="btn-tutorial">确认签约教程</view>
         <view class="text1">抖省心</view>
         <view class="text2"> 您将签约绑定上方抖音账号 </view>
