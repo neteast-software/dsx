@@ -1,0 +1,9 @@
+@use "@/styles/var.scss" as *;
+.eye {
+    position: absolute;
+    top: 50%;
+    right: 32rpx;
+    transform: translateY(-50%);
+    width: 56rpx;
+    height: 56rpx;
+}

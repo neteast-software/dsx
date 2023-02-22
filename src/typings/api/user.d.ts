@@ -1,0 +1,3 @@
+interface LoginByPasswordResult {
+    data: string;
+}

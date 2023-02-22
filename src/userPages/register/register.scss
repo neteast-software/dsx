@@ -1,0 +1,40 @@
+.wel {
+    position: relative;
+    margin-top: 70rpx;
+    image {
+        width: 76rpx;
+        height: 76rpx;
+    }
+    .text {
+        position: absolute;
+        top: 0;
+        left: 98rpx;
+        line-height: 76rpx;
+        font-size: 44rpx;
+        color: $uni-text-color;
+    }
+}
+.password {
+    position: relative;
+}
+.password img {
+    position: absolute;
+    top: 50%;
+    right: 32rpx;
+    transform: translateY(-50%);
+    width: 56rpx;
+    height: 56rpx;
+    z-index: 2;
+}
+.btn-register {
+    margin-top: 334rpx;
+    font-size: $uni-font-size-lg;
+    color: $uni-text-color-inverse;
+    background: #9e8eaf;
+    border-radius: 454rpx;
+    height: 98rpx;
+    line-height: 98rpx;
+    &.active {
+        background-color: $uni-color-primary;
+    }
+}
