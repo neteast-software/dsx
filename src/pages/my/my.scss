@@ -1,0 +1,103 @@
+.wrap-bg {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.userbar {
+    margin-top: 176rpx;
+    margin-bottom: 70rpx;
+    .avatar {
+        width: 124rpx;
+        height: 124rpx;
+    }
+    .content {
+        margin: 0 26rpx;
+        .title {
+            font-size: $uni-font-size-middle;
+            margin-bottom: 10rpx;
+        }
+        .intro {
+            color: $uni-text-color-tip;
+            font-size: $uni-font-size-base;
+        }
+    }
+    .setting {
+        width: 46rpx;
+        height: 46rpx;
+    }
+}
+.signbar {
+    padding: 38rpx 48rpx;
+    color: $uni-text-light-black;
+    border-radius: 28rpx;
+    overflow: hidden;
+    margin-bottom: 24rpx;
+    .vip {
+        width: 48rpx;
+        height: 48rpx;
+        margin-right: 8rpx;
+    }
+    .arrow {
+        width: 40rpx;
+        height: 40rpx;
+        margin-left: 26rpx;
+    }
+}
+.tabbar {
+    .tab {
+        width: 336rpx;
+        height: 156rpx;
+        padding: 34rpx 30rpx;
+        border-radius: 36rpx;
+        position: relative;
+        margin-bottom: 24rpx;
+        &.fan {
+            background: linear-gradient(244deg, #ffdbd0 13%, #ffecea 94%);
+            .tab-title {
+                color: $uni-color-primary;
+            }
+        }
+        &.share {
+            background: linear-gradient(244deg, #e3efff 4%, #e6f4ff 88%);
+            .tab-title {
+                color: $uni-color-inverse;
+            }
+        }
+        .tab-title {
+            font-size: $uni-font-size-middle;
+            font-weight: bold;
+            margin-bottom: 10rpx;
+        }
+        .intro {
+            font-size: $uni-font-size-sm;
+            color: $uni-text-color-tip;
+        }
+        .tab-img {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+        }
+    }
+}
+.navlist {
+    background-color: #fff;
+    padding: 32rpx;
+    border-radius: 36rpx;
+    .nav {
+        padding: 24rpx 0;
+        .nav-icon {
+            width: 52rpx;
+            height: 52rpx;
+        }
+        .nav-content {
+            margin-right: 12rpx;
+            margin-left: 26rpx;
+        }
+        .tip {
+            color: $uni-text-color-tip;
+            font-size: $uni-font-size-sm;
+        }
+    }
+}

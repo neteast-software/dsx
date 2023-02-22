@@ -1,16 +1,16 @@
 <template>
     <view class="container">
-        <img class="profile" src="@/static/guide/profile.png" alt="" mode="aspectFill" />
+        <image class="profile" src="@/static/guide/profile.png" alt="" mode="aspectFill"></image>
         <view class="btn-tutorial">确认签约教程</view>
         <view class="text1">抖省心</view>
         <view class="text2"> 您将签约绑定上方抖音账号 </view>
-        <view class="step">
+        <!-- <view class="step">
             <view class="ring"><view>第一步</view></view>
             <view class="dashed"></view>
             <view class="ring"><view>第二步</view></view>
             <view class="dashed"></view>
             <view class="ring"><view>第三步</view></view>
-        </view>
+        </view> -->
         <view class="tutorial">
             <view>
                 <view class="num">1</view>
@@ -24,6 +24,11 @@
         </view>
         <view class="btn-confirm">我已确认签约绑定</view>
     </view>
+    <!-- 结算绑定 -->
+    <!-- <view class="container">
+        <view class="btn-tutorial">确认结算教程</view>
+        <view class="btn-confirm">我已确认结算绑定</view>
+    </view> -->
 </template>
 
 <script setup lang="ts"></script>
@@ -58,57 +63,57 @@
     color: $uni-text-color-placeholder;
 }
 //步骤
-.step {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 62rpx;
-}
-.ring {
-    position: relative;
-    width: 40rpx;
-    height: 40rpx;
-    border-radius: 48rpx;
-    margin-bottom: 8rpx;
-    border: 10rpx solid #d0bcc5;
-    background: $uni-text-color-inverse;
-}
-.step > :first-child {
-    border: 10rpx solid $uni-color-primary;
-}
-.ring > view {
-    position: absolute;
-    top: 30rpx;
-    left: 50%;
-    transform: translateX(-50%);
-    line-height: 24px;
-    font-size: $uni-font-size-sm;
-    color: $uni-text-color-placeholder;
-    font-size: $uni-font-size-base;
-    white-space: nowrap;
-    letter-spacing: 4rpx;
-}
-.dashed {
-    width: 212rpx;
-    height: 2rpx;
-    margin-top: 15rpx;
-    border: 2rpx dashed #b9c2ce;
-}
+// .step {
+//     display: flex;
+//     justify-content: space-evenly;
+//     margin-top: 62rpx;
+// }
+// .ring {
+//     position: relative;
+//     width: 40rpx;
+//     height: 40rpx;
+//     border-radius: 48rpx;
+//     margin-bottom: 8rpx;
+//     border: 10rpx solid #d0bcc5;
+//     background: $uni-text-color-inverse;
+// }
+// .step > :first-child {
+//     border: 10rpx solid $uni-color-primary;
+// }
+// .ring > view {
+//     position: absolute;
+//     top: 30rpx;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     line-height: 24px;
+//     font-size: $uni-font-size-sm;
+//     color: $uni-text-color-placeholder;
+//     font-size: $uni-font-size-base;
+//     white-space: nowrap;
+//     letter-spacing: 4rpx;
+// }
+// .dashed {
+//     width: 212rpx;
+//     height: 2rpx;
+//     margin-top: 15rpx;
+//     border: 2rpx dashed #b9c2ce;
+// }
 .tutorial {
     position: relative;
     background: #f0f2f5;
-    margin-top: 100rpx;
+    margin-top: 64rpx;
     border-radius: 32rpx;
 }
-.tutorial::before {
-    content: "";
-    width: 0;
-    height: 0;
-    border: 50rpx solid transparent;
-    border-bottom: 50rpx solid #f0f2f5;
-    position: absolute;
-    top: -75rpx;
-    left: 25rpx;
-}
+// .tutorial::before {
+//     content: "";
+//     width: 0;
+//     height: 0;
+//     border: 50rpx solid transparent;
+//     border-bottom: 50rpx solid #f0f2f5;
+//     position: absolute;
+//     top: -75rpx;
+//     left: 25rpx;
+// }
 .tutorial > view {
     display: flex;
     flex-direction: row;
@@ -131,7 +136,7 @@
     margin: 0 40rpx 44rpx 40rpx;
 }
 .btn-confirm {
-    margin-top: 62rpx;
+    margin-top: 211.88rpx;
     padding: 26rpx 74rpx;
     background-color: $uni-color-primary;
     color: $uni-text-color-inverse;

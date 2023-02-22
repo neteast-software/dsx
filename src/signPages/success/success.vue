@@ -1,8 +1,15 @@
 <template>
     <view class="container">
         <img src="@/static/success/logo.png" alt="" />
-        <view class="text">您已签约绑定以下抖音账号</view>
-        <view class="btn">去结算绑定</view>
+        <view>
+            <view class="text">您已签约绑定以下抖音账号</view>
+            <view class="btn">去结算绑定</view>
+        </view>
+        <!-- 结算绑定 -->
+        <!-- <view>
+            <view class="text">您已签约绑定以下抖音账号</view>
+            <view class="btn">去授权</view>
+        </view> -->
     </view>
 </template>
 

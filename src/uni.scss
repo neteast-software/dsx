@@ -13,6 +13,11 @@
  */
 @use "@/styles/var.scss" as *;
 @use "@/styles/common.scss" as *;
+@use "@/styles/form.scss" as *;
+@use "@/styles/layout.scss" as *;
+uni-page-body {
+    height: 100%;
+}
 page,
 view,
 scroll-view,

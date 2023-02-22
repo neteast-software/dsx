@@ -1,6 +1,7 @@
 const routes = {
     index: "/pages/index/index",
-    login: "/pages/login/login"
+    login: "/userPages/login/login",
+    register: "/userPages/register/register"
 } as const;
 type RouteName = keyof typeof routes;
 type RoutePath = typeof routes[RouteName];
