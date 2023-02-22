@@ -1,0 +1,62 @@
+.wel {
+    margin-top: 104rpx;
+    color: $uni-text-color;
+    font-size: 56rpx;
+    line-height: 76rpx;
+}
+.bind {
+    margin-top: 14rpx;
+    font-size: 40rpx;
+    line-height: 76rpx;
+    color: $uni-text-color-placeholder;
+}
+
+.btn-next {
+    margin: 57rpx auto;
+    background-color: $uni-color-primary;
+    color: $uni-text-color-inverse;
+    font-size: 36rpx;
+    text-align: center;
+    line-height: 104rpx;
+    border-radius: 783rpx;
+    z-index: 1;
+    width: 400rpx;
+}
+.picture {
+    position: relative;
+    height: 262rpx;
+    background: #e6f1fc;
+    border-radius: 44rpx;
+    margin-top: 172rpx;
+}
+.img-text {
+    position: absolute;
+    left: 60rpx;
+    top: 40rpx;
+    width: 150rpx;
+}
+.picture view {
+    position: absolute;
+    top: 104rpx;
+    left: 60rpx;
+    font-size: 28rpx;
+    color: $uni-text-color;
+}
+.picture button {
+    position: absolute;
+    top: 172rpx;
+    left: 60rpx;
+    width: 134rpx;
+    height: 50rpx;
+    font-size: 24rpx;
+    border-radius: 448px;
+    background: #037beb;
+    color: $uni-text-color-inverse;
+    line-height: 50rpx;
+}
+.img-logo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 262rpx;
+}

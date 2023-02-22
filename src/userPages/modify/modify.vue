@@ -2,20 +2,48 @@
     <view class="wrap">
         <view class="wel"> 请开始设置新密码 </view>
         <uni-forms class="form" ref="form" :modelValue="formData" :rules="formRules">
-            <uni-forms-item class="item" name="phoneNumber">
-                <input v-model="formData.phoneNumber" type="text" placeholder="请输入手机号" />
-                <!-- <uni-easyinput type="text" v-model="formData.phoneNumber" placeholder="请输入手机号"></uni-easyinput> -->
-            </uni-forms-item>
-            <uni-forms-item class="item verify">
-                <input type="text" placeholder="请输入验证码" />
-                <button class="btn-obtain">获取验证码</button>
-            </uni-forms-item>
-            <uni-forms-item class="item password">
-                <input password type="text" placeholder="设置登录密码(6-20位数字或字母)" />
-                <img src="@/static/user/invisible.png" alt="" />
-            </uni-forms-item>
+            <view class="item-wrap">
+                <uni-forms-item class="item" name="mobile">
+                    <input v-model="formData.mobile" type="text" placeholder="请输入手机号" />
+                    <!-- <uni-easyinput type="text" v-model="formData.phoneNumber" placeholder="请输入手机号"></uni-easyinput> -->
+                </uni-forms-item>
+            </view>
+            <view class="item-wrap">
+                <uni-forms-item class="item verify" name="captcha">
+                    <input type="text" v-model="formData.captcha" placeholder="请输入验证码" />
+                </uni-forms-item>
+                <view v-if="countDown" class="btn-obtain" style="color: #7b7379">剩余{{ countDown }}s</view>
+                <button v-else class="btn-obtain" @tap="sendCaptcha">获取验证码</button>
+            </view>
+            <view v-if="showPassword" class="item-wrap">
+                <uni-forms-item class="item password">
+                    <input type="text" v-model="formData.password" placeholder="设置登录密码(6-20位数字或字母)" />
+                </uni-forms-item>
+                <image
+                    class="eye"
+                    src="@/static/user/visible.png"
+                    mode="widthFix"
+                    @tap="togglePasswordShow(false)"
+                ></image>
+            </view>
+            <view v-else class="item-wrap">
+                <uni-forms-item class="item password" name="password">
+                    <input
+                        password
+                        type="text"
+                        v-model="formData.password"
+                        placeholder="设置登录密码(6-20位数字或字母)"
+                    />
+                </uni-forms-item>
+                <image
+                    class="eye"
+                    src="@/static/user/invisible.png"
+                    mode="widthFix"
+                    @tap="togglePasswordShow(true)"
+                ></image>
+            </view>
         </uni-forms>
-        <button class="btn-submit" @click="register">确定</button>
+        <button class="btn-submit" :class="{ active: isFormAllFilled }" @click="register">确定</button>
     </view>
 </template>
 
@@ -23,61 +51,39 @@
 import uniForms from "@dcloudio/uni-ui/lib/uni-forms/uni-forms.vue";
 import uniFormsItem from "@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
 import uniEasyinput from "@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue";
-import { reactive, ref } from "vue";
+import { reactive, ref, computed, toRaw } from "vue";
+import { formRules } from "./modify";
+import { usePassword, useCountDown } from "../form";
+import { sendSms, registerCount } from "@/api/dsx/user";
+import router from "@/utils/router";
+const form = ref<any>(null);
 const formData = reactive({
-    phoneNumber: "",
-    verifyCode: "",
+    mobile: "",
+    captcha: "",
     password: "",
     inviteCode: ""
 });
-const formRules = reactive({
-    phoneNumber: {
-        rules: [
-            {
-                required: true,
-                errorMessage: "请输入手机号"
-            }
-        ]
-    }
+const { showPassword, togglePasswordShow } = usePassword();
+const { countDown, startCountDown } = useCountDown();
+const isFormAllFilled = computed(() => {
+    return formData.mobile && formData.password && formData.captcha && formData.inviteCode;
 });
-const form = ref<any>(null);
-function register() {
-    console.log("表单元素", form.value);
-    form.value.validate();
-    console.log(formData);
+
+async function sendCaptcha() {
+    if (!form.value) return;
+    await form.value.validateField(["mobile"]);
+    await sendSms(formData.mobile);
+    startCountDown();
+}
+
+async function register() {
+    await form.value.validate();
+    if (!isFormAllFilled.value) return;
+    await registerCount(toRaw(formData));
+    router.push("login", { query: { mobile: formData.mobile, password: formData.password } });
 }
 </script>
 
 <style scoped lang="scss">
-.wel {
-    position: relative;
-    margin-top: 120rpx;
-    line-height: 76rpx;
-    font-size: 44rpx;
-    color: $uni-text-color;
-    // font-weight: bold;
-}
-.password {
-    position: relative;
-}
-.password img {
-    position: absolute;
-    top: 50%;
-    right: 32rpx;
-    transform: translateY(-50%);
-    width: 56rpx;
-    height: 56rpx;
-
-    z-index: 2;
-}
-.btn-submit {
-    margin-top: 228rpx;
-    font-size: $uni-font-size-lg;
-    color: $uni-text-color-inverse;
-    // background: $uni-color-primary;
-    background: #9e8eaf;
-    border-radius: 454rpx;
-    height: 98rpx;
-    line-height: 98rpx;
-}
+@import "./modify.scss";
 </style>
