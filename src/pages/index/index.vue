@@ -1,54 +1,21 @@
 <template>
-    <view class="content">
-        <image class="logo" src="/static/logo.png" />
-        <view class="text-area">
-            <text class="title">{{ title }}</text>
-        </view>
-        <button @click="toSign">跳转</button>
-        <button @click="toLog">查看日志</button>
-    </view>
+    <Header></Header>
+    <Banner></Banner>
+    <Recommend></Recommend>
+    <GoodsList></GoodsList>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const title = ref("Hello");
-const toSign = () => {
-    console.log("toSign");
-    uni.navigateTo({
-        url: "/signPages/index/index"
-    });
-};
-function toLog() {
-    uni.navigateTo({
-        url: "/pages/log/log"
-    });
-}
+import { ref, reactive } from "vue";
+import Header from "./header.vue";
+import Banner from "./banner.vue";
+import Recommend from "./recommend.vue";
+import GoodsList from "./goods_list.vue";
 </script>
 
-<style>
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.logo {
-    height: 200rpx;
-    width: 200rpx;
-    margin-top: 200rpx;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 50rpx;
-}
-
-.text-area {
-    display: flex;
-    justify-content: center;
-}
-
-.title {
-    font-size: 36rpx;
-    color: #8f8f94;
+<style scoped lang="scss">
+page {
+    background-image: linear-gradient(180deg, #fde4d8 1%, rgba(247, 248, 250, 1) 20%);
+    background-size: 100% 100%;
 }
 </style>
