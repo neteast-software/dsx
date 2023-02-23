@@ -6,3 +6,9 @@ uni-page-body {
     padding-top: 20rpx;
     padding-bottom: 20rpx;
 }
+
+scroll-view ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background-color: transparent;
+}

@@ -21,7 +21,7 @@
             </view>
         </view>
         <view class="tabbar flex-between">
-            <view class="tab fan">
+            <view class="tab fan" @tap="toFan">
                 <image class="tab-img" src="@/assets/imgs/fan.png" mode="heightFix"></image>
                 <view class="tab-title">我的粉丝</view>
                 <view class="intro">关注你的人</view>
@@ -84,6 +84,9 @@ function toSetting() {
 }
 function toModify() {
     router.push("modify");
+}
+function toFan() {
+    router.push("fan");
 }
 </script>
 

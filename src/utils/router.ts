@@ -1,9 +1,12 @@
 const routes = {
     index: "/pages/index/index",
+    course: "/pages/course/course",
+    my: "/pages/my/my",
     setting: "/pages/setting/setting",
+    fan: "/pages/fan/fan",
     login: "/userPages/login/login",
     register: "/userPages/register/register",
-    modify: "/userPages/modify/modify",
+    modify: "/userPages/modify/modify"
 } as const;
 
 type RouteName = keyof typeof routes;

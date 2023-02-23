@@ -4,6 +4,7 @@
         "sourceMap": true,
         "baseUrl": ".",
         "noImplicitAny": false,
+        "isolatedModules": false,
         "paths": {
             "@/*": ["./src/*"]
         },
