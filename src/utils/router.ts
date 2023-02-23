@@ -4,6 +4,7 @@ const routes = {
     my: "/pages/my/my",
     setting: "/pages/setting/setting",
     fan: "/pages/fan/fan",
+    integral: "/pages/integral/integral",
     login: "/userPages/login/login",
     register: "/userPages/register/register",
     modify: "/userPages/modify/modify"
