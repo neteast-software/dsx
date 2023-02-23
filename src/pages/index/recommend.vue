@@ -115,6 +115,10 @@
         padding-bottom: 30rpx;
         position: relative;
     }
+    .price {
+        font-weight: bold;
+        color: #3d3d3d;
+    }
 
     .h4 {
         position: relative;
@@ -128,7 +132,9 @@
         align-items: center;
 
         .desc {
-            line-height: 34rpx;
+            font-weight: 300;
+            line-height: 28rpx;
+            height: 34rpx;
             padding: 4rpx 12rpx;
             background-color: #ff6383;
             font-size: 20rpx;
