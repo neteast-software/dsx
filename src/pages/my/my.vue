@@ -1,11 +1,11 @@
 <template>
     <view class="wrap small grey">
         <image class="wrap-bg" src="@/assets/my/bg.png" mode="widthFix"></image>
-        <view class="userbar flex-center">
-            <image class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
+        <view class="userbar flex-center relative" @tap="toSetting">
+            <image class="avatar" :src="user.avatar || defaultAvatar" mode="aspectFill"></image>
             <view class="content flex-column-between flex-rest-width">
-                <view class="title">抖省心</view>
-                <view class="intro">抖音选品第一平台</view>
+                <view class="title">{{ user.nickname || "抖省心" }}</view>
+                <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
             </view>
             <image class="setting" src="@/assets/icons/setting.png" mode="widthFix"></image>
         </view>
@@ -38,7 +38,7 @@
                 <view class="nav-content flex-rest-width">我的积分</view>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
-            <view class="nav flex-center">
+            <view class="nav flex-center" @tap="toModify">
                 <image class="nav-icon" src="@/assets/my/password.png" mode="widthFix"></image>
                 <view class="nav-content flex-rest-width">修改密码</view>
                 <uni-icons type="forward" size="20"></uni-icons>
@@ -57,7 +57,7 @@
                 <image class="nav-icon" src="@/assets/my/version.png" mode="widthFix"></image>
                 <view class="nav-content flex-rest-width flex-between">
                     <text>当前版本</text>
-                    <text class="tip">1.2.10</text>
+                    <text class="tip">{{ APP_VERSION }}</text>
                 </view>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
@@ -74,7 +74,17 @@
 </template>
 
 <script setup lang="ts">
+import router from "@/utils/router";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
+import user from "@/store/user";
+import { APP_VERSION } from "@/config/env";
+const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
+function toSetting() {
+    router.push("setting");
+}
+function toModify() {
+    router.push("modify");
+}
 </script>
 
 <style scoped lang="scss">

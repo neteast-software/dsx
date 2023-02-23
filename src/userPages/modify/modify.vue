@@ -43,44 +43,49 @@
                 ></image>
             </view>
         </uni-forms>
-        <button class="btn-submit" :class="{ active: isFormAllFilled }" @click="register">确定</button>
+        <button class="btn-submit" :class="{ active: isFormAllFilled }" @click="reset">确定</button>
     </view>
 </template>
 
 <script setup lang="ts">
 import uniForms from "@dcloudio/uni-ui/lib/uni-forms/uni-forms.vue";
 import uniFormsItem from "@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
-import uniEasyinput from "@dcloudio/uni-ui/lib/uni-easyinput/uni-easyinput.vue";
 import { reactive, ref, computed, toRaw } from "vue";
 import { formRules } from "./modify";
 import { usePassword, useCountDown } from "../form";
-import { sendSms, registerCount } from "@/api/dsx/user";
+import { sendResetSms, resetPassword } from "@/api/dsx/user";
 import router from "@/utils/router";
+import { Toast } from "@/utils/uniapi";
 const form = ref<any>(null);
 const formData = reactive({
     mobile: "",
     captcha: "",
-    password: "",
-    inviteCode: ""
+    password: ""
 });
 const { showPassword, togglePasswordShow } = usePassword();
 const { countDown, startCountDown } = useCountDown();
 const isFormAllFilled = computed(() => {
-    return formData.mobile && formData.password && formData.captcha && formData.inviteCode;
+    return formData.mobile && formData.password && formData.captcha;
 });
 
 async function sendCaptcha() {
     if (!form.value) return;
     await form.value.validateField(["mobile"]);
-    await sendSms(formData.mobile);
+    await sendResetSms(formData.mobile);
     startCountDown();
 }
 
-async function register() {
+function resetCountDown() {
+    countDown.value = 0;
+}
+
+async function reset() {
     await form.value.validate();
     if (!isFormAllFilled.value) return;
-    await registerCount(toRaw(formData));
-    router.push("login", { query: { mobile: formData.mobile, password: formData.password } });
+    await resetPassword(toRaw(formData));
+    Toast("密码重置成功");
+    resetCountDown();
+    router.back();
 }
 </script>
 

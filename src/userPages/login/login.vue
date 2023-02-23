@@ -47,7 +47,22 @@
         <button class="btn-login" @click="login">登录</button>
         <view class="agree">
             <view>
-                <uni-icons class="hook" type="checkbox-filled" size="32rpx" color="#cbbfcb"></uni-icons>
+                <uni-icons
+                    v-if="isAgree"
+                    class="hook"
+                    type="checkbox-filled"
+                    size="32rpx"
+                    color="#EA3598"
+                    @tap="toogleAgree(false)"
+                ></uni-icons>
+                <uni-icons
+                    v-else
+                    class="hook"
+                    type="checkbox-filled"
+                    size="32rpx"
+                    color="#cbbfcb"
+                    @tap="toogleAgree(true)"
+                ></uni-icons>
             </view>
             <text>请您阅读并同意“用户协议”和“隐私政策”</text>
         </view>
@@ -65,6 +80,8 @@ import router from "@/utils/router";
 import { formRules } from "./login";
 import { usePassword } from "../form";
 import { onLoad } from "@dcloudio/uni-app";
+import { Toast } from "@/utils/uniapi";
+import user from "@/store/user";
 
 const form = ref<any>(null);
 const formData = reactive({
@@ -79,15 +96,23 @@ function initFormData(options: AnyObject = {}) {
 onLoad((options) => {
     initFormData(options);
 });
+function toogleAgree(flag: boolean) {
+    isAgree.value = flag;
+}
+const isAgree = ref(false);
 const { showPassword, togglePasswordShow } = usePassword();
 async function login() {
+    if (!isAgree.value) {
+        Toast("请阅读协议并同意");
+        return;
+    }
     if (!form.value) return;
     await form.value.validate();
     const { mobile, password } = formData;
-    console.log(mobile, password);
     const { data: token } = await loginByPassword(mobile, password);
     storage.set("token", token);
-    router.replace("index");
+    user.initUserInfo();
+    router.switchTab("index");
 }
 </script>
 

@@ -49,6 +49,11 @@ class Requestor {
                 header: context.header,
                 timeout: context.timeout,
                 success: (res) => {
+                    res.data = JSON.parse(res.data);
+                    if (this.interceptor.response && typeof this.interceptor.response === "function") {
+                        const response = this.interceptor.response(res, context);
+                        return resolve(response as T);
+                    }
                     resolve(res.data as T);
                 },
                 fail: reject
