@@ -1,0 +1,40 @@
+.account{
+    margin-top: 22rpx;
+    padding: 46rpx 32rpx;
+    background: $uni-bg-color;
+    border-radius: 24rpx;
+    justify-content:space-between;
+    .share{
+        .text-share{
+            font-size: $uni-font-size-middle;
+            color: #2A2B2C;
+            
+        }
+        .data-surplus{
+            margin-top: 47rpx;
+            font-size: $uni-font-size-sm;
+            color: $uni-text-color-tip;
+            .surplus{
+                margin-top: 24rpx;
+                .text-surplus{
+                    font-size: $uni-font-size-middle;
+                    color: #2A2B2C;
+                }
+
+            }
+        }
+    }
+
+    .text-integral{
+        color: $uni-color-primary;
+        font-size: 42rpx;
+    }
+    .text-negative{
+        background: linear-gradient(180deg, #24DB5A 0%, #3DBC5F 100%);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        // background-clip: text;
+        // text-fill-color: transparent;
+        font-size: 42rpx;
+    }
+}

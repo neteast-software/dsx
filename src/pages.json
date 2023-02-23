@@ -37,6 +37,18 @@
             "style": {
                 "navigationBarTitleText": "签约管理"
             }
+        },
+        {
+            "path": "pages/fan/fan",
+            "style": {
+                "navigationBarTitleText": "我的粉丝"
+            }
+        },
+        {
+            "path": "pages/integral/integral",
+            "style": {
+                "navigationBarTitleText": "我的积分"
+            }
         }
     ],
     "subPackages": [
