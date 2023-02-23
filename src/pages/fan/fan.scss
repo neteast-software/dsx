@@ -41,9 +41,13 @@
     background: #FDEAE1;
     border-radius: 24rpx;
     padding: 30rpx 24rpx 30rpx 40rpx;
-    margin-top: 760rpx;
+    // margin-top: 760rpx;
     color: #AD5D37;
     font-size: $uni-font-size-sm;
+    position: fixed;
+    bottom: 84rpx;
+    // left: 50%;
+    // transform: translateX(-50%);
     .recommender{
         letter-spacing:2rpx;
         .img-recommender{

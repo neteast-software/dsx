@@ -49,6 +49,12 @@
             "style": {
                 "navigationBarTitleText": "我的积分"
             }
+        },
+        {
+            "path": "pages/news/news",
+            "style": {
+                "navigationBarTitleText": "消息中心"
+            }
         }
     ],
     "subPackages": [
