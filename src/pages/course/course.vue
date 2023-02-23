@@ -37,32 +37,33 @@
 <script setup lang="ts">
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { reactive } from "vue";
-const data = reactive([
-    {
-        username: "鱼丸1",
-        title: "数销通新手教程-陈老师教你如何赚教你如何赚教你如何赚钱扶",
-        read_count: 12000,
-        avatar: "/static/course/user.png"
-    },
-    {
-        username: "鱼丸2",
-        title: "数销通新手教程-陈老师教你如何赚教你如何赚教你如何赚钱扶",
-        read_count: 12000,
-        avatar: "/static/course/user.png"
-    },
-    {
-        username: "鱼丸3",
-        title: "数销通1231新手教程-陈老师教你如何赚教你如何赚教你如何赚钱扶",
-        read_count: 12000,
-        avatar: "/static/course/user.png"
-    },
-    {
-        username: "鱼丸4",
-        title: "数销通新手教程-陈老师教你如何赚教你如何赚教你如何赚钱扶",
-        read_count: 12000,
-        avatar: "/static/course/user.png"
+
+let tmp: { username: String; title: String; read_count: Number; avatar: String }[] = [];
+for (let i = 1; i <= 100; i++) {
+    let title = "数销通-陈老师教你";
+    if (i % 2 == 0) {
+        title += title;
     }
-]);
+    tmp.push({
+        username: "鱼丸" + i,
+        title,
+        read_count: 12000,
+        avatar: "/static/course/user.png"
+    });
+}
+let newData = [].concat(
+    ...Array.from(
+        tmp.reduce(
+            (total, cur, index) => {
+                total[index % 2].push(cur);
+                return total;
+            },
+            { 0: [], 1: [], length: 2 }
+        )
+    )
+);
+
+const data = reactive([...newData]);
 </script>
 
 <style scoped lang="scss">
@@ -71,33 +72,36 @@ page {
 }
 .items {
     padding: 60rpx 32rpx;
-    display: flex;
     padding-bottom: 100rpx;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    column-count: 2;
 
     .item {
         width: 334rpx;
-        height: 542rpx;
         border-radius: 36rpx;
         overflow: hidden;
         background-color: #fff;
         margin-bottom: 20rpx;
+        padding-bottom: 10rpx;
+
+        &:nth-child(2n + 1) {
+            order: 1;
+        }
+        &:nth-child(2n) {
+            order: 2;
+        }
         & > image {
             width: 100%;
             height: 334rpx;
         }
         .title {
             padding: 0 30rpx;
-            margin-top: 16rpx;
-            margin-bottom: 28rpx;
+            margin: 16rpx 0;
             overflow: hidden;
             -webkit-box-orient: vertical;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             text-overflow: ellipsis;
             font-size: 28rpx;
-            height: 78rpx;
         }
 
         .user {
