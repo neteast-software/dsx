@@ -238,11 +238,21 @@ const goodsList = [
 }
 
 .goods-list {
+    position: relative;
     width: 100%;
     border-radius: 30rpx;
     padding: 30rpx;
     background-color: #fff;
     padding-bottom: 80rpx;
+    &::after {
+        position: absolute;
+        content: " ";
+        width: 60rpx;
+        height: 60rpx;
+        right: 0;
+        top: 30rpx;
+        background-image: linear-gradient(270deg, #ffffff 50%, rgba(255, 255, 255, 0) 99%);
+    }
     .list {
         border-top: 1rpx solid #f3f6fc;
         padding-top: 30rpx;
