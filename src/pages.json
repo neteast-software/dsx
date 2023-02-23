@@ -27,9 +27,9 @@
             }
         },
         {
-            "path": "pages/log/log",
+            "path": "pages/setting/setting",
             "style": {
-                "navigationBarTitleText": "日志"
+                "navigationBarTitleText": "设置"
             }
         },
         {
