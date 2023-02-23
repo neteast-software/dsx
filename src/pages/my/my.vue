@@ -2,7 +2,7 @@
     <view class="wrap small grey">
         <image class="wrap-bg" src="@/assets/my/bg.png" mode="widthFix"></image>
         <view class="userbar flex-center relative" @tap="toSetting">
-            <image class="avatar" :src="user.avatar || defaultAvatar" mode="aspectFill"></image>
+            <image class="avatar" :src="user.avatar" mode="aspectFill"></image>
             <view class="content flex-column-between flex-rest-width">
                 <view class="title">{{ user.nickname || "抖省心" }}</view>
                 <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
@@ -21,7 +21,7 @@
             </view>
         </view>
         <view class="tabbar flex-between">
-            <view class="tab fan">
+            <view class="tab fan" @tap="toFan">
                 <image class="tab-img" src="@/assets/imgs/fan.png" mode="heightFix"></image>
                 <view class="tab-title">我的粉丝</view>
                 <view class="intro">关注你的人</view>
@@ -33,7 +33,7 @@
             </view>
         </view>
         <view class="navlist">
-            <view class="nav flex-center">
+            <view class="nav flex-center" @tap="toIntegral">
                 <image class="nav-icon" src="@/assets/my/token.png" mode="widthFix"></image>
                 <view class="nav-content flex-rest-width">我的积分</view>
                 <uni-icons type="forward" size="20"></uni-icons>
@@ -78,12 +78,18 @@ import router from "@/utils/router";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import user from "@/store/user";
 import { APP_VERSION } from "@/config/env";
-const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
+// const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 function toSetting() {
     router.push("setting");
 }
 function toModify() {
     router.push("modify");
+}
+function toFan() {
+    router.push("fan");
+}
+function toIntegral() {
+    router.push("integral");
 }
 </script>
 
