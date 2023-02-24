@@ -1,35 +1,24 @@
 <template>
-    <view>
-        <swiper
-            class="swiper-box"
-            @change="swipeChange"
-        >
-            <swiper-item
-                v-for="(item, index) in info"
-                :key="index"
-            >
-                <view class="swiper-item">
-                    <image
-                        :src="item.src"
-                        mode="aspectFit"
-                    />
-                </view>
-            </swiper-item>
-        </swiper>
-    </view>
+    <swiper class="swiper-box" autoplay indicator-dots>
+        <swiper-item v-for="banner in bannerList" :key="banner.id">
+            <view class="swiper-item">
+                <image class="banner" :src="baseURL + banner.image" mode="aspectFill" />
+            </view>
+        </swiper-item>
+    </swiper>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue";
-//swipe
-const current = ref(0);
-const swipeChange = function () {};
+import { getBannerList } from "@/api/dsx/business";
+import { ref, onMounted } from "vue";
+import { baseURL } from "@/config/env";
 
-const info = reactive([
-    { content: "你好", src: "/static/index/ad1.png" },
-    { content: "我好", src: "/static/index/ad1.png" },
-    { content: "大家好", src: "/static/index/ad1.png" }
-]);
+const bannerList = ref<BannerInfo[]>([]);
+async function initData() {
+    const { data } = await getBannerList();
+    bannerList.value = data;
+}
+onMounted(initData);
 </script>
 
 <style scoped lang="scss">
@@ -42,10 +31,11 @@ const info = reactive([
 }
 .swiper-item {
     height: 100%;
-    image {
+    border-radius: 40rpx;
+    overflow: hidden;
+    .banner {
         width: 100%;
         height: 100%;
-        object-fit: cover;
     }
 }
 </style>

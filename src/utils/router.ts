@@ -6,6 +6,8 @@ const routes = {
     fan: "/pages/fan/fan",
     integral: "/pages/integral/integral",
     news: "/pages/news/news",
+    newsDetail: "/pages/newsDetail/newsDetail",
+    goodDetail: "/pages/goodDetail/goodDetail",
     login: "/userPages/login/login",
     register: "/userPages/register/register",
     modify: "/userPages/modify/modify"

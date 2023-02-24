@@ -1,32 +1,18 @@
 <template>
+    <status-bar></status-bar>
     <view class="nav">
         <view class="active">新手入门 </view>
         <view>精品课程</view>
     </view>
-
     <view class="items">
-        <view
-            class="item"
-            v-for="(item, index) in data"
-        >
-            <image
-                src="@/static/course/ad.png"
-                mode="aspectFit"
-            />
+        <view class="item" v-for="(item, index) in data">
+            <image src="@/static/course/ad.png" mode="aspectFit" />
             <view class="title">{{ item.title }}</view>
             <view class="user">
-                <image
-                    class="avatar"
-                    :src="item.avatar"
-                    mode="aspectFit"
-                />
+                <image class="avatar" :src="item.avatar" mode="aspectFit" />
                 <view class="name">{{ item.username }}</view>
                 <view class="read_count">
-                    <uni-icons
-                        type="eye-filled"
-                        size="28rpx"
-                        color="#7B7379"
-                    ></uni-icons>
+                    <uni-icons type="eye-filled" size="28rpx" color="#7B7379"></uni-icons>
                     12W</view
                 >
             </view>
@@ -37,6 +23,7 @@
 <script setup lang="ts">
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { reactive } from "vue";
+import statusBar from "@/component/statusBar.vue";
 
 interface li {
     username: String;
@@ -133,6 +120,8 @@ page {
     }
 }
 .nav {
+    position: sticky;
+    top: 0;
     padding-top: 32rpx;
     font-size: 28rpx;
     color: #3d3d3d;

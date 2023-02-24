@@ -1,137 +1,82 @@
 <template>
     <view class="goods-list">
-        <scroll-view
-            scroll-x="true"
-            class="cates"
-        >
+        <!-- <scroll-view scroll-x="true" class="cates"> -->
+        <view class="scroller cates">
             <view
                 class="li"
-                v-for="(item, index) in goodsCates"
-                :key="index"
-                :class="{ active: index == 0 }"
-                >{{ item.title }}
+                v-for="item in cateList"
+                :key="item.id"
+                :class="{ active: item.id == activeCate }"
+                @tap="changeCate(item.id)"
+                >{{ item.name }}
             </view>
-        </scroll-view>
+        </view>
+        <!-- </scroll-view> -->
         <view class="list">
-            <view
-                class="goods"
-                v-for="(item, index) in goodsList"
-                :key="index"
-            >
-                <image
-                    class="cover"
-                    :src="item.image"
-                    mode="aspectFit"
-                />
+            <view class="goods" v-for="item in goodList" :key="item.id" @tap="toGoodDetail(item.id)">
+                <image class="cover" :src="item.images" mode="aspectFit" />
                 <view class="info">
                     <view class="row">
-                        <view class="label">
+                        <view v-if="Number(item.isExclusive)" class="label">
                             <image src="@/static/index/label.svg" />
-                            <view> {{ item.activity }}</view>
+                            <view>专属高佣</view>
                         </view>
-                        <view class="title">{{ item.title }}</view>
+                        <view class="title">{{ item.name }}</view>
                     </view>
                     <view class="row detail">
                         <view
                             >售价: <view>{{ item.price }}</view></view
                         >
                         <view
-                            >销量: <view>{{ item.sales }}</view></view
+                            >销量: <view>{{ item.saleCount }}</view></view
                         >
                     </view>
                     <view class="row money">
-                        <view class="percent">高佣{{ item.percent }}</view>
+                        <view class="percent"
+                            >{{ Number(item.isHigh) ? "高佣" : "佣金" }}{{ item.commissionRatio }}%</view
+                        >
                         <view class="profit">
                             赚：¥
-                            <view>{{ item.brokerage }}</view>
+                            <view>{{ (item.price * item.commissionRatio) / 100 }}</view>
                         </view>
                     </view>
                 </view>
-                <button
-                    class="add-btn"
-                    type="button"
-                >
-                    加橱窗
-                </button>
+                <button class="add-btn" type="button">加橱窗</button>
             </view>
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
+import { getGoodsCategoryList, getGoodsList } from "@/api/dsx/business";
+import { onMounted } from "vue";
+import { usePaginator } from "@/utils/util";
+import router from "@/utils/router";
+const { list: goodList, initList, nextList } = usePaginator<GoodInfo>(getGoodsList);
 
-//商品分类
-const goodsCates = reactive([
-    {
-        title: "今日精选",
-        id: 1
-    },
-    {
-        title: "日用家居",
-        id: 2
-    },
-    {
-        title: "食品饮料",
-        id: 3
-    },
-    {
-        title: "美妆个护",
-        id: 4
-    },
-    {
-        title: "服饰鞋袜",
-        id: 5
-    }
-]);
-//商品列表
-const goodsList = [
-    {
-        price: "12.8",
-        title: "OLAY光感小白瓶水感透白光水感透白光",
-        sales: "12w+",
-        activity: "专属高佣",
-        brokerage: "5.2",
-        percent: "45%",
-        image: "/static/index/goods1.png"
-    },
-    {
-        price: "12.8",
-        title: "OLAY光感小白瓶水感透白光水感透白光",
-        sales: "12w+",
-        activity: "专属高佣",
-        brokerage: "5.2",
-        percent: "45%",
-        image: "/static/index/goods1.png"
-    },
-    {
-        price: "12.8",
-        title: "OLAY光感小白瓶水感透白光水感透白光",
-        sales: "12w+",
-        activity: "专属高佣",
-        brokerage: "5.2",
-        percent: "45%",
-        image: "/static/index/goods1.png"
-    },
-    {
-        price: "12.8",
-        title: "OLAY光感小白瓶水感透白光水感透白光",
-        sales: "12w+",
-        activity: "专属高佣",
-        brokerage: "5.2",
-        percent: "45%",
-        image: "/static/index/goods1.png"
-    },
-    {
-        price: "12.8",
-        title: "OLAY光感小白瓶水感透白光水感透白光",
-        sales: "12w+",
-        activity: "专属高佣",
-        brokerage: "5.2",
-        percent: "45%",
-        image: "/static/index/goods1.png"
-    }
-];
+//商品分类列表
+const cateList = ref<GoodsCategory[]>([]);
+const activeCate = ref(0);
+async function initCate() {
+    const { data } = await getGoodsCategoryList();
+    cateList.value = data;
+    activeCate.value = data[0].id;
+}
+function changeCate(id: number) {
+    activeCate.value = id;
+    initList({ id });
+}
+onMounted(async () => {
+    await initCate();
+    const cateId = activeCate.value;
+    await initList({ id: cateId });
+});
+// 商品列表
+function toGoodDetail(id: number) {
+    console.log("去商品详情页", id);
+    router.push("goodDetail", { query: { id } });
+}
 </script>
 
 <style scoped lang="scss">

@@ -6,65 +6,29 @@
         </view>
         <view class="section">
             <view class="rexiao">
-                <image
-                    src="@/static/index/rexiao-bg.png"
-                    mode="aspectFit"
-                    class="texture"
-                ></image>
+                <image src="@/static/index/rexiao-bg.png" mode="aspectFit" class="texture"></image>
                 <view class="h4">热销榜单 <view class="desc">爆单更轻松</view></view>
                 <view class="items">
-                    <view class="item">
-                        <image
-                            src="@/static/index/naicha.png"
-                            mode="aspectFit"
-                        />
+                    <view class="item" v-for="item in hotGoodsList" :key="item.id">
+                        <image :src="item.images" mode="aspectFit" />
                         <view class="bottom">
                             <view class="zhuan">赚</view>
                             <view class="symbol">¥</view>
-                            <view class="price">2.3</view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <image
-                            src="@/static/index/naicha.png"
-                            mode="aspectFit"
-                        />
-                        <view class="bottom">
-                            <view class="zhuan">赚</view>
-                            <view class="symbol">¥</view>
-                            <view class="price">2.3</view>
+                            <view class="price">{{ (item.price * item.commissionRatio) / 100 }}</view>
                         </view>
                     </view>
                 </view>
             </view>
             <view class="gaoyong">
-                <image
-                    src="@/static/index/gaoyong-bg.png"
-                    mode="aspectFit"
-                    class="texture"
-                ></image>
+                <image src="@/static/index/gaoyong-bg.png" mode="aspectFit" class="texture"></image>
                 <view class="h4">专属高佣 <view class="desc">开单必备</view></view>
                 <view class="items">
-                    <view class="item">
-                        <image
-                            src="@/static/index/naicha.png"
-                            mode="aspectFit"
-                        />
+                    <view class="item" v-for="item in exclusiveGoodsList" :key="item.id">
+                        <image :src="item.images" mode="aspectFit" />
                         <view class="bottom">
                             <view class="zhuan">赚</view>
                             <view class="symbol">¥</view>
-                            <view class="price">2.3</view>
-                        </view>
-                    </view>
-                    <view class="item">
-                        <image
-                            src="@/static/index/naicha.png"
-                            mode="aspectFit"
-                        />
-                        <view class="bottom">
-                            <view class="zhuan">赚</view>
-                            <view class="symbol">¥</view>
-                            <view class="price">2.3</view>
+                            <view class="price">{{ (item.price * item.commissionRatio) / 100 }}</view>
                         </view>
                     </view>
                 </view>
@@ -73,7 +37,19 @@
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { getRecommendGoodsList } from "@/api/dsx/business";
+import { onMounted, ref } from "vue";
+const hotGoodsList = ref<GoodInfo[]>([]);
+const exclusiveGoodsList = ref<GoodInfo[]>([]);
+async function initData() {
+    const { data } = await getRecommendGoodsList();
+    const { hotList, exclisiveList } = data;
+    hotGoodsList.value = hotList;
+    exclusiveGoodsList.value = exclisiveList;
+}
+onMounted(initData);
+</script>
 
 <style scoped lang="scss">
 .recommend {

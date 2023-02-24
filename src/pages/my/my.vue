@@ -2,7 +2,8 @@
     <view class="wrap small grey">
         <image class="wrap-bg" src="@/assets/my/bg.png" mode="widthFix"></image>
         <view class="userbar flex-center relative" @tap="toSetting">
-            <image class="avatar" :src="user.avatar" mode="aspectFill"></image>
+            <image v-if="user.avatar" class="avatar" :src="user.avatar" mode="aspectFill"></image>
+            <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
             <view class="content flex-column-between flex-rest-width">
                 <view class="title">{{ user.nickname || "抖省心" }}</view>
                 <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
