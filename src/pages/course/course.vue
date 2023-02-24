@@ -11,7 +11,7 @@
                 {{ item.name }}
             </view>
         </view>
-        <swiper class="swiper-box" :current="currentIndex" @change="swipChange">
+        <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
             <swiper-item v-for="(t, ind) in dataList" :key="ind">
                 <view class="items">
                     <view class="item" v-for="(item, index) in t.list" :key="index">
@@ -43,12 +43,14 @@ const typeList = ref<TypeItem[]>([]);
 const dataList = ref<Record<number, any>>({});
 const currentIndex = ref<number>(0);
 
+//课程分类
 async function getTypes() {
     const { data } = await getTypeList();
     typeList.value = data;
 
     data.map((item) => {
         dataList.value[item.id] = {
+            //课程列表
             ...usePaginator<CourseListItem>(getCourseList),
             init: false
         };
