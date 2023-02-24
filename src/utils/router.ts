@@ -1,8 +1,15 @@
 const routes = {
     index: "/pages/index/index",
+    course: "/pages/course/course",
+    my: "/pages/my/my",
+    setting: "/pages/setting/setting",
+    fan: "/pages/fan/fan",
+    integral: "/pages/integral/integral",
     login: "/userPages/login/login",
-    register: "/userPages/register/register"
+    register: "/userPages/register/register",
+    modify: "/userPages/modify/modify"
 } as const;
+
 type RouteName = keyof typeof routes;
 type RoutePath = typeof routes[RouteName];
 type RouterQuery = Record<string, any>;

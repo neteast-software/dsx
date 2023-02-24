@@ -1,5 +1,1 @@
-interface ResponseData {
-    code?: number;
-    msg?: string;
-    [key: string]: any;
-}
+export { Ref } from "vue";

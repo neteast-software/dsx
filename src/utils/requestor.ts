@@ -42,6 +42,7 @@ class Requestor {
     upload<T = any>(url: string, filePath: string, name = "file", config: ReqestConfig = {}): Promise<T> {
         return new Promise((resolve, reject) => {
             const context = this.preProcess({ ...this.defaultConfig, ...config, url });
+            console.log("上传参数", filePath, context);
             uni.uploadFile({
                 url: this.defaultConfig.baseURL ? this.defaultConfig.baseURL + url : url,
                 filePath,
@@ -49,6 +50,11 @@ class Requestor {
                 header: context.header,
                 timeout: context.timeout,
                 success: (res) => {
+                    res.data = JSON.parse(res.data);
+                    if (this.interceptor.response && typeof this.interceptor.response === "function") {
+                        const response = this.interceptor.response(res, context);
+                        return resolve(response as T);
+                    }
                     resolve(res.data as T);
                 },
                 fail: reject

@@ -29,15 +29,33 @@
             }
         },
         {
-            "path": "pages/log/log",
+            "path": "pages/setting/setting",
             "style": {
-                "navigationBarTitleText": "日志"
+                "navigationBarTitleText": "设置"
             }
         },
         {
             "path": "pages/manage/manage",
             "style": {
                 "navigationBarTitleText": "签约管理"
+            }
+        },
+        {
+            "path": "pages/fan/fan",
+            "style": {
+                "navigationBarTitleText": "我的粉丝"
+            }
+        },
+        {
+            "path": "pages/integral/integral",
+            "style": {
+                "navigationBarTitleText": "我的积分"
+            }
+        },
+        {
+            "path": "pages/news/news",
+            "style": {
+                "navigationBarTitleText": "消息中心"
             }
         }
     ],

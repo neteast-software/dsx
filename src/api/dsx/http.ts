@@ -1,7 +1,10 @@
 import Requestor from "@/utils/requestor";
 import storage from "@/utils/storage";
+import { Toast } from "@/utils/uniapi";
+import { baseURL } from "@/config/env";
+import router from "@/utils/router";
 const http = new Requestor({
-    baseURL: "/api",
+    baseURL,
     timeout: 30000
 });
 http.interceptor.request = (config) => {
@@ -12,7 +15,6 @@ http.interceptor.request = (config) => {
     return config;
 };
 http.interceptor.response = (response) => {
-    console.log("响应", response);
     const res = response.data as ResponseData;
     const { code, msg, ...ret } = res;
     let result;
@@ -21,8 +23,17 @@ http.interceptor.response = (response) => {
             result = ret;
             break;
         case 401:
+            Toast(msg || "登录失效，请重新登录！");
+            result = Promise.reject(msg);
+            router.reLaunch("login");
+            break;
+        case 500:
+            Toast(msg || "服务器错误");
+            result = Promise.reject(msg);
             break;
         default:
+            Toast(msg || "未知错误");
+            result = Promise.reject(msg);
             break;
     }
     return result;

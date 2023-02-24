@@ -15,9 +15,7 @@
 @use "@/styles/common.scss" as *;
 @use "@/styles/form.scss" as *;
 @use "@/styles/layout.scss" as *;
-uni-page-body {
-    height: 100%;
-}
+@use "@/styles/uniui.scss" as *;
 page,
 view,
 scroll-view,
