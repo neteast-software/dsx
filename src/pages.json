@@ -36,6 +36,13 @@
             }
         },
         {
+            "path": "pages/goodDetail/goodDetail",
+            "style": {
+                "navigationBarTitleText": "商品详情",
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "path": "pages/manage/manage",
             "style": {
                 "navigationBarTitleText": "签约管理"

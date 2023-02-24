@@ -118,3 +118,23 @@ interface GetGoodsListResult {
     rows: GoodInfo[];
     total: number;
 }
+interface GoodDetail {
+    coalitionId: string;
+    coalitionUrl: string;
+    commissionRatio: number;
+    imageList: string[];
+    id: number;
+    isExclusive: string;
+    isHigh: string;
+    isHot: string;
+    makers: string;
+    name: string;
+    price: number;
+    saleCount: number;
+    templateImage: string;
+    templateVideo: string;
+    viewCount: number;
+}
+interface GetGoodsDetailResult {
+    data: GoodDetail;
+}
