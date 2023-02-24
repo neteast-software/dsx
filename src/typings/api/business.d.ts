@@ -40,3 +40,81 @@ interface GetMsgListResult {
     rows: MsgInfo[];
     total: number;
 }
+
+interface MsgDetail {
+    id: number;
+    content: string;
+    createBy: string;
+    createTime: string;
+    delFlag: string;
+    isRead: string;
+    recipient: string;
+    recipientArr: string[];
+    remark: string;
+    title: string;
+    updateBy: string;
+    updateTime: string;
+}
+interface GetMsgDetailResult {
+    data: MsgDetail;
+}
+interface BannerInfo {
+    createBy: string;
+    createTime: string;
+    delFlag: string;
+    id: number;
+    image: string;
+    name: string;
+    remark: string;
+    sort: number;
+    updateBy: string;
+    updateTime: string;
+    url: string;
+}
+interface GetBannerList {
+    data: BannerInfo[];
+}
+
+interface GoodInfo {
+    id: number;
+    sort: number;
+    name: string;
+    price: number;
+    commissionRatio: number;
+    viewCount: number;
+    saleCount: number;
+    isHigh: string;
+    isHot: string;
+    isExclusive: string;
+    images: string;
+    coalitionUrl: string;
+    coalitionId: string;
+}
+
+interface GetRecommendGoodsList {
+    data: {
+        exclisiveList: GoodInfo[];
+        hotList: GoodInfo[];
+    };
+}
+interface GoodsCategory {
+    id: number;
+    createBy: string;
+    createTime: string;
+    delFlag: string;
+    id: number;
+    image: string;
+    name: string;
+    remark: string;
+    sort: number;
+    updateBy: string;
+    updateTime: string;
+}
+interface GetGoodsCategoryList {
+    data: GoodsCategory[];
+}
+
+interface GetGoodsListResult {
+    rows: GoodInfo[];
+    total: number;
+}

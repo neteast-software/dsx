@@ -4,7 +4,7 @@
             <view class="data flex-between">
                 <view class="time">{{ item.createTime }}</view>
             </view>
-            <view class="information">
+            <view class="information" @tap="toNewsDetail(item.id)">
                 <view class="header flex-between">
                     <view class="flex-between">
                         <image class="img-news" src="@/assets/imgs/news.png"></image>
@@ -29,8 +29,12 @@ import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { getMsgList } from "@/api/dsx/business";
 import { onReady } from "@dcloudio/uni-app";
 import { usePaginator } from "@/utils/util";
+import router from "@/utils/router";
 const { initList, list: msgList, nextList } = usePaginator<MsgInfo>(getMsgList);
 onReady(initList);
+function toNewsDetail(id: string) {
+    router.push("newsDetail", { query: { id } });
+}
 </script>
 
 <style scoped lang="scss">
