@@ -70,6 +70,12 @@
                 "navigationBarTitleText": "",
                 "navigationStyle": "custom"
             }
+        },
+        {
+            "path": "pages/export/export",
+            "style": {
+                "navigationBarTitleText": "视频导出"
+            }
         }
     ],
     "subPackages": [

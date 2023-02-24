@@ -85,16 +85,29 @@
     // top: 50%;
     // transform: translateY(-50%);
 }
-.btn-add {
-    color: $uni-text-color-inverse;
-    background: $uni-color-primary;
-    // padding: 20rpx 116rpx;
-    width: 447rpx;
-    height: 90rpx;
-    font-size: $uni-font-size-lg;
-    border-radius: 454rpx;
+
+.add{
     position: fixed;
     bottom: 84rpx;
     left: 50%;
     transform: translateX(-50%);
+    .btn-add {
+        color: $uni-text-color-inverse;
+        background: $uni-color-primary;
+        // padding: 20rpx 116rpx;
+        width: 447rpx;
+        height: 90rpx;
+        font-size: $uni-font-size-lg;
+        border-radius: 454rpx;
+        margin-bottom: 12rpx;
+    }
+    text{
+        font-size: 22rpx;
+        color: $uni-text-color-tip;
+        text-align: center;
+        transform: scale(0.9);
+        // position: absolute;
+        // left: 50%;
+        // transform: translateX(-50%);
+    }
 }

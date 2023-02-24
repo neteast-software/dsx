@@ -1,0 +1,120 @@
+page {
+    height: 100%;
+    background-color: black;
+    color: $uni-text-color-inverse;
+}
+
+
+// .video-wrap {
+//     position: relative;
+// }
+
+.bj1{
+    width: 748rpx;
+    height: 572rpx;
+    opacity: 1;
+}
+.content1{
+    font-size: $uni-font-size-lg;
+    color: #D9DAE1;
+    text-align: center;
+}
+.content2{
+    font-size: $uni-font-size-base;
+    line-height: 28px;
+    color: #888A9C;
+    text-align: center;
+    font-size: 30rpx;
+}
+.adContainer{
+    position: fixed;
+    bottom: 52rpx;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 16rpx;
+    display: inline-block;
+    &.none {
+        display: none;
+    }
+}
+.swiper-banner {
+    width: 678rpx;
+    height: 274rpx;
+}
+.swiper-item image {
+    width: 100%;
+    height: 100%;
+}
+.btn-close{
+    background-color: #000;
+    color:$uni-text-color-inverse;
+    text-align: center;
+    opacity: 0.2;
+    border-top-right-radius: 16rpx;
+    width: 94rpx;
+    height: 52rpx;
+    font-style: 24rpx;
+    float:right;
+    margin-top: -274rpx;
+}
+// 界面2
+.bj2{
+    margin-top: 52rpx;
+    z-index: 128;
+    .video{
+        width: 660rpx;
+        height: 772rpx;
+        border-radius: 34rpx;
+        box-shadow: 0 0 3rpx 4rpx #f0f0f0;
+
+    }
+}
+.msg{
+    margin-top: 50rpx;
+    font-size: $uni-font-size-sm;
+    line-height: 42rpx;
+    .group{
+        display: flex;
+        .num{
+            width: 42rpx;
+            height: 42rpx;
+            border-radius: 21rpx;
+            background: #282536;
+            text-align: center;	
+        }
+    }
+}
+.copywriting{
+    margin-top:22rpx;
+    .write{
+        width: 672rpx;
+        line-height: 56rpx;
+        background: #282536;
+        color: #D9DAE1;
+        font-size: $uni-font-size-sm;
+        letter-spacing: 0em;
+        padding: 34rpx 42rpx 66rpx;
+        border-radius: 17px;
+        // margin-top: 26rpx;
+    }
+    .btn-copy{
+        margin-top: -34rpx;
+        background: #6C5980;
+        font-size: $uni-font-size-middle;
+        text-align: center;
+        line-height: 80rpx;
+        border-radius: 60rpx;
+        padding: 10rpx 80rpx;
+        z-index: 1;
+    }
+}
+.btn {
+    z-index: 99999;
+    background:$uni-color-primary;
+    font-size: $uni-font-size-middle;
+    text-align: center;
+    line-height: 112rpx;
+    border-radius: 300rpx;
+    margin-top: 68rpx;
+
+}
