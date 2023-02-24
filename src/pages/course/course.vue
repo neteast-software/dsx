@@ -1,30 +1,88 @@
 <template>
-    <status-bar></status-bar>
-    <view class="nav">
-        <view class="active">新手入门 </view>
-        <view>精品课程</view>
-    </view>
-    <view class="items">
-        <view class="item" v-for="(item, index) in data">
-            <image src="@/static/course/ad.png" mode="aspectFit" />
-            <view class="title">{{ item.title }}</view>
-            <view class="user">
-                <image class="avatar" :src="item.avatar" mode="aspectFit" />
-                <view class="name">{{ item.username }}</view>
-                <view class="read_count">
-                    <uni-icons type="eye-filled" size="28rpx" color="#7B7379"></uni-icons>
-                    12W</view
-                >
+    <view class="stage">
+        <status-bar></status-bar>
+        <view class="nav">
+            <view
+                v-for="(item, index) in typeList"
+                :key="index"
+                :class="{ active: item.id == nav }"
+                @click="changeNav(item.id, index)"
+            >
+                {{ item.name }}
             </view>
         </view>
+        <swiper class="swiper-box" :current="currentIndex" @change="swipChange">
+            <swiper-item v-for="(t, ind) in dataList" :key="ind">
+                <view class="items">
+                    <view class="item" v-for="(item, index) in t.list" :key="index">
+                        <image :src="item.viewCoveUrl" mode="aspectFit" />
+                        <view class="title">{{ item.name }} {{ item.id }}</view>
+                        <view class="user">
+                            <image class="avatar" :src="item.authorAvatar" mode="aspectFit" />
+                            <view class="name">{{ item.author }}</view>
+                            <view class="read_count">
+                                <uni-icons type="eye-filled" size="28rpx" color="#7B7379"></uni-icons>
+                                {{ item.viewCount }}</view
+                            >
+                        </view>
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
     </view>
 </template>
 
 <script setup lang="ts">
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
-import { reactive } from "vue";
+import { reactive, onMounted, ref } from "vue";
 import statusBar from "@/component/statusBar.vue";
+import { getTypeList, getCourseList } from "@/api/dsx/course";
+import { usePaginator } from "@/utils/util";
+const nav = ref<number>(0);
+const typeList = ref<TypeItem[]>([]);
+const dataList = ref<Record<number, any>>({});
+const currentIndex = ref<number>(0);
 
+async function getTypes() {
+    const { data } = await getTypeList();
+    typeList.value = data;
+
+    data.map((item) => {
+        dataList.value[item.id] = {
+            ...usePaginator<CourseListItem>(getCourseList),
+            init: false
+        };
+    });
+}
+
+function swipChange(e: any) {
+    if (currentIndex.value == e.detail.current) return;
+    changeNav(typeList.value[e.detail.current].id, e.detail.current);
+}
+
+function changeNav(id: number, index: number) {
+    nav.value = id;
+    const list = dataList.value[id];
+    if (!list.init) {
+        list.initList({ id });
+        list.init = true;
+    } else {
+        list.nextList({ id });
+    }
+    currentIndex.value = index;
+}
+
+async function initData() {
+    await getTypes();
+    nav.value = typeList.value[0].id;
+    const list = dataList.value[nav.value];
+    list.initList({ id: nav.value });
+    list.init = true;
+}
+
+onMounted(initData);
+
+/////////
 interface li {
     username: String;
     title: String;
@@ -60,8 +118,14 @@ const data = reactive<li[]>([...newData]);
 </script>
 
 <style scoped lang="scss">
-page {
+.stage {
+    width: 100%;
+    height: 100%;
     background-color: #f7f8fa;
+}
+.swiper-box {
+    width: 100%;
+    height: 100%;
 }
 .items {
     padding: 60rpx 32rpx;
