@@ -44,7 +44,22 @@
     font-size: $uni-font-size-sm;
     color: #6c7276;
     justify-content: center;
-    .hook{
+    .hook {
         margin-right: 5rpx;
+    }
+}
+.router {
+    margin: 250rpx auto 0;
+    width: max-content;
+    color: #fff;
+    background-color: #9e8eaf;
+    border-radius: 999rpx;
+    display: flex;
+    align-items: center;
+    padding: 12rpx 12rpx 12rpx 30rpx;
+    .router-icon {
+        width: 50rpx;
+        height: 50rpx;
+        margin-left: 16rpx;
     }
 }

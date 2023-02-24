@@ -9,7 +9,7 @@
                 <text class="font-middle">修改头像</text>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
-            <view class="setting flex-between" @tap="logoff">
+            <view class="setting flex-between" @tap="showDialog">
                 <text class="font-middle">注销账号</text>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
@@ -28,6 +28,19 @@
             </view>
         </view>
     </uni-popup>
+    <uni-popup ref="logoffDialog" type="center">
+        <view class="dialog">
+            <view class="dialog-upper">
+                <view class="content"> 您是否确认要注销账号？</view>
+                <view class="content">确认请输入“我确认” </view>
+                <input v-model="logoffText" class="input" type="text" />
+            </view>
+            <view class="dialog-lower">
+                <button class="btn cancel" @tap="closeDialog">取消</button>
+                <button class="btn confirm" @tap="logoff">确定</button>
+            </view>
+        </view>
+    </uni-popup>
 </template>
 
 <script setup lang="ts">
@@ -36,7 +49,7 @@ import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { ref } from "vue";
 import { chooseImageByAlbum, showModal, Toast } from "@/utils/uniapi";
 import { uploadFile } from "@/api/dsx/root";
-import { updateUserInfo, logOut } from "@/api/dsx/user";
+import { updateUserInfo, logOut, logOff } from "@/api/dsx/user";
 import router from "@/utils/router";
 import storage from "@/utils/storage";
 import user from "@/store/user";
@@ -69,9 +82,23 @@ async function changeAvatar() {
     Toast.success("修改成功");
     user.initUserInfo();
 }
+
 // 注销账号
+const logoffDialog = ref<any>(null);
+const logoffText = ref("");
+function showDialog() {
+    if (!logoffDialog.value) return;
+    logoffDialog.value.open();
+}
+function closeDialog() {
+    if (!logoffDialog.value) return;
+    logoffDialog.value.close();
+}
 async function logoff() {
-    // await showDialog("警示", "确定注销账号吗？", "#F03737");
+    if (logoffText.value !== "我确认") return Toast("输入错误");
+    await logOff();
+    storage.remove("token");
+    router.reLaunch("login");
 }
 // 退出登录
 async function logout() {
