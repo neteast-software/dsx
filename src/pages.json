@@ -57,6 +57,19 @@
             "style": {
                 "navigationBarTitleText": "消息中心"
             }
+        },
+        {
+            "path": "pages/newsDetail/newsDetail",
+            "style": {
+                "navigationBarTitleText": "消息详情"
+            }
+        },
+        {
+            "path": "pages/search/search",
+            "style": {
+                "navigationBarTitleText": "",
+                "navigationStyle": "custom"
+            }
         }
     ],
     "subPackages": [

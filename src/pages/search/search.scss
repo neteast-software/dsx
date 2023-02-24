@@ -1,0 +1,22 @@
+.header{
+    justify-content: space-between;
+    margin-top: 40rpx;
+    .search-input{
+        padding:14rpx 42rpx;
+        background: #F3EDED;
+        border-radius: 542rpx;
+        width: 600rpx;
+        .line{
+            width: 26rpx;
+            transform: rotate(89.27deg);
+            border: 1rpx solid #3D3D3D;
+            // margin-bottom: 25rpx;
+        }
+        .text{
+            color: #3D3D3D;
+            font-size: $uni-font-size-base;
+
+        }
+    }
+}
+
