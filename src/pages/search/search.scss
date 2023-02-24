@@ -1,6 +1,7 @@
 .header{
     justify-content: space-between;
     margin-top: 40rpx;
+    margin-bottom: 70rpx;
     .search-input{
         padding:14rpx 42rpx;
         background: #F3EDED;
@@ -15,8 +16,13 @@
         .text{
             color: #3D3D3D;
             font-size: $uni-font-size-base;
-
         }
     }
 }
+// .goods{
+//     .cover{
+//         width: 160rpx;
+//         height: 160rpx;
+//     }
+// }
 

@@ -41,10 +41,25 @@
 .agree {
     display: flex;
     margin-top: 66rpx;
+    margin-bottom: 270rpx;
     font-size: $uni-font-size-sm;
     color: #6c7276;
     justify-content: center;
     .hook{
         margin-right: 5rpx;
+    }
+}
+.register{
+    background: #9E8EAF;
+    border-radius: 454rpx;
+    font-size: $uni-font-size-middle;
+    width: 200rpx;
+    margin: 270rpx auto;
+
+    image{
+        width: 50rpx;
+        height: 50rpx;
+        vertical-align:middle;
+        margin-left: 16rpx;
     }
 }

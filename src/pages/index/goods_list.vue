@@ -1,28 +1,13 @@
 <template>
     <view class="goods-list">
-        <scroll-view
-            scroll-x="true"
-            class="cates"
-        >
-            <view
-                class="li"
-                v-for="(item, index) in goodsCates"
-                :key="index"
-                :class="{ active: index == 0 }"
+        <scroll-view scroll-x="true" class="cates">
+            <view class="li" v-for="(item, index) in goodsCates" :key="index" :class="{ active: index == 0 }"
                 >{{ item.title }}
             </view>
         </scroll-view>
         <view class="list">
-            <view
-                class="goods"
-                v-for="(item, index) in goodsList"
-                :key="index"
-            >
-                <image
-                    class="cover"
-                    :src="item.image"
-                    mode="aspectFit"
-                />
+            <view class="goods" v-for="(item, index) in goodsList" :key="index">
+                <image class="cover" :src="item.image" mode="aspectFit" />
                 <view class="info">
                     <view class="row">
                         <view class="label">
@@ -47,12 +32,7 @@
                         </view>
                     </view>
                 </view>
-                <button
-                    class="add-btn"
-                    type="button"
-                >
-                    加橱窗
-                </button>
+                <button class="add-btn" type="button">加橱窗</button>
             </view>
         </view>
     </view>
@@ -135,108 +115,7 @@ const goodsList = [
 </script>
 
 <style scoped lang="scss">
-.add-btn {
-    position: absolute;
-    right: 30rpx;
-    bottom: 0;
-    min-width: 138rpx;
-    height: 58rpx;
-    background: linear-gradient(180deg, #fd5bb4 10%, #f92e9e 100%);
-    border-radius: 220rpx;
-    line-height: 58rpx;
-    font-size: 24rpx;
-}
-.money {
-    align-items: center;
-    height: 42rpx;
-    font-size: 24rpx;
-    .percent {
-        color: #e93798;
-        background-color: rgba(#e93798, 0.1);
-
-        line-height: 40rpx;
-        border: #e93798 1rpx solid;
-        border-radius: 20rpx;
-        min-width: 136rpx;
-        text-align: center;
-    }
-    .profit {
-        color: #f03737;
-        font-size: 24rpx;
-        display: flex;
-        margin-left: 24rpx;
-        line-height: 40rpx;
-        align-items: baseline;
-
-        view {
-            font-size: 36rpx;
-            font-weight: bold;
-        }
-    }
-}
-.detail {
-    & > view {
-        display: flex;
-        color: #7b7379;
-        margin: 15rpx 0;
-        font-size: 24rpx;
-        &:last-child {
-            margin-left: 46rpx;
-        }
-    }
-}
-
-.row {
-    display: flex;
-    white-space: nowrap;
-}
-.goods {
-    position: relative;
-    display: flex;
-    margin-bottom: 50rpx;
-    .cover {
-        width: 160rpx;
-        height: 160rpx;
-        flex-shrink: 0;
-        border-radius: 26rpx;
-    }
-    .info {
-        padding-left: 16rpx;
-    }
-    .title {
-        width: 380rpx;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        white-space: nowrap;
-        font-size: 28rpx;
-    }
-    .label {
-        position: relative;
-        width: 120rpx;
-        height: 42rpx;
-        color: #fff;
-
-        image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        view {
-            width: 120rpx;
-            text-align: center;
-            white-space: nowrap;
-            position: relative;
-            font-size: 20rpx;
-            height: 100%;
-            line-height: 44rpx;
-        }
-    }
-}
-
+@import "@/styles/goods.scss";
 .goods-list {
     position: relative;
     width: 100%;

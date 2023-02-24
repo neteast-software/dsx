@@ -66,6 +66,7 @@
             </view>
             <text>请您阅读并同意“用户协议”和“隐私政策”</text>
         </view>
+        <button class="register flex-all-center">去注册 <image src="@/static/user/arrow.png"></image></button>
     </view>
 </template>
 

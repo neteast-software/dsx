@@ -33,7 +33,10 @@
             </view>
             <button class="btn-bind">进行结算绑定</button>
         </view>
-        <button class="btn-add">新增签约账号</button>
+        <view class="add flex-column">
+            <button class="btn-add">新增签约账号</button>
+            <text>每个签约账号都必须进行授权哦</text>
+        </view>
     </view>
 </template>
 
