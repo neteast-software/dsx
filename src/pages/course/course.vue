@@ -38,7 +38,13 @@
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { reactive } from "vue";
 
-let tmp: { username: String; title: String; read_count: Number; avatar: String }[] = [];
+interface li {
+    username: String;
+    title: String;
+    read_count: Number;
+    avatar: String;
+}
+let tmp: li[] = [];
 for (let i = 1; i <= 100; i++) {
     let title = "数销通-陈老师教你";
     if (i % 2 == 0) {
@@ -63,7 +69,7 @@ let newData = [].concat(
     )
 );
 
-const data = reactive([...newData]);
+const data = reactive<li[]>([...newData]);
 </script>
 
 <style scoped lang="scss">
