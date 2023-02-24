@@ -9,3 +9,8 @@ export function getFansList(pageNum = 1, pageSize = 10) {
 export function getIntegralList(pageNum = 1, pageSize = 10) {
     return http.get<any>("/mobile/my/myIntegralList", { pageNum, pageSize });
 }
+
+// 我的消息列表
+export function getMsgList(pageNum = 1, pageSize = 10) {
+    return http.get<GetMsgListResult>("/mobile/my/myMsglist", { pageNum, pageSize });
+}

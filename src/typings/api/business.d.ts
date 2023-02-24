@@ -29,3 +29,14 @@ interface GetIntegralListResult {
     rows: IntegralRecord[];
     total: number;
 }
+
+interface MsgInfo {
+    id: string;
+    title: string;
+    createTime: string;
+    content: string;
+}
+interface GetMsgListResult {
+    rows: MsgInfo[];
+    total: number;
+}

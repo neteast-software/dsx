@@ -38,6 +38,11 @@ export function logOut() {
     return http.get("/mobile/logout");
 }
 
+// 注销
+export function logOff() {
+    return http.get("/mobile/revoked");
+}
+
 // 修改用户昵称和头像
 interface UpdateUserInfoParams {
     nickname?: string;

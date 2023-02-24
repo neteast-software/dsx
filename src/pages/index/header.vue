@@ -1,32 +1,23 @@
 <template>
     <view class="header">
-        <view class="profile">
-            <image
-                src="@/static/index/avatar.png"
-                mode="aspectFit"
-            />
-        </view>
-
+        <image class="profile" v-if="user.avatar" :src="user.avatar" mode="aspectFill" />
+        <image class="profile" v-else src="@/assets/imgs/avatar.png" mode="aspectFill" />
         <view class="search">
-            <input
-                type="text"
-                v-model="searchValue"
-            />
-            <mask v-show="searchValue == ''"> <image src="@/static/index/seearch.svg" />搜索</mask>
+            <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
         </view>
-        <view class="msg">
-            <image
-                src="@/static/index/msg.svg"
-                alt=""
-            />
+        <view class="msg" @tap="toNews">
+            <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-const searchValue = ref("");
+import user from "@/store/user";
+import router from "@/utils/router";
+function toNews() {
+    router.push("news");
+}
 </script>
 
 <style scoped lang="scss">
@@ -48,29 +39,24 @@ const searchValue = ref("");
         background-color: #dfe2e1;
         text-align: center;
         overflow: hidden;
-        image {
-            margin-top: 17rpx;
-            width: 100%;
-            height: 100%;
-        }
+        // image {
+        //     margin-top: 17rpx;
+        //     width: 100%;
+        //     height: 100%;
+        // }
     }
 }
 .search {
     flex: 1;
     margin: 0 25rpx;
     position: relative;
-    input {
-        background-color: #f3eded;
-        border-radius: 500rpx;
-        height: 100%;
-        font-size: 28rpx;
-        text-align: center;
-    }
-    image {
+    background-color: #f3eded;
+    border-radius: 500rpx;
+    .icon-search {
         width: 28rpx;
         margin-right: 10rpx;
     }
-    mask {
+    .mask {
         pointer-events: none;
         position: absolute;
         top: 0;

@@ -41,8 +41,8 @@
             <button>密码登陆</button>
         </view> -->
         <view class="method">
-            <button>忘记密码</button>
-            <button>验证码登录</button>
+            <button @tap="toModify">忘记密码?</button>
+            <!-- <button>验证码登录</button> -->
         </view>
         <button class="btn-login" @click="login">登录</button>
         <view class="agree">
@@ -65,6 +65,10 @@
                 ></uni-icons>
             </view>
             <text>请您阅读并同意“用户协议”和“隐私政策”</text>
+        </view>
+        <view class="router" @tap="toRegister">
+            去注册
+            <image class="router-icon" src="@/assets/icons/go.png" mode="widthFix"></image>
         </view>
     </view>
 </template>
@@ -113,6 +117,13 @@ async function login() {
     storage.set("token", token);
     user.initUserInfo();
     router.switchTab("index");
+}
+
+function toRegister() {
+    router.push("register");
+}
+function toModify() {
+    router.push("modify");
 }
 </script>
 
