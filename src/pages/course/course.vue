@@ -13,20 +13,7 @@
         </view>
         <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
             <swiper-item v-for="(t, ind) in dataList" :key="ind">
-                <view class="items">
-                    <view class="item" v-for="(item, index) in t.list" :key="index">
-                        <image :src="item.viewCoveUrl" mode="aspectFit" />
-                        <view class="title">{{ item.name }} {{ item.id }}</view>
-                        <view class="user">
-                            <image class="avatar" :src="item.authorAvatar" mode="aspectFit" />
-                            <view class="name">{{ item.author }}</view>
-                            <view class="read_count">
-                                <uni-icons type="eye-filled" size="28rpx" color="#7B7379"></uni-icons>
-                                {{ item.viewCount }}</view
-                            >
-                        </view>
-                    </view>
-                </view>
+                <ItemList :list="t.list" :next="t.nextList" :init="t.initList" :id="ind"></ItemList>
             </swiper-item>
         </swiper>
     </view>
@@ -38,6 +25,8 @@ import { reactive, onMounted, ref } from "vue";
 import statusBar from "@/components/statusBar.vue";
 import { getTypeList, getCourseList } from "@/api/dsx/course";
 import { usePaginator } from "@/utils/util";
+import ItemList from "./itemList.vue";
+
 const nav = ref<number>(0);
 const typeList = ref<TypeItem[]>([]);
 const dataList = ref<Record<number, any>>({});
@@ -123,6 +112,7 @@ const data = reactive<li[]>([...newData]);
 .stage {
     width: 100%;
     height: 100%;
+    overflow: hidden;
     background-color: #f7f8fa;
 }
 .swiper-box {
@@ -131,7 +121,6 @@ const data = reactive<li[]>([...newData]);
 }
 .items {
     padding: 60rpx 32rpx;
-    padding-bottom: 100rpx;
     column-count: 2;
 
     .item {
