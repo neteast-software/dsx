@@ -138,3 +138,9 @@ interface GoodDetail {
 interface GetGoodsDetailResult {
     data: GoodDetail;
 }
+interface GetPrivacyAgreementResult {
+    data: string;
+}
+interface GetUserAgreementResult {
+    data: string;
+}

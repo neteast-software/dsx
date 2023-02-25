@@ -44,12 +44,12 @@
                 <view class="nav-content flex-rest-width">修改密码</view>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
-            <view class="nav flex-center">
+            <view class="nav flex-center" @tap="toServiceProtocol">
                 <image class="nav-icon" src="@/assets/my/user.png" mode="widthFix"></image>
                 <view class="nav-content flex-rest-width">用户协议</view>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
-            <view class="nav flex-center">
+            <view class="nav flex-center" @tap="toPrivacyProtocol">
                 <image class="nav-icon" src="@/assets/my/privacy.png" mode="widthFix"></image>
                 <view class="nav-content flex-rest-width">隐私协议</view>
                 <uni-icons type="forward" size="20"></uni-icons>
@@ -91,6 +91,12 @@ function toFan() {
 }
 function toIntegral() {
     router.push("integral");
+}
+function toPrivacyProtocol() {
+    router.push("privacyProtocol");
+}
+function toServiceProtocol() {
+    router.push("serviceProtocol");
 }
 </script>
 

@@ -7,7 +7,7 @@
     // },
     "pages": [
         //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-           {
+        {
             "path": "pages/course/course",
             "style": {
                 "navigationBarTitleText": "省心学院",
@@ -21,7 +21,7 @@
                 "navigationStyle": "custom"
             }
         },
-     
+
         {
             "path": "pages/my/my",
             "style": {
@@ -83,6 +83,18 @@
             "path": "pages/export/export",
             "style": {
                 "navigationBarTitleText": "视频导出"
+            }
+        },
+        {
+            "path": "pages/privacyProtocol/privacyProtocol",
+            "style": {
+                "navigationBarTitleText": "隐私协议"
+            }
+        },
+        {
+            "path": "pages/serviceProtocol/serviceProtocol",
+            "style": {
+                "navigationBarTitleText": "用户协议"
             }
         }
     ],

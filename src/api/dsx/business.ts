@@ -48,3 +48,12 @@ export function getGoodsList(pageNum = 1, pageSize = 10, filter: getGoodsListFil
 export function getGoodsDetail(id: string | number) {
     return http.get<GetGoodsDetailResult>(`/mobile/product/detail/${id}`);
 }
+
+// 隐私协议
+export function getPrivacyAgreement() {
+    return http.get<GetPrivacyAgreementResult>("/mobile/marketSettings/getPrivacyAgreement");
+}
+
+export function getUserAgreement() {
+    return http.get<GetUserAgreementResult>("/mobile/marketSettings/getuserAgreement");
+}

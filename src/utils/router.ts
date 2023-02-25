@@ -8,6 +8,8 @@ const routes = {
     news: "/pages/news/news",
     newsDetail: "/pages/newsDetail/newsDetail",
     goodDetail: "/pages/goodDetail/goodDetail",
+    privacyProtocol: "/pages/privacyProtocol/privacyProtocol",
+    serviceProtocol: "/pages/serviceProtocol/serviceProtocol",
     login: "/userPages/login/login",
     register: "/userPages/register/register",
     modify: "/userPages/modify/modify"
