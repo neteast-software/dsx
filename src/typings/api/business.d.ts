@@ -1,7 +1,6 @@
 interface FanInfo {
     nickname: string;
     mobile: string;
-    nickname: string;
     username: string;
     createTime: string;
     avatar: string;
@@ -102,7 +101,6 @@ interface GoodsCategory {
     createBy: string;
     createTime: string;
     delFlag: string;
-    id: number;
     image: string;
     name: string;
     remark: string;
