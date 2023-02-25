@@ -14,36 +14,6 @@
         <!-- </scroll-view> -->
         <view class="list">
             <good-info v-for="item in goodList" :key="item.id" :good-info="item"></good-info>
-            <!-- <view class="goods" v-for="item in goodList" :key="item.id" @tap="toGoodDetail(item.id)">
-                <image class="cover" :src="item.images" mode="aspectFit" />
-                <view class="info">
-                    <view class="row">
-                        <view v-if="Number(item.isExclusive)" class="label">
-                            <image src="@/static/index/label.svg" />
-                            <view>专属高佣</view>
-                        </view>
-                        <view class="title">{{ item.name }}</view>
-                    </view>
-                    <view class="row detail">
-                        <view
-                            >售价: <view>{{ item.price }}</view></view
-                        >
-                        <view
-                            >销量: <view>{{ item.saleCount }}</view></view
-                        >
-                    </view>
-                    <view class="row money">
-                        <view class="percent"
-                            >{{ Number(item.isHigh) ? "高佣" : "佣金" }}{{ item.commissionRatio }}%</view
-                        >
-                        <view class="profit">
-                            赚：¥
-                            <view>{{ (item.price * item.commissionRatio) / 100 }}</view>
-                        </view>
-                    </view>
-                </view>
-                <button class="add-btn" type="button">加橱窗</button>
-            </view> -->
         </view>
     </view>
 </template>

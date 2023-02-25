@@ -1,37 +1,31 @@
 <template>
     <view class="wrap small">
+        <status-bar></status-bar>
         <view class="header flex-center">
             <view class="search-input flex-center">
                 <view class="line"></view>
-                <input type="text" placeholder="请搜索内容" />
+                <input type="text" v-model="keyword" placeholder="请搜索内容" @confirm="initList({ keyword })" />
             </view>
-            <view>取消</view>
+            <view @tap="resetKeyword">取消</view>
         </view>
-        <view class="goods">
-            <image class="cover" src="@/static/index/goods2.png"></image>
-            <view class="info">
-                <view class="row">
-                    <view class="label">
-                        <image src="@/static/index/label.svg"></image>
-                        <view> 专属高佣</view>
-                    </view>
-                    <view class="title">百雀羚肌初赋活抗皱紧致护肤品</view>
-                </view>
-                <view class="row detail">
-                    <view>售价 ¥12.8 <view></view></view>
-                    <view>销量 12w+<view></view></view>
-                </view>
-                <view class="row money">
-                    <view class="percent">高佣 45%</view>
-                    <view class="profit">赚: ¥ <view>5.2</view></view>
-                </view>
-            </view>
-            <button class="add-btn" type="button">加橱窗</button>
-        </view>
+
+        <good-info v-for="good in goodList" :key="good.id" :good-info="good"></good-info>
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from "vue";
+import statusBar from "@/components/statusBar.vue";
+import { usePaginator } from "@/utils/util";
+import { getSearchGoodsList } from "@/api/dsx/business";
+import GoodInfo from "@/components/goodInfo.vue";
+const { list: goodList, initList, nextList } = usePaginator<GoodInfo>(getSearchGoodsList);
+const keyword = ref("");
+function resetKeyword() {
+    keyword.value = "";
+    initList({ keyword: "" });
+}
+</script>
 
 <style scoped lang="scss">
 @import "@/styles/goods.scss";

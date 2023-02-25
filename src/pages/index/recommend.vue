@@ -7,7 +7,7 @@
         <view class="section">
             <view class="rexiao">
                 <image src="@/static/index/rexiao-bg.png" mode="aspectFit" class="texture"></image>
-                <view class="h4">热销榜单 <view class="desc">爆单更轻松</view></view>
+                <view class="h4" @tap="toHotList">热销榜单 <view class="desc">爆单更轻松</view></view>
                 <view class="items">
                     <view class="item" v-for="item in hotGoodsList" :key="item.id">
                         <image :src="item.images" mode="aspectFit" />
@@ -21,7 +21,7 @@
             </view>
             <view class="gaoyong">
                 <image src="@/static/index/gaoyong-bg.png" mode="aspectFit" class="texture"></image>
-                <view class="h4">专属高佣 <view class="desc">开单必备</view></view>
+                <view class="h4" @tap="toExclusiveList">专属高佣 <view class="desc">开单必备</view></view>
                 <view class="items">
                     <view class="item" v-for="item in exclusiveGoodsList" :key="item.id">
                         <image :src="item.images" mode="aspectFit" />
@@ -39,6 +39,7 @@
 
 <script setup lang="ts">
 import { getRecommendGoodsList } from "@/api/dsx/business";
+import router from "@/utils/router";
 import { onMounted, ref } from "vue";
 const hotGoodsList = ref<GoodInfo[]>([]);
 const exclusiveGoodsList = ref<GoodInfo[]>([]);
@@ -49,6 +50,12 @@ async function initData() {
     exclusiveGoodsList.value = exclisiveList;
 }
 onMounted(initData);
+function toHotList() {
+    router.push("hotList");
+}
+function toExclusiveList() {
+    router.push("exclusiveList");
+}
 </script>
 
 <style scoped lang="scss">

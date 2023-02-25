@@ -2,7 +2,7 @@
     <view class="header">
         <image class="profile" v-if="user.avatar" :src="user.avatar" mode="aspectFill" />
         <image class="profile" v-else src="@/assets/imgs/avatar.png" mode="aspectFill" />
-        <view class="search">
+        <view class="search" @tap="toSearch">
             <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
         </view>
         <view class="msg" @tap="toNews">
@@ -17,6 +17,9 @@ import user from "@/store/user";
 import router from "@/utils/router";
 function toNews() {
     router.push("news");
+}
+function toSearch() {
+    router.push("search");
 }
 </script>
 

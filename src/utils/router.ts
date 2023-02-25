@@ -10,6 +10,9 @@ const routes = {
     goodDetail: "/pages/goodDetail/goodDetail",
     privacyProtocol: "/pages/privacyProtocol/privacyProtocol",
     serviceProtocol: "/pages/serviceProtocol/serviceProtocol",
+    hotList: "/pages/hotList/hotList",
+    exclusiveList: "/pages/exclusiveList/exclusiveList",
+    search: "/pages/search/search",
     login: "/userPages/login/login",
     register: "/userPages/register/register",
     modify: "/userPages/modify/modify"

@@ -66,5 +66,5 @@ interface getSearchGoodsListFilter {
     isExclusive?: string;
 }
 export function getSearchGoodsList(pageNum = 1, pageSize = 10, filter: getSearchGoodsListFilter) {
-    return http.get<GetSearchGoodsListResult>("/mobile/product/search", { pageNum, pageSize, ...filter });
+    return http.get<GetSearchGoodsListResult>("/mobile/product/searchInfoList", { pageNum, pageSize, ...filter });
 }

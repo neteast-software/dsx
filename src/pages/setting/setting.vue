@@ -46,6 +46,7 @@
 <script setup lang="ts">
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
+import Dialog from "@/components/dialog.vue";
 import { ref } from "vue";
 import { chooseImageByAlbum, showModal, Toast } from "@/utils/uniapi";
 import { uploadFile } from "@/api/dsx/root";

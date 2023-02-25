@@ -23,7 +23,7 @@ export function usePaginator<T>(requestFn: Function) {
     const total = ref(0);
     const list: Ref<T[]> = ref([]);
     async function initList(filter?: AnyObject) {
-        const { rows, total: totalNum } = await requestList(pageNum.value, filter);
+        const { rows, total: totalNum } = await requestList(1, filter);
         pageNum.value = 1;
         total.value = totalNum;
         list.value = rows;

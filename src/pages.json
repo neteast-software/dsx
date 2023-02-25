@@ -102,6 +102,20 @@
                 "navigationBarTitleText": "用户协议",
                 "navigationBarBackgroundColor": "#ffffff"
             }
+        },
+        {
+            "path": "pages/hotList/hotList",
+            "style": {
+                "navigationBarTitleText": "热门榜单",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
+        },
+        {
+            "path": "pages/exclusiveList/exclusiveList",
+            "style": {
+                "navigationBarTitleText": "专属高佣",
+                "navigationBarBackgroundColor": "#ffffff"
+            }
         }
     ],
     "subPackages": [

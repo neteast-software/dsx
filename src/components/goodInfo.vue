@@ -10,12 +10,8 @@
                 <view class="title">{{ goodInfo.name }}</view>
             </view>
             <view class="row detail">
-                <view
-                    >售价: <view>{{ goodInfo.price }}</view></view
-                >
-                <view
-                    >销量: <view>{{ goodInfo.saleCount }}</view></view
-                >
+                <view>售价: {{ goodInfo.price }}</view>
+                <view>销量: {{ goodInfo.saleCount }}</view>
             </view>
             <view class="row money">
                 <view class="percent"
