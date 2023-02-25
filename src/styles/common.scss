@@ -1,16 +1,30 @@
 @use "@/styles/var.scss" as *;
+:root {
+    background-color: #fff;
+    color: $uni-text-color;
+}
 // 整体距左右边框44rpx
 .wrap {
     position: relative;
     padding: 20rpx 48rpx;
     height: 100%;
     overflow-y: auto;
+    background-color: #fff;
+    color: $uni-text-color;
     &.small {
         padding: 0 32rpx;
     }
     &.grey {
         background-color: #f7f8fa;
     }
+}
+.stage {
+    color: $uni-text-color;
+    background-color: #fff;
+    height: 100%;
+}
+.font-bold {
+    font-weight: bold;
 }
 .relative {
     position: relative;

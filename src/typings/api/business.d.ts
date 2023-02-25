@@ -142,3 +142,7 @@ interface GetPrivacyAgreementResult {
 interface GetUserAgreementResult {
     data: string;
 }
+interface GetSearchGoodsListResult {
+    data: GoodInfo[];
+    total: number;
+}

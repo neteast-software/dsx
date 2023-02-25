@@ -51,25 +51,29 @@
         {
             "path": "pages/fan/fan",
             "style": {
-                "navigationBarTitleText": "我的粉丝"
+                "navigationBarTitleText": "我的粉丝",
+                "navigationBarBackgroundColor": "#ffffff"
             }
         },
         {
             "path": "pages/integral/integral",
             "style": {
-                "navigationBarTitleText": "我的积分"
+                "navigationBarTitleText": "我的积分",
+                "navigationBarBackgroundColor": "#ffffff"
             }
         },
         {
             "path": "pages/news/news",
             "style": {
-                "navigationBarTitleText": "消息中心"
+                "navigationBarTitleText": "消息中心",
+                "navigationBarBackgroundColor": "#ffffff"
             }
         },
         {
             "path": "pages/newsDetail/newsDetail",
             "style": {
-                "navigationBarTitleText": "消息详情"
+                "navigationBarTitleText": "消息详情",
+                "navigationBarBackgroundColor": "#ffffff"
             }
         },
         {
@@ -88,13 +92,15 @@
         {
             "path": "pages/privacyProtocol/privacyProtocol",
             "style": {
-                "navigationBarTitleText": "隐私协议"
+                "navigationBarTitleText": "隐私协议",
+                "navigationBarBackgroundColor": "#ffffff"
             }
         },
         {
             "path": "pages/serviceProtocol/serviceProtocol",
             "style": {
-                "navigationBarTitleText": "用户协议"
+                "navigationBarTitleText": "用户协议",
+                "navigationBarBackgroundColor": "#ffffff"
             }
         }
     ],
@@ -129,19 +135,22 @@
                 {
                     "path": "login/login",
                     "style": {
-                        "navigationBarTitleText": "登录"
+                        "navigationBarTitleText": "登录",
+                        "navigationBarBackgroundColor": "#ffffff"
                     }
                 },
                 {
                     "path": "register/register",
                     "style": {
-                        "navigationBarTitleText": "注册"
+                        "navigationBarTitleText": "注册",
+                        "navigationBarBackgroundColor": "#ffffff"
                     }
                 },
                 {
                     "path": "modify/modify",
                     "style": {
-                        "navigationBarTitleText": "修改密码"
+                        "navigationBarTitleText": "修改密码",
+                        "navigationBarBackgroundColor": "#ffffff"
                     }
                 }
             ]

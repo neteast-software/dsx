@@ -13,7 +13,8 @@
         </view>
         <!-- </scroll-view> -->
         <view class="list">
-            <view class="goods" v-for="item in goodList" :key="item.id" @tap="toGoodDetail(item.id)">
+            <good-info v-for="item in goodList" :key="item.id" :good-info="item"></good-info>
+            <!-- <view class="goods" v-for="item in goodList" :key="item.id" @tap="toGoodDetail(item.id)">
                 <image class="cover" :src="item.images" mode="aspectFit" />
                 <view class="info">
                     <view class="row">
@@ -42,7 +43,7 @@
                     </view>
                 </view>
                 <button class="add-btn" type="button">加橱窗</button>
-            </view>
+            </view> -->
         </view>
     </view>
 </template>
@@ -53,6 +54,7 @@ import { getGoodsCategoryList, getGoodsList } from "@/api/dsx/business";
 import { onMounted } from "vue";
 import { usePaginator } from "@/utils/util";
 import router from "@/utils/router";
+import GoodInfo from "@/components/goodInfo.vue";
 const { list: goodList, initList, nextList } = usePaginator<GoodInfo>(getGoodsList);
 
 //商品分类列表

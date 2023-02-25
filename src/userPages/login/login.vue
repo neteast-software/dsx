@@ -45,26 +45,24 @@
             <!-- <button>验证码登录</button> -->
         </view>
         <button class="btn-login" @click="login">登录</button>
-        <view class="agree">
+        <view class="agree flex-center">
             <view>
                 <uni-icons
                     v-if="isAgree"
-                    class="hook"
                     type="checkbox-filled"
-                    size="32rpx"
+                    size="32"
                     color="#EA3598"
                     @tap="toogleAgree(false)"
                 ></uni-icons>
-                <uni-icons
-                    v-else
-                    class="hook"
-                    type="checkbox-filled"
-                    size="32rpx"
-                    color="#cbbfcb"
-                    @tap="toogleAgree(true)"
-                ></uni-icons>
+                <uni-icons v-else type="checkbox-filled" size="32" color="#cbbfcb" @tap="toogleAgree(true)"></uni-icons>
             </view>
-            <text>请您阅读并同意“用户协议”和“隐私政策”</text>
+            <text class="agreement"
+                >请您阅读并同意<text class="font-bold" @tap="toServieProtocol">“用户协议”</text>和<text
+                    class="font-bold"
+                    @tap="toPrivacyProtocol"
+                    >“隐私政策”</text
+                ></text
+            >
         </view>
         <view class="router" @tap="toRegister">
             去注册
@@ -124,6 +122,12 @@ function toRegister() {
 }
 function toModify() {
     router.push("modify");
+}
+function toServieProtocol() {
+    router.push("serviceProtocol");
+}
+function toPrivacyProtocol() {
+    router.push("privacyProtocol");
 }
 </script>
 

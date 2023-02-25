@@ -1,24 +1,24 @@
-.details{
-    padding:75rpx 65rpx;
+.details {
+    min-height: 100%;
+    padding: 75rpx 65rpx;
     color: $uni-text-color;
+    background-color: #fff;
     // display: flex;
     // flex-direction: column;
     // justify-content: flex-start;
-    .title{
-        .h1{
+    .title {
+        .h1 {
             font-size: $uni-font-size-middle;
             margin-bottom: 24rpx;
         }
-        .time{
+        .time {
             font-size: 22rpx;
             transform: scale(0.8);
-        
         }
     }
-    .text-content{
+    .text-content {
         margin-top: 88rpx;
         font-size: $uni-font-size-base;
         line-height: 58rpx;
-
     }
 }

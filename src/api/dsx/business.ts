@@ -54,6 +54,17 @@ export function getPrivacyAgreement() {
     return http.get<GetPrivacyAgreementResult>("/mobile/marketSettings/getPrivacyAgreement");
 }
 
+// 用户协议
 export function getUserAgreement() {
     return http.get<GetUserAgreementResult>("/mobile/marketSettings/getuserAgreement");
+}
+
+// 商品搜索、高佣、热销列表
+interface getSearchGoodsListFilter {
+    keyword?: string;
+    isHot?: string;
+    isExclusive?: string;
+}
+export function getSearchGoodsList(pageNum = 1, pageSize = 10, filter: getSearchGoodsListFilter) {
+    return http.get<GetSearchGoodsListResult>("/mobile/product/search", { pageNum, pageSize, ...filter });
 }

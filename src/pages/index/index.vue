@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import statusBar from "@/component/statusBar.vue";
+import statusBar from "@/components/statusBar.vue";
 import Header from "./header.vue";
 import Banner from "./banner.vue";
 import Recommend from "./recommend.vue";

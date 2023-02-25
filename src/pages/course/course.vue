@@ -35,7 +35,7 @@
 <script setup lang="ts">
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { reactive, onMounted, ref } from "vue";
-import statusBar from "@/component/statusBar.vue";
+import statusBar from "@/components/statusBar.vue";
 import { getTypeList, getCourseList } from "@/api/dsx/course";
 import { usePaginator } from "@/utils/util";
 const nav = ref<number>(0);
