@@ -1,0 +1,52 @@
+.share{
+    margin-top: 43rpx;
+    position: relative;
+    .poster-img{
+        width: 580rpx;
+        height: 927rpx;
+    }
+    .code-img{
+        position: absolute;
+        top: 785rpx;
+        right: 172rpx;
+        width: 103rpx;
+        height: 103rpx;
+    }
+    .share-btn{
+        color: $uni-text-color-inverse;
+        // background: $uni-color-primary;
+        background: linear-gradient(180deg, #EB62AD 5%, #EA3598 100%);
+        border-radius: 224rpx;
+        width: 394rpx;
+        height: 92rpx;
+        margin-top: 123rpx;
+    }
+    .popup{
+        margin-top: 66rpx;
+        color:$uni-text-color;
+        font-size: $uni-font-size-lg;
+        .share-content{
+            // flex-direction: row;
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            font-size: $uni-font-size-base;
+            .item{
+                margin-top: 62rpx;
+                .item-img{
+                    width: 112rpx;
+                    height: 112rpx;
+                    margin-bottom: 32rpx;
+                }
+            }
+        }
+        .cancel-btn{
+            background: #9E8EAF;
+            color: $uni-text-color-inverse;
+            width: 394rpx;
+            height: 92rpx;
+            border-radius: 300px;
+            margin: 80rpx 0 65rpx 0 ;
+        }
+    }
+}
