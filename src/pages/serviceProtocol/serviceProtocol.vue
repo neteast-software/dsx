@@ -19,5 +19,7 @@ onReady(initData);
 <style scoped lang="scss">
 .protocol {
     padding: 64rpx;
+    background-color: #fff;
+    color: $uni-text-color;
 }
 </style>

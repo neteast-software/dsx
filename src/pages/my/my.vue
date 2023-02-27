@@ -81,6 +81,12 @@ import user from "@/store/user";
 import { APP_VERSION } from "@/config/env";
 import { Toast } from "@/utils/uniapi";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
+// function getCache() {
+//     if (!plus) return;
+//     plus.cache.calculate((size) => {
+//         console.log(size);
+//     });
+// }
 function toSetting() {
     router.push("setting");
 }

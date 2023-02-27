@@ -62,11 +62,12 @@
 .bj2 {
     margin-top: 52rpx;
     z-index: 128;
+    border: 2rpx solid #f0f0f0;
     .video {
         width: 660rpx;
         height: 772rpx;
         border-radius: 34rpx;
-        box-shadow: 0 0 3rpx 4rpx #f0f0f0;
+        // box-shadow: 0 0 3rpx 4rpx #f0f0f0;
     }
 }
 .msg {

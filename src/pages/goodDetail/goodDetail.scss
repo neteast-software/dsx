@@ -147,13 +147,19 @@
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 999;
     .nav-bar {
-        padding: 16rpx 36rpx;
+        padding: 8rpx 28rpx;
+        display: flex;
     }
 }
+.back-wrap {
+    width: 52rpx;
+    height: 52rpx;
+    padding: 8rpx;
+}
 .back-icon {
-    width: 36rpx;
-    height: 36rpx;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    position: absolute;
 }

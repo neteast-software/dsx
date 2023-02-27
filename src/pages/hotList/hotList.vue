@@ -1,5 +1,5 @@
 <template>
-    <view class="wrap small">
+    <view class="wrap small overflow-hidden">
         <scroll-view class="h-full" scroll-y @scrolltolower="nextList({ isHot: '1' })">
             <good-info v-for="good in goodList" :key="good.id" :good-info="good"></good-info>
         </scroll-view>
@@ -17,4 +17,6 @@ onReady(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import "./hotList.scss";
+</style>
