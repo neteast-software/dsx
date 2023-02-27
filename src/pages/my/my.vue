@@ -27,7 +27,7 @@
                 <view class="tab-title">我的粉丝</view>
                 <view class="intro">关注你的人</view>
             </view>
-            <view class="tab share">
+            <view class="tab share" @tap="toShare">
                 <image class="tab-img" src="@/assets/imgs/share.png" mode="heightFix"></image>
                 <view class="tab-title">分享有礼</view>
                 <view class="intro">更多好友来帮您</view>
@@ -79,6 +79,7 @@ import router from "@/utils/router";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import user from "@/store/user";
 import { APP_VERSION } from "@/config/env";
+import { Toast } from "@/utils/uniapi";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 function toSetting() {
     router.push("setting");
@@ -97,6 +98,10 @@ function toPrivacyProtocol() {
 }
 function toServiceProtocol() {
     router.push("serviceProtocol");
+}
+function toShare() {
+    Toast("功能开发中，敬请期待！");
+    // router.push("share");
 }
 </script>
 

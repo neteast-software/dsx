@@ -14,7 +14,7 @@
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
         </view>
-        <button class="logout font-middle" @tap="logout">退出登录</button>
+        <button class="logout font-middle" @tap="showLogoutDialog">退出登录</button>
     </view>
     <uni-popup ref="drawer" type="bottom">
         <view class="drawer">
@@ -41,6 +41,7 @@
             </view>
         </view>
     </uni-popup>
+    <Dialog :show="isShowLogout" content="确定退出登录吗？" @cancel="hideLogoutDialog" @confirm="logout"></Dialog>
 </template>
 
 <script setup lang="ts">
@@ -102,8 +103,14 @@ async function logoff() {
     router.reLaunch("login");
 }
 // 退出登录
+const isShowLogout = ref(false);
+function showLogoutDialog() {
+    isShowLogout.value = true;
+}
+function hideLogoutDialog() {
+    isShowLogout.value = false;
+}
 async function logout() {
-    await showModal("", "确定退出登录吗？", "#F03737");
     await logOut();
     storage.remove("token");
     router.reLaunch("login");

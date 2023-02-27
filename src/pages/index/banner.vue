@@ -2,7 +2,7 @@
     <swiper class="swiper-box" autoplay indicator-dots>
         <swiper-item v-for="banner in bannerList" :key="banner.id">
             <view class="swiper-item">
-                <image class="banner" :src="baseURL + banner.image" mode="aspectFill" />
+                <image class="banner" :src="banner.image" mode="aspectFill" />
             </view>
         </swiper-item>
     </swiper>
@@ -11,7 +11,6 @@
 <script setup lang="ts">
 import { getBannerList } from "@/api/dsx/business";
 import { ref, onMounted } from "vue";
-import { baseURL } from "@/config/env";
 
 const bannerList = ref<BannerInfo[]>([]);
 async function initData() {

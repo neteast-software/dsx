@@ -32,6 +32,11 @@ export default defineConfig({
                 changeOrigin: true,
                 secure: false
                 // rewrite: (path) => path.replace(/^\/api/, "")
+            },
+            "https://service.dyhculture.com": {
+                target: "https://service.dyhculture.com",
+                changeOrigin: true,
+                secure: false
             }
         }
     }

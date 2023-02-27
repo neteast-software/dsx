@@ -21,8 +21,13 @@ export function getMsgDetail(id: string | number) {
 }
 
 // 轮播图列表
-export function getBannerList() {
-    return http.get<GetBannerList>("/mobile/carousel/list");
+export function getBannerList(type: "1" | "2" = "1") {
+    return http.get<GetBannerList>(`/mobile/carousel/list/${type}`);
+}
+
+// 广告列表
+export function getAdList(type: "1" | "2" = "2") {
+    return http.get<GetBannerList>(`/mobile/carousel/list/${type}`);
 }
 
 // 热销商品列表
@@ -67,4 +72,9 @@ interface getSearchGoodsListFilter {
 }
 export function getSearchGoodsList(pageNum = 1, pageSize = 10, filter: getSearchGoodsListFilter) {
     return http.get<GetSearchGoodsListResult>("/mobile/product/searchInfoList", { pageNum, pageSize, ...filter });
+}
+
+// 合成视频
+export function getProcessVideo(id: number) {
+    return http.get<GetProcessVideoResult>(`/mobile/product/compositedFootage/${id}`);
 }

@@ -1,5 +1,5 @@
 {
-    "name" : "hyyx",
+    "name" : "抖省心",
     "appid" : "__UNI__ED86F18",
     "description" : "",
     "versionName" : "1.0.0",
@@ -17,8 +17,13 @@
             "autoclose" : true,
             "delay" : 0
         },
+        "compatible" : {
+            "ignoreVersion" : true
+        },
         /* 模块配置 */
-        "modules" : {},
+        "modules" : {
+            "VideoPlayer" : {}
+        },
         /* 应用发布信息 */
         "distribute" : {
             /* android打包配置 */
@@ -39,7 +44,8 @@
                     "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-                ]
+                ],
+                "minSdkVersion" : 21
             },
             /* ios打包配置 */
             "ios" : {
@@ -48,6 +54,32 @@
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {}
+            },
+            "splashscreen" : {
+                "useOriginalMsgbox" : true
+            }
+        },
+        "nativePlugins" : {
+            "Html5app-Tiktok" : {
+                "sdkclientKey" : "aw0slud1jnw9wyet",
+                "__plugin_info__" : {
+                    "name" : "Android 和 IOS 抖音 第三方授权登录 分享插件",
+                    "description" : "抖音 第三方授权 登录 分享图片视频，QQ交流群：891416757",
+                    "platforms" : "Android,iOS",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=1378",
+                    "android_package_name" : "uni.dsx",
+                    "ios_bundle_id" : "uni.dsx",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "1378",
+                    "parameters" : {
+                        "sdkclientKey" : {
+                            "des" : "抖音应用 clientKey",
+                            "key" : "tiktok:clientkey",
+                            "value" : ""
+                        }
+                    }
+                }
             }
         }
     },

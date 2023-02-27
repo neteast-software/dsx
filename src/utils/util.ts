@@ -49,3 +49,19 @@ export function usePaginator<T>(requestFn: Function) {
         nextList
     };
 }
+
+/**
+ * 轮询
+ */
+const timeoutPromise = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export async function pollFetch(cb: Function, interval = 1000) {
+    while (true) {
+        try {
+            await cb();
+            await timeoutPromise(interval);
+        } catch (error) {
+            console.error(error);
+            await timeoutPromise(interval);
+        }
+    }
+}
