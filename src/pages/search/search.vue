@@ -6,7 +6,7 @@
                 <view class="line"></view>
                 <input type="text" v-model="keyword" placeholder="请搜索内容" @confirm="initList({ keyword })" />
             </view>
-            <view @tap="resetKeyword">取消</view>
+            <view @tap="back">取消</view>
         </view>
 
         <good-info v-for="good in goodList" :key="good.id" :good-info="good"></good-info>
@@ -19,11 +19,15 @@ import statusBar from "@/components/statusBar.vue";
 import { usePaginator } from "@/utils/util";
 import { getSearchGoodsList } from "@/api/dsx/business";
 import GoodInfo from "@/components/goodInfo.vue";
+import router from "@/utils/router";
 const { list: goodList, initList, nextList } = usePaginator<GoodInfo>(getSearchGoodsList);
 const keyword = ref("");
 function resetKeyword() {
     keyword.value = "";
     initList({ keyword: "" });
+}
+function back() {
+    router.back();
 }
 </script>
 

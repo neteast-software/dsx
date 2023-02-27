@@ -17,4 +17,6 @@ onReady(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped lang="scss">
+@import "./exclusiveList.scss";
+</style>

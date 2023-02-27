@@ -161,6 +161,7 @@ function toGoodDetail(id: number) {
     padding: 30rpx;
     background-color: #fff;
     padding-bottom: 80rpx;
+    min-height: 50%;
     &::after {
         position: absolute;
         content: " ";

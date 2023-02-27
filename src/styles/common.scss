@@ -1,8 +1,8 @@
 @use "@/styles/var.scss" as *;
-:root {
-    background-color: #fff;
-    color: $uni-text-color;
-}
+// :root {
+//     background-color: #fff;
+//     color: $uni-text-color;
+// }
 // 整体距左右边框44rpx
 .wrap {
     position: relative;
@@ -17,6 +17,12 @@
     &.grey {
         background-color: #f7f8fa;
     }
+}
+.bg-white {
+    background-color: #fff;
+}
+.font-black {
+    color: $uni-text-color;
 }
 .stage {
     color: $uni-text-color;

@@ -7,7 +7,14 @@
                     <view class="nav">
                         <status-bar></status-bar>
                         <view class="nav-bar">
-                            <image class="back-icon" src="@/assets/icons/back.png" mode="widthFix" @tap="back"></image>
+                            <view class="back-wrap">
+                                <image
+                                    class="back-icon"
+                                    src="@/assets/icons/back.png"
+                                    mode="widthFix"
+                                    @tap="back"
+                                ></image>
+                            </view>
                         </view>
                     </view>
                     <swiper class="swiper-box" :current="current" autoplay circular>
@@ -37,9 +44,15 @@
                     </view>
                     <view class="video-wrap">
                         <view class="font-middle title">范本视频</view>
-                        <view class="poster-wrap relative">
+                        <view class="poster-wrap relative" @tap="showVideo">
                             <image class="poster" :src="goodInfo.templateImage" mode="aspectFill"></image>
                             <image class="icon-play" src="@/assets/icons/play.png" mode="widthFix"></image>
+                            <video
+                                id="myVideo"
+                                :src="goodInfo.templateVideo"
+                                :direction="0"
+                                :show-fullscreen-btn="false"
+                            ></video>
                         </view>
                     </view>
                 </view>
@@ -97,8 +110,16 @@ function toExport(id = 0) {
 function back() {
     router.back();
 }
+function showVideo() {
+    const video = uni.createVideoContext("myVideo");
+    video.requestFullScreen({ direction: 0 });
+    video.play();
+}
 </script>
 
 <style scoped lang="scss">
 @import "./goodDetail.scss";
+#myVideo {
+    display: none;
+}
 </style>
