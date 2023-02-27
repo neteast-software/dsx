@@ -1,7 +1,7 @@
 <template>
     <view class="goods-list">
-        <!-- <scroll-view scroll-x="true" class="cates"> -->
-        <view class="scroller cates">
+        <scroll-view :scroll-x="true" class="cates">
+            <!-- <view class="scroller cates"> -->
             <view
                 class="li"
                 v-for="item in cateList"
@@ -10,11 +10,11 @@
                 @tap="changeCate(item.id)"
                 >{{ item.name }}
             </view>
-        </view>
-        <!-- </scroll-view> -->
-        <view class="list">
+            <!-- </view> -->
+        </scroll-view>
+        <scroll-view class="list" :scroll-y="true" @scrolltolower="nextList({ id: activeCate })">
             <good-info v-for="item in goodList" :key="item.id" :good-info="item"></good-info>
-        </view>
+        </scroll-view>
     </view>
 </template>
 

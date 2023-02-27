@@ -8,7 +8,7 @@
         @scrolltolower="nextPage()"
     >
         <view class="items">
-            <view class="item" v-for="(item, index) in list" :key="index">
+            <view class="item" v-for="(item, index) in list" :key="index" @tap="showVideo(item.id)">
                 <image :src="item.viewCoveUrl" mode="aspectFit" />
                 <view class="title">{{ item.name }} {{ item.id }}</view>
                 <view class="user">
@@ -19,6 +19,7 @@
                         {{ item.viewCount }}</view
                     >
                 </view>
+                <video class="video-box" :id="'video' + item.id" :src="item.viewUrl || ''"></video>
             </view>
         </view>
         <view class="nomore" v-if="nomore"> -- 没有更多了 --</view>
@@ -54,6 +55,18 @@ async function nextPage() {
         }
     });
 }
+
+function showVideo(id: number) {
+    // const video = document.getElementById("video" + id) as HTMLVideoElement;
+    // if (video.paused) {
+    //     video.play();
+    // } else {
+    //     video.pause();
+    // }
+    const video = uni.createVideoContext("video" + id);
+    video.requestFullScreen({ direction: 0 });
+    video.play();
+}
 </script>
 <style scoped lang="scss">
 .items {
@@ -65,6 +78,9 @@ async function nextPage() {
     flex-flow: row wrap;
     justify-content: space-between;
     padding-bottom: 60rpx;
+}
+.video-box {
+    display: none;
 }
 .nomore {
     color: #a1a1a1;
@@ -135,4 +151,3 @@ async function nextPage() {
     }
 }
 </style>
-

@@ -37,6 +37,11 @@ export default defineConfig({
                 target: "https://service.dyhculture.com",
                 changeOrigin: true,
                 secure: false
+            },
+            "http://apidsx.huoyuanyouxuan.com": {
+                target: "http://apidsx.huoyuanyouxuan.com",
+                changeOrigin: true,
+                secure: false
             }
         }
     }

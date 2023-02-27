@@ -10,7 +10,7 @@
             </view>
             <image class="setting" src="@/assets/icons/setting.png" mode="widthFix"></image>
         </view>
-        <view class="signbar flex-between relative">
+        <view class="signbar flex-between relative" @tap="toSign">
             <image class="bg" src="@/assets/imgs/sign-bg.png" mode="aspectFill"></image>
             <view class="flex-center relative">
                 <image class="vip" src="@/assets/icons/vip.png" mode="widthFix"></image>
@@ -62,11 +62,11 @@
                 </view>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
-            <view class="nav flex-center">
+            <view class="nav flex-center" @tap="clear">
                 <image class="nav-icon" src="@/assets/my/clear.png" mode="widthFix"></image>
                 <view class="nav-content flex-rest-width flex-between">
                     <text>清除缓存</text>
-                    <text class="tip">5.8M</text>
+                    <text class="tip">{{ cache }}</text>
                 </view>
                 <uni-icons type="forward" size="20"></uni-icons>
             </view>
@@ -80,13 +80,20 @@ import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import user from "@/store/user";
 import { APP_VERSION } from "@/config/env";
 import { Toast } from "@/utils/uniapi";
+import { onReady } from "@dcloudio/uni-app";
+import { ref } from "vue";
+import { getCache, clearCache } from "@/utils/util";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
-// function getCache() {
-//     if (!plus) return;
-//     plus.cache.calculate((size) => {
-//         console.log(size);
-//     });
-// }
+const cache = ref("");
+
+onReady(async () => {
+    cache.value = await getCache();
+});
+async function clear() {
+    await clearCache();
+    Toast("缓存清理完成");
+    cache.value = await getCache();
+}
 function toSetting() {
     router.push("setting");
 }
@@ -108,6 +115,10 @@ function toServiceProtocol() {
 function toShare() {
     Toast("功能开发中，敬请期待！");
     // router.push("share");
+}
+function toSign() {
+    Toast("功能开发中，敬请期待！");
+    // router.push("sign");
 }
 </script>
 

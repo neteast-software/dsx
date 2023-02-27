@@ -65,3 +65,73 @@ export async function pollFetch(cb: Function, interval = 1000) {
         }
     }
 }
+
+/**
+ * 获取缓存
+ */
+
+export function getCache() {
+    if (!plus) return "0B";
+    return new Promise<string>((resolve) => {
+        const appPlus: any = plus;
+        appPlus.cache.calculate((size) => {
+            let cacheSize = parseInt(size);
+            let ret = "0B";
+            if (cacheSize === 0) {
+                ret = "0B";
+            } else if (cacheSize < 1024) {
+                ret = cacheSize + "B";
+            } else if (cacheSize < 1024 * 1024) {
+                ret = (cacheSize / 1024).toFixed(2) + "KB";
+            } else if (cacheSize < 1024 * 1024 * 1024) {
+                ret = (cacheSize / 1024 / 1024).toFixed(2) + "MB";
+            } else {
+                ret = (cacheSize / 1024 / 1024 / 1024).toFixed(2) + "GB";
+            }
+            resolve(ret);
+        });
+    });
+}
+
+/**
+ * 清除缓存
+ */
+export function clearCache() {
+    if (!plus) return;
+    return new Promise((resolve, reject) => {
+        const appPlus: any = plus;
+        const os = appPlus.os.name;
+        if (os === "iOS") {
+            appPlus.cache.clear(resolve);
+            return;
+        }
+        const main = appPlus.android.runtimeMainActivity();
+        const sdRoot = main.getCacheDir();
+        const files = appPlus.android.invoke(sdRoot, "listFiles");
+        const length = files.length;
+        for (let i = 0; i < length; i++) {
+            const filePath = "" + files[i];
+            plus.io.resolveLocalFileSystemURL(
+                filePath,
+                function (entry) {
+                    if (entry.isDirectory) {
+                        entry.removeRecursively(
+                            function () {
+                                resolve("缓存清理完成");
+                            },
+                            function (e) {
+                                reject(e.message);
+                            }
+                        );
+                    } else {
+                        entry.remove();
+                        resolve("缓存清理完成");
+                    }
+                },
+                function (e) {
+                    reject("文件路径读取失败");
+                }
+            );
+        }
+    });
+}

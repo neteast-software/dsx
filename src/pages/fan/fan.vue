@@ -10,11 +10,11 @@
                         <view class="shopkeeper">店主</view>
                     </view>
                     <view class="tel">{{ fan.mobile }}</view>
-                    <view class="stop">有效店铺数: 12</view>
+                    <!-- <view class="stop">有效店铺数: 12</view> -->
                 </view>
                 <view class="copy-wrap flex-column">
-                    <view class="copy">复制</view>
-                    <view class="data">2023.02.17. 11:58:21</view>
+                    <view class="copy" @tap="copyMobile(fan.username)">复制</view>
+                    <view class="data">{{ fan.createTime }}</view>
                 </view>
             </view>
         </scroll-view>
@@ -38,6 +38,17 @@ import { usePaginator } from "@/utils/util";
 import user from "@/store/user";
 const { initList, list: fansList, nextList } = usePaginator<FanInfo>(getFansList);
 onReady(initList);
+function copyMobile(mobile: string) {
+    uni.setClipboardData({
+        data: mobile
+        // success: () => {
+        //     uni.showToast({
+        //         title: "复制成功",
+        //         icon: "none"
+        //     });
+        // }
+    });
+}
 </script>
 
 <style scoped lang="scss">

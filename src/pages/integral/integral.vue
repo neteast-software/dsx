@@ -1,5 +1,5 @@
 <template>
-    <view class="wrap grey small overflow-hidden">
+    <view v-if="integralList.length" class="wrap grey small overflow-hidden">
         <scroll-view class="h-full" :scroll-y="true" :enable-flex="true" @scrolltolower="nextList">
             <view class="account flex-box" v-for="item in integralList" :key="item.id">
                 <view class="share">
@@ -17,6 +17,9 @@
                 >
             </view>
         </scroll-view>
+    </view>
+    <view v-else class="h-full bg-white flex-box">
+        <image class="img-empty" src="@/assets/empty/noScore.png" mode="widthFix"></image>
     </view>
 </template>
 

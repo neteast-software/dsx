@@ -49,6 +49,7 @@
                             <image class="icon-play" src="@/assets/icons/play.png" mode="widthFix"></image>
                             <video
                                 id="myVideo"
+                                v-if="goodInfo.templateVideo"
                                 :src="goodInfo.templateVideo"
                                 :direction="0"
                                 :show-fullscreen-btn="false"
