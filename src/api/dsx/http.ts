@@ -31,6 +31,10 @@ http.interceptor.response = (response) => {
             Toast(msg || "服务器错误");
             result = Promise.reject(msg);
             break;
+        case 700:
+            console.log("错误重试", res);
+            result = Promise.reject("retry");
+            break;
         default:
             Toast(msg || "未知错误");
             result = Promise.reject(msg);

@@ -146,3 +146,9 @@ interface GetSearchGoodsListResult {
     data: GoodInfo[];
     total: number;
 }
+interface GetProcessVideoResult {
+    data: {
+        task: string;
+        token: string;
+    };
+}

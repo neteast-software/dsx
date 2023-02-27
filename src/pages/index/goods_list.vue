@@ -157,7 +157,7 @@ function toGoodDetail(id: number) {
 .goods-list {
     position: relative;
     width: 100%;
-    border-radius: 30rpx;
+    border-radius: 30rpx 30rpx 0 0;
     padding: 30rpx;
     background-color: #fff;
     padding-bottom: 80rpx;

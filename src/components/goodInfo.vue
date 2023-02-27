@@ -23,13 +23,21 @@
                 </view>
             </view>
         </view>
-        <button class="add-btn" type="button">加橱窗</button>
+        <button class="add-btn" type="button" @tap.stop="copyToClipboard(goodInfo.coalitionUrl)">加橱窗</button>
     </view>
+    <Dialog
+        :show="showDialog"
+        :content="dialogContent"
+        confirm-text="立即前往"
+        @confirm="hideDialog"
+        @cancel="hideDialog"
+    ></Dialog>
 </template>
 
 <script setup lang="ts">
 import router from "@/utils/router";
-// import { PropType } from "vue";
+import Dialog from "./dialog.vue";
+import { ref } from "vue";
 const props = defineProps({
     goodInfo: {
         type: Object,
@@ -38,6 +46,22 @@ const props = defineProps({
 });
 function toGoodDetail(id: number) {
     router.push("goodDetail", { query: { id } });
+}
+
+// 加橱窗
+const showDialog = ref(false);
+const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
+function copyToClipboard(coalitionUrl: string) {
+    uni.setClipboardData({
+        data: coalitionUrl,
+        showToast: false,
+        success: () => {
+            showDialog.value = true;
+        }
+    });
+}
+function hideDialog() {
+    showDialog.value = false;
 }
 </script>
 

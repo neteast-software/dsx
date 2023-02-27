@@ -2,7 +2,8 @@
     <view class="wrap grey flex-column overflow-hidden">
         <scroll-view class="flex-rest-height" :scroll-y="true" :enable-flex="true" @scrolltolower="nextList">
             <view class="account flex-center" v-for="fan in fansList">
-                <image class="avatar" src="@/static/manage/avatar1.png" mode="aspectFill"></image>
+                <image v-if="fan.avatar" class="avatar" :src="fan.avatar" mode="aspectFill"></image>
+                <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
                 <view class="message flex-rest-width">
                     <view class="message-item flex-center">
                         <view class="name">{{ fan.nickname }}</view>

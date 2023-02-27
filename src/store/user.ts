@@ -12,7 +12,7 @@ class User {
         return this._nickname.value || "";
     }
     get avatar() {
-        return this._avatar.value ? `${baseURL}${this._avatar.value}` : "";
+        return this._avatar.value || "";
     }
     get mobile() {
         return this._mobile.value || "";

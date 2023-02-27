@@ -3,6 +3,13 @@
         <template v-if="goodInfo">
             <view class="flex-rest-height content-wrap">
                 <view class="swiper-wrap relative">
+                    <!-- <nav-bar ext-class="absoluteNav"></nav-bar> -->
+                    <view class="nav">
+                        <status-bar></status-bar>
+                        <view class="nav-bar">
+                            <image class="back-icon" src="@/assets/icons/back.png" mode="widthFix" @tap="back"></image>
+                        </view>
+                    </view>
                     <swiper class="swiper-box" :current="current" autoplay circular>
                         <swiper-item v-for="image in goodInfo.imageList" :key="image">
                             <view class="swiper-item">
@@ -10,7 +17,7 @@
                             </view>
                         </swiper-item>
                     </swiper>
-                    <view class="swiper-tip">{{ current }}</view>
+                    <view class="swiper-tip">{{ current }}/{{ goodInfo.imageList.length || 0 }}</view>
                 </view>
                 <view class="content">
                     <view class="info">
@@ -38,10 +45,17 @@
                 </view>
             </view>
             <view class="footer relative">
-                <button class="video-btn font-middle">视频合成</button>
-                <button class="add-btn font-middle">添加至橱窗</button>
+                <button class="video-btn font-middle" @tap="toExport(goodInfo?.id)">视频合成</button>
+                <button class="add-btn font-middle" @tap="copyToClipboard(goodInfo?.coalitionUrl)">添加至橱窗</button>
             </view>
         </template>
+        <Dialog
+            :show="showDialog"
+            :content="dialogContent"
+            confirm-text="立即前往"
+            @cancel="hideDialog"
+            @confirm="hideDialog"
+        ></Dialog>
     </view>
 </template>
 
@@ -49,6 +63,9 @@
 import { getGoodsDetail } from "@/api/dsx/business";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
+import Dialog from "@/components/dialog.vue";
+import router from "@/utils/router";
+import statusBar from "@/components/statusBar.vue";
 onLoad((options) => {
     initData(options?.id || 0);
 });
@@ -60,6 +77,26 @@ async function initData(id = 0) {
 }
 
 const current = ref(0);
+const showDialog = ref(false);
+const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
+function copyToClipboard(coalitionUrl = "") {
+    uni.setClipboardData({
+        data: coalitionUrl,
+        showToast: false,
+        success: () => {
+            showDialog.value = true;
+        }
+    });
+}
+function hideDialog() {
+    showDialog.value = false;
+}
+function toExport(id = 0) {
+    router.push("export", { query: { id } });
+}
+function back() {
+    router.back();
+}
 </script>
 
 <style scoped lang="scss">
