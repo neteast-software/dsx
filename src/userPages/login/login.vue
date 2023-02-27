@@ -51,7 +51,7 @@
                     v-if="isAgree"
                     class="hook"
                     type="checkbox-filled"
-                    size="32rpx"
+                    size="32"
                     color="#EA3598"
                     @tap="toogleAgree(false)"
                 ></uni-icons>
@@ -59,7 +59,7 @@
                     v-else
                     class="hook"
                     type="checkbox-filled"
-                    size="32rpx"
+                    size="32"
                     color="#cbbfcb"
                     @tap="toogleAgree(true)"
                 ></uni-icons>

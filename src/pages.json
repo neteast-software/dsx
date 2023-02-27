@@ -96,6 +96,12 @@
             "style": {
                 "navigationBarTitleText": "用户协议"
             }
+        },
+        {
+            "path": "pages/share/share",
+            "style": {
+                "navigationBarTitleText": "分享有礼"
+            }
         }
     ],
     "subPackages": [
