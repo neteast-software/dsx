@@ -116,6 +116,12 @@
                 "navigationBarTitleText": "专属高佣",
                 "navigationBarBackgroundColor": "#ffffff"
             }
+        },
+        {
+            "path": "pages/share/share",
+            "style": {
+                "navigationBarTitleText": "分享有礼"
+            }
         }
     ],
     "subPackages": [
