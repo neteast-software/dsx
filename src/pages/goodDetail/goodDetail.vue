@@ -17,7 +17,7 @@
                             </view>
                         </view>
                     </view>
-                    <swiper class="swiper-box" :current="current" autoplay circular>
+                    <swiper class="swiper-box" autoplay circular @change="onSwiperChange">
                         <swiper-item v-for="image in goodInfo.imageList" :key="image">
                             <view class="swiper-item">
                                 <image class="banner" :src="image" mode="aspectFill" />
@@ -59,7 +59,7 @@
                 </view>
             </view>
             <view class="footer relative">
-                <button class="video-btn font-middle" @tap="toExport(goodInfo?.id)">视频合成</button>
+                <button class="video-btn font-middle" @tap="showConfirm">视频合成</button>
                 <button class="add-btn font-middle" @tap="copyToClipboard(goodInfo?.coalitionUrl)">添加至橱窗</button>
             </view>
         </template>
@@ -69,6 +69,12 @@
             confirm-text="立即前往"
             @cancel="hideDialog"
             @confirm="hideDialog"
+        ></Dialog>
+        <Dialog
+            :show="isShowConfirm"
+            content="合成视频要扣除1个积分"
+            @cancel="hideConfirm"
+            @confirm="toExport(goodInfo?.id, goodInfo?.description)"
         ></Dialog>
     </view>
 </template>
@@ -80,6 +86,8 @@ import { ref } from "vue";
 import Dialog from "@/components/dialog.vue";
 import router from "@/utils/router";
 import statusBar from "@/components/statusBar.vue";
+import user from "@/store/user";
+import { Toast } from "@/utils/uniapi";
 onLoad((options) => {
     initData(options?.id || 0);
 });
@@ -102,11 +110,15 @@ function copyToClipboard(coalitionUrl = "") {
         }
     });
 }
+function onSwiperChange(e) {
+    current.value = e.detail.current + 1;
+}
 function hideDialog() {
     showDialog.value = false;
 }
-function toExport(id = 0) {
-    router.push("export", { query: { id } });
+function toExport(id = 0, description = "") {
+    hideConfirm();
+    router.push("export", { query: { id, description } });
 }
 function back() {
     router.back();
@@ -115,6 +127,19 @@ function showVideo() {
     const video = uni.createVideoContext("myVideo");
     video.requestFullScreen({ direction: 0 });
     video.play();
+}
+
+const isShowConfirm = ref(false);
+function hideConfirm() {
+    isShowConfirm.value = false;
+}
+function showConfirm() {
+    console.log("user.integral", user.integral);
+    if (user.integral === 0) {
+        Toast("积分不足");
+        return;
+    }
+    isShowConfirm.value = true;
 }
 </script>
 

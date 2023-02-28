@@ -7,7 +7,7 @@ interface UserInfo {
     nickname: string;
     username: string;
     mobile: string;
-    intergral: number;
+    integral: number;
     inviteNickname: string;
     inviteUserMobile: string;
 }

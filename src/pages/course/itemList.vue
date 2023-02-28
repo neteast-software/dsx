@@ -10,7 +10,7 @@
         <view class="items">
             <view class="item" v-for="(item, index) in list" :key="index" @tap="showVideo(item.id)">
                 <image :src="item.viewCoveUrl" mode="aspectFit" />
-                <view class="title">{{ item.name }} {{ item.id }}</view>
+                <view class="title">{{ item.name }}</view>
                 <view class="user">
                     <image class="avatar" :src="item.authorAvatar" mode="aspectFit" />
                     <view class="name">{{ item.author }}</view>

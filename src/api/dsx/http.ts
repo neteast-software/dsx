@@ -23,7 +23,7 @@ http.interceptor.response = (response) => {
             result = ret;
             break;
         case 401:
-            Toast(msg || "登录失效，请重新登录！");
+            // Toast(msg || "登录失效，请重新登录！");
             result = Promise.reject(msg);
             router.reLaunch("login");
             break;

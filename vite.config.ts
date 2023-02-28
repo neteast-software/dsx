@@ -38,8 +38,8 @@ export default defineConfig({
                 changeOrigin: true,
                 secure: false
             },
-            "http://apidsx.huoyuanyouxuan.com": {
-                target: "http://apidsx.huoyuanyouxuan.com",
+            "https://dsxmanager.huoyuanyouxuan.com": {
+                target: "https://dsxmanager.huoyuanyouxuan.com",
                 changeOrigin: true,
                 secure: false
             }

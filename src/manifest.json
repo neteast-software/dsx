@@ -1,5 +1,5 @@
 {
-    "name" : "hyyx",
+    "name" : "抖省心",
     "appid" : "__UNI__ED86F18",
     "description" : "",
     "versionName" : "1.0.0",
@@ -93,7 +93,7 @@
         },
         "nativePlugins" : {
             "Html5app-Tiktok" : {
-                "sdkclientKey" : "aw0slud1jnw9wyet",
+                "sdkclientKey" : "awqcw7b0q5ohorz9",
                 "__plugin_info__" : {
                     "name" : "Android 和 IOS 抖音 第三方授权登录 分享插件",
                     "description" : "抖音 第三方授权 登录 分享图片视频，QQ交流群：891416757",
@@ -119,9 +119,10 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wxb1113697b9ae810e",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "es6" : true
         },
         "usingComponents" : true
     },

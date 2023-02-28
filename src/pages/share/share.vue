@@ -1,6 +1,11 @@
 <template>
     <view class="container share">
-        <image src="@/assets/imgs/share-poster.png" class="poster-img" mode="widthFix"> </image>
+        <image
+            src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/share-poster.png"
+            class="poster-img"
+            mode="widthFix"
+        >
+        </image>
         <image src="@/assets/imgs/code.png" class="code-img" mode="widthFix"></image>
         <!-- <button class="share-btn">马上分享</button> -->
         <!-- <uni-section> -->

@@ -31,9 +31,9 @@ function toSearch() {
     padding: 0 33rpx;
     align-items: center;
 
-    & > * {
-        height: 100%;
-    }
+    // & > * {
+    //     height: 100%;
+    // }
 
     .profile {
         width: 70rpx;

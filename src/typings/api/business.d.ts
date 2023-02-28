@@ -132,6 +132,7 @@ interface GoodDetail {
     templateImage: string;
     templateVideo: string;
     viewCount: number;
+    description: string;
 }
 interface GetGoodsDetailResult {
     data: GoodDetail;

@@ -2,7 +2,12 @@
     <view class="new">
         <!-- 界面1 -->
         <view class="container" v-if="!videoUrl">
-            <image class="bj1" src="../../static/export/bj1.gif" mode="widthFix" alt=""></image>
+            <image
+                class="bj1"
+                src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/bj1.gif"
+                mode="widthFix"
+                alt=""
+            ></image>
             <view class="content1">视频努力导出中{{ progress }}%</view>
             <view class="content2">您的专属视频生成中，请勿离开</view>
             <view class="adContainer" v-if="isAdShow && adList.length">
@@ -17,7 +22,7 @@
         <!-- 界面2 -->
         <view v-else class="wrap">
             <view class="bj2">
-                <video class="video" :src="videoUrl"></video>
+                <video class="video" :src="videoUrl" autoplay></video>
             </view>
             <view class="msg flex-between">
                 <view class="group">
@@ -34,9 +39,7 @@
                 </view>
             </view>
             <view class="copywriting flex-column-center">
-                <view class="write" :selectsble="true" user-select="ture"
-                    >上一期没弹幕真的好不习惯，这次让我听到你们的声音好吗
-                </view>
+                <view class="write" :selectsble="true" user-select="ture">{{ description }} </view>
                 <button class="btn-copy" @click="copyText">复制文案</button>
             </view>
             <button class="btn" @click="publishToDouyin(videoUrl)">发布到抖音</button>
@@ -54,7 +57,9 @@ import { ref } from "vue";
 const timer = ref<MaybeNull<NodeJS.Timer>>(null);
 const progress = ref(0);
 const videoUrl = ref("");
+const description = ref("");
 onLoad((options) => {
+    description.value = options?.description || "";
     initData(options?.id || 0);
 });
 // 合成视频
@@ -86,7 +91,7 @@ async function updateVideoStat(taskId: string, token: string) {
     }
     timer.value = setTimeout(() => {
         updateVideoStat(taskId, token);
-    }, 3000);
+    }, 1000);
 }
 function clearTimer() {
     if (timer.value) {
@@ -98,9 +103,12 @@ onUnload(() => {
 });
 
 // 合并到抖音
-const copywriting = ref("");
+// const copywriting = ref("");
 function copyText() {
-    console.log("复制文案");
+    // copywriting.value = description.value;
+    uni.setClipboardData({
+        data: description.value
+    });
 }
 async function publishToDouyin(url) {
     uni.showLoading({
@@ -120,7 +128,7 @@ async function publishToDouyin(url) {
             (d, status) => {
                 if (status == 200) {
                     let savePath = plus.io.convertLocalFileSystemURL(d.filename as string);
-                    douyinShareVideos([savePath], copywriting).then(
+                    douyinShareVideos([savePath], description.value).then(
                         () => {
                             uni.showToast({
                                 title: "分享抖音成功",

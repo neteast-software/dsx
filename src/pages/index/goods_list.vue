@@ -12,9 +12,9 @@
             </view>
             <!-- </view> -->
         </scroll-view>
-        <scroll-view class="list" :scroll-y="true" @scrolltolower="nextList({ id: activeCate })">
+        <view class="list" :scroll-y="true" @scrolltolower="nextList({ id: activeCate })">
             <good-info v-for="item in goodList" :key="item.id" :good-info="item"></good-info>
-        </scroll-view>
+        </view>
     </view>
 </template>
 
