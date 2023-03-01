@@ -4,39 +4,47 @@
             <image src="@/static/user/logo.png" mode="widthFix"></image>
             <view class="text">欢迎来到抖省心</view>
         </view>
-        <uni-forms class="form" ref="form" :modelValue="formData" :rules="formRules">
-            <view class="item-wrap">
-                <uni-forms-item class="item" name="mobile">
-                    <input v-model="formData.mobile" type="text" placeholder="请输入手机号" />
-                </uni-forms-item>
-            </view>
-            <view v-if="showPassword" class="item-wrap">
-                <uni-forms-item class="item relative" name="password">
-                    <input v-model="formData.password" type="text" placeholder="请输入密码" />
-                </uni-forms-item>
-                <image
-                    class="eye"
-                    src="@/static/user/visible.png"
-                    mode="widthFix"
-                    @tap="togglePasswordShow(false)"
-                ></image>
-            </view>
-            <view v-else class="item-wrap">
-                <uni-forms-item class="item relative" name="password">
-                    <input v-model="formData.password" password type="text" placeholder="请输入密码" />
-                </uni-forms-item>
-                <image
-                    class="eye"
-                    src="@/static/user/invisible.png"
-                    mode="widthFix"
-                    @tap="togglePasswordShow(true)"
-                ></image>
-            </view>
-            <!-- <uni-forms-item class="item verify">
-                <input type="text" placeholder="请输入验证码" />
-                <button class="btn-obtain">获取验证码</button>
-            </uni-forms-item> -->
-        </uni-forms>
+        <view class="form">
+            <uni-forms ref="form" :modelValue="formData" :rules="formRules">
+                <view class="item-wrap">
+                    <uni-forms-item class="item" name="mobile">
+                        <input class="form-input" v-model="formData.mobile" type="text" placeholder="请输入手机号" />
+                    </uni-forms-item>
+                </view>
+                <view v-if="showPassword" class="item-wrap">
+                    <uni-forms-item class="item relative" name="password">
+                        <input class="form-input" v-model="formData.password" type="text" placeholder="请输入密码" />
+                    </uni-forms-item>
+                    <image
+                        class="eye"
+                        src="@/static/user/visible.png"
+                        mode="widthFix"
+                        @tap="togglePasswordShow(false)"
+                    ></image>
+                </view>
+                <view v-else class="item-wrap">
+                    <uni-forms-item class="item relative" name="password">
+                        <input
+                            class="form-input"
+                            v-model="formData.password"
+                            password
+                            type="text"
+                            placeholder="请输入密码"
+                        />
+                    </uni-forms-item>
+                    <image
+                        class="eye"
+                        src="@/static/user/invisible.png"
+                        mode="widthFix"
+                        @tap="togglePasswordShow(true)"
+                    ></image>
+                </view>
+                <!-- <uni-forms-item class="item verify">
+                    <input type="text" placeholder="请输入验证码" />
+                    <button class="btn-obtain">获取验证码</button>
+                </uni-forms-item> -->
+            </uni-forms>
+        </view>
         <!-- <view class="method">
             <button>密码登陆</button>
         </view> -->

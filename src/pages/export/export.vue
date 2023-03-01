@@ -2,19 +2,19 @@
     <view class="new">
         <!-- 界面1 -->
         <view class="container" v-if="!videoUrl">
-            <!-- <image
+            <image
                 class="bj1"
                 src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/bj1.gif"
                 mode="widthFix"
                 alt=""
-            ></image> -->
-            <image class="bj1" src="@/static/export/bj1.gif" mode="widthFix" alt=""></image>
+            ></image>
+            <!-- <image class="bj1" src="@/static/export/bj1.gif" mode="widthFix" alt=""></image> -->
             <view class="content1">视频努力导出中{{ progress }}%</view>
             <view class="content2">您的专属视频生成中，请勿离开</view>
             <view class="adContainer" v-if="isAdShow && adList.length">
                 <swiper class="swiper-banner" autoplay circular>
                     <swiper-item class="swiper-item" v-for="ad in adList" :key="ad.id">
-                        <image :src="ad.image" mode="scaleToFill"></image>
+                        <image class="ad-img" :src="ad.image" mode="scaleToFill"></image>
                     </swiper-item>
                 </swiper>
                 <view class="btn-close" @tap="closeAd">关闭</view>

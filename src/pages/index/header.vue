@@ -34,6 +34,9 @@ function toSearch() {
     // & > * {
     //     height: 100%;
     // }
+    .search {
+        height: 100%;
+    }
 
     .profile {
         width: 70rpx;

@@ -135,7 +135,7 @@ async function getVideoProcessToken(id) {
     }
 }
 async function toExport(id = 0, description = "") {
-    // const {} = await getVideoProcessToken(id);
+    // const { taskId, token } = await getVideoProcessToken(id);
     hideConfirm();
     router.push("export", { query: { id, description } });
 }
