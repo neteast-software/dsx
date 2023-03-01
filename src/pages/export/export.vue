@@ -12,8 +12,8 @@
             <view class="content1">视频努力导出中{{ progress }}%</view>
             <view class="content2">您的专属视频生成中，请勿离开</view>
             <view class="adContainer" v-if="isAdShow && adList.length">
-                <swiper class="swiper-banner" v-for="ad in adList" :key="ad.id">
-                    <swiper-item class="swiper-item">
+                <swiper class="swiper-banner" autoplay circular>
+                    <swiper-item class="swiper-item" v-for="ad in adList" :key="ad.id">
                         <image :src="ad.image" mode="scaleToFill"></image>
                     </swiper-item>
                 </swiper>

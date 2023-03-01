@@ -36,7 +36,7 @@
         },
         {
             "path": "pages/goodDetail/goodDetail",
-            "style": {
+            "styl0e": {
                 "navigationBarTitleText": "商品详情",
                 "navigationStyle": "custom"
             }
