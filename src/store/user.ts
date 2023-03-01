@@ -9,6 +9,7 @@ class User {
     private _inviteNickname = ref("");
     private _inviteUserMobile = ref("");
     private _integral = ref(0);
+    private _inviteCode = ref("");
     get nickname() {
         return this._nickname.value || "";
     }
@@ -27,15 +28,19 @@ class User {
     get integral() {
         return this._integral.value || 0;
     }
+    get inviteCode() {
+        return this._inviteCode.value || "";
+    }
     async initUserInfo() {
         const { data } = await getUserInfo();
-        const { nickname, avatar, mobile, inviteNickname, inviteUserMobile, integral } = data;
+        const { nickname, avatar, mobile, inviteNickname, inviteUserMobile, integral, inviteCode } = data;
         this._nickname.value = nickname;
         this._avatar.value = avatar;
         this._mobile.value = mobile;
         this._inviteNickname.value = inviteNickname;
         this._inviteUserMobile.value = inviteUserMobile;
         this._integral.value = integral;
+        this._inviteCode.value = inviteCode;
     }
 }
 

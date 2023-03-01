@@ -90,5 +90,6 @@ async function reset() {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/common.scss";
 @import "./modify.scss";
 </style>

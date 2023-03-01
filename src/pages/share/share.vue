@@ -8,11 +8,12 @@
         </image>
         <image src="@/assets/imgs/code.png" class="code-img" mode="widthFix"></image>
         <!-- <button class="share-btn">马上分享</button> -->
-        <!-- <uni-section> -->
+        <view class="share-code font-middle" @tap="copyToClipboard(user.inviteCode)"
+            >您的邀请码：{{ user.inviteCode }}</view
+        >
         <button class="share-btn" @tap="shareToggle">
             <text class="button-text">马上分享</text>
         </button>
-        <!-- </uni-section> -->
         <uni-popup ref="sharePop" type="share" safeArea backgroundColor="#fff">
             <view class="popup flex-column-center">
                 <text class="title">请选择分享至</text>
@@ -35,14 +36,17 @@
 <script setup lang="ts">
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { ref } from "vue";
+import user from "@/store/user";
 const sharePop = ref<any>(null);
-
+function copyToClipboard(text: string) {
+    uni.setClipboardData({
+        data: text
+    });
+}
 function shareToggle() {
-    console.log("open share", sharePop.value);
     sharePop.value.open();
 }
 function close() {
-    console.log("close share", sharePop.value);
     sharePop.value.close();
 }
 //分享到微信

@@ -32,7 +32,6 @@ http.interceptor.response = (response) => {
             result = Promise.reject(msg);
             break;
         case 700:
-            console.log("错误重试", res);
             result = Promise.reject("retry");
             break;
         default:

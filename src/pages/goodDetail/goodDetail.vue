@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { getGoodsDetail } from "@/api/dsx/business";
+import { getGoodsDetail, getProcessVideo } from "@/api/dsx/business";
 import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import Dialog from "@/components/dialog.vue";
@@ -95,7 +95,6 @@ const goodInfo = ref<GoodDetail>();
 async function initData(id = 0) {
     const { data } = await getGoodsDetail(id);
     goodInfo.value = data;
-    console.log(data);
 }
 
 const current = ref(0);
@@ -116,7 +115,27 @@ function onSwiperChange(e) {
 function hideDialog() {
     showDialog.value = false;
 }
-function toExport(id = 0, description = "") {
+// 获取合成视频的token
+let retryCount = 0;
+async function getVideoProcessToken(id) {
+    try {
+        const { data } = await getProcessVideo(id);
+        const { task: taskId, token } = data;
+        retryCount = 0;
+        return { taskId, token };
+    } catch (error) {
+        if (error !== "retry") return;
+        if (retryCount < 10) {
+            retryCount++;
+            return await getVideoProcessToken(id);
+        } else {
+            Toast("获取合成视频token失败");
+            retryCount = 0;
+        }
+    }
+}
+async function toExport(id = 0, description = "") {
+    // const {} = await getVideoProcessToken(id);
     hideConfirm();
     router.push("export", { query: { id, description } });
 }
@@ -134,7 +153,6 @@ function hideConfirm() {
     isShowConfirm.value = false;
 }
 function showConfirm() {
-    console.log("user.integral", user.integral);
     if (user.integral === 0) {
         Toast("积分不足");
         return;

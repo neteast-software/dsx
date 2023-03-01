@@ -1,10 +1,6 @@
 <template>
     <view class="wrap small grey">
-        <image
-            class="wrap-bg"
-            src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/my-bg.png"
-            mode="widthFix"
-        ></image>
+        <image class="wrap-bg" src="@/assets/my/bg.png" mode="widthFix"></image>
         <view class="userbar flex-center relative" @tap="toSetting">
             <image v-if="user.avatar" class="avatar" :src="user.avatar" mode="aspectFill"></image>
             <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
@@ -117,8 +113,8 @@ function toServiceProtocol() {
     router.push("serviceProtocol");
 }
 function toShare() {
-    Toast("功能开发中，敬请期待！");
-    // router.push("share");
+    // Toast("功能开发中，敬请期待！");
+    router.push("share");
 }
 function toSign() {
     Toast("功能开发中，敬请期待！");

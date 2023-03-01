@@ -18,7 +18,6 @@ dyh.interceptor.response = (response) => {
             result = Promise.reject(msg);
             break;
     }
-    console.log(result);
     return result;
 };
 export default dyh;

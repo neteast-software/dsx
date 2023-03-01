@@ -46,7 +46,6 @@ onMounted(async () => {
 });
 // 商品列表
 function toGoodDetail(id: number) {
-    console.log("去商品详情页", id);
     router.push("goodDetail", { query: { id } });
 }
 </script>

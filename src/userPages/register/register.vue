@@ -92,5 +92,6 @@ async function register() {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/common.scss";
 @import "./register.scss";
 </style>

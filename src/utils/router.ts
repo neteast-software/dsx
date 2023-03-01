@@ -13,6 +13,7 @@ const routes = {
     hotList: "/pages/hotList/hotList",
     exclusiveList: "/pages/exclusiveList/exclusiveList",
     search: "/pages/search/search",
+    share: "/pages/share/share",
     export: "/pages/export/export",
     login: "/userPages/login/login",
     register: "/userPages/register/register",

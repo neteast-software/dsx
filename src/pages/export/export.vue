@@ -2,12 +2,13 @@
     <view class="new">
         <!-- 界面1 -->
         <view class="container" v-if="!videoUrl">
-            <image
+            <!-- <image
                 class="bj1"
                 src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/bj1.gif"
                 mode="widthFix"
                 alt=""
-            ></image>
+            ></image> -->
+            <image class="bj1" src="@/static/export/bj1.gif" mode="widthFix" alt=""></image>
             <view class="content1">视频努力导出中{{ progress }}%</view>
             <view class="content2">您的专属视频生成中，请勿离开</view>
             <view class="adContainer" v-if="isAdShow && adList.length">
@@ -158,7 +159,6 @@ function closeAd() {
 }
 async function initAdList() {
     const { data } = await getAdList();
-    console.log("广告", data);
     adList.value = data;
 }
 onReady(initAdList);

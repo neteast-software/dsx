@@ -8,6 +8,7 @@ interface UserInfo {
     username: string;
     mobile: string;
     integral: number;
+    inviteCode: string;
     inviteNickname: string;
     inviteUserMobile: string;
 }
