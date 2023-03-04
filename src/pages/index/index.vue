@@ -1,25 +1,71 @@
 <template>
-    <view class="stage">
-        <status-bar></status-bar>
-        <Header></Header>
-        <Banner></Banner>
-        <Recommend></Recommend>
-        <GoodsList></GoodsList>
-    </view>
+    <!-- #ifdef MP-WEIXIN -->
+    <page-meta page-style="height: 100%;background: #f7f8fa;">
+        <!-- #endif -->
+        <view class="stage">
+            <!-- <status-bar></status-bar> -->
+            <view style="position: sticky; top: 0; z-index: 9999">
+                <NavBar>
+                    <Header></Header>
+                </NavBar>
+            </view>
+            <Banner></Banner>
+            <Recommend></Recommend>
+            <view class="h-full goodlist-wrap">
+                <GoodsList></GoodsList>
+            </view>
+        </view>
+        <Dialog
+            :show="showDialog"
+            :content="dialogContent"
+            confirm-text="立即前往"
+            @confirm="toDouyin"
+            @cancel="hideDialog"
+        ></Dialog>
+        <!-- #ifdef MP-WEIXIN -->
+    </page-meta>
+    <!-- #endif -->
 </template>
 
 <script setup lang="ts">
-import statusBar from "@/components/statusBar.vue";
 import Header from "./header.vue";
 import Banner from "./banner.vue";
 import Recommend from "./recommend.vue";
 import GoodsList from "./goods_list.vue";
+import NavBar from "@/components/navBar.vue";
+import Dialog from "@/components/dialog.vue";
+import { provide, ref } from "vue";
+import { goDouyin } from "@/utils/util";
+import { onShareAppMessage } from "@dcloudio/uni-app";
+const showDialog = ref(false);
+provide("showDialog", showDialog);
+const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
+function hideDialog() {
+    showDialog.value = false;
+}
+function toDouyin() {
+    // #ifdef APP-PLUS
+    goDouyin();
+    // #endif
+    showDialog.value = false;
+}
+onShareAppMessage(() => {
+    return {
+        title: "抖省心",
+        path: "/pages/index/index"
+    };
+});
 </script>
 
 <style scoped lang="scss">
 .stage {
-    background-image: linear-gradient(180deg, #fde4d8 1%, rgba(247, 248, 250, 1) 20%);
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
+    height: 100%;
+    // background-image: linear-gradient(180deg, #fde4d8 1%, rgba(247, 248, 250, 1) 20%);
+    // background-size: 100% 100%;
+    // background-repeat: no-repeat;
 }
+// .goodlist-wrap {
+//     position: sticky;
+//     top: 200rpx;
+// }
 </style>

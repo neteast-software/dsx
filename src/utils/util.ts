@@ -50,7 +50,7 @@ export function usePaginator<T>(requestFn: Function) {
 /**
  * 轮询
  */
-const timeoutPromise = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+export const timeoutPromise = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 export async function pollFetch(cb: Function, interval = 1000) {
     while (true) {
         try {
@@ -131,4 +131,9 @@ export function clearCache() {
             );
         }
     });
+}
+
+// 去抖音个人页
+export function goDouyin() {
+    plus.runtime.openURL("snssdk1128://user/profile");
 }

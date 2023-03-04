@@ -26,10 +26,11 @@
         <button class="add-btn" type="button" @tap.stop="copyToClipboard(goodInfo.coalitionUrl)">加橱窗</button>
     </view>
     <Dialog
+        v-if="hasDialog"
         :show="showDialog"
         :content="dialogContent"
         confirm-text="立即前往"
-        @confirm="hideDialog"
+        @confirm="toDouyin"
         @cancel="hideDialog"
     ></Dialog>
 </template>
@@ -37,17 +38,22 @@
 <script setup lang="ts">
 import router from "@/utils/router";
 import Dialog from "./dialog.vue";
-import { ref } from "vue";
+import { ref, inject } from "vue";
+import { goDouyin } from "@/utils/util";
 const props = defineProps({
     goodInfo: {
         type: Object,
         default: () => {}
+    },
+    hasDialog: {
+        type: Boolean,
+        default: true
     }
 });
 function toGoodDetail(id: number) {
     router.push("goodDetail", { query: { id } });
 }
-
+const topShow: any = inject("showDialog");
 // 加橱窗
 const showDialog = ref(false);
 const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
@@ -56,11 +62,23 @@ function copyToClipboard(coalitionUrl: string) {
         data: coalitionUrl,
         showToast: false,
         success: () => {
-            showDialog.value = true;
+            if (props.hasDialog) {
+                showDialog.value = true;
+            } else if (topShow && !props.hasDialog) {
+                // const showDialog: any = inject("showDialog");
+                // console.log("showDialog", showDialog);
+                topShow.value = true;
+            }
         }
     });
 }
 function hideDialog() {
+    showDialog.value = false;
+}
+function toDouyin() {
+    // #ifdef APP-PLUS
+    goDouyin();
+    // #endif
     showDialog.value = false;
 }
 </script>

@@ -8,7 +8,7 @@
         @scrolltolower="nextPage()"
     >
         <view class="items">
-            <view class="item" v-for="(item, index) in list" :key="index" @tap="showVideo(item.id)">
+            <view class="item" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id)">
                 <image :src="item.viewCoveUrl" mode="aspectFit" />
                 <view class="title">{{ item.name }}</view>
                 <view class="user">
@@ -19,7 +19,13 @@
                         {{ item.viewCount }}</view
                     >
                 </view>
-                <video class="video-box" :id="'video' + item.id" :src="item.viewUrl || ''"></video>
+                <video
+                    v-if="activeVideoId == item.id"
+                    class="video-box"
+                    :id="'video' + item.id"
+                    :src="item.viewUrl || ''"
+                    @fullscreenchange="exitVideo"
+                ></video>
             </view>
         </view>
         <view class="nomore" v-if="nomore"> -- 没有更多了 --</view>
@@ -27,7 +33,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, nextTick } from "vue";
+import { ref, nextTick, getCurrentInstance, onMounted } from "vue";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 const topLoading = ref<boolean>(false);
 const nomore = ref<boolean>(false);
@@ -55,17 +61,33 @@ async function nextPage() {
         }
     });
 }
-
+let instance: any = null;
+onMounted(() => {
+    console.log("挂在", getCurrentInstance());
+    instance = getCurrentInstance();
+});
+const scroller = ref<any>();
+let videoContext: MaybeNull<UniApp.VideoContext> = null;
+const activeVideoId = ref(0);
 function showVideo(id: number) {
-    // const video = document.getElementById("video" + id) as HTMLVideoElement;
-    // if (video.paused) {
-    //     video.play();
-    // } else {
-    //     video.pause();
-    // }
-    const video = uni.createVideoContext("video" + id);
-    video.requestFullScreen({ direction: 0 });
-    video.play();
+    activeVideoId.value = id;
+    nextTick(() => {
+        // setTimeout(() => {
+        videoContext = uni.createVideoContext("video" + id, instance);
+        console.log("showVideo", videoContext);
+        if (!videoContext) return;
+        videoContext.requestFullScreen({ direction: 0 });
+        videoContext.play();
+        // }, 200);
+    });
+}
+
+function exitVideo(e) {
+    if (e.detail?.fullScreen) return;
+    activeVideoId.value = 0;
+    if (!videoContext) return;
+    videoContext.seek(0);
+    videoContext.pause();
 }
 </script>
 <style scoped lang="scss">
@@ -80,7 +102,8 @@ function showVideo(id: number) {
     padding-bottom: 60rpx;
 }
 .video-box {
-    display: none;
+    width: 0;
+    height: 0;
 }
 .nomore {
     color: #a1a1a1;

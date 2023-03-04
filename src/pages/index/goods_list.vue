@@ -1,53 +1,58 @@
 <template>
-    <view class="goods-list">
+    <view class="goods-list flex-column">
         <scroll-view :scroll-x="true" class="cates">
-            <!-- <view class="scroller cates"> -->
+            <view class="li" :class="{ active: currentIndex === 0 }" @tap="changeCate(0, 0)">全部</view>
             <view
                 class="li"
-                v-for="item in cateList"
+                v-for="(item, index) in cateList"
                 :key="item.id"
-                :class="{ active: item.id == activeCate }"
-                @tap="changeCate(item.id)"
+                :class="{ active: index + 1 === currentIndex }"
+                @tap="changeCate(item.id, index + 1)"
                 >{{ item.name }}
             </view>
-            <!-- </view> -->
         </scroll-view>
-        <view class="list" :scroll-y="true" @scrolltolower="nextList({ id: activeCate })">
+        <!-- <view class="list" :scroll-y="true" @scrolltolower="nextList({ id: activeCate })">
             <good-info v-for="item in goodList" :key="item.id" :good-info="item"></good-info>
-        </view>
+        </view> -->
+        <swiper class="swiper-box flex-rest-height" :current="currentIndex" @change="swiperChange" duration="220">
+            <template v-for="(item, index) in cateList" :key="item.id">
+                <swiper-item v-if="index == 0">
+                    <all-list></all-list>
+                </swiper-item>
+                <swiper-item v-else>
+                    <cate-list :cate-id="item.id"></cate-list>
+                </swiper-item>
+            </template>
+        </swiper>
     </view>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import { getGoodsCategoryList, getGoodsList } from "@/api/dsx/business";
+import { ref } from "vue";
+import { getGoodsCategoryList } from "@/api/dsx/business";
 import { onMounted } from "vue";
-import { usePaginator } from "@/utils/util";
-import router from "@/utils/router";
-import GoodInfo from "@/components/goodInfo.vue";
-const { list: goodList, initList, nextList } = usePaginator<GoodInfo>(getGoodsList);
+import CateList from "./cateList.vue";
+import AllList from "./allList.vue";
 
 //商品分类列表
 const cateList = ref<GoodsCategory[]>([]);
 const activeCate = ref(0);
+const currentIndex = ref(0);
 async function initCate() {
     const { data } = await getGoodsCategoryList();
     cateList.value = data;
-    activeCate.value = data[0].id;
 }
-function changeCate(id: number) {
+async function changeCate(id: number, index: number) {
     activeCate.value = id;
-    initList({ id });
+    currentIndex.value = index;
+}
+function swiperChange(e) {
+    if (currentIndex.value === e.detail.current) return;
+    currentIndex.value = e.detail.current;
 }
 onMounted(async () => {
-    await initCate();
-    const cateId = activeCate.value;
-    await initList({ id: cateId });
+    initCate();
 });
-// 商品列表
-function toGoodDetail(id: number) {
-    router.push("goodDetail", { query: { id } });
-}
 </script>
 
 <style scoped lang="scss">
@@ -154,13 +159,14 @@ function toGoodDetail(id: number) {
 }
 
 .goods-list {
-    position: relative;
+    position: sticky;
+    top: 176rpx;
     width: 100%;
     border-radius: 30rpx 30rpx 0 0;
-    padding: 30rpx;
+    padding: 0 30rpx;
     background-color: #fff;
-    padding-bottom: 80rpx;
-    min-height: 50%;
+    // padding-bottom: 80rpx;
+    height: calc(100% - 176rpx);
     &::after {
         position: absolute;
         content: " ";
@@ -178,8 +184,12 @@ function toGoodDetail(id: number) {
         white-space: nowrap;
         width: 100%;
         overflow: hidden;
-        padding-bottom: 30rpx;
-
+        padding: 30rpx 0;
+        background-color: #fff;
+        // position: sticky;
+        // top: 176rpx;
+        // z-index: 999;
+        height: 130rpx;
         .li {
             text-align: center;
             &.active {
@@ -195,5 +205,7 @@ function toGoodDetail(id: number) {
             color: #3d3d3d;
         }
     }
+}
+.swiper-box {
 }
 </style>

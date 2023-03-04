@@ -1,51 +1,61 @@
 <template>
-    <view class="new">
-        <!-- 界面1 -->
-        <view class="container" v-if="!videoUrl">
-            <image
-                class="bj1"
-                src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/bj1.gif"
-                mode="widthFix"
-                alt=""
-            ></image>
-            <!-- <image class="bj1" src="@/static/export/bj1.gif" mode="widthFix" alt=""></image> -->
-            <view class="content1">视频努力导出中{{ progress }}%</view>
-            <view class="content2">您的专属视频生成中，请勿离开</view>
-            <view class="adContainer" v-if="isAdShow && adList.length">
-                <swiper class="swiper-banner" autoplay circular>
-                    <swiper-item class="swiper-item" v-for="ad in adList" :key="ad.id">
-                        <image class="ad-img" :src="ad.image" mode="scaleToFill"></image>
-                    </swiper-item>
-                </swiper>
-                <view class="btn-close" @tap="closeAd">关闭</view>
+    <!-- #ifdef MP-WEIXIN -->
+    <page-meta page-style="height: 100%;background:#000;">
+        <!-- #endif -->
+        <view class="new">
+            <!-- 界面1 -->
+            <view class="container" v-if="!videoUrl">
+                <!-- #ifdef APP-PLUS -->
+                <image class="bj1" src="@/assets/imgs/bj1.gif" mode="widthFix" alt=""></image>
+                <!-- #endif -->
+                <!-- #ifdef MP-WEIXIN -->
+                <image
+                    class="bj1"
+                    src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/bj1.gif"
+                    mode="widthFix"
+                    alt=""
+                ></image>
+                <!-- #endif -->
+                <view class="content1">视频努力导出中{{ progress }}%</view>
+                <view class="content2">您的专属视频生成中，请勿离开</view>
+                <view class="adContainer" v-if="isAdShow && adList.length">
+                    <swiper class="swiper-banner" autoplay circular>
+                        <swiper-item class="swiper-item" v-for="ad in adList" :key="ad.id">
+                            <image class="ad-img" :src="ad.image" mode="scaleToFill"></image>
+                        </swiper-item>
+                    </swiper>
+                    <view class="btn-close" @tap="closeAd">关闭</view>
+                </view>
+            </view>
+            <!-- 界面2 -->
+            <view v-else class="wrap">
+                <view class="bj2">
+                    <video class="video" :src="videoUrl" autoplay></video>
+                </view>
+                <view class="msg flex-between">
+                    <view class="group">
+                        <view class="num">1</view>
+                        <view class="">先复制文案</view>
+                    </view>
+                    <view class="group">
+                        <view class="num">2</view>
+                        <view class="">发布到抖音</view>
+                    </view>
+                    <view class="group">
+                        <view class="num">3</view>
+                        <view class="">文案粘贴到抖音</view>
+                    </view>
+                </view>
+                <view class="copywriting flex-column-center">
+                    <view class="write" :selectsble="true" user-select="ture">{{ description }} </view>
+                    <button class="btn-copy" @click="copyText">复制文案</button>
+                </view>
+                <button class="btn" @click="publishToDouyin(videoUrl)">发布到抖音</button>
             </view>
         </view>
-        <!-- 界面2 -->
-        <view v-else class="wrap">
-            <view class="bj2">
-                <video class="video" :src="videoUrl" autoplay></video>
-            </view>
-            <view class="msg flex-between">
-                <view class="group">
-                    <view class="num">1</view>
-                    <view class="">先复制文案</view>
-                </view>
-                <view class="group">
-                    <view class="num">2</view>
-                    <view class="">发布到抖音</view>
-                </view>
-                <view class="group">
-                    <view class="num">3</view>
-                    <view class="">文案粘贴到抖音</view>
-                </view>
-            </view>
-            <view class="copywriting flex-column-center">
-                <view class="write" :selectsble="true" user-select="ture">{{ description }} </view>
-                <button class="btn-copy" @click="copyText">复制文案</button>
-            </view>
-            <button class="btn" @click="publishToDouyin(videoUrl)">发布到抖音</button>
-        </view>
-    </view>
+        <!-- #ifdef MP-WEIXIN -->
+    </page-meta>
+    <!-- #endif -->
 </template>
 
 <script setup lang="ts">
@@ -61,25 +71,28 @@ const videoUrl = ref("");
 const description = ref("");
 onLoad((options) => {
     description.value = options?.description || "";
-    initData(options?.id || 0);
+    const taskId = options?.taskId || "";
+    const token = options?.token || "";
+    updateVideoStat(taskId, token);
+    // initData(options?.id || 0);
 });
 // 合成视频
-let retryCount = 0;
-async function initData(id: number) {
-    try {
-        const { data } = await getProcessVideo(id);
-        const { task: taskId, token } = data;
-        updateVideoStat(taskId, token);
-    } catch (error) {
-        if (error !== "retry") return;
-        if (retryCount < 10) {
-            retryCount++;
-            initData(id);
-        } else {
-            Toast("网络异常，请退出页面重试");
-        }
-    }
-}
+// let retryCount = 0;
+// async function initData(id: number) {
+//     try {
+//         const { data } = await getProcessVideo(id);
+//         const { task: taskId, token } = data;
+//         updateVideoStat(taskId, token);
+//     } catch (error) {
+//         if (error !== "retry") return;
+//         if (retryCount < 10) {
+//             retryCount++;
+//             initData(id);
+//         } else {
+//             Toast("网络异常，请退出页面重试");
+//         }
+//     }
+// }
 async function updateVideoStat(taskId: string, token: string) {
     const { data } = await getVideoStats(taskId, token);
     if (data.status === 5) {

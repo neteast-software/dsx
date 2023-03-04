@@ -53,6 +53,7 @@
                                 :src="goodInfo.templateVideo"
                                 :direction="0"
                                 :show-fullscreen-btn="false"
+                                @fullscreenchange="exitVideo"
                             ></video>
                         </view>
                     </view>
@@ -68,7 +69,7 @@
             :content="dialogContent"
             confirm-text="立即前往"
             @cancel="hideDialog"
-            @confirm="hideDialog"
+            @confirm="toDouyin"
         ></Dialog>
         <Dialog
             :show="isShowConfirm"
@@ -88,6 +89,7 @@ import router from "@/utils/router";
 import statusBar from "@/components/statusBar.vue";
 import user from "@/store/user";
 import { Toast } from "@/utils/uniapi";
+import { goDouyin, timeoutPromise } from "@/utils/util";
 onLoad((options) => {
     initData(options?.id || 0);
 });
@@ -112,6 +114,12 @@ function copyToClipboard(coalitionUrl = "") {
 function onSwiperChange(e) {
     current.value = e.detail.current + 1;
 }
+function toDouyin() {
+    // #ifdef APP-PLUS
+    goDouyin();
+    // #endif
+    showDialog.value = false;
+}
 function hideDialog() {
     showDialog.value = false;
 }
@@ -120,12 +128,15 @@ let retryCount = 0;
 async function getVideoProcessToken(id) {
     try {
         const { data } = await getProcessVideo(id);
+        console.log(data);
         const { task: taskId, token } = data;
         retryCount = 0;
         return { taskId, token };
     } catch (error) {
         if (error !== "retry") return;
         if (retryCount < 10) {
+            console.log("retry", retryCount);
+            await timeoutPromise(100);
             retryCount++;
             return await getVideoProcessToken(id);
         } else {
@@ -135,17 +146,32 @@ async function getVideoProcessToken(id) {
     }
 }
 async function toExport(id = 0, description = "") {
-    // const { taskId, token } = await getVideoProcessToken(id);
+    const { taskId, token } = await getVideoProcessToken(id);
     hideConfirm();
-    router.push("export", { query: { id, description } });
+    router.push("export", { query: { id, description, taskId, token } });
 }
 function back() {
     router.back();
 }
+// function showVideo() {
+//     const video = uni.createVideoContext("myVideo");
+//     video.requestFullScreen({ direction: 0 });
+//     video.play();
+// }
+let videoContext: MaybeNull<UniApp.VideoContext> = null;
 function showVideo() {
-    const video = uni.createVideoContext("myVideo");
-    video.requestFullScreen({ direction: 0 });
-    video.play();
+    videoContext = uni.createVideoContext("myVideo");
+    console.log(videoContext);
+    if (!videoContext) return;
+    videoContext.requestFullScreen({ direction: 0 });
+    videoContext.play();
+}
+
+function exitVideo(e) {
+    if (e.detail?.fullScreen) return;
+    if (!videoContext) return;
+    videoContext.seek(0);
+    videoContext.pause();
 }
 
 const isShowConfirm = ref(false);
@@ -164,6 +190,8 @@ function showConfirm() {
 <style scoped lang="scss">
 @import "./goodDetail.scss";
 #myVideo {
-    display: none;
+    width: 0;
+    height: 0;
+    // display: none;
 }
 </style>

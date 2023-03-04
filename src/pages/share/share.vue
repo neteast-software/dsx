@@ -18,7 +18,7 @@
             <view class="popup flex-column-center">
                 <text class="title">请选择分享至</text>
                 <view class="share-content">
-                    <view class="item flex-column-center">
+                    <view class="item flex-column-center" @tap="shareToFriends">
                         <image src="@/assets/share/weixin.png" class="item-img" mode="widthFix"></image>
                         <view class="item-text">微信</view>
                     </view>
@@ -37,6 +37,7 @@
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { ref } from "vue";
 import user from "@/store/user";
+import { shareToWechat } from "@/utils/uniapi";
 const sharePop = ref<any>(null);
 function copyToClipboard(text: string) {
     uni.setClipboardData({
@@ -48,6 +49,9 @@ function shareToggle() {
 }
 function close() {
     sharePop.value.close();
+}
+function shareToFriends() {
+    shareToWechat();
 }
 //分享到微信
 // uni.share({

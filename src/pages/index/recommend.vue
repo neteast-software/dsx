@@ -134,13 +134,14 @@ function toExclusiveList() {
     }
     .items {
         display: flex;
-        & > view {
+        > .item {
             width: 50%;
             text-align: center;
         }
         image {
             height: 132rpx;
             width: 132rpx;
+            border-radius: 16rpx;
         }
         .zhuan {
             font-size: 24rpx;

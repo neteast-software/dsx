@@ -36,7 +36,7 @@
         },
         {
             "path": "pages/goodDetail/goodDetail",
-            "styl0e": {
+            "style": {
                 "navigationBarTitleText": "商品详情",
                 "navigationStyle": "custom"
             }
@@ -78,7 +78,7 @@
         {
             "path": "pages/search/search",
             "style": {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "抖省心",
                 "navigationStyle": "custom"
             }
         },

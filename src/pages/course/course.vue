@@ -1,22 +1,28 @@
 <template>
-    <view class="stage">
-        <status-bar></status-bar>
-        <view class="nav">
-            <view
-                v-for="(item, index) in typeList"
-                :key="index"
-                :class="{ active: item.id == nav }"
-                @click="changeNav(item.id, index)"
-            >
-                {{ item.name }}
+    <!-- #ifdef MP-WEIXIN -->
+    <page-meta page-style="height: 100%">
+        <!-- #endif -->
+        <view class="stage">
+            <status-bar></status-bar>
+            <view class="nav">
+                <view
+                    v-for="(item, index) in typeList"
+                    :key="index"
+                    :class="{ active: item.id == nav }"
+                    @click="changeNav(item.id, index)"
+                >
+                    {{ item.name }}
+                </view>
             </view>
+            <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
+                <swiper-item v-for="(t, ind) in dataList" :key="ind">
+                    <ItemList :list="t.list" :next="t.nextList" :init="t.initList" :id="ind"></ItemList>
+                </swiper-item>
+            </swiper>
         </view>
-        <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
-            <swiper-item v-for="(t, ind) in dataList" :key="ind">
-                <ItemList :list="t.list" :next="t.nextList" :init="t.initList" :id="ind"></ItemList>
-            </swiper-item>
-        </swiper>
-    </view>
+        <!-- #ifdef MP-WEIXIN -->
+    </page-meta>
+    <!-- #endif -->
 </template>
 
 <script setup lang="ts">
@@ -106,9 +112,13 @@ let newData = [].concat(
 );
 
 const data = reactive<li[]>([...newData]);
+let videoContext: MaybeNull<UniApp.VideoContext> = null;
 </script>
 
 <style scoped lang="scss">
+page {
+    height: 100%;
+}
 .stage {
     width: 100%;
     height: 100%;

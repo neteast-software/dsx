@@ -40,6 +40,10 @@ export function getGoodsCategoryList() {
     return http.get<GetGoodsCategoryList>("/mobile/product/typeList");
 }
 
+export function getAllGoodsLists() {
+    return http.get("/mobile/product/allList")
+}
+
 // 商品列表
 interface getGoodsListFilter {
     id: string | number;

@@ -1,18 +1,14 @@
 <template>
     <view class="navigator" :class="[extClass ? extClass : '']">
         <status-bar></status-bar>
-        <view class="navbar">
+        <!-- <view class="navbar">
             <view class="navbar-left">
                 <view class="navbar-left-icon" @tap="back">
                     <uni-icons type="back" size="32" color="#ffffff"></uni-icons>
                 </view>
             </view>
-            <!-- <view class="navbar-right">
-                <view class="navbar-right-icon" @tap="showDrawer">
-                    <uni-icons name="edit" size="32" color="#000"></uni-icons>
-                </view>
-            </view> -->
-        </view>
+        </view> -->
+        <slot></slot>
     </view>
 </template>
 
@@ -28,13 +24,13 @@ function back() {
 </script>
 
 <style scoped lang="scss">
-// .navigator {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     z-index: 64;
-// }
+.navigator {
+    position: sticky;
+    top: 0;
+    height: 176rpx;
+    position: 9999;
+    background: #fff linear-gradient(180deg, #fde4d8 3%, rgba(253, 228, 216, 0) 76%);
+}
 .navbar {
     padding: 16rpx 32rpx;
     display: flex;
