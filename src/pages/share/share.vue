@@ -4,7 +4,7 @@
         <image src="@/assets/imgs/code.png" class="code-img" mode="widthFix"></image>
         <!-- <button class="share-btn">马上分享</button> -->
         <view class="share-code font-middle" @tap="copyToClipboard(user.inviteCode)"
-            >您的邀请码：{{ user.inviteCode }}</view
+            >点击复制您的邀请码：{{ user.inviteCode }}</view
         >
         <button class="share-btn" @tap="shareToggle">
             <text class="button-text">马上分享</text>
