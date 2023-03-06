@@ -71,16 +71,20 @@ export function chooseImageByAlbum() {
 }
 
 // 分享到微信
-export function shareToWechat(scene: "WXSceneSession" | "WXSceneTimeline" | "WXSceneFavorite" = "WXSceneSession") {
+export function shareToWechat(
+    imageUrl: string,
+    type: 0 | 1 | 2 | 3 | 4 | 5 = 2,
+    scene: "WXSceneSession" | "WXSceneTimeline" | "WXSceneFavorite" = "WXSceneSession"
+) {
     return new Promise((resolve, reject) => {
         uni.share({
             provider: "weixin",
-            type: 0, // 图文
+            type, // 图文
             title: "抖省心",
             scene,
             summary: "我正在使用抖省心，快来一起省心吧！",
-            href: "http://uniapp.dcloud.io/",
-            imageUrl: "https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png",
+            href: "https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/logo.png",
+            imageUrl,
             success: resolve,
             fail: reject
         });

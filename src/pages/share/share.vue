@@ -1,11 +1,6 @@
 <template>
     <view class="container share">
-        <image
-            src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/share-poster.png"
-            class="poster-img"
-            mode="widthFix"
-        >
-        </image>
+        <image :src="shareImg" class="poster-img" mode="widthFix"> </image>
         <image src="@/assets/imgs/code.png" class="code-img" mode="widthFix"></image>
         <!-- <button class="share-btn">马上分享</button> -->
         <view class="share-code font-middle" @tap="copyToClipboard(user.inviteCode)"
@@ -18,11 +13,11 @@
             <view class="popup flex-column-center">
                 <text class="title">请选择分享至</text>
                 <view class="share-content">
-                    <view class="item flex-column-center" @tap="shareToFriends">
+                    <view class="item flex-column-center" @tap="shareToFriends(shareImg)">
                         <image src="@/assets/share/weixin.png" class="item-img" mode="widthFix"></image>
                         <view class="item-text">微信</view>
                     </view>
-                    <view class="item flex-column-center">
+                    <view class="item flex-column-center" @tap="shareToTimeline(shareImg)">
                         <image src="@/assets/share/Moments.png" class="item-img" mode="widthFix"></image>
                         <view class="item-text">朋友圈</view>
                     </view>
@@ -38,6 +33,8 @@ import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { ref } from "vue";
 import user from "@/store/user";
 import { shareToWechat } from "@/utils/uniapi";
+import { onReady } from "@dcloudio/uni-app";
+import { getShareImg } from "@/api/dsx/business";
 const sharePop = ref<any>(null);
 function copyToClipboard(text: string) {
     uni.setClipboardData({
@@ -45,40 +42,52 @@ function copyToClipboard(text: string) {
     });
 }
 function shareToggle() {
+    // #ifdef APP-PLUS
     sharePop.value.open();
+    // #endif
+    // #ifdef MP-WEIXIN
+    shareToFriends(shareImg.value);
+    // #endif
 }
 function close() {
     sharePop.value.close();
 }
-function shareToFriends() {
-    shareToWechat();
+const shareImg = ref("");
+async function initShare() {
+    const { data } = await getShareImg();
+    shareImg.value = data;
 }
+onReady(initShare);
 //分享到微信
-// uni.share({
-//     provider: "weixin",
-//     scene: "WXSceneSession",
-//     type: 2,
-//     imageUrl: "https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png",
-//     success: function (res) {
-//         console.log("success:" + JSON.stringify(res));
-//     },
-//     fail: function (err) {
-//         console.log("fail:" + JSON.stringify(err));
-//     }
-// });
-//分享到朋友圈
-// uni.share({
-//     provider: "weixin",
-//     scene: "WXSceneTimeline",
-//     type: 2,
-//     imageUrl: "https://web-assets.dcloud.net.cn/unidoc/zh/uni@2x.png",
-//     success: function (res) {
-//         console.log("success:" + JSON.stringify(res));
-//     },
-//     fail: function (err) {
-//         console.log("fail:" + JSON.stringify(err));
-//     }
-// });
+function shareToFriends(url: string) {
+    // #ifdef APP-PLUS
+    shareToWechat(url);
+    // #endif
+    // #ifdef MP-WEIXIN
+    uni.downloadFile({
+        url,
+        success: (res) => {
+            uni.showShareImageMenu({
+                path: res.tempFilePath,
+                success: (res) => {
+                    console.log("success:");
+                },
+                fail: (err) => {
+                    console.log("fail:");
+                }
+            });
+        }
+    });
+    // #endif
+    close();
+}
+// 分享到朋友圈
+function shareToTimeline(url: string) {
+    // #ifdef APP-PLUS
+    shareToWechat(url, 2, "WXSceneTimeline");
+    // #endif
+    close();
+}
 </script>
 
 <style scoped lang="scss">

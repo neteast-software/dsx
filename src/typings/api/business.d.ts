@@ -153,3 +153,6 @@ interface GetProcessVideoResult {
         token: string;
     };
 }
+interface GetShareImgResult {
+    data: string;
+}

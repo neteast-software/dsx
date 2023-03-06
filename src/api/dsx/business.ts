@@ -41,7 +41,7 @@ export function getGoodsCategoryList() {
 }
 
 export function getAllGoodsLists() {
-    return http.get("/mobile/product/allList")
+    return http.get("/mobile/product/allList");
 }
 
 // 商品列表
@@ -81,4 +81,9 @@ export function getSearchGoodsList(pageNum = 1, pageSize = 10, filter: getSearch
 // 合成视频
 export function getProcessVideo(id: number) {
     return http.get<GetProcessVideoResult>(`/mobile/product/compositedFootage/${id}`);
+}
+
+// 获取分享图片
+export function getShareImg() {
+    return http.get<GetShareImgResult>("/mobile/marketSettings/getShareImgUrl");
 }
