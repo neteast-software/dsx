@@ -64,12 +64,12 @@
                 ></uni-icons>
                 <uni-icons v-else type="checkbox-filled" size="32" color="#cbbfcb" @tap="toogleAgree(true)"></uni-icons>
             </view>
-            <text class="agreement"
-                >请您阅读并同意<text class="font-bold" @tap="toServieProtocol">“用户协议”</text>和<text
+            <view class="agreement flex-center"
+                >请您阅读并同意<view class="font-bold" @tap="toServieProtocol">“用户协议”</view>和<view
                     class="font-bold"
                     @tap="toPrivacyProtocol"
-                    >“隐私政策”</text
-                ></text
+                    >“隐私政策”</view
+                ></view
             >
         </view>
         <view class="router" @tap="toRegister">
