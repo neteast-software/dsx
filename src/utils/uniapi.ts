@@ -90,3 +90,26 @@ export function shareToWechat(
         });
     });
 }
+
+// 下载网络文件
+export function downloadFile(url: string) {
+    return new Promise<UniApp.DownloadSuccessData>((resolve, reject) => {
+        uni.downloadFile({
+            url,
+            success: resolve,
+            fail: reject
+        });
+    });
+}
+
+// 保存视频到相册
+export async function saveVideoToAlbum(url: string) {
+    const res = await downloadFile(url);
+    return new Promise<any>((resolve, reject) => {
+        uni.saveVideoToPhotosAlbum({
+            filePath: res.tempFilePath,
+            success: resolve,
+            fail: reject
+        });
+    });
+}

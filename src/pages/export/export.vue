@@ -50,7 +50,12 @@
                     <view class="write" :selectsble="true" user-select="ture">{{ description }} </view>
                     <button class="btn-copy" @click="copyText">复制文案</button>
                 </view>
+                <!-- #ifdef APP-PLUS -->
                 <button class="btn" @click="publishToDouyin(videoUrl)">发布到抖音</button>
+                <!-- #endif -->
+                <!-- #ifdef MP-WEIXIN -->
+                <button class="btn" @click="saveToAlbum(videoUrl)">保存到相册</button>
+                <!-- #endif -->
             </view>
         </view>
         <!-- #ifdef MP-WEIXIN -->
@@ -61,7 +66,7 @@
 <script setup lang="ts">
 import { getAdList, getProcessVideo } from "@/api/dsx/business";
 import { getVideoStats } from "@/api/dyh";
-import { Toast } from "@/utils/uniapi";
+import { saveVideoToAlbum, Toast } from "@/utils/uniapi";
 import { onLoad, onReady, onUnload } from "@dcloudio/uni-app";
 import { douyinShareVideos } from "@/utils/douyin";
 import { ref } from "vue";
@@ -162,6 +167,16 @@ async function publishToDouyin(url) {
     } finally {
         uni.hideLoading();
     }
+}
+
+function saveToAlbum(url: string) {
+    saveVideoToAlbum(url)
+        .then(() => {
+            Toast("保存成功");
+        })
+        .catch(() => {
+            Toast("保存失败");
+        });
 }
 
 // 广告

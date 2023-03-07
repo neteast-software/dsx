@@ -146,9 +146,14 @@ async function getVideoProcessToken(id) {
     }
 }
 async function toExport(id = 0, description = "") {
-    const { taskId, token } = await getVideoProcessToken(id);
-    hideConfirm();
-    router.push("export", { query: { id, description, taskId, token } });
+    uni.showLoading({ title: "加载中..." });
+    try {
+        const { taskId, token } = await getVideoProcessToken(id);
+        hideConfirm();
+        router.push("export", { query: { id, description, taskId, token } });
+    } finally {
+        uni.hideLoading();
+    }
 }
 function back() {
     router.back();
