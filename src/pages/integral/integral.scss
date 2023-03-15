@@ -1,5 +1,36 @@
+.header {
+    margin-top: 55rpx;
+    width: 685rpx;
+    height: 198rpx;
+    border-radius: 24rpx;
+    // justify-content: space-around;
+    .available {
+        width: 50%;
+        .available-num {
+            text-align: center;
+            font-size: 56rpx;
+            color: #584028;
+        }
+        .available-text {
+            color: rgba(88, 64, 40, 0.6);
+            font-size: 24rpx;
+        }
+    }
+}
+.points-details {
+    margin: 72rpx 0 36rpx 0;
+    color: #2a2b2c;
+    font-size: $uni-font-size-middle;
+    .shape {
+        margin-right: 17rpx;
+        width: 4rpx;
+        height: 24rpx;
+        border-radius: 358rpx;
+        background-color: $uni-color-primary;
+    }
+}
 .account {
-    margin-top: 22rpx;
+    margin-bottom: 22rpx;
     padding: 46rpx 32rpx;
     background: $uni-bg-color;
     border-radius: 24rpx;

@@ -11,7 +11,14 @@
                     <view class="title">{{ user.nickname || "抖省心" }}</view>
                     <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
                 </view>
-                <image class="setting" src="@/assets/icons/setting.png" mode="widthFix"></image>
+                <view class="flex-column-center integral">
+                    <view class="integral-item flex-center">
+                        <image class="heart-img" src="@/assets/imgs/heart-circle.png" mode="scaleToFill"></image>
+                        <view>4246</view>
+                    </view>
+                    <text class="">可用积分</text>
+                </view>
+                <!-- <image class="setting" src="@/assets/icons/setting.png" mode="widthFix"></image> -->
             </view>
             <view class="signbar flex-between relative" @tap="toSign">
                 <image class="bg" src="@/assets/imgs/sign-bg.png" mode="aspectFill"></image>

@@ -51,14 +51,14 @@
             "path": "pages/fan/fan",
             "style": {
                 "navigationBarTitleText": "我的粉丝",
-                "navigationBarBackgroundColor": "#ffffff"
+                "navigationBarBackgroundColor": "#F7F8FA"
             }
         },
         {
             "path": "pages/integral/integral",
             "style": {
                 "navigationBarTitleText": "我的积分",
-                "navigationBarBackgroundColor": "#ffffff"
+                "navigationBarBackgroundColor": "#F7F8FA"
             }
         },
         {

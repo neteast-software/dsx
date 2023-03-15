@@ -24,11 +24,26 @@
             font-size: $uni-font-size-base;
         }
     }
-    .setting {
-        width: 46rpx;
-        height: 46rpx;
+    // .setting {
+    //     width: 46rpx;
+    //     height: 46rpx;
+    // }
+}
+.integral {
+    margin-right: -30rpx;
+}
+.integral-item {
+    padding: 14rpx 38rpx 14rpx 18rpx;
+    border-radius: 36rpx 0rpx 0rpx 36rpx;
+    background: linear-gradient(0deg, #ffdbd0 0%, #ffecea 88%);
+    margin-bottom: 12rpx;
+    .heart-img {
+        margin-right: 17rpx;
+        width: 31rpx;
+        height: 31rpx;
     }
 }
+
 .signbar {
     padding: 38rpx 48rpx;
     color: $uni-text-light-black;
