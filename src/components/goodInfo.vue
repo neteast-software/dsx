@@ -19,7 +19,7 @@
                 >
                 <view class="profit">
                     赚：¥
-                    <view>{{ (goodInfo.price * goodInfo.commissionRatio) / 100 }}</view>
+                    <view>{{ ((goodInfo.price * goodInfo.commissionRatio) / 100).toFixed(2) }}</view>
                 </view>
             </view>
         </view>

@@ -15,14 +15,12 @@
             <good-info v-for="item in goodList" :key="item.id" :good-info="item"></good-info>
         </view> -->
         <swiper class="swiper-box flex-rest-height" :current="currentIndex" @change="swiperChange" duration="220">
-            <template v-for="(item, index) in cateList" :key="item.id">
-                <swiper-item v-if="index == 0">
-                    <all-list></all-list>
-                </swiper-item>
-                <swiper-item v-else>
-                    <cate-list :cate-id="item.id"></cate-list>
-                </swiper-item>
-            </template>
+            <swiper-item>
+                <all-list></all-list>
+            </swiper-item>
+            <swiper-item v-for="item in cateList" :key="item.id">
+                <cate-list :cate-id="item.id"></cate-list>
+            </swiper-item>
         </swiper>
     </view>
 </template>

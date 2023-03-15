@@ -8,7 +8,7 @@
         @scrolltolower="nextPage()"
     >
         <view class="items">
-            <view class="item" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id)">
+            <view class="item" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id, item)">
                 <image :src="item.viewCoveUrl" mode="aspectFit" />
                 <view class="title">{{ item.name }}</view>
                 <view class="user">
@@ -34,6 +34,7 @@
 
 <script setup lang="ts">
 import { ref, nextTick, getCurrentInstance, onMounted } from "vue";
+import { getCourseRead } from "@/api/dsx/course";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 const topLoading = ref<boolean>(false);
 const nomore = ref<boolean>(false);
@@ -63,22 +64,20 @@ async function nextPage() {
 }
 let instance: any = null;
 onMounted(() => {
-    console.log("挂在", getCurrentInstance());
     instance = getCurrentInstance();
 });
 const scroller = ref<any>();
 let videoContext: MaybeNull<UniApp.VideoContext> = null;
 const activeVideoId = ref(0);
-function showVideo(id: number) {
+function showVideo(id: number, item) {
+    getCourseRead(id).then(() => item.viewCount++);
     activeVideoId.value = id;
     nextTick(() => {
-        // setTimeout(() => {
         videoContext = uni.createVideoContext("video" + id, instance);
         console.log("showVideo", videoContext);
         if (!videoContext) return;
         videoContext.requestFullScreen({ direction: 0 });
         videoContext.play();
-        // }, 200);
     });
 }
 

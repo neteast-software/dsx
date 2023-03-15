@@ -112,7 +112,6 @@ let newData = [].concat(
 );
 
 const data = reactive<li[]>([...newData]);
-let videoContext: MaybeNull<UniApp.VideoContext> = null;
 </script>
 
 <style scoped lang="scss">

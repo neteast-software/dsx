@@ -68,7 +68,7 @@ export async function pollFetch(cb: Function, interval = 1000) {
  */
 
 export function getCache() {
-    if (!plus) return "0B";
+    if (typeof plus === undefined) return "0B";
     return new Promise<string>((resolve) => {
         const appPlus: any = plus;
         appPlus.cache.calculate((size) => {

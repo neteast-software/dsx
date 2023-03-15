@@ -2,7 +2,7 @@
     <!-- #ifdef MP-WEIXIN -->
     <page-meta page-style="height: 100%;background: #f7f8fa;">
         <!-- #endif -->
-        <view class="stage">
+        <scroll-view class="stage" scroll-y @scroll="onScroll">
             <!-- <status-bar></status-bar> -->
             <view style="position: sticky; top: 0; z-index: 9999">
                 <NavBar>
@@ -11,10 +11,10 @@
             </view>
             <Banner></Banner>
             <Recommend></Recommend>
-            <view class="h-full goodlist-wrap">
+            <view id="goods" class="h-full goodlist-wrap">
                 <GoodsList></GoodsList>
             </view>
-        </view>
+        </scroll-view>
         <Dialog
             :show="showDialog"
             :content="dialogContent"
@@ -36,7 +36,10 @@ import NavBar from "@/components/navBar.vue";
 import Dialog from "@/components/dialog.vue";
 import { provide, ref } from "vue";
 import { goDouyin } from "@/utils/util";
-import { onShareAppMessage } from "@dcloudio/uni-app";
+import { getNodeInfo } from "@/utils/uniapi";
+import { onShareAppMessage, onReady } from "@dcloudio/uni-app";
+import user from "@/store/user";
+
 const showDialog = ref(false);
 provide("showDialog", showDialog);
 const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
@@ -55,6 +58,33 @@ onShareAppMessage(() => {
         path: "/pages/index/index"
     };
 });
+function onScroll(e) {
+    console.log("onScroll", e.detail);
+}
+onReady(() => {
+    user.initUserInfo();
+});
+onReady(() => {
+    const query = uni.createSelectorQuery();
+    console.log("query", query);
+    query
+        .select("#goods")
+        .boundingClientRect((data) => {
+            console.log("data", data);
+        })
+        .exec();
+});
+function getGoodsTop() {
+    return new Promise((resolve, reject) => {
+        const query = uni.createSelectorQuery();
+        query
+            .select("#goods")
+            .boundingClientRect((data) => {
+                resolve(data);
+            })
+            .exec();
+    });
+}
 </script>
 
 <style scoped lang="scss">

@@ -93,6 +93,7 @@ import { getCache, clearCache } from "@/utils/util";
 const cache = ref("");
 
 onReady(async () => {
+    user.initUserInfo();
     cache.value = await getCache();
 });
 async function clear() {
