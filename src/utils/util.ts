@@ -68,7 +68,7 @@ export async function pollFetch(cb: Function, interval = 1000) {
  */
 
 export function getCache() {
-    if (typeof plus === undefined) return "0B";
+    if (typeof plus === "undefined") return "0B";
     return new Promise<string>((resolve) => {
         const appPlus: any = plus;
         appPlus.cache.calculate((size) => {
@@ -94,7 +94,7 @@ export function getCache() {
  * 清除缓存
  */
 export function clearCache() {
-    if (!plus) return;
+    if (typeof plus === "undefined") return;
     return new Promise((resolve, reject) => {
         const appPlus: any = plus;
         const os = appPlus.os.name;
@@ -135,5 +135,6 @@ export function clearCache() {
 
 // 去抖音个人页
 export function goDouyin() {
+    if (typeof plus === "undefined") return;
     plus.runtime.openURL("snssdk1128://user/profile");
 }
