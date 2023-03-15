@@ -10,6 +10,8 @@ class User {
     private _inviteUserMobile = ref("");
     private _integral = ref(0);
     private _inviteCode = ref("");
+    private _giftsPoints = ref(0);
+    private _unreadMsgCount = ref(0);
     get nickname() {
         return this._nickname.value || "";
     }
@@ -31,9 +33,25 @@ class User {
     get inviteCode() {
         return this._inviteCode.value || "";
     }
+    get giftsPoints() {
+        return this._giftsPoints.value || 0;
+    }
+    get unreadMsgCount() {
+        return this._unreadMsgCount.value || 0;
+    }
     async initUserInfo() {
         const { data } = await getUserInfo();
-        const { nickname, avatar, mobile, inviteNickname, inviteUserMobile, integral, inviteCode } = data;
+        const {
+            nickname,
+            avatar,
+            mobile,
+            inviteNickname,
+            inviteUserMobile,
+            integral,
+            inviteCode,
+            giftsPoints,
+            unreadMsgCount
+        } = data;
         this._nickname.value = nickname;
         this._avatar.value = avatar;
         this._mobile.value = mobile;
@@ -41,6 +59,8 @@ class User {
         this._inviteUserMobile.value = inviteUserMobile;
         this._integral.value = integral;
         this._inviteCode.value = inviteCode;
+        this._giftsPoints.value = giftsPoints;
+        this._unreadMsgCount.value = unreadMsgCount;
     }
 }
 

@@ -116,13 +116,13 @@ export async function saveVideoToAlbum(url: string) {
 
 // 获取节点信息
 export function getNodeInfo(selector: string, instance = null) {
-    return new Promise((resolve, reject) => {
+    return new Promise<UniApp.NodeInfo>((resolve, reject) => {
         const query = instance ? uni.createSelectorQuery().in(instance) : uni.createSelectorQuery();
         query
             .select(selector)
             .boundingClientRect((data) => {
                 if (data) {
-                    resolve(data);
+                    resolve(data as UniApp.NodeInfo);
                 } else {
                     reject();
                 }

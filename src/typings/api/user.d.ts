@@ -11,6 +11,8 @@ interface UserInfo {
     inviteCode: string;
     inviteNickname: string;
     inviteUserMobile: string;
+    giftsPoints: number;
+    unreadMsgCount: number;
 }
 interface GetUserInfoResult {
     data: UserInfo;

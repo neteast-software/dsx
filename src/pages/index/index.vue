@@ -4,7 +4,7 @@
         <!-- #endif -->
         <scroll-view class="stage" scroll-y @scroll="onScroll">
             <!-- <status-bar></status-bar> -->
-            <view style="position: sticky; top: 0; z-index: 9999">
+            <view id="nav" style="position: sticky; top: 0; z-index: 9999">
                 <NavBar>
                     <Header></Header>
                 </NavBar>
@@ -42,6 +42,9 @@ import user from "@/store/user";
 
 const showDialog = ref(false);
 provide("showDialog", showDialog);
+let navHeight = 0;
+const disableScroll = ref(false);
+provide("disableScroll", disableScroll);
 const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
 function hideDialog() {
     showDialog.value = false;
@@ -58,32 +61,29 @@ onShareAppMessage(() => {
         path: "/pages/index/index"
     };
 });
-function onScroll(e) {
-    console.log("onScroll", e.detail);
-}
 onReady(() => {
     user.initUserInfo();
 });
-onReady(() => {
-    const query = uni.createSelectorQuery();
-    console.log("query", query);
-    query
-        .select("#goods")
-        .boundingClientRect((data) => {
-            console.log("data", data);
-        })
-        .exec();
+onReady(async () => {
+    const { height } = await getNodeInfo("#nav");
+    navHeight = height || 0;
 });
-function getGoodsTop() {
-    return new Promise((resolve, reject) => {
-        const query = uni.createSelectorQuery();
-        query
-            .select("#goods")
-            .boundingClientRect((data) => {
-                resolve(data);
-            })
-            .exec();
-    });
+const timer = ref<NodeJS.Timer>();
+function onScroll(e) {
+    if (timer.value) {
+        clearTimeout(timer.value);
+    }
+    timer.value = setTimeout(() => {
+        setScrollStatus();
+    }, 100);
+}
+async function setScrollStatus() {
+    const { top = 0 } = await getNodeInfo("#goods");
+    if (top <= navHeight + 5) {
+        disableScroll.value = true;
+    } else {
+        disableScroll.value = false;
+    }
 }
 </script>
 
