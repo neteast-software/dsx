@@ -37,7 +37,7 @@ import Dialog from "@/components/dialog.vue";
 import { provide, ref } from "vue";
 import { goDouyin } from "@/utils/util";
 import { getNodeInfo } from "@/utils/uniapi";
-import { onShareAppMessage, onReady } from "@dcloudio/uni-app";
+import { onShareAppMessage, onReady, onShow } from "@dcloudio/uni-app";
 import user from "@/store/user";
 
 const showDialog = ref(false);
@@ -61,7 +61,7 @@ onShareAppMessage(() => {
         path: "/pages/index/index"
     };
 });
-onReady(() => {
+onShow(() => {
     user.initUserInfo();
 });
 onReady(async () => {
@@ -70,12 +70,19 @@ onReady(async () => {
 });
 const timer = ref<NodeJS.Timer>();
 function onScroll(e) {
+    let timeOut = 50;
+    // #ifdef APP-PLUS
+    timeOut = 20;
+    // #endif
+    // #ifdef MP-WEIXIN
+    timeOut = 100;
+    // #endif
     if (timer.value) {
         clearTimeout(timer.value);
     }
     timer.value = setTimeout(() => {
         setScrollStatus();
-    }, 100);
+    }, timeOut);
 }
 async function setScrollStatus() {
     const { top = 0 } = await getNodeInfo("#goods");

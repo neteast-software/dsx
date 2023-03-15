@@ -7,14 +7,14 @@
             <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
         </view>
         <view class="msg" @tap="toNews">
-            <view class="news"></view>
+            <view class="news" v-if="user.unreadMsgCount"></view>
             <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
         <!-- #endif -->
         <!-- #ifdef MP-WEIXIN -->
         <view class="msg" @tap="toNews">
-            <view class="news"></view>
+            <view class="news" v-if="user.unreadMsgCount"></view>
             <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
@@ -134,7 +134,7 @@ function toSearch() {
         box-sizing: border-box;
         width: 16rpx;
         height: 16rpx;
-        border-radius: 200rpx;
+        border-radius: 50%;
     }
     image {
         width: 48rpx;

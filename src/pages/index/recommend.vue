@@ -9,7 +9,7 @@
                 <image src="@/static/index/rexiao-bg.png" mode="aspectFit" class="texture"></image>
                 <view class="h4" @tap="toHotList">热销榜单 <view class="desc">爆单更轻松</view></view>
                 <view class="items">
-                    <view class="item" v-for="item in hotGoodsList" :key="item.id">
+                    <view class="item" v-for="item in hotGoodsList" :key="item.id" @tap="toGoodDetail(item.id)">
                         <image :src="item.images" mode="aspectFit" />
                         <view class="bottom">
                             <view class="zhuan">赚</view>
@@ -23,7 +23,7 @@
                 <image src="@/static/index/gaoyong-bg.png" mode="aspectFit" class="texture"></image>
                 <view class="h4" @tap="toExclusiveList">专属高佣 <view class="desc">开单必备</view></view>
                 <view class="items">
-                    <view class="item" v-for="item in exclusiveGoodsList" :key="item.id">
+                    <view class="item" v-for="item in exclusiveGoodsList" :key="item.id" @tap="toGoodDetail(item.id)">
                         <image :src="item.images" mode="aspectFit" />
                         <view class="bottom">
                             <view class="zhuan">赚</view>
@@ -55,6 +55,9 @@ function toHotList() {
 }
 function toExclusiveList() {
     router.push("exclusiveList");
+}
+function toGoodDetail(id: number) {
+    router.push("goodDetail", { query: { id } });
 }
 </script>
 

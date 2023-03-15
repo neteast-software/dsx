@@ -11,10 +11,10 @@
                     <view class="title">{{ user.nickname || "抖省心" }}</view>
                     <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
                 </view>
-                <view class="flex-column-center integral">
+                <view class="flex-column-center integral" @tap.stop="toIntegral">
                     <view class="integral-item flex-center">
                         <image class="heart-img" src="@/assets/imgs/heart-circle.png" mode="scaleToFill"></image>
-                        <view>4246</view>
+                        <view>{{ user.integral }}</view>
                     </view>
                     <text class="">可用积分</text>
                 </view>
@@ -93,15 +93,17 @@ import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import user from "@/store/user";
 import { APP_VERSION } from "@/config/env";
 import { Toast } from "@/utils/uniapi";
-import { onReady } from "@dcloudio/uni-app";
+import { onReady, onShow } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { getCache, clearCache } from "@/utils/util";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 const cache = ref("");
 
 onReady(async () => {
-    user.initUserInfo();
     cache.value = await getCache();
+});
+onShow(() => {
+    user.initUserInfo();
 });
 async function clear() {
     await clearCache();

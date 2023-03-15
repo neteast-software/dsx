@@ -9,4 +9,8 @@ onHide(() => {
     console.log("App Hide");
 });
 </script>
-<style></style>
+<style>
+page {
+    height: 100%;
+}
+</style>

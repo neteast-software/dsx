@@ -4,11 +4,11 @@
             <view class="header flex-center relative">
                 <image class="bg" src="../../assets/imgs/integral-bg.png" mode="aspectFill"></image>
                 <view class="relative flex-column-center available">
-                    <view class="available-num">1226</view>
+                    <view class="available-num">{{ user.integral }}</view>
                     <view class="available-text">可用积分</view>
                 </view>
                 <view class="relative flex-column-center available">
-                    <view class="available-num">122</view>
+                    <view class="available-num">{{ user.giftsPoints }}</view>
                     <view class="available-text">赠送积分</view>
                 </view>
             </view>
@@ -43,10 +43,10 @@
 import { onReady } from "@dcloudio/uni-app";
 import { getIntegralList } from "@/api/dsx/business";
 import { usePaginator } from "@/utils/util";
+import user from "@/store/user";
 const { initList, list: integralList, nextList } = usePaginator<IntegralRecord>(getIntegralList);
 onReady(initList);
 </script>
-
 <style scoped lang="scss">
 @import "./integral.scss";
 </style>
