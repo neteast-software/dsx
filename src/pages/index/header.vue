@@ -7,12 +7,14 @@
             <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
         </view>
         <view class="msg" @tap="toNews">
+            <view class="news"></view>
             <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
         <!-- #endif -->
         <!-- #ifdef MP-WEIXIN -->
         <view class="msg" @tap="toNews">
+            <view class="news"></view>
             <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
@@ -123,7 +125,17 @@ function toSearch() {
     align-items: center;
     flex-direction: column;
     font-size: 20rpx;
-
+    position: relative;
+    .news {
+        position: absolute;
+        top: 5rpx;
+        right: 5rpx;
+        background: #f03737;
+        box-sizing: border-box;
+        width: 16rpx;
+        height: 16rpx;
+        border-radius: 200rpx;
+    }
     image {
         width: 48rpx;
         height: 48rpx;
