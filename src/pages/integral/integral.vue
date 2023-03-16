@@ -4,7 +4,7 @@
             <view class="header flex-center relative">
                 <image class="bg" src="../../assets/imgs/integral-bg.png" mode="aspectFill"></image>
                 <view class="relative flex-column-center available">
-                    <view class="available-num">1226</view>
+                    <view class="available-num">292</view>
                     <view class="available-text">可用积分</view>
                 </view>
                 <view class="relative flex-column-center available">
