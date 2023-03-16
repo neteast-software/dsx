@@ -4,12 +4,25 @@
         <!-- #endif -->
         <view class="wrap small grey">
             <image class="wrap-bg" src="@/assets/my/bg.png" mode="widthFix"></image>
-            <view class="userbar flex-center relative" @tap="toSetting">
-                <image v-if="user.avatar" class="avatar" :src="user.avatar" mode="aspectFill"></image>
-                <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
-                <view class="content flex-column-between flex-rest-width">
-                    <view class="title">{{ user.nickname || "抖省心" }}</view>
-                    <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
+            <view :style="{ height: statusBarHeight + 'px' }"></view>
+            <!-- #ifdef APP-PLUS -->
+            <view class="setting-app" @tap="toSetting">
+                <image class="setting-img" src="@/assets/icons/setting.png" mode="widthFix"></image
+            ></view>
+            <!-- #endif -->
+            <!-- #ifdef MP-WEIXIN -->
+            <view class="setting" @tap="toSetting">
+                <image class="setting-img" src="@/assets/icons/setting.png" mode="widthFix"></image
+            ></view>
+            <!-- #endif -->
+            <view class="userbar flex-center relative">
+                <view class="flex-center" @tap="toSetting">
+                    <image v-if="user.avatar" class="avatar" :src="user.avatar" mode="aspectFill"></image>
+                    <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
+                    <view class="content flex-column-between flex-rest-width">
+                        <view class="title">{{ user.nickname || "抖省心" }}</view>
+                        <view class="intro">{{ user.mobile || "抖音选品第一平台" }}</view>
+                    </view>
                 </view>
                 <view class="flex-column-center integral" @tap.stop="toIntegral">
                     <view class="integral-item flex-center">
@@ -18,7 +31,6 @@
                     </view>
                     <text class="">可用积分</text>
                 </view>
-                <!-- <image class="setting" src="@/assets/icons/setting.png" mode="widthFix"></image> -->
             </view>
             <view class="signbar flex-between relative" @tap="toSign">
                 <image class="bg" src="@/assets/imgs/sign-bg.png" mode="aspectFill"></image>
@@ -96,6 +108,8 @@ import { Toast } from "@/utils/uniapi";
 import { onReady, onShow } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { getCache, clearCache } from "@/utils/util";
+import { statusBarHeight } from "@/utils/systemInfo";
+// import NavBar from "@/components/navBar.vue";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 const cache = ref("");
 

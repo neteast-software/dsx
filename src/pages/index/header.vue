@@ -19,7 +19,7 @@
             消息
         </view>
         <view class="weapp-search" @tap="toSearch">
-            <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
+            <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜c 索</view>
         </view>
         <!-- #endif -->
     </view>
@@ -135,6 +135,8 @@ function toSearch() {
         width: 16rpx;
         height: 16rpx;
         border-radius: 50%;
+        border-radius: 200rpx;
+        z-index: 100;
     }
     image {
         width: 48rpx;

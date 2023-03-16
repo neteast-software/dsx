@@ -4,9 +4,22 @@
     left: 0;
     top: 0;
 }
+.setting-app {
+    display: flex;
+    justify-content: flex-end;
+}
+// .setting {
+//     z-index: 100;
+// }
+.setting-img {
+    margin: 5rpx;
+    width: 46rpx;
+    height: 46rpx;
+}
 .userbar {
-    margin-top: 176rpx;
+    margin-top: 21rpx;
     margin-bottom: 70rpx;
+    justify-content: space-between;
     .avatar {
         width: 124rpx;
         height: 124rpx;
@@ -24,13 +37,9 @@
             font-size: $uni-font-size-base;
         }
     }
-    // .setting {
-    //     width: 46rpx;
-    //     height: 46rpx;
-    // }
 }
 .integral {
-    margin-right: -30rpx;
+    margin: 18rpx -30rpx 0 0;
 }
 .integral-item {
     padding: 14rpx 38rpx 14rpx 18rpx;
