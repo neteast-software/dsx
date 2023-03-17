@@ -2,21 +2,16 @@
     <view class="stage">
         <template v-if="goodInfo">
             <view class="flex-rest-height content-wrap">
-                <view class="swiper-wrap relative">
-                    <!-- <nav-bar ext-class="absoluteNav"></nav-bar> -->
-                    <view class="nav">
-                        <status-bar></status-bar>
-                        <view class="nav-bar">
-                            <view class="back-wrap">
-                                <image
-                                    class="back-icon"
-                                    src="@/assets/icons/back.png"
-                                    mode="widthFix"
-                                    @tap="back"
-                                ></image>
-                            </view>
+                <view class="nav">
+                    <status-bar></status-bar>
+                    <view class="nav-bar">
+                        <view class="back-wrap">
+                            <image class="back-icon" src="@/assets/icons/back.png" mode="widthFix" @tap="back"></image>
                         </view>
                     </view>
+                </view>
+                <view class="swiper-wrap relative">
+                    <!-- <nav-bar ext-class="absoluteNav"></nav-bar> -->
                     <swiper class="swiper-box" autoplay circular @change="onSwiperChange">
                         <swiper-item v-for="image in goodInfo.imageList" :key="image">
                             <view class="swiper-item">

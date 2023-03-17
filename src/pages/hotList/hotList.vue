@@ -19,4 +19,7 @@ onReady(async () => {
 
 <style scoped lang="scss">
 @import "./hotList.scss";
+.h-full {
+    padding-top: 40rpx;
+}
 </style>

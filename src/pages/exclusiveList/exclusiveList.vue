@@ -19,4 +19,7 @@ onReady(async () => {
 
 <style scoped lang="scss">
 @import "./exclusiveList.scss";
+.h-full {
+    padding-top: 40rpx;
+}
 </style>
