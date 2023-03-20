@@ -32,7 +32,7 @@
                     <text class="">可用积分</text>
                 </view>
             </view>
-            <view class="signbar flex-between relative" @tap="toSign">
+            <view class="signbar flex-between relative" @tap="showApply">
                 <image class="bg" src="@/assets/imgs/sign-bg.png" mode="aspectFill"></image>
                 <view class="flex-center relative">
                     <image class="vip" src="@/assets/icons/vip.png" mode="widthFix"></image>
@@ -93,6 +93,19 @@
                     <uni-icons type="forward" size="20"></uni-icons>
                 </view>
             </view>
+            <uni-popup type="center" ref="apply">
+                <view class="apply">
+                    <image class="apply-img" src="@/assets/imgs/fly.png" mode="scaleToFill"></image>
+                    <uni-icons class="apply-close" type="close" color="#FFFFFF" size="60rpx" @tap="closeApply" />
+                    <view class="apply-upper flex-column-center">
+                        <view class="apply-title">签约申请</view>
+                        <view class="apply-text">
+                            签约申请申请绑定抖省心签约达人，获得更多商家扶持，申请绑定后请耐心等待，客服人员将在1-3个工作日内联系您
+                        </view>
+                        <button class="apply-btn">发起申请</button>
+                    </view>
+                </view>
+            </uni-popup>
         </view>
         <!-- #ifdef MP-WEIXIN -->
     </page-meta>
@@ -109,10 +122,11 @@ import { onReady, onShow } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import { getCache, clearCache } from "@/utils/util";
 import { statusBarHeight } from "@/utils/systemInfo";
+import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 // import NavBar from "@/components/navBar.vue";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 const cache = ref("");
-
+const apply = ref<any>(null);
 onReady(async () => {
     cache.value = await getCache();
 });
@@ -146,9 +160,17 @@ function toShare() {
     // Toast("功能开发中，敬请期待！");
     router.push("share");
 }
-function toSign() {
-    Toast("功能开发中，敬请期待！");
-    // router.push("sign");
+// function toSign() {
+//     Toast("功能开发中，敬请期待！");
+//     // router.push("sign");
+// }
+function showApply() {
+    if (!apply.value) return;
+    apply.value.open();
+}
+function closeApply() {
+    if (!apply.value) return;
+    apply.value.close();
 }
 </script>
 

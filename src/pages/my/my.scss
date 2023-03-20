@@ -127,3 +127,30 @@
         }
     }
 }
+.apply {
+    position: relative;
+    padding: 191rpx 62rpx 106rpx 62rpx;
+    width: 607rpx;
+    height: 740rpx;
+    border-radius: 36rpx;
+    background: #ffffff;
+    box-shadow: inset 2rpx 2rpx 0rpx 0rpx rgba(255, 255, 255, 0.7);
+    .apply-img {
+        position: absolute;
+        top: -104rpx;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 314rpx;
+        height: 314rpx;
+    }
+    .apply-close {
+        position: absolute;
+        top: -88rpx;
+        right: 0;
+    }
+    .apply-title {
+        color: #2a2b2c;
+        text-align: center;
+        font-size: 42rpx;
+    }
+}
