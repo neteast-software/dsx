@@ -69,6 +69,10 @@
         height: 40rpx;
         margin-left: 26rpx;
     }
+    .date {
+        font-size: $uni-font-size-sm;
+        color: $uni-text-light-black;
+    }
 }
 .tabbar {
     .tab {
@@ -152,5 +156,21 @@
         color: #2a2b2c;
         text-align: center;
         font-size: 42rpx;
+    }
+    .apply-text {
+        color: #7b7379;
+        font-size: $uni-font-size-base;
+        line-height: 42rpx;
+        margin-top: 60rpx;
+        margin-bottom: 105rpx;
+    }
+    .apply-btn {
+        width: 315rpx;
+        height: 94rpx;
+        line-height: 94rpx;
+        border-radius: 522rpx;
+        background: linear-gradient(180deg, #ffe6bd 0%, #fcd697 100%);
+        color: #4c2e1d;
+        font-size: $uni-font-size-middle;
     }
 }

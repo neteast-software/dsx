@@ -121,6 +121,12 @@
             "style": {
                 "navigationBarTitleText": "分享有礼"
             }
+        },
+        {
+            "path": "pages/signSuccess/signSuccess",
+            "style": {
+                "navigationBarTitleText": "签约申请"
+            }
         }
     ],
     "subPackages": [

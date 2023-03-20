@@ -1,0 +1,18 @@
+.hook {
+    margin-top: 100rpx;
+    width: 144rpx;
+    height: 144rpx;
+    border-radius: 522rpx;
+    background: linear-gradient(180deg, #ffe6bd 0%, #fcd697 100%);
+}
+.success {
+    color: $uni-text-color;
+    font-size: $uni-font-size-middle;
+    margin-top: 70rpx;
+    margin-bottom: 46rpx;
+}
+.tip {
+    color: $uni-text-color-tip;
+    font-size: $uni-font-size-sm;
+    line-height: 42rpx;
+}

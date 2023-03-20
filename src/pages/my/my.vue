@@ -42,6 +42,7 @@
                     <text>新增签约账号</text>
                     <image class="arrow" src="@/assets/icons/arrow-fill.png" mode="widhtFix"></image>
                 </view>
+                <!-- <view class="date relative">签约日期:2023-02-12</view> -->
             </view>
             <view class="tabbar flex-between">
                 <view class="tab fan" @tap="toFan">
@@ -96,13 +97,13 @@
             <uni-popup type="center" ref="apply">
                 <view class="apply">
                     <image class="apply-img" src="@/assets/imgs/fly.png" mode="scaleToFill"></image>
-                    <uni-icons class="apply-close" type="close" color="#FFFFFF" size="60rpx" @tap="closeApply" />
-                    <view class="apply-upper flex-column-center">
+                    <uni-icons class="apply-close" type="close" color="#FFFFFF" size="30" @tap="closeApply" />
+                    <view class="flex-column-center">
                         <view class="apply-title">签约申请</view>
                         <view class="apply-text">
-                            签约申请申请绑定抖省心签约达人，获得更多商家扶持，申请绑定后请耐心等待，客服人员将在1-3个工作日内联系您
+                            签约申请申请绑定抖省心签约达人,获得更多商家扶持,申请绑定后请耐心等待,客服人员将在1-3个工作日内联系您
                         </view>
-                        <button class="apply-btn">发起申请</button>
+                        <button class="apply-btn" @tap="signConfirm">发起申请</button>
                     </view>
                 </view>
             </uni-popup>
@@ -171,6 +172,14 @@ function showApply() {
 function closeApply() {
     if (!apply.value) return;
     apply.value.close();
+}
+function toSignSuccess() {
+    router.push("signSuccess");
+}
+async function signConfirm() {
+    await 123;
+    closeApply();
+    toSignSuccess();
 }
 </script>
 

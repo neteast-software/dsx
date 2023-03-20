@@ -17,7 +17,8 @@ const routes = {
     export: "/pages/export/export",
     login: "/userPages/login/login",
     register: "/userPages/register/register",
-    modify: "/userPages/modify/modify"
+    modify: "/userPages/modify/modify",
+    signSuccess:"../../pages/signSuccess/signSuccess"
 } as const;
 
 type RouteName = keyof typeof routes;

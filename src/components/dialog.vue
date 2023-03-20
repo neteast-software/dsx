@@ -8,7 +8,7 @@
                 <view class="content">确认请输入“我确认” </view>
                 <input v-model="logoffText" class="input" type="text" /> -->
             </view>
-            <view class="dialog-lower">
+            <view class="dialog-lower" v-if="showBtn">
                 <button class="btn cancel" @tap="onCancel">{{ cancelText }}</button>
                 <button class="btn confirm" @tap="onConfirm">{{ confirmText }}</button>
             </view>
@@ -28,6 +28,10 @@ const props = defineProps({
     type: {
         type: String,
         default: "center"
+    },
+    showBtn: {
+        type: Boolean,
+        default: true
     },
     cancelText: {
         type: String,
