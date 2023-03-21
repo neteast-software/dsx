@@ -12,14 +12,14 @@ class User {
     private _inviteCode = ref("");
     private _giftsPoints = ref(0);
     private _unreadMsgCount = ref(0);
-    private _agencyStatus = ref("");
-    private _agencyTime = ref("");
+    private _agencyStatus = ref<string>("");
+    private _agencyTime = ref<string>("");
 
-    get agencyStatus() {
-        return this._agencyStatus || "";
+    get agencyStatus(): string {
+        return this._agencyStatus.value || "";
     }
-    get agencyTime() {
-        return this._agencyTime || "";
+    get agencyTime(): string {
+        return this._agencyTime.value || "";
     }
     get nickname() {
         return this._nickname.value || "";
@@ -64,8 +64,8 @@ class User {
             unreadMsgCount
         } = data;
 
-        this._agencyStatus = agencyStatus;
-        this._agencyTime = agencyTime;
+        this._agencyStatus.value = agencyStatus;
+        this._agencyTime.value = agencyTime;
         this._nickname.value = nickname;
         this._avatar.value = avatar;
         this._mobile.value = mobile;

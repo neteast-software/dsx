@@ -38,11 +38,12 @@
                     <image class="vip" src="@/assets/icons/vip.png" mode="widthFix"></image>
                     <text class="font-middle">签约管理</text>
                 </view>
-                <view class="flex-center relative">
+                <view class="flex-center relative" v-if="user.agencyStatus == '0'">
                     <text>新增签约账号</text>
                     <image class="arrow" src="@/assets/icons/arrow-fill.png" mode="widhtFix"></image>
                 </view>
-                <!-- <view class="date relative">签约日期:2023-02-12</view> -->
+                <view class="date relative" v-else-if="user.agencyStatus == '1'">申请签约中</view>
+                <view class="date relative" v-else>签约日期: {{ user.agencyTime.substring(0, 10) }}</view>
             </view>
             <view class="tabbar flex-between">
                 <view class="tab fan" @tap="toFan">
@@ -168,7 +169,13 @@ function toShare() {
 // }
 function showApply() {
     if (!apply.value) return;
-    apply.value.open();
+    if (user.agencyStatus == "0") {
+        apply.value.open();
+    } else if (user.agencyStatus == "1") {
+        toSignSuccess();
+    } else if (user.agencyStatus == "2") {
+        Toast("当前帐号已成功完成签约");
+    }
 }
 function closeApply() {
     if (!apply.value) return;
