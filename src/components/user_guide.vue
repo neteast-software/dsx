@@ -1,7 +1,7 @@
 <template>
     <uni-popup ref="guide" type="center">
         <view class="guide">
-            <view class="title"> 新手带货指南 </view>
+            <view class="title"> {{ props.title }} </view>
             <view class="desc">{{ props.text }} </view>
             <view class="content">
                 <swiper class="swiper" circular :autoplay="false" @change="swiperChange">
@@ -51,6 +51,10 @@ const tips = ref<Array<Record<string, string>>>([
 ]);
 const emit = defineEmits(["confirm"]);
 const props = defineProps({
+    title: {
+        type: String,
+        default: "新手带货指南"
+    },
     text: {
         type: String,
         default: "下载视频前请先将商品添加至橱窗哦"
