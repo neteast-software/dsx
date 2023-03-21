@@ -28,6 +28,7 @@
     .content {
         margin: 0 26rpx;
         align-items: flex-start;
+        width:auto;
         .title {
             font-size: $uni-font-size-middle;
             margin-bottom: 10rpx;
@@ -124,6 +125,7 @@
         .nav-content {
             margin-right: 12rpx;
             margin-left: 26rpx;
+            font-size:$uni-font-size-middle;
         }
         .tip {
             color: $uni-text-color-tip;
