@@ -104,6 +104,7 @@ function toGoodDetail(id: number) {
     .price {
         font-weight: bold;
         color: #3d3d3d;
+        font-size: 28rpx;
     }
 
     .h4 {
