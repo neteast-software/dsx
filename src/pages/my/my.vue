@@ -124,6 +124,7 @@ import { ref } from "vue";
 import { getCache, clearCache } from "@/utils/util";
 import { statusBarHeight } from "@/utils/systemInfo";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
+import { doApply } from "@/api/dsx/business";
 // import NavBar from "@/components/navBar.vue";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 const cache = ref("");
@@ -177,7 +178,8 @@ function toSignSuccess() {
     router.push("signSuccess");
 }
 async function signConfirm() {
-    await 123;
+    //发起请求
+    await doApply();
     closeApply();
     toSignSuccess();
 }

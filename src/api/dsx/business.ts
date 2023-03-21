@@ -87,3 +87,8 @@ export function getProcessVideo(id: number) {
 export function getShareImg() {
     return http.get<GetShareImgResult>("/mobile/marketSettings/getShareImgUrl");
 }
+
+// 发起签约申请(无返回值)
+export function doApply() {
+    return http.post<null>("/mobile/my/mcnApply");
+}
