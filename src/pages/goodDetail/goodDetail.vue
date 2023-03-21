@@ -72,6 +72,13 @@
             @cancel="hideConfirm"
             @confirm="toExport(goodInfo?.id, goodInfo?.description)"
         ></Dialog>
+        <userGuide
+            ref="ug"
+            :confirm="true"
+            :title="'带货指南'"
+            :text="'您已复制商品链接，请前往添加至橱窗'"
+            @confirm="toDouyin"
+        ></userGuide>
     </view>
 </template>
 
@@ -85,6 +92,8 @@ import statusBar from "@/components/statusBar.vue";
 import user from "@/store/user";
 import { Toast } from "@/utils/uniapi";
 import { goDouyin, timeoutPromise } from "@/utils/util";
+import userGuide from "@/components/user_guide.vue";
+
 onLoad((options) => {
     initData(options?.id || 0);
 });
@@ -94,6 +103,8 @@ async function initData(id = 0) {
     goodInfo.value = data;
 }
 
+const ug = ref<any>();
+
 const current = ref(0);
 const showDialog = ref(false);
 const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
@@ -102,7 +113,8 @@ function copyToClipboard(coalitionUrl = "") {
         data: coalitionUrl,
         showToast: false,
         success: () => {
-            showDialog.value = true;
+            // showDialog.value = true;
+            (ug.value as DuckActions).show();
         }
     });
 }
@@ -114,6 +126,7 @@ function toDouyin() {
     goDouyin();
     // #endif
     showDialog.value = false;
+    (ug.value as DuckActions).hide();
 }
 function hideDialog() {
     showDialog.value = false;
