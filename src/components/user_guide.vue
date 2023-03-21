@@ -15,6 +15,8 @@
                 <image
                     mode="aspectFit"
                     class="duck"
+                    @animationend="aniRemove"
+                    :class="{ active: aniPlay }"
                     src="https://dsxmanager.huoyuanyouxuan.com/dsx/assets/Flipper.png"
                 ></image>
             </view>
@@ -29,12 +31,13 @@
     </uni-popup>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
-import { onReady, onShow } from "@dcloudio/uni-app";
+import { onMounted, ref } from "vue";
+import { onShow } from "@dcloudio/uni-app";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 const guide = ref<any>(null);
 const swiperIndex = ref<number>(1);
-onReady(() => {
+const aniPlay = ref<boolean>(false);
+onMounted(() => {
     guide.value.open();
 });
 onShow(() => {
@@ -49,6 +52,10 @@ const tips = ref<Array<Record<string, string>>>([
 ]);
 function swiperChange(e) {
     swiperIndex.value = e.detail.current;
+    aniPlay.value = true;
+}
+function aniRemove() {
+    aniPlay.value = false;
 }
 function close() {
     guide.value.close();
@@ -63,6 +70,9 @@ function close() {
     padding: 74rpx;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     .content {
         display: flex;
         justify-content: center;
@@ -118,7 +128,32 @@ function close() {
         width: 32%;
         height: 52%;
         transform: translateY(25rpx);
+        transform-origin: center 200rpx;
+        &.active {
+            animation: duck-duck 1s ease-in-out forwards;
+        }
     }
+    @keyframes duck-duck {
+        0% {
+            transform: rotate(0) translateY(25rpx);
+        }
+        20% {
+            transform: rotate(36deg) translateY(25rpx);
+        }
+        40% {
+            transform: rotate(-18deg) translateY(25rpx);
+        }
+        60% {
+            transform: rotate(12deg) translateY(25rpx);
+        }
+        80% {
+            transform: rotate(-6deg) translateY(25rpx);
+        }
+        100% {
+            transform: rotate(0) translateY(25rpx);
+        }
+    }
+
     .title {
         font-size: 42rpx;
         color: #2a2b2c;
