@@ -46,7 +46,7 @@ const tips = ref<Array<Record<string, string>>>([
     { step: "一", action: "点击商品橱窗" },
     { step: "二", action: "点击选品广场" },
     { step: "三", action: "在搜索栏粘贴商品链接" },
-    { step: "四", action: "点几查看详情查看商品" },
+    { step: "四", action: "点击查看详情查看商品" },
     { step: "五", action: "点击加橱窗，把商品加到自己的抖音橱窗" }
 ]);
 const emit = defineEmits(["confirm"]);
