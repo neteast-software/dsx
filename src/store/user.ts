@@ -12,6 +12,15 @@ class User {
     private _inviteCode = ref("");
     private _giftsPoints = ref(0);
     private _unreadMsgCount = ref(0);
+    private _agencyStatus = ref("");
+    private _agencyTime = ref("");
+
+    get agencyStatus() {
+        return this._agencyStatus || "";
+    }
+    get agencyTime() {
+        return this._agencyTime || "";
+    }
     get nickname() {
         return this._nickname.value || "";
     }
@@ -43,6 +52,8 @@ class User {
         const { data } = await getUserInfo();
         const {
             nickname,
+            agencyStatus,
+            agencyTime,
             avatar,
             mobile,
             inviteNickname,
@@ -52,6 +63,9 @@ class User {
             giftsPoints,
             unreadMsgCount
         } = data;
+
+        this._agencyStatus = agencyStatus;
+        this._agencyTime = agencyTime;
         this._nickname.value = nickname;
         this._avatar.value = avatar;
         this._mobile.value = mobile;

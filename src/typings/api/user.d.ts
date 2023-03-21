@@ -13,6 +13,8 @@ interface UserInfo {
     inviteUserMobile: string;
     giftsPoints: number;
     unreadMsgCount: number;
+    agencyTime: string;
+    agencyStatus: string;
 }
 interface GetUserInfoResult {
     data: UserInfo;
