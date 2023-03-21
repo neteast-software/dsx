@@ -37,12 +37,6 @@ import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 const guide = ref<any>(null);
 const swiperIndex = ref<number>(1);
 const aniPlay = ref<boolean>(false);
-onMounted(() => {
-    guide.value.open();
-});
-onShow(() => {
-    guide.value.open();
-});
 const tips = ref<Array<Record<string, string>>>([
     { step: "一", action: "点击商品橱窗" },
     { step: "二", action: "点击选品广场" },
@@ -60,6 +54,14 @@ function aniRemove() {
 function close() {
     guide.value.close();
 }
+defineExpose({
+    show: () => {
+        guide.value.open();
+    },
+    hide: () => {
+        guide.value.close();
+    }
+});
 </script>
 <style lang="scss">
 .guide {
