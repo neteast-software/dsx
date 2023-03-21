@@ -2,7 +2,7 @@
     <uni-popup ref="guide" type="center">
         <view class="guide">
             <view class="title"> 新手带货指南 </view>
-            <view class="desc"> 下载视频前请先将商品添加至橱窗哦 </view>
+            <view class="desc">{{ props.text }} </view>
             <view class="content">
                 <swiper class="swiper" circular :autoplay="false" @change="swiperChange">
                     <swiper-item v-for="(item, index) in tips" :key="index">
@@ -25,17 +25,22 @@
                 <view v-for="(item, index) in tips" :key="index" class="dot" :class="{ active: swiperIndex == index }">
                 </view>
             </view>
-            <button class="close" @tap="close">我知道了</button>
+            <view class="btns">
+                <button class="close" @tap="close">我知道了</button>
+                <template v-if="props.confirm">
+                    <button class="close" @tap="confirm">{{ props.confirm_text }}</button>
+                </template>
+            </view>
             <button class="close-icon" @tap="close">x</button>
         </view>
     </uni-popup>
 </template>
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { onShow } from "@dcloudio/uni-app";
+import { ref } from "vue";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
+
 const guide = ref<any>(null);
-const swiperIndex = ref<number>(1);
+const swiperIndex = ref<number>(0);
 const aniPlay = ref<boolean>(false);
 const tips = ref<Array<Record<string, string>>>([
     { step: "一", action: "点击商品橱窗" },
@@ -44,12 +49,31 @@ const tips = ref<Array<Record<string, string>>>([
     { step: "四", action: "点几查看详情查看商品" },
     { step: "五", action: "点击加橱窗，把商品加到自己的抖音橱窗" }
 ]);
+const emit = defineEmits(["confirm"]);
+const props = defineProps({
+    text: {
+        type: String,
+        default: "下载视频前请先将商品添加至橱窗哦"
+    },
+    confirm_text: {
+        type: String,
+        default: "立即前往"
+    },
+    confirm: {
+        type: Boolean,
+        default: false
+    }
+});
 function swiperChange(e) {
     swiperIndex.value = e.detail.current;
     aniPlay.value = true;
 }
 function aniRemove() {
     aniPlay.value = false;
+}
+function confirm() {
+    emit("confirm");
+    close();
 }
 function close() {
     guide.value.close();
@@ -140,10 +164,10 @@ defineExpose({
             transform: rotate(0) translateY(25rpx);
         }
         20% {
-            transform: rotate(36deg) translateY(25rpx);
+            transform: rotate(26deg) translateY(25rpx);
         }
         40% {
-            transform: rotate(-18deg) translateY(25rpx);
+            transform: rotate(-16deg) translateY(25rpx);
         }
         60% {
             transform: rotate(12deg) translateY(25rpx);
@@ -178,11 +202,19 @@ defineExpose({
         border: 1rpx #fff solid;
         border-radius: 50%;
     }
+    .btns {
+        width: 100%;
+        display: flex;
+        gap: 20rpx;
+        .close {
+            width: 100%;
+            max-width: 315rpx;
+        }
+    }
     .close {
-        width: 315rpx;
         height: 94rpx;
         line-height: 94rpx;
-        border-radius: 522px;
+        border-radius: 100rpx;
         margin: 0 auto;
         color: #4c2e1d;
         background: linear-gradient(180deg, #ffe6bd 0%, #fcd697 100%);
