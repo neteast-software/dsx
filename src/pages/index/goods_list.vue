@@ -188,19 +188,22 @@ onMounted(async () => {
         // top: 176rpx;
         // z-index: 999;
         height: 130rpx;
+
         .li {
             text-align: center;
-            &.active {
-                color: #fff;
-                background-image: linear-gradient(180deg, #fd5bb4 10%, #f92e9e 100%);
-            }
+            background: #f3f3f2;
             display: inline-block;
-            border-radius: 30rpx;
-            height: 62rpx;
-            line-height: 62rpx;
-            min-width: 166rpx;
-            margin-right: 10rpx;
-            color: #3d3d3d;
+            border-radius: 8rpx;
+            height: 52rpx;
+            line-height: 52rpx;
+            min-width: 138rpx;
+            margin-right: 13rpx;
+            color: $uni-text-color;
+            font-size: $uni-font-size-sm;
+            &.active {
+                color: #ea3598;
+                // background-image: linear-gradient(180deg, #fd5bb4 10%, #f92e9e 100%);
+            }
         }
     }
 }

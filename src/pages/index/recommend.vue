@@ -63,8 +63,8 @@ function toGoodDetail(id: number) {
 
 <style scoped lang="scss">
 .recommend {
-    margin-top: 25rpx;
-    padding: 25rpx 32rpx;
+    margin-top: 30rpx;
+    padding: 30rpx 0;
 }
 
 .rexiao {

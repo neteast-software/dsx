@@ -3,9 +3,7 @@
         <!-- #ifdef APP-PLUS -->
         <image class="profile" v-if="user.avatar" :src="user.avatar" mode="aspectFill" />
         <image class="profile" v-else src="@/assets/imgs/avatar.png" mode="aspectFill" />
-        <view class="search" @tap="toSearch">
-            <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
-        </view>
+        <image class="logo-img" src="@/assets/imgs/logo.png" mode="widthFix" />
         <view class="msg" @tap="toNews">
             <view class="news" v-if="user.unreadMsgCount"></view>
             <image src="@/static/index/msg.svg" mode="widthFix" />
@@ -18,9 +16,7 @@
             <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
-        <view class="weapp-search" @tap="toSearch">
-            <view class="mask"><image class="icon-search" src="@/static/index/seearch.svg" />搜索</view>
-        </view>
+        <image class="logo-img" src="@/assets/imgs/logo.png" mode="widthFix" />
         <!-- #endif -->
     </view>
 </template>
@@ -31,9 +27,6 @@ import router from "@/utils/router";
 function toNews() {
     router.push("news");
 }
-function toSearch() {
-    router.push("search");
-}
 </script>
 
 <style scoped lang="scss">
@@ -43,40 +36,11 @@ function toSearch() {
     display: flex;
     padding: 0 33rpx;
     align-items: center;
+    justify-content: space-between;
 
     // & > * {
     //     height: 100%;
     // }
-    .search {
-        height: 100%;
-    }
-    .weapp-search {
-        width: 374rpx;
-        height: 66rpx;
-        margin: 0 50rpx;
-        position: relative;
-        background-color: #f3eded;
-        border-radius: 500rpx;
-        .icon-search {
-            width: 28rpx;
-            margin-right: 10rpx;
-        }
-        .mask {
-            pointer-events: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28rpx;
-            color: #847978;
-            font-weight: 400;
-        }
-    }
-
     .profile {
         width: 70rpx;
         height: 70rpx;
@@ -90,36 +54,15 @@ function toSearch() {
         //     height: 100%;
         // }
     }
-}
-.search {
-    flex: 1;
-    margin: 0 25rpx;
-    position: relative;
-    background-color: #f3eded;
-    border-radius: 500rpx;
-    // &.weapp {
-    //     width: 374rpx;
-    //     flex-grow: 1;
-    // }
-    .icon-search {
-        width: 28rpx;
-        margin-right: 10rpx;
-    }
-    .mask {
-        pointer-events: none;
+    .logo-img {
+        width: 152rpx;
+        height: 55rpx;
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 28rpx;
-        color: #847978;
-        font-weight: 400;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
+
 .msg {
     display: flex;
     align-items: center;

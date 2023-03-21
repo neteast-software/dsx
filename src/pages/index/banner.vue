@@ -22,11 +22,11 @@ onMounted(initData);
 
 <style scoped lang="scss">
 .swiper-box {
-    width: 686rpx;
-    height: 337rpx;
+    width: 100%;
+    height: 250rpx;
     margin: 0 auto;
     border-radius: 40rpx;
-    margin-top: 30rpx;
+    margin: 30rpx 0;
 }
 .swiper-item {
     height: 100%;

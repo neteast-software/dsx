@@ -6,32 +6,86 @@
 .new {
     height: 100%;
     background-color: #000;
+    color: $uni-text-color-inverse;
+    padding: 0 32rpx;
 }
-.wrap {
-    background-color: black;
-}
+// .wrap {
+//     background-color: black;
+// }
 .bj1 {
     width: 748rpx;
-    height: 572rpx;
+    height: 344rpx;
     opacity: 1;
 }
 .content1 {
     font-size: $uni-font-size-lg;
     color: #d9dae1;
     text-align: center;
+    margin-top: 36rpx;
+    margin-bottom: 27rpx;
 }
 .content2 {
     font-size: $uni-font-size-base;
     line-height: 28px;
     color: #888a9c;
     text-align: center;
-    font-size: 30rpx;
+    margin-bottom: 150rpx;
 }
+//推荐商品
+.moreproducts {
+    width: 100%;
+    .title-img {
+        width: 200rpx;
+        height: 25rpx;
+        &:last-child {
+            transform: rotateY(180deg);
+        }
+    }
+    .title-text {
+        margin: 0 26rpx;
+        color: $uni-text-color-inverse;
+    }
+    .recommend {
+        margin-top: 64rpx;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 36rpx;
+    }
+}
+.moreproducts-item {
+    border-radius: 10rpx;
+    background: #202121;
+    width: 325rpx;
+    .moreproducts-img {
+        position: relative;
+        height: 359rpx;
+        font-size: $uni-font-size-base;
+        .moreproducts-text {
+            position: absolute;
+            bottom: 6rpx;
+            padding: 0 22rpx;
+            color: #bcbcbc;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            /*! autoprefixer: off */
+        }
+    }
+    .sales {
+        padding: 25rpx 24rpx;
+    }
+}
+//广告
 .adContainer {
-    position: fixed;
-    bottom: 52rpx;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    // position: fixed;
+    // bottom: 52rpx;
+    // left: 50%;
+    // transform: translateX(-50%);
+    margin-top: 130rpx;
+    margin-bottom: 78rpx;
     border-radius: 16rpx;
     display: inline-block;
     &.none {
@@ -47,16 +101,17 @@
     height: 100%;
 }
 .btn-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 12rpx 23rpx;
     background-color: #000;
     color: $uni-text-color-inverse;
     text-align: center;
     opacity: 0.2;
     border-top-right-radius: 16rpx;
-    width: 94rpx;
-    height: 52rpx;
-    font-style: 24rpx;
+    font-size: $uni-font-size-sm;
     float: right;
-    margin-top: -274rpx;
 }
 // 界面2
 .bj2 {

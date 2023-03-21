@@ -9,8 +9,12 @@
                     <Header></Header>
                 </NavBar>
             </view>
-            <Banner></Banner>
-            <Recommend></Recommend>
+            <view class="item">
+                <search></search>
+                <Banner></Banner>
+                <iconsWrapper></iconsWrapper>
+                <Recommend></Recommend>
+            </view>
             <view id="goods" class="h-full goodlist-wrap">
                 <GoodsList></GoodsList>
             </view>
@@ -39,6 +43,8 @@ import { goDouyin } from "@/utils/util";
 import { getNodeInfo } from "@/utils/uniapi";
 import { onShareAppMessage, onReady, onShow } from "@dcloudio/uni-app";
 import user from "@/store/user";
+import search from "./search.vue";
+import iconsWrapper from "./icons-wrapper.vue";
 
 const showDialog = ref(false);
 provide("showDialog", showDialog);
@@ -97,7 +103,7 @@ async function setScrollStatus() {
 <style scoped lang="scss">
 .stage {
     height: 100%;
-    // background-image: linear-gradient(180deg, #fde4d8 1%, rgba(247, 248, 250, 1) 20%);
+    // background-image: linear-gradient(180deg, rgba(253, 228, 216, 1) 1%, rgba(247, 248, 250, 1) 20%);
     // background-size: 100% 100%;
     // background-repeat: no-repeat;
 }
@@ -105,4 +111,8 @@ async function setScrollStatus() {
 //     position: sticky;
 //     top: 200rpx;
 // }
+
+.item {
+    padding: 0 32rpx;
+}
 </style>

@@ -18,6 +18,45 @@
                 <!-- #endif -->
                 <view class="content1">视频努力导出中{{ progress }}%</view>
                 <view class="content2">您的专属视频生成中，请勿离开</view>
+                <!-- 推荐商品 -->
+                <view class="moreproducts flex-column-all-center">
+                    <view class="flex-center">
+                        <image class="title-img" src="@/assets/icons/title.png" mode="scaleToFill"></image>
+                        <view class="title-text">更多同款商品</view>
+                        <image class="title-img" src="@/assets/icons/title.png" mode="scaleToFill"></image>
+                    </view>
+                    <view class="recommend">
+                        <view class="moreproducts-item">
+                            <view class="moreproducts-img">
+                                <image class="bg" src="@/assets/text/item..png" mode="scaleToFill"> </image>
+                                <view class="moreproducts-text">家里放一个这样的椅子 周末真的才有快乐～</view>
+                            </view>
+                            <view class="sales">累计销量 1万加</view>
+                        </view>
+                        <view class="moreproducts-item">
+                            <view class="moreproducts-img">
+                                <image class="bg" src="@/assets/text/item..png" mode="scaleToFill"> </image>
+                                <view class="moreproducts-text">家里放一个这样的椅子 周末真的才有快乐～</view>
+                            </view>
+                            <view class="sales">累计销量 1万加</view>
+                        </view>
+                        <view class="moreproducts-item">
+                            <view class="moreproducts-img">
+                                <image class="bg" src="@/assets/text/item..png" mode="scaleToFill"> </image>
+                                <view class="moreproducts-text">家里放一个这样的椅子 周末真的才有快乐～</view>
+                            </view>
+                            <view class="sales">累计销量 1万加</view>
+                        </view>
+                        <view class="moreproducts-item">
+                            <view class="moreproducts-img">
+                                <image class="bg" src="@/assets/text/item..png" mode="scaleToFill"> </image>
+                                <view class="moreproducts-text">家里放一个这样的椅子 周末真的才有快乐～</view>
+                            </view>
+                            <view class="sales">累计销量 1万加</view>
+                        </view>
+                    </view>
+                </view>
+                <!-- 广告 -->
                 <view class="adContainer" v-if="isAdShow && adList.length">
                     <swiper class="swiper-banner" autoplay circular>
                         <swiper-item class="swiper-item" v-for="ad in adList" :key="ad.id">
