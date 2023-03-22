@@ -18,7 +18,8 @@ const routes = {
     login: "/userPages/login/login",
     register: "/userPages/register/register",
     modify: "/userPages/modify/modify",
-    signSuccess:"../../pages/signSuccess/signSuccess"
+    signSuccess: "/pages/signSuccess/signSuccess",
+    videoPreview: "/pages/videoPreview/videoPreview"
 } as const;
 
 type RouteName = keyof typeof routes;

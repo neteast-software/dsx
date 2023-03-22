@@ -1,5 +1,6 @@
 <template>
-    <view class="wrap grey flex-column overflow-hidden">
+    <!-- <view class="container"></view> -->
+    <view class="container wrap grey flex-column overflow-hidden">
         <scroll-view class="flex-rest-height" :scroll-y="true" :enable-flex="true" @scrolltolower="nextList">
             <view class="account flex-center" v-for="fan in fansList">
                 <image v-if="fan.avatar" class="avatar" :src="fan.avatar" mode="aspectFill"></image>

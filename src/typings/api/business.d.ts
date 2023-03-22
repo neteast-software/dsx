@@ -134,6 +134,7 @@ interface GoodDetail {
     viewCount: number;
     description: string;
     productType: number;
+    generateVideo: boolean;
 }
 interface GetGoodsDetailResult {
     data: GoodDetail;

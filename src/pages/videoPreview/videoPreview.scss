@@ -3,17 +3,19 @@
     z-index: 128;
     background: #000;
     width: 100%;
-    height: 100%;
     padding: 0 32rpx;
     .back {
         padding: 17rpx 0;
+        // position: absolute;
+        z-index: 9999;
+        // top: 18rpx;
         .back-icon {
             z-index: 999;
         }
     }
     .video {
         width: 100%;
-        height: 580rpx;
+        height: 550rpx;
     }
 }
 .deatil {
@@ -22,6 +24,7 @@
     background: $uni-bg-color;
     border-radius: 36rpx;
     padding: 22rpx 116rpx 33rpx 116rpx;
+
     .line {
         height: 42rpx;
         width: 1rpx;

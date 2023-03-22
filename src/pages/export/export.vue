@@ -1,6 +1,6 @@
 <template>
     <!-- 界面1 -->
-    <view class="container flex-column h-full">
+    <view class="container flex-column">
         <!-- #ifdef APP-PLUS -->
         <image class="bj1 flex-shrink-0" src="@/assets/imgs/bj1.gif" mode="widthFix" alt=""></image>
         <!-- #endif -->
@@ -25,10 +25,10 @@
             <view class="recommend">
                 <view class="moreproducts-item" v-for="item in sortGoods" :key="item.id">
                     <view class="moreproducts-img">
-                        <image class="bg" src="@/assets/text/item..png" mode="scaleToFill"> </image>
-                        <view class="moreproducts-text">家里放一个这样的椅子 周末真的才有快乐～</view>
+                        <image class="bg" :src="item.images" mode="aspectFill"> </image>
+                        <view class="moreproducts-text">{{ item.name }}</view>
                     </view>
-                    <view class="sales">累计销量 1万加</view>
+                    <view class="sales">累计销量 {{ item.saleCount > 10000 ? "1w+" : item.saleCount }}</view>
                 </view>
             </view>
         </view>
@@ -52,18 +52,20 @@ import { saveVideoToAlbum, Toast } from "@/utils/uniapi";
 import { onLoad, onReady, onUnload } from "@dcloudio/uni-app";
 import { douyinShareVideos } from "@/utils/douyin";
 import { ref } from "vue";
+import router from "@/utils/router";
 const timer = ref<MaybeNull<NodeJS.Timer>>(null);
 const progress = ref(0);
 const videoUrl = ref("");
-const description = ref("");
+// const description = ref("");
+const goodId = ref("");
 onLoad((options) => {
-    description.value = options?.description || "";
+    // description.value = options?.description || "";
     const taskId = options?.taskId || "";
     const token = options?.token || "";
-    const goodId = options?.typeId || "";
+    const typeId = options?.typeId || "";
+    goodId.value = options?.id || "";
     updateVideoStat(taskId, token);
-    // initData(options?.id || 0);
-    initSortGoods(goodId);
+    initSortGoods(typeId);
 });
 const sortGoods = ref<GoodInfo[]>([]);
 async function initSortGoods(id: string) {
@@ -78,6 +80,7 @@ async function updateVideoStat(taskId: string, token: string) {
     if (data.status === 7) {
         videoUrl.value = data.data.res.fileUrl;
         clearTimer();
+        router.replace("videoPreview", { query: { url: videoUrl.value, id: goodId.value } });
         return;
     }
     timer.value = setTimeout(() => {
@@ -95,61 +98,61 @@ onUnload(() => {
 
 // 合并到抖音
 // const copywriting = ref("");
-function copyText() {
-    // copywriting.value = description.value;
-    uni.setClipboardData({
-        data: description.value
-    });
-}
-async function publishToDouyin(url) {
-    uni.showLoading({
-        title: "视频准备中",
-        mask: true
-    });
-    try {
-        let ar = url.split("/");
-        let filename = ar[ar.length - 1];
-        let ff = filename.split(".");
-        filename = ff[0] + new Date().getTime() + "." + ff[1];
-        let dtask = plus.downloader.createDownload(
-            url,
-            {
-                filename: "_downloads/" + filename
-            },
-            (d, status) => {
-                if (status == 200) {
-                    let savePath = plus.io.convertLocalFileSystemURL(d.filename as string);
-                    douyinShareVideos([savePath], description.value).then(
-                        () => {
-                            uni.showToast({
-                                title: "分享抖音成功",
-                                duration: 2000
-                            });
-                        },
-                        () => {
-                            console.log("分享失败");
-                        }
-                    );
-                } else {
-                    console.log("下载文件失败");
-                }
-            }
-        );
-        dtask.start();
-    } finally {
-        uni.hideLoading();
-    }
-}
+// function copyText() {
+//     // copywriting.value = description.value;
+//     uni.setClipboardData({
+//         data: description.value
+//     });
+// }
+// async function publishToDouyin(url) {
+//     uni.showLoading({
+//         title: "视频准备中",
+//         mask: true
+//     });
+//     try {
+//         let ar = url.split("/");
+//         let filename = ar[ar.length - 1];
+//         let ff = filename.split(".");
+//         filename = ff[0] + new Date().getTime() + "." + ff[1];
+//         let dtask = plus.downloader.createDownload(
+//             url,
+//             {
+//                 filename: "_downloads/" + filename
+//             },
+//             (d, status) => {
+//                 if (status == 200) {
+//                     let savePath = plus.io.convertLocalFileSystemURL(d.filename as string);
+//                     douyinShareVideos([savePath], description.value).then(
+//                         () => {
+//                             uni.showToast({
+//                                 title: "分享抖音成功",
+//                                 duration: 2000
+//                             });
+//                         },
+//                         () => {
+//                             console.log("分享失败");
+//                         }
+//                     );
+//                 } else {
+//                     console.log("下载文件失败");
+//                 }
+//             }
+//         );
+//         dtask.start();
+//     } finally {
+//         uni.hideLoading();
+//     }
+// }
 
-function saveToAlbum(url: string) {
-    saveVideoToAlbum(url)
-        .then(() => {
-            Toast("保存成功");
-        })
-        .catch(() => {
-            Toast("保存失败");
-        });
-}
+// function saveToAlbum(url: string) {
+//     saveVideoToAlbum(url)
+//         .then(() => {
+//             Toast("保存成功");
+//         })
+//         .catch(() => {
+//             Toast("保存失败");
+//         });
+// }
 
 // 广告
 const isAdShow = ref(true);

@@ -1,19 +1,19 @@
 <template>
-    <view>
+    <view class="container">
         <status-bar></status-bar>
-        <view class="bj">
-            <view class="back" @tap="back"><uni-icons class="back-icon" type="back" color="#fff" size="24" /></view>
-            <video class="video" :src="videoUrl" autoplay></video>
+        <view class="bj relative">
+            <view class="back"><uni-icons @tap="back" class="back-icon" type="back" color="#fff" size="24" /></view>
+            <video class="video" :src="videoUrl"></video>
         </view>
-        <view class="wrap small grey">
+        <view class="wrap small grey flex-rest-height">
             <view class="deatil flex-between">
                 <view class="flex-column-center">
-                    <view class="sale-num">14w+</view>
-                    <view class="sale-text">销售</view>
+                    <view class="sale-num">{{ salesCount || 0 }}</view>
+                    <view class="sale-text">销量</view>
                 </view>
                 <view class="line"></view>
                 <view class="flex-column-center">
-                    <view class="sale-num">20w+</view>
+                    <view class="sale-num">{{ salesTotal || 0 }}</view>
                     <view class="sale-text">销售额</view>
                 </view>
             </view>
@@ -35,11 +35,8 @@
                 </view>
                 <view>产品描述内容</view>
                 <view class="copywriting flex-between">
-                    <view class="write" :selectsble="true" user-select="ture"
-                        >{{ description }} 这样装修才有家的感觉配上这柜子～绝绝子#实用好物 #品质生活 #轻奢衣柜
-                        #生活格调</view
-                    >
-                    <view class="btn-copy flex-center" @click="copyText"
+                    <view class="write" :selectsble="true" user-select="ture">{{ goodInfo?.description }}</view>
+                    <view class="btn-copy flex-center" @click="copyText(goodInfo?.description || '')"
                         ><image class="click-img" src="@/assets/icons/click.png" mode="scaleToFill"></image>复制</view
                     >
                 </view>
@@ -55,52 +52,50 @@
 </template>
 
 <script setup lang="ts">
-import { getAdList, getProcessVideo } from "@/api/dsx/business";
-import { getVideoStats } from "@/api/dyh";
 import { saveVideoToAlbum, Toast } from "@/utils/uniapi";
-import { onLoad, onReady, onUnload } from "@dcloudio/uni-app";
+import { onLoad } from "@dcloudio/uni-app";
 import { douyinShareVideos } from "@/utils/douyin";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import statusBar from "@/components/statusBar.vue";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import router from "@/utils/router";
+import { getGoodsDetail } from "@/api/dsx/business";
 const timer = ref<MaybeNull<NodeJS.Timer>>(null);
 const progress = ref(0);
 const videoUrl = ref("");
 const description = ref("");
+const goodInfo = ref<GoodDetail>();
+
 onLoad((options) => {
-    description.value = options?.description || "";
-    const taskId = options?.taskId || "";
-    const token = options?.token || "";
-    updateVideoStat(taskId, token);
-    // initData(options?.id || 0);
+    // description.value = options?.description || "";
+    // const taskId = options?.taskId || "";
+    // const token = options?.token || "";
+    videoUrl.value = options?.url || "";
+    const goodId = options?.id || "";
+    console.log(goodId);
+    initGoodInfo(goodId);
 });
-async function updateVideoStat(taskId: string, token: string) {
-    const { data } = await getVideoStats(taskId, token);
-    if (data.status === 5) {
-        progress.value = data.data.progress;
-    }
-    if (data.status === 7) {
-        videoUrl.value = data.data.res.fileUrl;
-        clearTimer();
-        return;
-    }
-    timer.value = setTimeout(() => {
-        updateVideoStat(taskId, token);
-    }, 1000);
-}
-function clearTimer() {
-    if (timer.value) {
-        clearTimeout(timer.value);
-    }
-}
-onUnload(() => {
-    clearTimer();
+const salesCount = computed(() => {
+    const saleCount = goodInfo.value?.saleCount || 0;
+    return saleCount > 10000 ? (saleCount / 10000).toFixed(2) + "w" : saleCount;
 });
-function copyText() {
+
+const salesTotal = computed(() => {
+    const saleCount = goodInfo.value?.saleCount || 0;
+    const price = goodInfo.value?.price || 0;
+    const total = saleCount * price;
+    return total > 10000 ? ((saleCount * price) / 10000).toFixed(2) + "w" : total;
+});
+
+async function initGoodInfo(id: string | number) {
+    const { data } = await getGoodsDetail(id);
+    goodInfo.value = data;
+}
+
+function copyText(description: string) {
     // copywriting.value = description.value;
     uni.setClipboardData({
-        data: description.value
+        data: description
     });
 }
 async function publishToDouyin(url) {
@@ -155,7 +150,11 @@ function back() {
     router.back();
 }
 </script>
-<style></style>
+<style>
+.wrap {
+    height: fit-content !important;
+}
+</style>
 <style scoped lang="scss">
 @import "./videoPreview.scss";
 </style>

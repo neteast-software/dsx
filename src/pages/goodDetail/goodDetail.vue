@@ -25,7 +25,7 @@
                     <view class="info">
                         <view class="good-name font-middle">{{ goodInfo.name }}</view>
                         <view class="good-tags">
-                            <view v-if="goodInfo.isHigh" class="tag-high relative">
+                            <view v-if="goodInfo.isHigh" class="tag-high relative flex-all-center">
                                 <image class="bg" src="@/assets/imgs/high.png" mode="widthFix"></image>
                                 <text class="relative text">高佣{{ goodInfo.commissionRatio }}%</text>
                             </view>
@@ -105,7 +105,7 @@ async function initData(id = 0) {
 
 const ug = ref<any>();
 
-const current = ref(0);
+const current = ref(1);
 const showDialog = ref(false);
 const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
 function copyToClipboard(coalitionUrl = "") {
@@ -158,6 +158,7 @@ async function toExport(id = 0, description = "") {
     try {
         const { taskId, token } = await getVideoProcessToken(id);
         hideConfirm();
+        console.log("商品详情id", id);
         router.push("export", { query: { id, description, taskId, token, typeId: goodInfo.value?.productType } });
     } finally {
         uni.hideLoading();
@@ -194,6 +195,10 @@ function hideConfirm() {
 function showConfirm() {
     if (user.integral === 0) {
         Toast("积分不足");
+        return;
+    }
+    if (!goodInfo.value?.generateVideo) {
+        Toast("该商品暂不支持合成视频");
         return;
     }
     isShowConfirm.value = true;
