@@ -47,10 +47,11 @@ export function getAllGoodsLists() {
 // 商品列表
 interface getGoodsListFilter {
     id: string | number;
+    sortSaleCount?: boolean;
 }
 export function getGoodsList(pageNum = 1, pageSize = 10, filter: getGoodsListFilter) {
-    const { id } = filter;
-    return http.get<GetGoodsListResult>(`/mobile/product/infoList/${id}`, { pageNum, pageSize });
+    const { id, sortSaleCount = false } = filter;
+    return http.get<GetGoodsListResult>(`/mobile/product/infoList/${id}`, { pageNum, pageSize, sortSaleCount });
 }
 
 // 商品详情

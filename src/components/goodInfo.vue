@@ -25,14 +25,21 @@
         </view>
         <button class="add-btn" type="button" @tap.stop="copyToClipboard(goodInfo.coalitionUrl)">加橱窗</button>
     </view>
-    <Dialog
+    <!-- <Dialog
         v-if="hasDialog"
         :show="showDialog"
         :content="dialogContent"
         confirm-text="立即前往"
         @confirm="toDouyin"
         @cancel="hideDialog"
-    ></Dialog>
+    ></Dialog> -->
+    <user-guide
+        v-model="showDialog"
+        :confirm="true"
+        :title="'带货指南'"
+        :text="'您已复制商品链接，请前往添加至橱窗'"
+        @confirm="toDouyin"
+    ></user-guide>
 </template>
 
 <script setup lang="ts">
@@ -40,6 +47,7 @@ import router from "@/utils/router";
 import Dialog from "./dialog.vue";
 import { ref, inject } from "vue";
 import { goDouyin } from "@/utils/util";
+import UserGuide from "@/components/user_guide.vue";
 const props = defineProps({
     goodInfo: {
         type: Object,
@@ -53,26 +61,27 @@ const props = defineProps({
 function toGoodDetail(id: number) {
     router.push("goodDetail", { query: { id } });
 }
-const topShow: any = inject("showDialog");
+const topShow: any = props.hasDialog ? false : inject("showDialog");
 // 加橱窗
 const showDialog = ref(false);
-const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
+// const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
 function copyToClipboard(coalitionUrl: string) {
+    console.log("复制内容", coalitionUrl);
     uni.setClipboardData({
         data: coalitionUrl,
         showToast: false,
         success: () => {
+            console.log("复制成功");
             if (props.hasDialog) {
                 showDialog.value = true;
             } else if (topShow && !props.hasDialog) {
-                // const showDialog: any = inject("showDialog");
-                // console.log("showDialog", showDialog);
                 topShow.value = true;
             }
         }
     });
 }
 function hideDialog() {
+    // (ug.value as DuckActions).hide();
     showDialog.value = false;
 }
 function toDouyin() {

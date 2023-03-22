@@ -12,14 +12,20 @@
             <image class="icons-img" src="@/assets/imgs/goodStuff.png" mode="widthFix"></image>
             <view class="icons-text">团长好货</view>
         </view>
-        <view class="">
+        <view class="" @tap="toCourse">
             <image class="icons-img" src="@/assets/imgs/teaching.png" mode="widthFix"></image>
             <view class="icons-text">视频教学</view>
         </view>
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import router from "@/utils/router";
+
+function toCourse() {
+    router.switchTab("course");
+}
+</script>
 
 <style scoped lang="scss">
 .icons-img {
