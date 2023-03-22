@@ -36,7 +36,7 @@
     </uni-popup>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch, computed } from "vue";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 
 const guide = ref<any>(null);
@@ -49,8 +49,13 @@ const tips = ref<Array<Record<string, string>>>([
     { step: "四", action: "点击查看详情查看商品" },
     { step: "五", action: "点击加橱窗，把商品加到自己的抖音橱窗" }
 ]);
-const emit = defineEmits(["confirm"]);
+
+const emit = defineEmits(["confirm", "update:modelValue"]);
 const props = defineProps({
+    modelValue: {
+        type: Boolean,
+        default: false
+    },
     title: {
         type: String,
         default: "新手带货指南"
@@ -68,6 +73,22 @@ const props = defineProps({
         default: false
     }
 });
+const actualModel = computed({
+    get: () => props.modelValue,
+    set: (value) => emit("update:modelValue", value)
+});
+// const actureShow = computed()
+watch(
+    () => props.modelValue,
+    (val) => {
+        if (val) {
+            openDialog();
+        } else {
+            closeDialog();
+        }
+    }
+);
+
 function swiperChange(e) {
     swiperIndex.value = e.detail.current;
     aniPlay.value = true;
@@ -81,6 +102,13 @@ function confirm() {
 }
 function close() {
     guide.value.close();
+    actualModel.value = false;
+}
+function openDialog() {
+    guide.value.open();
+}
+function closeDialog() {
+    guide.value.close();
 }
 defineExpose({
     show: () => {
@@ -91,7 +119,7 @@ defineExpose({
     }
 });
 </script>
-<style lang="scss">
+<style scoped lang="scss">
 .guide {
     width: 607rpx;
     border-radius: 36rpx;
@@ -225,4 +253,3 @@ defineExpose({
     }
 }
 </style>
-

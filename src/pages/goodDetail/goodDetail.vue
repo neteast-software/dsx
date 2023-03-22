@@ -59,13 +59,13 @@
                 <button class="add-btn font-middle" @tap="copyToClipboard(goodInfo?.coalitionUrl)">添加至橱窗</button>
             </view>
         </template>
-        <Dialog
+        <!-- <Dialog
             :show="showDialog"
             :content="dialogContent"
             confirm-text="立即前往"
             @cancel="hideDialog"
             @confirm="toDouyin"
-        ></Dialog>
+        ></Dialog> -->
         <Dialog
             :show="isShowConfirm"
             content="合成视频要扣除1个积分"
@@ -158,7 +158,7 @@ async function toExport(id = 0, description = "") {
     try {
         const { taskId, token } = await getVideoProcessToken(id);
         hideConfirm();
-        router.push("export", { query: { id, description, taskId, token } });
+        router.push("export", { query: { id, description, taskId, token, typeId: goodInfo.value?.productType } });
     } finally {
         uni.hideLoading();
     }

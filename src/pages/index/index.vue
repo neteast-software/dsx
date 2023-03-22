@@ -19,13 +19,20 @@
                 <GoodsList></GoodsList>
             </view>
         </scroll-view>
-        <Dialog
+        <!-- <Dialog
             :show="showDialog"
             :content="dialogContent"
             confirm-text="立即前往"
             @confirm="toDouyin"
             @cancel="hideDialog"
-        ></Dialog>
+        ></Dialog> -->
+        <user-guide
+            v-model="showDialog"
+            :confirm="true"
+            :title="'带货指南'"
+            :text="'您已复制商品链接，请前往添加至橱窗'"
+            @confirm="toDouyin"
+        ></user-guide>
         <!-- #ifdef MP-WEIXIN -->
     </page-meta>
     <!-- #endif -->
@@ -45,6 +52,7 @@ import { onShareAppMessage, onReady, onShow } from "@dcloudio/uni-app";
 import user from "@/store/user";
 import search from "./search.vue";
 import iconsWrapper from "./icons-wrapper.vue";
+import UserGuide from "@/components/user_guide.vue";
 
 const showDialog = ref(false);
 provide("showDialog", showDialog);
