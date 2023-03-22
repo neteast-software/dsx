@@ -39,21 +39,34 @@
                     </view>
                     <view class="flex-between good-datas">
                         <view class="flex-column-center">
-                            <view class="value">12W+</view>
+                            <view class="value">{{ salesCount || 0 }}</view>
                             <view class="label">销量</view>
                         </view>
                         <view class="flex-column-center">
-                            <view class="value">4.79高</view>
+                            <view class="value"
+                                >{{ goodInfo.score || "--"
+                                }}<text v-if="Number(goodInfo.score) > 4.5" class="rank high">高</text></view
+                            >
                             <view class="label">商家体验分</view>
                         </view>
                         <view class="flex-column-center">
-                            <view class="value">百雀羚</view>
+                            <view class="value text-overflow">{{ goodInfo.brand || "--" }}</view>
                             <view class="label">品牌</view>
                         </view>
                         <view class="flex-column-center">
-                            <view class="value">不加蔗糖</view>
+                            <view class="value text-overflow">{{ goodInfo.recommendReason || "--" }}</view>
                             <view class="label">推荐理由</view>
                         </view>
+                    </view>
+                    <view
+                        class="rank-top flex-between"
+                        v-if="Number(goodInfo.isHigh) && goodInfo.top"
+                        @tap="toHighGoods"
+                    >
+                        <view
+                            >专属高佣榜单<text class="top">TOP {{ goodInfo.top }}</text></view
+                        >
+                        <uni-icons type="forward" color="#3D3D3D" size="24" />
                     </view>
                     <view class="video-wrap">
                         <view class="font-middle title">范本视频</view>
@@ -103,7 +116,7 @@
 <script setup lang="ts">
 import { getGoodsDetail, getProcessVideo } from "@/api/dsx/business";
 import { onLoad } from "@dcloudio/uni-app";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import Dialog from "@/components/dialog.vue";
 import router from "@/utils/router";
 import statusBar from "@/components/statusBar.vue";
@@ -111,7 +124,7 @@ import user from "@/store/user";
 import { Toast } from "@/utils/uniapi";
 import { goDouyin, timeoutPromise } from "@/utils/util";
 import userGuide from "@/components/user_guide.vue";
-
+import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 onLoad((options) => {
     initData(options?.id || 0);
 });
@@ -121,6 +134,10 @@ async function initData(id = 0) {
     goodInfo.value = data;
 }
 
+const salesCount = computed(() => {
+    const saleCount = goodInfo.value?.saleCount || 0;
+    return saleCount > 10000 ? (saleCount / 10000).toFixed(0) + "w+" : saleCount;
+});
 const ug = ref<any>();
 
 const current = ref(1);
@@ -184,6 +201,10 @@ async function toExport(id = 0, description = "") {
 }
 function back() {
     router.back();
+}
+
+function toHighGoods() {
+    router.push("exclusiveList");
 }
 // function showVideo() {
 //     const video = uni.createVideoContext("myVideo");

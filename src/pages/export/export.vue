@@ -173,6 +173,7 @@ page {
 .container {
     padding-bottom: 32rpx;
     min-height: 100%;
+    background-color: #000;
 }
 </style>
 <style setup lang="scss">

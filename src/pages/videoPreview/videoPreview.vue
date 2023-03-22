@@ -77,14 +77,14 @@ onLoad((options) => {
 });
 const salesCount = computed(() => {
     const saleCount = goodInfo.value?.saleCount || 0;
-    return saleCount > 10000 ? (saleCount / 10000).toFixed(2) + "w" : saleCount;
+    return saleCount > 10000 ? (saleCount / 10000).toFixed(0) + "w+" : saleCount;
 });
 
 const salesTotal = computed(() => {
     const saleCount = goodInfo.value?.saleCount || 0;
     const price = goodInfo.value?.price || 0;
     const total = saleCount * price;
-    return total > 10000 ? ((saleCount * price) / 10000).toFixed(2) + "w" : total;
+    return total > 10000 ? ((saleCount * price) / 10000).toFixed(0) + "w+" : total;
 });
 
 async function initGoodInfo(id: string | number) {

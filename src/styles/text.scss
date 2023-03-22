@@ -1,0 +1,36 @@
+.line-clamp {
+    display: -webkit-box;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    &.line1 {
+        -webkit-line-clamp: 1;
+    }
+    &.line3 {
+        -webkit-line-clamp: 3;
+    }
+    &.line4 {
+        -webkit-line-clamp: 4;
+    }
+}
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    white-space: nowrap;
+}
+.vertical-center {
+    vertical-align: center;
+}
+.bold-font {
+    font-weight: bold;
+}
+.text-align-right {
+    text-align: right;
+}
+.font-normal {
+    font-size: var(--font-size-S);
+}

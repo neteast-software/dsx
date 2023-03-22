@@ -135,6 +135,10 @@ interface GoodDetail {
     description: string;
     productType: number;
     generateVideo: boolean;
+    brand: string;
+    recommendReason: string;
+    score: number;
+    top: number;
 }
 interface GetGoodsDetailResult {
     data: GoodDetail;

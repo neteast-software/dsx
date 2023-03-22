@@ -167,10 +167,32 @@
     background-color: #fff;
     padding: 24rpx 32rpx;
     border-radius: 36rpx;
+    margin-bottom: 22rpx;
     .label {
         font-size: 22rpx;
+        color: #7b7379;
     }
     .value {
         font-size: 26rpx;
+        margin-bottom: 10rpx;
+        max-width: 200rpx;
+    }
+    .rank {
+        margin-left: 4rpx;
+        &.high {
+            color: #ec544d;
+        }
+    }
+}
+.rank-top {
+    padding: 24rpx 32rpx;
+    background: linear-gradient(180deg, #fff4ee 3%, #ffffff 76%);
+    border-radius: 36rpx;
+    margin-bottom: 22rpx;
+    font-size: 32rpx;
+    .top {
+        color: #f14847;
+        margin-left: 16rpx;
+        font-weight: bold;
     }
 }
