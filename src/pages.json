@@ -89,6 +89,13 @@
             }
         },
         {
+            "path": "pages/videoPreview/videoPreview",
+            "style": {
+                "navigationBarTitleText": "视频导出",
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "path": "pages/privacyProtocol/privacyProtocol",
             "style": {
                 "navigationBarTitleText": "隐私协议",

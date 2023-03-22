@@ -67,7 +67,7 @@
                 </view>
             </view>
             <!-- 界面2 -->
-            <view v-else class="wrap">
+            <!-- <view v-else class="wrap">
                 <view class="bj2">
                     <video class="video" :src="videoUrl" autoplay></video>
                 </view>
@@ -88,14 +88,14 @@
                 <view class="copywriting flex-column-center">
                     <view class="write" :selectsble="true" user-select="ture">{{ description }} </view>
                     <button class="btn-copy" @click="copyText">复制文案</button>
-                </view>
-                <!-- #ifdef APP-PLUS -->
-                <button class="btn" @click="publishToDouyin(videoUrl)">发布到抖音</button>
-                <!-- #endif -->
-                <!-- #ifdef MP-WEIXIN -->
-                <button class="btn" @click="saveToAlbum(videoUrl)">保存到相册</button>
-                <!-- #endif -->
-            </view>
+                </view> -->
+            <!-- #ifdef APP-PLUS -->
+            <!-- <button class="btn" @click="publishToDouyin(videoUrl)">发布到抖音</button> -->
+            <!-- #endif -->
+            <!-- #ifdef MP-WEIXIN -->
+            <!-- <button class="btn" @click="saveToAlbum(videoUrl)">保存到相册</button> -->
+            <!-- #endif -->
+            <!-- </view> -->
         </view>
         <!-- #ifdef MP-WEIXIN -->
     </page-meta>
