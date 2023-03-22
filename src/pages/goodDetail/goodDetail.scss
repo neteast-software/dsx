@@ -163,3 +163,14 @@
         border-radius: 50%;
     }
 }
+.good-datas {
+    background-color: #fff;
+    padding: 24rpx 32rpx;
+    border-radius: 36rpx;
+    .label {
+        font-size: 22rpx;
+    }
+    .value {
+        font-size: 26rpx;
+    }
+}

@@ -37,6 +37,24 @@
                             {{ goodInfo.makers }}
                         </view>
                     </view>
+                    <view class="flex-between good-datas">
+                        <view class="flex-column-center">
+                            <view class="value">12W+</view>
+                            <view class="label">销量</view>
+                        </view>
+                        <view class="flex-column-center">
+                            <view class="value">4.79高</view>
+                            <view class="label">商家体验分</view>
+                        </view>
+                        <view class="flex-column-center">
+                            <view class="value">百雀羚</view>
+                            <view class="label">品牌</view>
+                        </view>
+                        <view class="flex-column-center">
+                            <view class="value">不加蔗糖</view>
+                            <view class="label">推荐理由</view>
+                        </view>
+                    </view>
                     <view class="video-wrap">
                         <view class="font-middle title">范本视频</view>
                         <view class="poster-wrap relative" @tap="showVideo">
