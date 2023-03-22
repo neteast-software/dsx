@@ -3,7 +3,7 @@
     <page-meta page-style="height: 100%;">
         <!-- #endif -->
         <view class="wrap small grey">
-            <image class="wrap-bg" src="@/assets/my/bg.png" mode="widthFix"></image>
+            <image class="wrap-bg" src="@/assets/my/bg.svg" mode="widthFix"></image>
             <view :style="{ height: statusBarHeight + 'px' }"></view>
             <!-- #ifdef APP-PLUS -->
             <view class="setting-app" @tap="toSetting">
