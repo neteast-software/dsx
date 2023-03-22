@@ -11,14 +11,6 @@
             <view class="item" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id, item)">
                 <image :src="item.viewCoveUrl" mode="aspectFit" />
                 <view class="title">{{ item.name }}</view>
-                <view class="user">
-                    <image class="avatar" :src="item.authorAvatar" mode="aspectFit" />
-                    <view class="name">{{ item.author }}</view>
-                    <view class="read_count">
-                        <uni-icons type="eye-filled" size="24rpx" color="#7B7379"></uni-icons>
-                        {{ item.viewCount }}</view
-                    >
-                </view>
                 <video
                     v-if="activeVideoId == item.id"
                     class="video-box"
