@@ -98,64 +98,6 @@ onUnload(() => {
     clearTimer();
 });
 
-// 合并到抖音
-// const copywriting = ref("");
-// function copyText() {
-//     // copywriting.value = description.value;
-//     uni.setClipboardData({
-//         data: description.value
-//     });
-// }
-// async function publishToDouyin(url) {
-//     uni.showLoading({
-//         title: "视频准备中",
-//         mask: true
-//     });
-//     try {
-//         let ar = url.split("/");
-//         let filename = ar[ar.length - 1];
-//         let ff = filename.split(".");
-//         filename = ff[0] + new Date().getTime() + "." + ff[1];
-//         let dtask = plus.downloader.createDownload(
-//             url,
-//             {
-//                 filename: "_downloads/" + filename
-//             },
-//             (d, status) => {
-//                 if (status == 200) {
-//                     let savePath = plus.io.convertLocalFileSystemURL(d.filename as string);
-//                     douyinShareVideos([savePath], description.value).then(
-//                         () => {
-//                             uni.showToast({
-//                                 title: "分享抖音成功",
-//                                 duration: 2000
-//                             });
-//                         },
-//                         () => {
-//                             console.log("分享失败");
-//                         }
-//                     );
-//                 } else {
-//                     console.log("下载文件失败");
-//                 }
-//             }
-//         );
-//         dtask.start();
-//     } finally {
-//         uni.hideLoading();
-//     }
-// }
-
-// function saveToAlbum(url: string) {
-//     saveVideoToAlbum(url)
-//         .then(() => {
-//             Toast("保存成功");
-//         })
-//         .catch(() => {
-//             Toast("保存失败");
-//         });
-// }
-
 // 广告
 const isAdShow = ref(true);
 const adList = ref<BannerInfo[]>([]);

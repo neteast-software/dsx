@@ -1,5 +1,4 @@
 :root {
-    // height: 100%;
     background-color: black;
     color: $uni-text-color-inverse;
 }
@@ -9,15 +8,8 @@
     color: $uni-text-color-inverse;
     padding: 0 32rpx;
 }
-// .wrap {
-//     background-color: black;
-// }
-// .bj1-wrap {
-//     width: 784rpx;
-//     height: 344rpx;
-// }
+
 .bj1 {
-    // width: 748rpx;
     height: 480rpx;
 }
 .content1 {
@@ -77,6 +69,7 @@
     }
     .sales {
         padding: 25rpx 24rpx;
+        color: #fff;
     }
 }
 //广告
@@ -115,67 +108,7 @@
     font-size: $uni-font-size-sm;
     float: right;
 }
-// 界面2
-// .bj2 {
-//     margin-top: 52rpx;
-//     z-index: 128;
-//     .video {
-//         width: 660rpx;
-//         height: 772rpx;
-//         // border-radius: 34rpx;
-//         // border: 2rpx solid #f0f0f0;
-//         // box-shadow: 0 0 3rpx 4rpx #f0f0f0;
-//     }
-// }
-// .msg {
-//     margin-top: 50rpx;
-//     font-size: $uni-font-size-sm;
-//     line-height: 42rpx;
-//     .group {
-//         display: flex;
-//         color: #fff;
-//         .num {
-//             width: 42rpx;
-//             height: 42rpx;
-//             border-radius: 21rpx;
-//             background: #282536;
-//             text-align: center;
-//         }
-//     }
-// }
-// .copywriting {
-//     margin-top: 22rpx;
-//     .write {
-//         width: 672rpx;
-//         line-height: 56rpx;
-//         background: #282536;
-//         color: #d9dae1;
-//         font-size: $uni-font-size-sm;
-//         letter-spacing: 0em;
-//         padding: 34rpx 42rpx 66rpx;
-//         border-radius: 17px;
-//         // margin-top: 26rpx;
-//     }
-//     .btn-copy {
-//         margin-top: -34rpx;
-//         background: #6c5980;
-//         font-size: $uni-font-size-middle;
-//         text-align: center;
-//         line-height: 80rpx;
-//         border-radius: 60rpx;
-//         padding: 10rpx 80rpx;
-//         z-index: 1;
-//     }
-// }
-// .btn {
-//     z-index: 99999;
-//     background: $uni-color-primary;
-//     font-size: $uni-font-size-middle;
-//     text-align: center;
-//     line-height: 112rpx;
-//     border-radius: 300rpx;
-//     margin-top: 68rpx;
-// }
+
 .ad-img {
     width: 100%;
     height: 100%;

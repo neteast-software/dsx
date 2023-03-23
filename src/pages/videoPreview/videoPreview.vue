@@ -4,7 +4,7 @@
         <status-bar></status-bar>
         <view class="bj relative">
             <view class="back"><uni-icons @tap="back" class="back-icon" type="back" color="#fff" size="24" /></view>
-            <video class="video" :src="videoUrl"></video>
+            <video class="video" :src="videoUrl" autoplay></video>
         </view>
         <view class="wrap small grey flex-rest-height w-full">
             <view class="deatil flex-between">
