@@ -58,11 +58,7 @@
                             <view class="label">推荐理由</view>
                         </view>
                     </view>
-                    <view
-                        class="rank-top flex-between"
-                        v-if="Number(goodInfo.isHigh) && goodInfo.top"
-                        @tap="toHighGoods"
-                    >
+                    <view class="rank-top flex-between" v-if="goodInfo.top" @tap="toHighGoods">
                         <view
                             >专属高佣榜单<text class="top">TOP {{ goodInfo.top }}</text></view
                         >

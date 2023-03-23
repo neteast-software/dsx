@@ -165,9 +165,12 @@
 }
 .good-datas {
     background-color: #fff;
-    padding: 24rpx 32rpx;
+    padding: 24rpx 0rpx;
     border-radius: 36rpx;
     margin-bottom: 22rpx;
+    > view {
+        width: 25%;
+    }
     .label {
         font-size: 22rpx;
         color: #7b7379;
@@ -175,7 +178,6 @@
     .value {
         font-size: 26rpx;
         margin-bottom: 10rpx;
-        max-width: 200rpx;
     }
     .rank {
         margin-left: 4rpx;

@@ -35,14 +35,12 @@
             </view>
         </view>
     </view>
-    <userGuide ref="ug"></userGuide>
 </template>
 
 <script setup lang="ts">
 import { getRecommendGoodsList } from "@/api/dsx/business";
 import router from "@/utils/router";
 import { onMounted, ref } from "vue";
-import userGuide from "@/components/user_guide.vue";
 const hotGoodsList = ref<GoodInfo[]>([]);
 const exclusiveGoodsList = ref<GoodInfo[]>([]);
 
@@ -56,7 +54,6 @@ async function initData() {
 
 onMounted(() => {
     initData();
-    (ug.value as DuckActions).show();
 });
 function toHotList() {
     router.push("hotList");

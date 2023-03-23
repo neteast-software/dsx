@@ -5,7 +5,7 @@
         <scroll-view class="stage" scroll-y @scroll="onScroll">
             <!-- <status-bar></status-bar> -->
             <view id="nav" style="position: sticky; top: 0; z-index: 9999">
-                <NavBar>
+                <NavBar ext-class="indexNav">
                     <Header></Header>
                 </NavBar>
             </view>

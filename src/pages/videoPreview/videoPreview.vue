@@ -1,11 +1,12 @@
 <template>
+    <page-meta page-style="background: #f7f8fa"></page-meta>
     <view class="container">
         <status-bar></status-bar>
         <view class="bj relative">
             <view class="back"><uni-icons @tap="back" class="back-icon" type="back" color="#fff" size="24" /></view>
             <video class="video" :src="videoUrl"></video>
         </view>
-        <view class="wrap small grey flex-rest-height">
+        <view class="wrap small grey flex-rest-height w-full">
             <view class="deatil flex-between">
                 <view class="flex-column-center">
                     <view class="sale-num">{{ salesCount || 0 }}</view>
@@ -52,7 +53,7 @@
 </template>
 
 <script setup lang="ts">
-import { saveVideoToAlbum, Toast } from "@/utils/uniapi";
+import { saveVideoToAlbum, showModal, Toast } from "@/utils/uniapi";
 import { onLoad } from "@dcloudio/uni-app";
 import { douyinShareVideos } from "@/utils/douyin";
 import { ref, computed } from "vue";
@@ -143,6 +144,8 @@ function saveToAlbum(url: string) {
             Toast("保存成功");
         })
         .catch(() => {
+            console.log("保存失败的url", url);
+            showModal("保存失败", url);
             Toast("保存失败");
         });
 }

@@ -1,16 +1,18 @@
 <template>
     <!-- 界面1 -->
-    <view class="container flex-column">
+    <view class="container">
         <!-- #ifdef APP-PLUS -->
-        <image class="bj1 flex-shrink-0" src="@/assets/imgs/bj1.gif" mode="widthFix" alt=""></image>
+        <image class="bj1 flex-shrink-0" src="@/assets/imgs/bj1.gif" mode="height" alt=""></image>
         <!-- #endif -->
         <!-- #ifdef MP-WEIXIN -->
+        <!-- <view class="bj1-wrap flex-shrink-0"> -->
         <image
             class="bj1 flex-shrink-0"
             src="https://dsxmanager.huoyuanyouxuan.com/profile/upload/webImage/bj1.gif"
-            mode="widthFix"
+            mode="heightFix"
             alt=""
         ></image>
+        <!-- </view> -->
         <!-- #endif -->
         <view class="content1">视频努力导出中{{ progress }}%</view>
         <view class="content2">您的专属视频生成中，请勿离开</view>

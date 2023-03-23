@@ -3,7 +3,7 @@
         <!-- #ifdef APP-PLUS -->
         <image class="profile" v-if="user.avatar" :src="user.avatar" mode="aspectFill" />
         <image class="profile" v-else src="@/assets/imgs/avatar.png" mode="aspectFill" />
-        <image class="logo-img" src="@/assets/imgs/logo.png" mode="widthFix" />
+        <image class="logo-img" src="@/assets/imgs/top-logo.svg" mode="widthFix" />
         <view class="msg" @tap="toNews">
             <view class="news" v-if="user.unreadMsgCount"></view>
             <image src="@/static/index/msg.svg" mode="widthFix" />
@@ -16,7 +16,7 @@
             <image src="@/static/index/msg.svg" mode="widthFix" />
             消息
         </view>
-        <image class="logo-img" src="@/assets/imgs/logo.png" mode="widthFix" />
+        <image class="logo-img" src="@/assets/imgs/top-logo.svg" mode="widthFix" />
         <!-- #endif -->
     </view>
 </template>
@@ -55,8 +55,8 @@ function toNews() {
         // }
     }
     .logo-img {
-        width: 152rpx;
-        height: 55rpx;
+        width: 218rpx;
+        height: 58rpx;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);

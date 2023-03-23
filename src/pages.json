@@ -134,6 +134,13 @@
             "style": {
                 "navigationBarTitleText": "签约申请"
             }
+        },
+        {
+            "path": "pages/list/list",
+            "style": {
+                "navigationBarTitleText": "商品列表",
+                "navigationStyle": "custom"
+            }
         }
     ],
     "subPackages": [

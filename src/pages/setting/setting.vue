@@ -1,55 +1,48 @@
 <template>
-    <!-- #ifdef MP-WEIXIN -->
-    <page-meta page-style="height: 100%;">
-        <!-- #endif -->
-        <view class="wrap small grey pt-60">
-            <view class="setting-list">
-                <view class="setting flex-between" @tap="showDrawer">
-                    <text class="font-middle">修改昵称</text>
-                    <uni-icons type="forward" size="20"></uni-icons>
-                </view>
-                <view class="setting flex-between" @tap="changeAvatar">
-                    <text class="font-middle">修改头像</text>
-                    <uni-icons type="forward" size="20"></uni-icons>
-                </view>
-                <view class="setting flex-between" @tap="showDialog">
-                    <text class="font-middle">注销账号</text>
-                    <uni-icons type="forward" size="20"></uni-icons>
-                </view>
+    <page-meta page-style="background: #f7f8fa"></page-meta>
+    <view class="wrap small grey pt-60">
+        <view class="setting-list">
+            <view class="setting flex-between" @tap="showDrawer">
+                <text class="font-middle">修改昵称</text>
+                <uni-icons type="forward" size="20"></uni-icons>
             </view>
-            <button class="logout font-middle" @tap="showLogoutDialog">退出登录</button>
+            <view class="setting flex-between" @tap="changeAvatar">
+                <text class="font-middle">修改头像</text>
+                <uni-icons type="forward" size="20"></uni-icons>
+            </view>
+            <view class="setting flex-between" @tap="showDialog">
+                <text class="font-middle">注销账号</text>
+                <uni-icons type="forward" size="20"></uni-icons>
+            </view>
         </view>
-        <uni-popup ref="drawer" type="bottom">
-            <view class="drawer">
-                <view class="drawer-title">修改昵称</view>
-                <view class="drawer-input">
-                    <input type="text" v-model="nickname" maxlength="20" placeholder="请输入昵称" />
-                </view>
-                <view class="btn-wrap">
-                    <button v-if="nickname" class="btn confirm font-middle" @tap="changeNickname(nickname)">
-                        确定
-                    </button>
-                    <button v-else class="btn cancel font-middle" @tap="closeDrawer">取消</button>
-                </view>
+        <button class="logout font-middle" @tap="showLogoutDialog">退出登录</button>
+    </view>
+    <uni-popup ref="drawer" type="bottom">
+        <view class="drawer">
+            <view class="drawer-title">修改昵称</view>
+            <view class="drawer-input">
+                <input type="text" v-model="nickname" maxlength="20" placeholder="请输入昵称" />
             </view>
-        </uni-popup>
-        <uni-popup ref="logoffDialog" type="center">
-            <view class="dialog">
-                <view class="dialog-upper">
-                    <view class="content"> 您是否确认要注销账号？</view>
-                    <view class="content">确认请输入“我确认” </view>
-                    <input v-model="logoffText" class="input" type="text" />
-                </view>
-                <view class="dialog-lower">
-                    <button class="btn cancel" @tap="closeDialog">取消</button>
-                    <button class="btn confirm" @tap="logoff">确定</button>
-                </view>
+            <view class="btn-wrap">
+                <button v-if="nickname" class="btn confirm font-middle" @tap="changeNickname(nickname)">确定</button>
+                <button v-else class="btn cancel font-middle" @tap="closeDrawer">取消</button>
             </view>
-        </uni-popup>
-        <Dialog :show="isShowLogout" content="确定退出登录吗？" @cancel="hideLogoutDialog" @confirm="logout"></Dialog>
-        <!-- #ifdef MP-WEIXIN -->
-    </page-meta>
-    <!-- #endif -->
+        </view>
+    </uni-popup>
+    <uni-popup ref="logoffDialog" type="center">
+        <view class="dialog">
+            <view class="dialog-upper">
+                <view class="content"> 您是否确认要注销账号？</view>
+                <view class="content">确认请输入“我确认” </view>
+                <input v-model="logoffText" class="input" type="text" />
+            </view>
+            <view class="dialog-lower">
+                <button class="btn cancel" @tap="closeDialog">取消</button>
+                <button class="btn confirm" @tap="logoff">确定</button>
+            </view>
+        </view>
+    </uni-popup>
+    <Dialog :show="isShowLogout" content="确定退出登录吗？" @cancel="hideLogoutDialog" @confirm="logout"></Dialog>
 </template>
 
 <script setup lang="ts">

@@ -4,6 +4,9 @@
 //     color: $uni-text-color;
 // }
 // 整体距左右边框44rpx
+.indexNav {
+    background: #fff linear-gradient(180deg, #fde4d8 3%, rgba(253, 228, 216, 0) 76%);
+}
 .wrap {
     position: relative;
     padding: 20rpx 48rpx;
@@ -17,6 +20,13 @@
     &.grey {
         background-color: #f7f8fa;
     }
+    &.p-0 {
+        padding: 0;
+    }
+}
+.p-x-32 {
+    padding-left: 32rpx;
+    padding-right: 32rpx;
 }
 .bg-white {
     background-color: #fff;
@@ -95,6 +105,9 @@
 }
 .h-full {
     height: 100%;
+}
+.w-full {
+    width: 100%;
 }
 
 // 对话框

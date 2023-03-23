@@ -1,22 +1,20 @@
 <template>
     <view class="navigator" :class="[extClass ? extClass : '']">
         <status-bar></status-bar>
-        <!-- <view class="navbar">
-            <view class="navbar-left">
-                <view class="navbar-left-icon" @tap="back">
-                    <uni-icons type="back" size="32" color="#ffffff"></uni-icons>
-                </view>
-            </view>
-        </view> -->
-        <slot></slot>
+        <slot v-if="defaultSlot"></slot>
+        <uni-nav-bar v-else left-icon="left" :title="title" :border="false" @clickLeft="back"></uni-nav-bar>
     </view>
 </template>
 
 <script setup lang="ts">
 import router from "@/utils/router";
 import statusBar from "./statusBar.vue";
+import uniNavBar from "@dcloudio/uni-ui/lib/uni-nav-bar/uni-nav-bar.vue";
+import { useSlots } from "vue";
+const { default: defaultSlot } = useSlots();
 const props = defineProps({
-    extClass: String
+    extClass: String,
+    title: String
 });
 function back() {
     router.back();
@@ -29,7 +27,6 @@ function back() {
     top: 0;
     height: 176rpx;
     position: 9999;
-    background: #fff linear-gradient(180deg, #fde4d8 3%, rgba(253, 228, 216, 0) 76%);
 }
 .navbar {
     padding: 16rpx 32rpx;

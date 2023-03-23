@@ -40,8 +40,8 @@ export function getGoodsCategoryList() {
     return http.get<GetGoodsCategoryList>("/mobile/product/typeList");
 }
 
-export function getAllGoodsLists() {
-    return http.get("/mobile/product/allList");
+export function getAllGoodsLists(pageNum = 1, pageSize = 10) {
+    return http.get("/mobile/product/allList", { pageNum, pageSize });
 }
 
 // 商品列表
@@ -92,4 +92,15 @@ export function getShareImg() {
 // 发起签约申请(无返回值)
 export function doApply() {
     return http.post<null>("/mobile/my/mcnApply");
+}
+
+export type ListType = "hot" | "exclusive" | "lightning" | "direct" | "goods";
+type getGoodListByListTypeResult = GetSearchGoodsListResult;
+interface getGoodListByListTypeFilter {
+    listType: ListType;
+}
+// 获取属性列表
+export function getGoodListByListType(pageNum = 1, pageSize = 10, filter: getGoodListByListTypeFilter) {
+    const { listType } = filter;
+    return http.get<getGoodListByListTypeResult>(`/mobile/product/getAttrList/${listType}`, { pageNum, pageSize });
 }
