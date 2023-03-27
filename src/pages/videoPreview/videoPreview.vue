@@ -61,6 +61,7 @@ import statusBar from "@/components/statusBar.vue";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import router from "@/utils/router";
 import { getGoodsDetail } from "@/api/dsx/business";
+import { useDebounceFn } from "@vueuse/core";
 const timer = ref<MaybeNull<NodeJS.Timer>>(null);
 const progress = ref(0);
 const videoUrl = ref("");
@@ -138,17 +139,29 @@ async function publishToDouyin(url) {
         uni.hideLoading();
     }
 }
-function saveToAlbum(url: string) {
+const saveToAlbum = useDebounceFn((url) => {
     saveVideoToAlbum(url)
         .then(() => {
             Toast("保存成功");
         })
         .catch(() => {
-            console.log("保存失败的url", url);
-            showModal("保存失败", url);
+            // console.log("保存失败的url", url);
+            // showModal("保存失败", url);
             Toast("保存失败");
         });
-}
+}, 600);
+// function saveToAlbum(url: string) {
+//     saveVideoToAlbum(url)
+//         .then(() => {
+//             Toast("保存成功");
+//         })
+//         .catch(() => {
+//             console.log("保存失败的url", url);
+//             showModal("保存失败", url);
+//             Toast("保存失败");
+//         });
+// }
+
 function back() {
     router.back();
 }

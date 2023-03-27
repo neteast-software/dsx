@@ -82,7 +82,6 @@
 <script setup lang="ts">
 import uniForms from "@dcloudio/uni-ui/lib/uni-forms/uni-forms.vue";
 import uniFormsItem from "@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
-import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue"; //uni图标
 import { reactive, ref } from "vue";
 import { loginByPassword } from "@/api/dsx/user";
 import storage from "@/utils/storage";
@@ -92,7 +91,7 @@ import { usePassword } from "../form";
 import { onLoad } from "@dcloudio/uni-app";
 import { Toast } from "@/utils/uniapi";
 import user from "@/store/user";
-
+import { useDebounceFn } from "@vueuse/shared";
 const form = ref<any>(null);
 const formData = reactive({
     mobile: "",
@@ -111,7 +110,7 @@ function toogleAgree(flag: boolean) {
 }
 const isAgree = ref(false);
 const { showPassword, togglePasswordShow } = usePassword();
-async function login() {
+const login = useDebounceFn(async () => {
     if (!isAgree.value) {
         Toast("请阅读协议并同意");
         return;
@@ -123,7 +122,7 @@ async function login() {
     storage.set("token", token);
     user.initUserInfo();
     router.switchTab("index");
-}
+}, 300);
 
 function toRegister() {
     router.push("register");
