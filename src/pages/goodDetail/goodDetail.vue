@@ -29,7 +29,9 @@
                                 <image class="bg" src="@/assets/imgs/high.png" mode="widthFix"></image>
                                 <text class="relative text">高佣{{ goodInfo.commissionRatio }}%</text>
                             </view>
-                            <view class="tag-obtain">赚 {{ (goodInfo.price * goodInfo.commissionRatio) / 100 }}</view>
+                            <view class="tag-obtain"
+                                >赚 {{ ((goodInfo.price * goodInfo.commissionRatio) / 100).toFixed(2) }}</view
+                            >
                         </view>
                         <view class="good-price">{{ goodInfo.price }}</view>
                         <view class="shop flex-center">

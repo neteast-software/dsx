@@ -14,7 +14,7 @@
                         <view class="bottom">
                             <view class="zhuan">赚</view>
                             <view class="symbol">¥</view>
-                            <view class="price">{{ (item.price * item.commissionRatio) / 100 }}</view>
+                            <view class="price">{{ ((item.price * item.commissionRatio) / 100).toFixed(2) }}</view>
                         </view>
                     </view>
                 </view>
@@ -28,7 +28,7 @@
                         <view class="bottom">
                             <view class="zhuan">赚</view>
                             <view class="symbol">¥</view>
-                            <view class="price">{{ (item.price * item.commissionRatio) / 100 }}</view>
+                            <view class="price">{{ ((item.price * item.commissionRatio) / 100).toFixed(2) }}</view>
                         </view>
                     </view>
                 </view>
