@@ -40,22 +40,22 @@
                         </view>
                     </view>
                     <view class="flex-between good-datas">
-                        <view class="flex-column-center">
+                        <view class="flex-column-center flex-shrink-0">
                             <view class="value">{{ salesCount || 0 }}</view>
                             <view class="label">销量</view>
                         </view>
-                        <view class="flex-column-center">
+                        <view class="flex-column-center flex-shrink-0">
                             <view class="value"
                                 >{{ goodInfo.score || "--"
                                 }}<text v-if="Number(goodInfo.score) > 4.5" class="rank high">高</text></view
                             >
                             <view class="label">商家体验分</view>
                         </view>
-                        <view class="flex-column-center">
+                        <view class="flex-column-center flex-shrink-0">
                             <view class="value text-overflow">{{ goodInfo.brand || "--" }}</view>
                             <view class="label">品牌</view>
                         </view>
-                        <view class="flex-column-center">
+                        <view class="flex-column-center flex-shrink-0">
                             <view class="value text-overflow">{{ goodInfo.recommendReason || "--" }}</view>
                             <view class="label">推荐理由</view>
                         </view>

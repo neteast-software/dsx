@@ -14,7 +14,9 @@ class User {
     private _unreadMsgCount = ref(0);
     private _agencyStatus = ref<string>("");
     private _agencyTime = ref<string>("");
-
+    get logined() {
+        return !!this._nickname.value;
+    }
     get agencyStatus(): string {
         return this._agencyStatus.value || "";
     }

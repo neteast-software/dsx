@@ -1,41 +1,28 @@
 <template>
-    <!-- #ifdef MP-WEIXIN -->
-    <page-meta page-style="height: 100%;background: #f7f8fa;">
-        <!-- #endif -->
-        <scroll-view class="stage" scroll-y @scroll="onScroll">
-            <!-- <status-bar></status-bar> -->
-            <view id="nav" style="position: sticky; top: 0; z-index: 9999">
-                <NavBar ext-class="indexNav">
-                    <Header></Header>
-                </NavBar>
-            </view>
-            <view class="item">
-                <search></search>
-                <Banner></Banner>
-                <iconsWrapper></iconsWrapper>
-                <Recommend></Recommend>
-            </view>
-            <view id="goods" class="h-full goodlist-wrap">
-                <GoodsList></GoodsList>
-            </view>
-        </scroll-view>
-        <!-- <Dialog
-            :show="showDialog"
-            :content="dialogContent"
-            confirm-text="立即前往"
-            @confirm="toDouyin"
-            @cancel="hideDialog"
-        ></Dialog> -->
-        <user-guide
-            v-model="showDialog"
-            :confirm="true"
-            :title="'带货指南'"
-            :text="'您已复制商品链接，请前往添加至橱窗'"
-            @confirm="toDouyin"
-        ></user-guide>
-        <!-- #ifdef MP-WEIXIN -->
-    </page-meta>
-    <!-- #endif -->
+    <scroll-view v-if="user.logined" class="stage" scroll-y @scroll="onScroll">
+        <!-- <status-bar></status-bar> -->
+        <view id="nav" style="position: sticky; top: 0; z-index: 9999">
+            <NavBar ext-class="indexNav">
+                <Header></Header>
+            </NavBar>
+        </view>
+        <view class="item">
+            <search></search>
+            <Banner></Banner>
+            <iconsWrapper></iconsWrapper>
+            <Recommend></Recommend>
+        </view>
+        <view id="goods" class="h-full goodlist-wrap">
+            <GoodsList></GoodsList>
+        </view>
+    </scroll-view>
+    <user-guide
+        v-model="showDialog"
+        :confirm="true"
+        :title="'带货指南'"
+        :text="'您已复制商品链接，请前往添加至橱窗'"
+        @confirm="toDouyin"
+    ></user-guide>
 </template>
 
 <script setup lang="ts">
@@ -108,6 +95,12 @@ async function setScrollStatus() {
 }
 </script>
 
+<style>
+page {
+    height: 100%;
+    background: #f7f8fa;
+}
+</style>
 <style scoped lang="scss">
 .stage {
     height: 100%;
