@@ -4,6 +4,7 @@ import { baseURL } from "@/config/env";
 
 class User {
     private _nickname = ref("");
+    private _username = ref("");
     private _avatar = ref("");
     private _mobile = ref("");
     private _inviteNickname = ref("");
@@ -16,7 +17,7 @@ class User {
     private _agencyTime = ref<string>("");
     private _token = ref("");
     get logined() {
-        return !!this._nickname.value;
+        return !!this._username.value;
     }
     get agencyStatus(): string {
         return this._agencyStatus.value || "";
@@ -61,6 +62,7 @@ class User {
         const { data } = await getUserInfo();
         const {
             nickname,
+            username,
             agencyStatus,
             agencyTime,
             avatar,
@@ -72,7 +74,7 @@ class User {
             giftsPoints,
             unreadMsgCount
         } = data;
-
+        this._username.value = username;
         this._agencyStatus.value = agencyStatus;
         this._agencyTime.value = agencyTime;
         this._nickname.value = nickname;

@@ -169,14 +169,12 @@ let retryCount = 0;
 async function getVideoProcessToken(id) {
     try {
         const { data } = await getProcessVideo(id);
-        console.log(data);
         const { task: taskId, token } = data;
         retryCount = 0;
         return { taskId, token };
     } catch (error) {
         if (error !== "retry") return;
         if (retryCount < 10) {
-            console.log("retry", retryCount);
             await timeoutPromise(100);
             retryCount++;
             return await getVideoProcessToken(id);
@@ -191,7 +189,6 @@ async function toExport(id = 0, description = "") {
     try {
         const { taskId, token } = await getVideoProcessToken(id);
         hideConfirm();
-        console.log("商品详情id", id);
         router.push("export", { query: { id, description, taskId, token, typeId: goodInfo.value?.productType } });
     } finally {
         uni.hideLoading();
@@ -212,7 +209,6 @@ function toHighGoods() {
 let videoContext: MaybeNull<UniApp.VideoContext> = null;
 function showVideo() {
     videoContext = uni.createVideoContext("myVideo");
-    console.log(videoContext);
     if (!videoContext) return;
     videoContext.requestFullScreen({ direction: 0 });
     videoContext.play();

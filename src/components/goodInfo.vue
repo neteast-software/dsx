@@ -66,12 +66,10 @@ const topShow: any = props.hasDialog ? false : inject("showDialog");
 const showDialog = ref(false);
 // const dialogContent = ref("您已复制商品链接\n是否立刻前往抖音加入橱窗");
 function copyToClipboard(coalitionUrl: string) {
-    console.log("复制内容", coalitionUrl);
     uni.setClipboardData({
         data: coalitionUrl,
         showToast: false,
         success: () => {
-            console.log("复制成功");
             if (props.hasDialog) {
                 showDialog.value = true;
             } else if (topShow && !props.hasDialog) {

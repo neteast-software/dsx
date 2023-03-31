@@ -26,7 +26,7 @@ http.interceptor.response = async (response, requestConfig) => {
             break;
         case 401:
             // #ifdef MP-WEIXIN
-            handleWeapp401(requestConfig);
+            result = await handleWeapp401(requestConfig);
             // #endif
             // #ifdef APP-PLUS
             result = Promise.reject(msg);
@@ -51,6 +51,7 @@ http.interceptor.response = async (response, requestConfig) => {
 async function handleWeapp401(requestConfig: RequestConfigWithUrl) {
     const { data } = await session.refreshLogin();
     const { token } = data;
+    console.log("refresh token", token);
     if (!token) {
         router.reLaunch("login");
         return Promise.reject("静默登录失败");

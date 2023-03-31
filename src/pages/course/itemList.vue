@@ -66,7 +66,6 @@ function showVideo(id: number, item) {
     activeVideoId.value = id;
     nextTick(() => {
         videoContext = uni.createVideoContext("video" + id, instance);
-        console.log("showVideo", videoContext);
         if (!videoContext) return;
         videoContext.requestFullScreen({ direction: 0 });
         videoContext.play();

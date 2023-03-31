@@ -118,14 +118,16 @@ const login = useDebounceFn(async () => {
     if (!form.value) return;
     await form.value.validate();
     const { mobile, password } = formData;
+    let token = "";
     // #ifdef APP-PLUS
-    const { data: token } = await loginByPassword(mobile, password);
+    const { data: appToken } = await loginByPassword(mobile, password);
+    token = appToken;
     // #endif
     // #ifdef MP-WEIXIN
     const openid = storage.get<string>("openid");
-    const data = await bindAccount(mobile, password, openid);
-    console.log("微信绑定", data);
-    return;
+    const { data } = await bindAccount(mobile, password, openid);
+    const { token: wxToken } = data;
+    token = wxToken;
     // #endif
     storage.set("token", token);
     user.initUserInfo();

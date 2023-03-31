@@ -8,6 +8,8 @@ interface ReqestConfig {
     header?: AnyObject;
     method?: RequestMethod;
     timeout?: number;
+    isUpload?: boolean;
+    filePath?: string;
 }
 export interface RequestConfigWithUrl extends ReqestConfig {
     url: string;
@@ -39,26 +41,8 @@ class Requestor {
     delete<T = any>(url: string, data?: RequestData, config: ReqestConfig = {}): Promise<T> {
         return this.preRequest<T>(url, "DELETE", config, data);
     }
-    upload<T = any>(url: string, filePath: string, name = "file", config: ReqestConfig = {}): Promise<T> {
-        return new Promise((resolve, reject) => {
-            const context = this.preProcess({ ...this.defaultConfig, ...config, url });
-            uni.uploadFile({
-                url: this.defaultConfig.baseURL ? this.defaultConfig.baseURL + url : url,
-                filePath,
-                name,
-                header: context.header,
-                timeout: context.timeout,
-                success: (res) => {
-                    res.data = JSON.parse(res.data);
-                    if (this.interceptor.response && typeof this.interceptor.response === "function") {
-                        const response = this.interceptor.response(res, context);
-                        return resolve(response as T);
-                    }
-                    resolve(res.data as T);
-                },
-                fail: reject
-            });
-        });
+    upload<T = any>(url: string, filePath: string, config: ReqestConfig = {}): Promise<T> {
+        return this.preRequest<T>(url, "POST", { ...config, url, filePath, isUpload: true });
     }
     private getLockKey(config: ReqestConfig): string {
         const { url, method, data } = config;
@@ -86,27 +70,43 @@ class Requestor {
         if (newConfig.baseURL) {
             newConfig.url = newConfig.baseURL + newConfig.url;
         }
-        // 是否存在拦截器
-        if (this.interceptor.request) {
-            newConfig = this.interceptor.request(newConfig);
-        }
+        // // 是否存在拦截器
+        // if (this.interceptor.request) {
+        //     newConfig = this.interceptor.request(newConfig);
+        // }
         return newConfig;
     }
-    request<T = any>(context: RequestConfigWithUrl) {
-        // const context = this.preProcess(config);
+    request<T = any>(config: RequestConfigWithUrl) {
+        let context = config;
+        if (this.interceptor.request) {
+            context = this.interceptor.request(config);
+        }
         return new Promise<T>((resolve, reject) => {
-            uni.request({
-                ...context,
-                success: async (res) => {
-                    // 是否存在拦截器
-                    if (this.interceptor.response && typeof this.interceptor.response === "function") {
-                        const response = await this.interceptor.response(res, context);
-                        return resolve(response as T);
-                    }
-                    resolve(res.data as T);
-                },
-                fail: reject
-            });
+            const onSuccess = async (
+                res: UniApp.UploadFileSuccessCallbackResult | UniApp.RequestSuccessCallbackResult
+            ) => {
+                if (context.isUpload) {
+                    res.data = JSON.parse(res.data as string);
+                }
+                // 是否存在拦截器
+                if (this.interceptor.response && typeof this.interceptor.response === "function") {
+                    const response = await this.interceptor.response(res, context);
+                    return resolve(response as T);
+                }
+                resolve(res.data as T);
+            };
+            context.isUpload
+                ? uni.uploadFile({
+                      ...context,
+                      name: "file",
+                      success: onSuccess,
+                      fail: reject
+                  })
+                : uni.request({
+                      ...context,
+                      success: onSuccess,
+                      fail: reject
+                  });
         });
     }
 }

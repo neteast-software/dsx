@@ -3,7 +3,6 @@ import { Toast } from "./uniapi";
 const scope = "user_info,trial.whitelist";
 const state = "1424";
 const douyin = uni.requireNativePlugin ? uni.requireNativePlugin("Html5app-Tiktok") : undefined;
-console.log("抖音插件", douyin);
 export function douyinAuth() {
     return new Promise((resolve, reject) => {
         if (!douyin) {

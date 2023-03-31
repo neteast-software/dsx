@@ -1,10 +1,7 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
-import { wxLogin } from "./weapp/utils";
 onLaunch(() => {
-    wxLogin().then((res) => {
-        console.log("wxLogin", res);
-    });
+    console.log("App Launch");
 });
 onShow(() => {
     // user.initUserInfo();

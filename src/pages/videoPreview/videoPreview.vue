@@ -74,7 +74,6 @@ onLoad((options) => {
     // const token = options?.token || "";
     videoUrl.value = options?.url || "";
     const goodId = options?.id || "";
-    console.log(goodId);
     initGoodInfo(goodId);
 });
 const salesCount = computed(() => {
@@ -145,22 +144,9 @@ const saveToAlbum = useDebounceFn((url) => {
             Toast("保存成功");
         })
         .catch(() => {
-            // console.log("保存失败的url", url);
-            // showModal("保存失败", url);
             Toast("保存失败");
         });
 }, 600);
-// function saveToAlbum(url: string) {
-//     saveVideoToAlbum(url)
-//         .then(() => {
-//             Toast("保存成功");
-//         })
-//         .catch(() => {
-//             console.log("保存失败的url", url);
-//             showModal("保存失败", url);
-//             Toast("保存失败");
-//         });
-// }
 
 function back() {
     router.back();
