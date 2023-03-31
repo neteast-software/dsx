@@ -196,7 +196,14 @@
         },
         {
             "root": "statusPages",
-            "pages": []
+            "pages": [
+                {
+                    "path": "paySuccess/paySuccess",
+                    "style": {
+                        "navigationBarTitleText": "支付成功"
+                    }
+                }
+            ]
         }
     ],
     "tabBar": {

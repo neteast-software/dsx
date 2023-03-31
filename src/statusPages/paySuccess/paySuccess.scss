@@ -1,0 +1,28 @@
+.paySuccess {
+}
+.img {
+    margin-top: 145rpx;
+    height: 118rpx;
+    width: 148rpx;
+}
+.title {
+    margin-top: 42rpx;
+    font-size: $uni-font-size-middle;
+    color: $uni-text-color;
+}
+.back-text {
+    margin-top: 23rpx;
+    color: #cbbfcb;
+    font-size: $uni-font-size-base;
+}
+.back-btn {
+    margin-top: 77rpx;
+    border: 1rpx solid $uni-color-primary;
+    color: $uni-color-primary;
+    font-size: $uni-font-size-base;
+    // padding: 10rpx 57rpx;
+    width: 170rpx;
+    height: 58rpx;
+    line-height: 58rpx;
+    border-radius: 29rpx;
+}

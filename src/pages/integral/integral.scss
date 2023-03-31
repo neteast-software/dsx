@@ -82,3 +82,64 @@
     height: 400rpx;
     margin: 260rpx auto 0;
 }
+.pop-wrap {
+    position: relative;
+    padding: 0 32rpx;
+    background: #fff;
+    border-radius: 75rpx 75rpx 0px 0px;
+    .popup-text {
+        width: 208rpx;
+        height: 52rpx;
+        margin-top: 57rpx;
+        margin-bottom: 84rpx;
+    }
+}
+.pop-box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    // grid-template-rows: 33.33% 33.33% 33.33%;
+    justify-content: space-between;
+    grid-row-gap: 31rpx;
+}
+.popup-item {
+    width: 219rpx;
+    height: 179rpx;
+    background: #fcf3e6;
+    border-radius: 32rpx;
+
+    .money {
+        color: #f03737;
+        font-size: 62rpx;
+        margin-bottom: 15rpx;
+        align-items: flex-end;
+        .sign-money {
+            font-size: 32rpx;
+            line-height: 52rpx;
+        }
+    }
+}
+.currency-img {
+    width: 24rpx;
+    height: 24rpx;
+    margin-right: 10rpx;
+}
+.currency-text {
+    font-size: 24rpx;
+    color: #3d3d3d;
+}
+.popup-btn {
+    margin-top: 125rpx;
+    margin-bottom: 126rpx;
+    width: 100%;
+    border-radius: 522rpx;
+    background: linear-gradient(180deg, #ffe6bd 0%, #fcd697 100%);
+    color: #4c2e1d;
+}
+.popup-close {
+    position: absolute;
+    top: -82rpx;
+    right: 35rpx;
+    width: 60rpx;
+    height: 60rpx;
+}

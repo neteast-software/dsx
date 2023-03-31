@@ -38,13 +38,31 @@
             </template>
             <template v-else>
                 <view class="h-full bg-white flex-box">
-                    <image class="img-empty" src="@/assets/empty/noScore.png" mode="widthFix"></image>
+                    <image class="img-empty" src="@/assets/empty/noScore.png" mode="aspectFill"></image>
                 </view>
             </template>
         </scroll-view>
     </view>
     <uni-popup ref="popup" type="bottom">
-        <view class="pop-wrap"> </view>
+        <view class="pop-wrap flex-column-center">
+            <view></view>
+            <view></view>
+            <image class="popup-text" src="@/assets/imgs/payText.svg" mode="widthFix" />
+            <view class="pop-box">
+                <view class="popup-item flex-column-all-center" v-for="index in 6">
+                    <view class="flex-center money">
+                        <view class="sign-money">¥</view>
+                        <view>10</view>
+                    </view>
+                    <view class="flex-center">
+                        <image class="currency-img" src="@/assets/icons/currency.png" mode="widthFix"></image>
+                        <view class="currency-text">100积分</view>
+                    </view></view
+                >
+            </view>
+            <button class="popup-btn">确定</button>
+            <image class="popup-close" src="@/assets/icons/close.svg" mode="scaleToFill"></image>
+        </view>
     </uni-popup>
 </template>
 
@@ -62,6 +80,9 @@ onReady(initList);
 
 // 充值
 const popup = ref();
+onReady(() => {
+    popup.value.open();
+});
 onReady(initRechargeList);
 async function initRechargeList() {
     const data = await getIntegralRechargeList();
