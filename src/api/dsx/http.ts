@@ -3,6 +3,8 @@ import storage from "@/utils/storage";
 import { Toast } from "@/utils/uniapi";
 import { baseURL } from "@/config/env";
 import router from "@/utils/router";
+import session from "@/weapp/session";
+import type { RequestConfigWithUrl } from "@/utils/requestor";
 const http = new Requestor({
     baseURL,
     timeout: 30000
@@ -14,7 +16,7 @@ http.interceptor.request = (config) => {
     }
     return config;
 };
-http.interceptor.response = (response) => {
+http.interceptor.response = async (response, requestConfig) => {
     const res = response.data as ResponseData;
     const { code, msg, ...ret } = res;
     let result;
@@ -23,9 +25,13 @@ http.interceptor.response = (response) => {
             result = ret;
             break;
         case 401:
-            // Toast(msg || "登录失效，请重新登录！");
+            // #ifdef MP-WEIXIN
+            handleWeapp401(requestConfig);
+            // #endif
+            // #ifdef APP-PLUS
             result = Promise.reject(msg);
             router.reLaunch("login");
+            // #endif
             break;
         case 500:
             Toast(msg || "服务器错误");
@@ -41,4 +47,15 @@ http.interceptor.response = (response) => {
     }
     return result;
 };
+
+async function handleWeapp401(requestConfig: RequestConfigWithUrl) {
+    const { data } = await session.refreshLogin();
+    const { token } = data;
+    if (!token) {
+        router.reLaunch("login");
+        return Promise.reject("静默登录失败");
+    }
+    storage.set("token", token);
+    return await http.request(requestConfig);
+}
 export default http;

@@ -1,6 +1,12 @@
 interface LoginByPasswordResult {
     data: string;
 }
+interface BindAccountResult {
+    data: {
+        openid: string;
+        token: string;
+    };
+}
 interface UserInfo {
     avatar: string;
     mobile: string;

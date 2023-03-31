@@ -14,6 +14,7 @@ class User {
     private _unreadMsgCount = ref(0);
     private _agencyStatus = ref<string>("");
     private _agencyTime = ref<string>("");
+    private _token = ref("");
     get logined() {
         return !!this._nickname.value;
     }
@@ -49,6 +50,12 @@ class User {
     }
     get unreadMsgCount() {
         return this._unreadMsgCount.value || 0;
+    }
+    get token() {
+        return this._token.value || "";
+    }
+    set token(token: string) {
+        this._token.value = token;
     }
     async initUserInfo() {
         const { data } = await getUserInfo();

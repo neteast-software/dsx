@@ -130,3 +130,16 @@ export function getNodeInfo(selector: string, instance = null) {
             .exec();
     });
 }
+
+// 登录
+export function uniLogin(provider: "weixin" | "apple") {
+    return function () {
+        return new Promise<UniApp.LoginRes>((resolve, reject) => {
+            uni.login({
+                provider,
+                success: resolve,
+                fail: reject
+            });
+        });
+    };
+}

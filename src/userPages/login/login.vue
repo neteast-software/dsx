@@ -83,7 +83,7 @@
 import uniForms from "@dcloudio/uni-ui/lib/uni-forms/uni-forms.vue";
 import uniFormsItem from "@dcloudio/uni-ui/lib/uni-forms-item/uni-forms-item.vue";
 import { reactive, ref } from "vue";
-import { loginByPassword } from "@/api/dsx/user";
+import { loginByPassword, bindAccount } from "@/api/dsx/user";
 import storage from "@/utils/storage";
 import router from "@/utils/router";
 import { formRules } from "./login";
@@ -118,7 +118,15 @@ const login = useDebounceFn(async () => {
     if (!form.value) return;
     await form.value.validate();
     const { mobile, password } = formData;
+    // #ifdef APP-PLUS
     const { data: token } = await loginByPassword(mobile, password);
+    // #endif
+    // #ifdef MP-WEIXIN
+    const openid = storage.get<string>("openid");
+    const data = await bindAccount(mobile, password, openid);
+    console.log("微信绑定", data);
+    return;
+    // #endif
     storage.set("token", token);
     user.initUserInfo();
     router.switchTab("index");

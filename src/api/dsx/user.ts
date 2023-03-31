@@ -1,8 +1,13 @@
 import http from "./http";
+import { APPID } from "@/config/env";
 
 // 密码登录
 export function loginByPassword(mobile: string, password: string) {
     return http.post<LoginByPasswordResult>("/mobile/login", { mobile, password });
+}
+// 微信绑定账号
+export function bindAccount(mobile: string, password: string, openid: string) {
+    return http.post<BindAccountResult>(`/wechat/bind/${APPID}`, { mobile, password, openid });
 }
 
 // 发送短信验证码

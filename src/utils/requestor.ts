@@ -9,7 +9,7 @@ interface ReqestConfig {
     method?: RequestMethod;
     timeout?: number;
 }
-interface RequestConfigWithUrl extends ReqestConfig {
+export interface RequestConfigWithUrl extends ReqestConfig {
     url: string;
 }
 type UniResponse = UniApp.RequestSuccessCallbackResult | UniApp.UploadFileSuccessCallbackResult;
@@ -74,7 +74,8 @@ class Requestor {
         const lockKey = this.getLockKey(newConfig);
         if (this.lock[lockKey]) return Promise.reject("请求重复");
         this.lock[lockKey] = true;
-        const p = this.request(newConfig);
+        const context = this.preProcess(newConfig);
+        const p = this.request(context);
         p.finally(() => {
             this.lock[lockKey] = false;
         });
@@ -91,15 +92,15 @@ class Requestor {
         }
         return newConfig;
     }
-    request<T = any>(config: RequestConfigWithUrl) {
-        const context = this.preProcess(config);
+    request<T = any>(context: RequestConfigWithUrl) {
+        // const context = this.preProcess(config);
         return new Promise<T>((resolve, reject) => {
             uni.request({
                 ...context,
-                success: (res) => {
+                success: async (res) => {
                     // 是否存在拦截器
                     if (this.interceptor.response && typeof this.interceptor.response === "function") {
-                        const response = this.interceptor.response(res, context);
+                        const response = await this.interceptor.response(res, context);
                         return resolve(response as T);
                     }
                     resolve(res.data as T);
