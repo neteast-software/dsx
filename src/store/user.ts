@@ -1,6 +1,7 @@
 import { getUserInfo } from "@/api/dsx/user";
 import { ref } from "vue";
 import { baseURL } from "@/config/env";
+import storage from "@/utils/storage";
 
 class User {
     private _nickname = ref("");
@@ -13,8 +14,8 @@ class User {
     private _inviteCode = ref("");
     private _giftsPoints = ref(0);
     private _unreadMsgCount = ref(0);
-    private _agencyStatus = ref<string>("");
-    private _agencyTime = ref<string>("");
+    private _agencyStatus = ref("");
+    private _agencyTime = ref("");
     private _token = ref("");
     get logined() {
         return !!this._username.value;
@@ -53,7 +54,7 @@ class User {
         return this._unreadMsgCount.value || 0;
     }
     get token() {
-        return this._token.value || "";
+        return this._token.value || storage.get("token") || "";
     }
     set token(token: string) {
         this._token.value = token;
