@@ -162,3 +162,17 @@ interface GetProcessVideoResult {
 interface GetShareImgResult {
     data: string;
 }
+interface IntegralRechargeListItem {
+    actualAmount: number;
+    amount: number;
+    bonusPoints: number;
+    id: number;
+    points: number;
+    totalPoints: number;
+}
+interface GetIntegralRechargeListResult {
+    data: IntegralRechargeListItem[];
+}
+interface RechargeIntegralResult {
+    data: UniApp.RequestPaymentOptions;
+}

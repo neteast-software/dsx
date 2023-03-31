@@ -1,3 +1,4 @@
+import { APPID } from "@/config/env";
 import http from "./http";
 
 // 我的粉丝列表
@@ -103,4 +104,15 @@ interface getGoodListByListTypeFilter {
 export function getGoodListByListType(pageNum = 1, pageSize = 10, filter: getGoodListByListTypeFilter) {
     const { listType } = filter;
     return http.get<getGoodListByListTypeResult>(`/mobile/product/getAttrList/${listType}`, { pageNum, pageSize });
+}
+
+// 获取积分充值列表
+export function getIntegralRechargeList() {
+    return http.get<GetIntegralRechargeListResult>("/mobile/pointsProducts/getRechargeList");
+}
+
+// 微信充值积分
+export function rechargeIntegral(id: number) {
+    console.log("充值id", id);
+    return http.post<RechargeIntegralResult>(`/wechat/pay/${APPID}/miniApp/JSAPI/${id}`);
 }

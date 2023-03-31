@@ -1,5 +1,5 @@
 <template>
-    <view class="navigator" :class="[extClass ? extClass : '']">
+    <view class="navigator" :style="extStyle" :class="[extClass ? extClass : '']">
         <status-bar></status-bar>
         <slot v-if="defaultSlot"></slot>
         <uni-nav-bar v-else left-icon="left" :title="title" :border="false" @clickLeft="back"></uni-nav-bar>
@@ -14,6 +14,7 @@ import { useSlots } from "vue";
 const { default: defaultSlot } = useSlots();
 const props = defineProps({
     extClass: String,
+    extStyle: Object,
     title: String
 });
 function back() {

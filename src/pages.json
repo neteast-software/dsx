@@ -193,6 +193,10 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "statusPages",
+            "pages": []
         }
     ],
     "tabBar": {
