@@ -58,7 +58,8 @@
             "path": "pages/integral/integral",
             "style": {
                 "navigationBarTitleText": "我的积分",
-                "navigationBarBackgroundColor": "#F7F8FA"
+                "navigationBarBackgroundColor": "#F7F8FA",
+                "navigationStyle": "custom"
             }
         },
         {

@@ -118,9 +118,11 @@ export async function saveVideoToAlbum(url: string) {
 export function getNodeInfo(selector: string, instance = null) {
     return new Promise<UniApp.NodeInfo>((resolve, reject) => {
         const query = instance ? uni.createSelectorQuery().in(instance) : uni.createSelectorQuery();
+        console.log("query", query);
         query
             .select(selector)
             .boundingClientRect((data) => {
+                console.log("data", data);
                 if (data) {
                     resolve(data as UniApp.NodeInfo);
                 } else {

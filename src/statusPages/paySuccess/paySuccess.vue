@@ -3,11 +3,17 @@
         <image class="img" src="@/assets/imgs/paySuccess.png" mode="widthFix"></image>
         <view class="title">支付成功</view>
         <view class="back-text">请返回我的积分查看</view>
-        <button class="back-btn">返回</button>
+        <button class="back-btn" @tap="back">返回</button>
     </view>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import router from "@/utils/router";
+
+function back() {
+    router.back();
+}
+</script>
 
 <style scoped lang="scss">
 @import "./paySuccess.scss";
