@@ -2,7 +2,14 @@
     <view class="navigator" :style="extStyle" :class="[extClass ? extClass : '']">
         <status-bar></status-bar>
         <slot v-if="defaultSlot"></slot>
-        <uni-nav-bar v-else left-icon="left" :title="title" :border="false" @clickLeft="back"></uni-nav-bar>
+        <uni-nav-bar
+            v-else
+            left-icon="left"
+            :title="title"
+            :border="false"
+            :background-color="backgroundColor"
+            @clickLeft="back"
+        ></uni-nav-bar>
     </view>
 </template>
 
@@ -15,7 +22,11 @@ const { default: defaultSlot } = useSlots();
 const props = defineProps({
     extClass: String,
     extStyle: Object,
-    title: String
+    title: String,
+    backgroundColor: {
+        type: String,
+        default: "#ffffff"
+    }
 });
 function back() {
     router.back();
