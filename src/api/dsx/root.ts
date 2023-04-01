@@ -8,7 +8,7 @@ export function uploadFile(file: string) {
 
 // 微信登录
 export function wxLogin(code: string) {
-    const p = http.post<WxLoginResult>(`/wechat/login/${APPID}/${code}`);
+    const p = http.post<WxLoginResult>(`/wechat/login/${APPID.WEAPP}/${code}`);
     p.then((res) => {
         const { openid } = res.data;
         storage.set("openid", openid);

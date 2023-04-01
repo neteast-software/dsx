@@ -1,20 +1,22 @@
 <template>
-    <scroll-view v-if="user.logined" class="stage" scroll-y @scroll="onScroll">
-        <!-- <status-bar></status-bar> -->
-        <view id="nav" style="position: sticky; top: 0; z-index: 9999">
-            <NavBar ext-class="indexNav">
-                <Header></Header>
-            </NavBar>
-        </view>
-        <view class="item">
-            <search></search>
-            <Banner></Banner>
-            <iconsWrapper></iconsWrapper>
-            <Recommend></Recommend>
-        </view>
-        <view id="goods" class="h-full goodlist-wrap">
-            <GoodsList></GoodsList>
-        </view>
+    <scroll-view class="stage" scroll-y @scroll="onScroll">
+        <template v-if="user.logined">
+            <!-- <status-bar></status-bar> -->
+            <view id="nav" style="position: sticky; top: 0; z-index: 9999">
+                <NavBar ext-class="indexNav">
+                    <Header></Header>
+                </NavBar>
+            </view>
+            <view class="item">
+                <search></search>
+                <Banner></Banner>
+                <iconsWrapper></iconsWrapper>
+                <Recommend></Recommend>
+            </view>
+            <view id="goods" class="h-full goodlist-wrap">
+                <GoodsList></GoodsList>
+            </view>
+        </template>
     </scroll-view>
     <user-guide
         v-model="showDialog"
@@ -63,6 +65,7 @@ onShareAppMessage(() => {
     };
 });
 onShow(() => {
+    console.log("index onShow");
     user.initUserInfo();
 });
 onReady(async () => {

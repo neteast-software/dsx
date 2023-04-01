@@ -70,10 +70,6 @@ class Requestor {
         if (newConfig.baseURL) {
             newConfig.url = newConfig.baseURL + newConfig.url;
         }
-        // // 是否存在拦截器
-        // if (this.interceptor.request) {
-        //     newConfig = this.interceptor.request(newConfig);
-        // }
         return newConfig;
     }
     request<T = any>(config: RequestConfigWithUrl) {
@@ -90,8 +86,12 @@ class Requestor {
                 }
                 // 是否存在拦截器
                 if (this.interceptor.response && typeof this.interceptor.response === "function") {
-                    const response = await this.interceptor.response(res, context);
-                    return resolve(response as T);
+                    try {
+                        const response = await this.interceptor.response(res, context);
+                        return resolve(response as T);
+                    } catch (error) {
+                        return reject(error);
+                    }
                 }
                 resolve(res.data as T);
             };

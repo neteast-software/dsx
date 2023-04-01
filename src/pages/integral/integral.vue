@@ -63,28 +63,29 @@
     </view>
     <uni-popup ref="popup" type="bottom">
         <view class="pop-wrap flex-column-center">
-            <view></view>
-            <view></view>
-            <image class="popup-text" src="@/assets/imgs/payText.svg" mode="widthFix" />
-            <view class="pop-box">
-                <view
-                    class="popup-item flex-column-all-center"
-                    :class="{ active: item.id === activeRecharge }"
-                    v-for="item in rechargeList"
-                    @tap="changeActive(item.id)"
-                    :key="item.id"
-                >
-                    <view class="flex-center money">
-                        <view class="sign-money">¥</view>
-                        <view>{{ item.amount }}</view>
-                    </view>
-                    <view class="flex-center">
-                        <image class="currency-img" src="@/assets/icons/currency.png" mode="widthFix"></image>
-                        <view class="currency-text">{{ item.totalPoints }}积分</view>
-                    </view></view
-                >
+            <view class="bg"></view>
+            <view class="pop-content flex-column-center">
+                <image class="popup-text" src="@/assets/imgs/payText.svg" mode="widthFix" />
+                <view class="pop-box">
+                    <view
+                        class="popup-item flex-column-all-center"
+                        :class="{ active: item.id === activeRecharge }"
+                        v-for="item in rechargeList"
+                        @tap="changeActive(item.id)"
+                        :key="item.id"
+                    >
+                        <view class="flex-center money">
+                            <view class="sign-money">¥</view>
+                            <view>{{ item.amount }}</view>
+                        </view>
+                        <view class="flex-center">
+                            <image class="currency-img" src="@/assets/icons/currency.png" mode="widthFix"></image>
+                            <view class="currency-text">{{ item.totalPoints }}积分</view>
+                        </view></view
+                    >
+                </view>
+                <button class="popup-btn" @tap="recharge(activeRecharge)">确定</button>
             </view>
-            <button class="popup-btn" @tap="recharge(activeRecharge)">确定</button>
             <image
                 @tap="closeRechargeList"
                 class="popup-close"
@@ -98,7 +99,7 @@
 <script setup lang="ts">
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import navBar from "@/components/navBar.vue";
-import { onReady, onPageScroll, onReachBottom } from "@dcloudio/uni-app";
+import { onReady, onPageScroll, onReachBottom, onShow } from "@dcloudio/uni-app";
 import { getIntegralList, getIntegralRechargeList, rechargeIntegral } from "@/api/dsx/business";
 import { usePaginator } from "@/utils/util";
 import user from "@/store/user";
@@ -108,27 +109,27 @@ import { getNodeInfo } from "@/utils/uniapi";
 import { windowHeight } from "@/utils/systemInfo";
 import router from "@/utils/router";
 import { useDebounceFn } from "@vueuse/shared";
+// 初始化页面数据
 const { initList, list: integralList, nextList } = usePaginator<IntegralRecord>(getIntegralList);
-onReady(initList);
-user.initUserInfo();
+onShow(() => {
+    initList();
+    user.initUserInfo();
+});
 
 // 页面滚动改变navbar透明度
 const navBarHeight = ref(0);
 const opaticy = ref(0);
 const scrollViewHeight = ref(0);
-const tipTop = ref(0);
 const canScroll = ref(false);
 async function initNavbarInfo() {
     const { height } = await getNodeInfo("#navbar");
-    const { height: tipHeight = 0, top } = await getNodeInfo(".points-details");
-    tipTop.value = top || 0;
+    const { height: tipHeight = 0 } = await getNodeInfo(".points-details");
     navBarHeight.value = height || 0;
     scrollViewHeight.value = windowHeight - navBarHeight.value - tipHeight - 20;
 }
 onReady(initNavbarInfo);
 const setScrollStatus = useDebounceFn(async () => {
     const { top = 0 } = await getNodeInfo(".points-details");
-    console.log(top, navBarHeight.value);
     if (top <= navBarHeight.value + 5) {
         canScroll.value = true;
     } else {

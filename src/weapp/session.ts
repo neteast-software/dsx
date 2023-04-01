@@ -1,4 +1,5 @@
 import { wxLogin } from "@/api/dsx/root";
+import user from "@/store/user";
 // import user from "@/store/user";
 import storage from "@/utils/storage";
 class Session {
@@ -47,7 +48,7 @@ class Session {
         return this.refreshLoginSingleton;
     }
     clearSession() {
-        // user.token = "";
+        user.token = "";
         storage.remove("token");
     }
     login() {
@@ -63,8 +64,7 @@ class Session {
         });
     }
     async ensureSession() {
-        // const token = user.token;
-        const token = storage.get("token");
+        const token = user.token;
         if (!token) {
             return this.refreshLogin();
         }

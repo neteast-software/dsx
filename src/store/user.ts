@@ -1,57 +1,58 @@
 import { getUserInfo } from "@/api/dsx/user";
-import { ref } from "vue";
-import { baseURL } from "@/config/env";
+import { ref, reactive, toRaw } from "vue";
 import storage from "@/utils/storage";
 
 class User {
-    private _nickname = ref("");
-    private _username = ref("");
-    private _avatar = ref("");
-    private _mobile = ref("");
-    private _inviteNickname = ref("");
-    private _inviteUserMobile = ref("");
-    private _integral = ref(0);
-    private _inviteCode = ref("");
-    private _giftsPoints = ref(0);
-    private _unreadMsgCount = ref(0);
-    private _agencyStatus = ref("");
-    private _agencyTime = ref("");
+    private _userInfo = reactive<UserInfo>({
+        nickname: "",
+        username: "",
+        avatar: "",
+        mobile: "",
+        inviteNickname: "",
+        inviteUserMobile: "",
+        integral: 0,
+        inviteCode: "",
+        giftsPoints: 0,
+        unreadMsgCount: 0,
+        agencyStatus: "",
+        agencyTime: ""
+    });
     private _token = ref("");
     get logined() {
-        return !!this._username.value;
+        return !!this._userInfo.username;
     }
     get agencyStatus(): string {
-        return this._agencyStatus.value || "";
+        return this._userInfo.agencyStatus || "";
     }
     get agencyTime(): string {
-        return this._agencyTime.value || "";
+        return this._userInfo.agencyTime || "";
     }
     get nickname() {
-        return this._nickname.value || "";
+        return this._userInfo.nickname || "";
     }
     get avatar() {
-        return this._avatar.value || "";
+        return this._userInfo.avatar || "";
     }
     get mobile() {
-        return this._mobile.value || "";
+        return this._userInfo.mobile || "";
     }
     get inviteNickname() {
-        return this._inviteNickname.value || "";
+        return this._userInfo.inviteNickname || "";
     }
     get inviteUserMobile() {
-        return this._inviteUserMobile.value || "";
+        return this._userInfo.inviteUserMobile || "";
     }
     get integral() {
-        return this._integral.value || 0;
+        return this._userInfo.integral || 0;
     }
     get inviteCode() {
-        return this._inviteCode.value || "";
+        return this._userInfo.inviteCode || "";
     }
     get giftsPoints() {
-        return this._giftsPoints.value || 0;
+        return this._userInfo.giftsPoints || 0;
     }
     get unreadMsgCount() {
-        return this._unreadMsgCount.value || 0;
+        return this._userInfo.unreadMsgCount || 0;
     }
     get token() {
         return this._token.value || storage.get("token") || "";
@@ -61,32 +62,9 @@ class User {
     }
     async initUserInfo() {
         const { data } = await getUserInfo();
-        const {
-            nickname,
-            username,
-            agencyStatus,
-            agencyTime,
-            avatar,
-            mobile,
-            inviteNickname,
-            inviteUserMobile,
-            integral,
-            inviteCode,
-            giftsPoints,
-            unreadMsgCount
-        } = data;
-        this._username.value = username;
-        this._agencyStatus.value = agencyStatus;
-        this._agencyTime.value = agencyTime;
-        this._nickname.value = nickname;
-        this._avatar.value = avatar;
-        this._mobile.value = mobile;
-        this._inviteNickname.value = inviteNickname;
-        this._inviteUserMobile.value = inviteUserMobile;
-        this._integral.value = integral;
-        this._inviteCode.value = inviteCode;
-        this._giftsPoints.value = giftsPoints;
-        this._unreadMsgCount.value = unreadMsgCount;
+        Object.keys(toRaw(this._userInfo)).forEach((key) => {
+            this._userInfo[key] = data[key];
+        });
     }
 }
 

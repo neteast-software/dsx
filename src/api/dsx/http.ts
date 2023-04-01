@@ -1,16 +1,16 @@
 import Requestor from "@/utils/requestor";
-import storage from "@/utils/storage";
 import { Toast } from "@/utils/uniapi";
 import { baseURL } from "@/config/env";
 import router from "@/utils/router";
 import session from "@/weapp/session";
 import type { RequestConfigWithUrl } from "@/utils/requestor";
+import user from "@/store/user";
 const http = new Requestor({
     baseURL,
     timeout: 30000
 });
 http.interceptor.request = (config) => {
-    const token = storage.get("token");
+    const token = user.token;
     if (token && config.header) {
         config.header.AppAuthorization = token;
     }
@@ -26,7 +26,12 @@ http.interceptor.response = async (response, requestConfig) => {
             break;
         case 401:
             // #ifdef MP-WEIXIN
-            result = await handleWeapp401(requestConfig);
+            try {
+                result = await handleWeapp401(requestConfig);
+            } catch (error) {
+                console.log("handleWeapp401 error", error);
+                result = Promise.reject(error);
+            }
             // #endif
             // #ifdef APP-PLUS
             result = Promise.reject(msg);
@@ -51,12 +56,11 @@ http.interceptor.response = async (response, requestConfig) => {
 async function handleWeapp401(requestConfig: RequestConfigWithUrl) {
     const { data } = await session.refreshLogin();
     const { token } = data;
-    console.log("refresh token", token);
     if (!token) {
-        router.reLaunch("login");
-        return Promise.reject("静默登录失败");
+        router.replace("login");
+        throw "静默登录失败";
     }
-    storage.set("token", token);
+    user.token = token;
     return await http.request(requestConfig);
 }
 export default http;

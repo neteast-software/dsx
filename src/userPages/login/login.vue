@@ -92,6 +92,7 @@ import { onLoad } from "@dcloudio/uni-app";
 import { Toast } from "@/utils/uniapi";
 import user from "@/store/user";
 import { useDebounceFn } from "@vueuse/shared";
+import session from "@/weapp/session";
 const form = ref<any>(null);
 const formData = reactive({
     mobile: "",
@@ -118,18 +119,23 @@ const login = useDebounceFn(async () => {
     if (!form.value) return;
     await form.value.validate();
     const { mobile, password } = formData;
-    let token = "";
     // #ifdef APP-PLUS
     const { data: appToken } = await loginByPassword(mobile, password);
-    token = appToken;
+    storage.set("token", appToken);
     // #endif
     // #ifdef MP-WEIXIN
+    const { data: sessionData } = await session.refreshLogin();
+    if (sessionData.token) {
+        user.token = sessionData.token;
+        user.initUserInfo();
+        router.switchTab("index");
+        return;
+    }
     const openid = storage.get<string>("openid");
     const { data } = await bindAccount(mobile, password, openid);
     const { token: wxToken } = data;
-    token = wxToken;
+    user.token = wxToken;
     // #endif
-    storage.set("token", token);
     user.initUserInfo();
     router.switchTab("index");
 }, 300);

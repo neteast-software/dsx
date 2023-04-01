@@ -112,7 +112,6 @@ export function getIntegralRechargeList() {
 }
 
 // 微信充值积分
-export function rechargeIntegral(id: number) {
-    console.log("充值id", id);
-    return http.post<RechargeIntegralResult>(`/wechat/pay/${APPID}/miniApp/JSAPI/${id}`);
+export function rechargeIntegral(id: number, appid = APPID.WEAPP) {
+    return http.post<RechargeIntegralResult>(`/wechat/pay/${appid}/miniApp/JSAPI/${id}`);
 }

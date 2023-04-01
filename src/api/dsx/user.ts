@@ -7,7 +7,7 @@ export function loginByPassword(mobile: string, password: string) {
 }
 // 微信绑定账号
 export function bindAccount(mobile: string, password: string, openid: string) {
-    return http.post<BindAccountResult>(`/wechat/bind/${APPID}`, { mobile, password, openid });
+    return http.post<BindAccountResult>(`/wechat/bind/${APPID.WEAPP}`, { mobile, password, openid });
 }
 
 // 发送短信验证码
