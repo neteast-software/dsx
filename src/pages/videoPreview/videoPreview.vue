@@ -85,7 +85,7 @@ const salesTotal = computed(() => {
     const saleCount = goodInfo.value?.saleCount || 0;
     const price = goodInfo.value?.price || 0;
     const total = saleCount * price;
-    return total > 10000 ? ((saleCount * price) / 10000).toFixed(0) + "w+" : total;
+    return total > 10000 ? ((saleCount * price) / 10000).toFixed(0) + "w+" : total.toFixed(2);
 });
 
 async function initGoodInfo(id: string | number) {

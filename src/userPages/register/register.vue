@@ -11,7 +11,7 @@
                         <input class="form-input" v-model="formData.mobile" type="text" placeholder="请输入手机号" />
                     </uni-forms-item>
                 </view>
-                <view class="item-wrap">
+                <view class="item-wrap" style="padding-right: 200rpx">
                     <uni-forms-item class="item verify" name="captcha">
                         <input class="form-input" type="text" v-model="formData.captcha" placeholder="请输入验证码" />
                     </uni-forms-item>
