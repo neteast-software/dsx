@@ -1,5 +1,5 @@
 <template>
-    <uni-popup ref="guide" type="center" @close="onClose">
+    <uni-popup ref="guide" type="center" @change="onChange">
         <view class="guide">
             <image class="crown" src="@/assets/imgs/crown.png" mode="widthFix" />
             <view class="title">恭喜您成为VIP</view>
@@ -16,6 +16,7 @@
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { onMounted } from "vue";
 import { ref, computed, watch } from "vue";
+import { useDebounceFn } from "@vueuse/shared";
 const props = defineProps({
     modelValue: {
         type: Boolean,
@@ -56,9 +57,10 @@ function close() {
     guide.value.close();
     actualModel.value = false;
 }
-function onClose() {
+const onChange = useDebounceFn((e) => {
+    if (e.show) return;
     emit("close");
-}
+}, 100);
 </script>
 
 <style scoped lang="scss">

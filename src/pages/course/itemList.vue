@@ -179,6 +179,7 @@ function exitVideo(e) {
 }
 .vip-mark {
     position: absolute;
+    z-index: 999;
     width: 60rpx;
     height: 60rpx;
     border-radius: 50%;
