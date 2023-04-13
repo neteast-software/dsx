@@ -180,7 +180,7 @@ interface RechargeIntegralResult {
 interface GetVipUpgradeMsgResult {
     data: {
         createTime: string;
-        id: string;
+        id: string | null;
         isRead: string;
         title: string;
     };

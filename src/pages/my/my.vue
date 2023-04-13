@@ -108,7 +108,7 @@
                 </view>
             </view>
         </uni-popup>
-        <Congratulation v-model="showCongratulation"></Congratulation>
+        <Congratulation v-model="showCongratulation" @close="confirmUpgrade"></Congratulation>
     </view>
 </template>
 
@@ -125,6 +125,8 @@ import { statusBarHeight } from "@/utils/systemInfo";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
 import { doApply, getVipUpgradeMsg } from "@/api/dsx/business";
 import Congratulation from "@/components/congratulation.vue";
+import { useVipUpgrade } from "@/mixins/vip";
+const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
 // import NavBar from "@/components/navBar.vue";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
 const cache = ref("");
@@ -136,10 +138,11 @@ onShow(() => {
     user.initUserInfo();
     checkVipUpgrade();
 });
-async function checkVipUpgrade() {
-    const { data } = await getVipUpgradeMsg();
-    console.log("获取Vip升级消息", data);
-}
+// const showCongratulation = ref(false);
+// async function checkVipUpgrade() {
+//     const { data } = await getVipUpgradeMsg();
+//     console.log("获取Vip升级消息", data);
+// }
 
 async function clear() {
     await clearCache();
@@ -195,8 +198,6 @@ async function signConfirm() {
     closeApply();
     toSignSuccess();
 }
-
-const showCongratulation = ref(true);
 </script>
 <style>
 page {

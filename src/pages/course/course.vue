@@ -24,6 +24,7 @@
         </swiper>
     </view>
     <Upgrade v-model="showForbidden"></Upgrade>
+    <Congratulation v-model="showCongratulation" @close="confirmUpgrade"></Congratulation>
 </template>
 
 <script setup lang="ts">
@@ -34,6 +35,12 @@ import { getTypeList, getCourseList } from "@/api/dsx/course";
 import { usePaginator } from "@/utils/util";
 import ItemList from "./itemList.vue";
 import Upgrade from "@/components/upgrade.vue";
+import { onShow } from "@dcloudio/uni-app";
+
+import Congratulation from "@/components/congratulation.vue";
+import { useVipUpgrade } from "@/mixins/vip";
+const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
+onShow(checkVipUpgrade);
 
 const nav = ref<number>(0);
 const typeList = ref<TypeItem[]>([]);

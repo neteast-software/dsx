@@ -106,7 +106,6 @@ import user from "@/store/user";
 import { ref } from "vue";
 import { wxRequestPayment } from "@/weapp/utils";
 import { getNodeInfo } from "@/utils/uniapi";
-import { windowHeight } from "@/utils/systemInfo";
 import router from "@/utils/router";
 import { useDebounceFn } from "@vueuse/shared";
 // 初始化页面数据
@@ -125,6 +124,9 @@ async function initNavbarInfo() {
     const { height } = await getNodeInfo("#navbar");
     const { height: tipHeight = 0 } = await getNodeInfo(".points-details");
     navBarHeight.value = height || 0;
+    // console.log("巴拉巴拉", uni.getSystemInfoSync());
+    const { windowHeight } = uni.getSystemInfoSync();
+    console.log("一系列高度", windowHeight, navBarHeight.value, tipHeight);
     scrollViewHeight.value = windowHeight - navBarHeight.value - tipHeight - 20;
 }
 onReady(initNavbarInfo);

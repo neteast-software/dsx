@@ -25,6 +25,7 @@
         :text="'您已复制商品链接，请前往添加至橱窗'"
         @confirm="toDouyin"
     ></user-guide>
+    <Congratulation v-model="showCongratulation" @close="confirmUpgrade"></Congratulation>
 </template>
 
 <script setup lang="ts">
@@ -42,6 +43,10 @@ import user from "@/store/user";
 import search from "./search.vue";
 import iconsWrapper from "./icons-wrapper.vue";
 import UserGuide from "@/components/user_guide.vue";
+import Congratulation from "@/components/congratulation.vue";
+import { useVipUpgrade } from "@/mixins/vip";
+const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
+onShow(checkVipUpgrade);
 
 const showDialog = ref(false);
 provide("showDialog", showDialog);

@@ -1,5 +1,5 @@
 <template>
-    <uni-popup ref="guide" type="center">
+    <uni-popup ref="guide" type="center" @close="onClose">
         <view class="guide">
             <image class="crown" src="@/assets/imgs/crown.png" mode="widthFix" />
             <view class="title">恭喜您成为VIP</view>
@@ -25,7 +25,7 @@ const props = defineProps({
 const desc = `您已成功升级为尊贵的VIP会员，解锁以下权限
 1、完全解锁视频合成，不受次数限制
 2、可观看专属VIP课程，该权限只有VIP可以享受。`;
-const emit = defineEmits(["save", "update:modelValue"]);
+const emit = defineEmits(["save", "update:modelValue", "close"]);
 const actualModel = computed({
     get: () => props.modelValue,
     set: (value) => emit("update:modelValue", value)
@@ -55,6 +55,9 @@ function closeDialog() {
 function close() {
     guide.value.close();
     actualModel.value = false;
+}
+function onClose() {
+    emit("close");
 }
 </script>
 
