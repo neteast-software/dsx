@@ -1,28 +1,23 @@
 <template>
-    <!-- #ifdef MP-WEIXIN -->
-    <page-meta page-style="height: 100%">
-        <!-- #endif -->
-        <view class="stage">
-            <status-bar></status-bar>
-            <view class="nav">
-                <view
-                    v-for="(item, index) in typeList"
-                    :key="index"
-                    :class="{ active: item.id == nav }"
-                    @click="changeNav(item.id, index)"
-                >
-                    {{ item.name }}
-                </view>
+    <view class="stage">
+        <status-bar></status-bar>
+        <view class="nav">
+            <view
+                v-for="(item, index) in typeList"
+                :key="index"
+                :class="{ active: item.id == nav }"
+                @click="changeNav(item.id, index)"
+            >
+                {{ item.name }}
             </view>
-            <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
-                <swiper-item v-for="(t, ind) in dataList" :key="ind">
-                    <ItemList :list="t.list" :next="t.nextList" :init="t.initList" :id="ind"></ItemList>
-                </swiper-item>
-            </swiper>
         </view>
-        <!-- #ifdef MP-WEIXIN -->
-    </page-meta>
-    <!-- #endif -->
+        <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
+            <swiper-item v-for="(t, ind) in dataList" :key="ind">
+                <ItemList :list="t.list" :next="t.nextList" :init="t.initList" :id="ind"></ItemList>
+            </swiper-item>
+        </swiper>
+    </view>
+    <Upgrade v-model="showForbidden"></Upgrade>
 </template>
 
 <script setup lang="ts">
@@ -32,6 +27,7 @@ import statusBar from "@/components/statusBar.vue";
 import { getTypeList, getCourseList } from "@/api/dsx/course";
 import { usePaginator } from "@/utils/util";
 import ItemList from "./itemList.vue";
+import Upgrade from "@/components/upgrade.vue";
 
 const nav = ref<number>(0);
 const typeList = ref<TypeItem[]>([]);
@@ -112,12 +108,16 @@ let newData = [].concat(
 );
 
 const data = reactive<li[]>([...newData]);
+
+const showForbidden = ref(true);
 </script>
 
-<style scoped lang="scss">
+<style>
 page {
     height: 100%;
 }
+</style>
+<style scoped lang="scss">
 .stage {
     width: 100%;
     height: 100%;

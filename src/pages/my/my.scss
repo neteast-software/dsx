@@ -28,7 +28,7 @@
     .content {
         margin: 0 26rpx;
         align-items: flex-start;
-        width:auto;
+        width: auto;
         .title {
             font-size: $uni-font-size-middle;
             margin-bottom: 10rpx;
@@ -125,7 +125,7 @@
         .nav-content {
             margin-right: 12rpx;
             margin-left: 26rpx;
-            font-size:$uni-font-size-middle;
+            font-size: $uni-font-size-middle;
         }
         .tip {
             color: $uni-text-color-tip;
@@ -175,4 +175,12 @@
         color: #4c2e1d;
         font-size: $uni-font-size-middle;
     }
+}
+.crown {
+    position: absolute;
+    width: 87rpx;
+    height: 87rpx;
+    top: 0;
+    left: 50%;
+    transform: translateX(-10%) translateY(-52%);
 }
