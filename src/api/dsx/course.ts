@@ -13,7 +13,13 @@ export function getCourseList(pageNum = 1, pageSize = 10, filter: CourseListPara
     const { id } = filter;
     return http.get<{ data: CourseListParams[] }>("/mobile/materialCenter/centerList/" + id, { pageNum, pageSize });
 }
+
+interface GetCourseReadResult {
+    data: {
+        viewUrl: string;
+    };
+}
 // 课程已阅
 export function getCourseRead(id: number) {
-    return http.get(`/mobile/materialCenter/centerDetail/${id}`);
+    return http.get<GetCourseReadResult>(`/mobile/materialCenter/centerDetail/${id}`);
 }

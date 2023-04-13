@@ -21,6 +21,7 @@ interface UserInfo {
     unreadMsgCount: number;
     agencyTime: string;
     agencyStatus: string;
+    vipLvl: number;
 }
 interface GetUserInfoResult {
     data: UserInfo;

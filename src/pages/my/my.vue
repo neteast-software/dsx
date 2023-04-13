@@ -17,7 +17,7 @@
                 <view class="avatar-wrap relative">
                     <image v-if="user.avatar" class="avatar" :src="user.avatar" mode="aspectFill"></image>
                     <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
-                    <image class="crown" src="@/assets/imgs/user-crown.png" mode="widthFix" />
+                    <image v-if="user.vipLvl" class="crown" src="@/assets/imgs/user-crown.png" mode="widthFix" />
                 </view>
                 <view class="content flex-column-between flex-rest-width">
                     <view class="title">{{ user.nickname || "抖省心" }}</view>
@@ -123,7 +123,7 @@ import { ref } from "vue";
 import { getCache, clearCache } from "@/utils/util";
 import { statusBarHeight } from "@/utils/systemInfo";
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
-import { doApply } from "@/api/dsx/business";
+import { doApply, getVipUpgradeMsg } from "@/api/dsx/business";
 import Congratulation from "@/components/congratulation.vue";
 // import NavBar from "@/components/navBar.vue";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
@@ -134,7 +134,13 @@ onReady(async () => {
 });
 onShow(() => {
     user.initUserInfo();
+    checkVipUpgrade();
 });
+async function checkVipUpgrade() {
+    const { data } = await getVipUpgradeMsg();
+    console.log("获取Vip升级消息", data);
+}
+
 async function clear() {
     await clearCache();
     Toast("缓存清理完成");

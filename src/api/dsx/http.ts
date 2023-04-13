@@ -45,6 +45,9 @@ http.interceptor.response = async (response, requestConfig) => {
         case 700:
             result = Promise.reject("retry");
             break;
+        case 800:
+            result = Promise.reject("forbidden");
+            break;
         default:
             Toast(msg || "未知错误");
             result = Promise.reject(msg);

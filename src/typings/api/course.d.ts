@@ -18,10 +18,11 @@ interface CourseListItem{
     name: string;
     materialType: number;
     viewCoveUrl: string;
-    viewUrl: string | null;
+    // viewUrl: string | null;
     delFlag: string;
     author: string | null;
     authorAvatar: string | null;
     viewCount: number;
     materialTypeLabel: string | null;
+    isVip: boolean
 }

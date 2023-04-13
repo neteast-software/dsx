@@ -115,3 +115,13 @@ export function getIntegralRechargeList() {
 export function rechargeIntegral(id: number, appid = APPID.WEAPP) {
     return http.post<RechargeIntegralResult>(`/wechat/pay/${appid}/miniApp/JSAPI/${id}`);
 }
+
+// 获取客服二维码
+export function getCustomerQrcode() {
+    return http.get<{ data: string }>("/mobile/marketSettings/getCustomerQrcode");
+}
+
+// 获取Vip升级消息
+export function getVipUpgradeMsg() {
+    return http.get<GetVipUpgradeMsgResult>("/mobile/my/myVipMsg");
+}

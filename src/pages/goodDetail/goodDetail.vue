@@ -108,6 +108,7 @@
             :text="'您已复制商品链接，请前往添加至橱窗'"
             @confirm="toDouyin"
         ></userGuide>
+        <Upgrade v-model="showUpgrade"></Upgrade>
     </view>
 </template>
 
@@ -123,6 +124,7 @@ import { Toast } from "@/utils/uniapi";
 import { goDouyin, timeoutPromise } from "@/utils/util";
 import userGuide from "@/components/user_guide.vue";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
+import Upgrade from "@/components/upgrade.vue";
 onLoad((options) => {
     initData(options?.id || 0);
 });
@@ -166,6 +168,8 @@ function hideDialog() {
 }
 // 获取合成视频的token
 let retryCount = 0;
+const showUpgrade = ref(false);
+
 async function getVideoProcessToken(id) {
     try {
         const { data } = await getProcessVideo(id);
@@ -173,6 +177,12 @@ async function getVideoProcessToken(id) {
         retryCount = 0;
         return { taskId, token };
     } catch (error) {
+        console.log("error", error);
+        if (error === "forbidden") {
+            showUpgrade.value = true;
+            hideConfirm();
+            return;
+        }
         if (error !== "retry") return;
         if (retryCount < 10) {
             await timeoutPromise(100);

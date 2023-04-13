@@ -13,7 +13,13 @@
         </view>
         <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
             <swiper-item v-for="(t, ind) in dataList" :key="ind">
-                <ItemList :list="t.list" :next="t.nextList" :init="t.initList" :id="ind"></ItemList>
+                <ItemList
+                    :list="t.list"
+                    :next="t.nextList"
+                    :init="t.initList"
+                    :id="ind"
+                    @forbid="showUpgrade"
+                ></ItemList>
             </swiper-item>
         </swiper>
     </view>
@@ -109,7 +115,10 @@ let newData = [].concat(
 
 const data = reactive<li[]>([...newData]);
 
-const showForbidden = ref(true);
+const showForbidden = ref(false);
+const showUpgrade = () => {
+    showForbidden.value = true;
+};
 </script>
 
 <style>

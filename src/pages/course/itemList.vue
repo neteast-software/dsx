@@ -8,18 +8,21 @@
         @scrolltolower="nextPage()"
     >
         <view class="items">
-            <view class="item" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id, item)">
-                <image :src="item.viewCoveUrl" mode="aspectFit" />
+            <view class="item relative" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id, item)">
+                <view class="vip-mark" v-if="item.isVip">
+                    <image class="diamond" src="@/assets/imgs/diamond.png" mode="widthFix" />
+                </view>
+                <image :src="item.viewCoveUrl" mode="aspectFill" />
                 <view class="title">{{ item.name }}</view>
-                <video
-                    v-if="activeVideoId == item.id"
-                    class="video-box"
-                    :id="'video' + item.id"
-                    :src="item.viewUrl || ''"
-                    @fullscreenchange="exitVideo"
-                ></video>
             </view>
         </view>
+        <video
+            v-if="activeVideoUrl"
+            class="video-box"
+            id="courseVideo"
+            :src="activeVideoUrl"
+            @fullscreenchange="exitVideo"
+        ></video>
         <view class="nomore" v-if="nomore"> -- 没有更多了 --</view>
     </scroll-view>
 </template>
@@ -27,7 +30,10 @@
 <script setup lang="ts">
 import { ref, nextTick, getCurrentInstance, onMounted } from "vue";
 import { getCourseRead } from "@/api/dsx/course";
+import user from "@/store/user";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
+
+const emit = defineEmits(["forbid"]);
 const topLoading = ref<boolean>(false);
 const nomore = ref<boolean>(false);
 const { list, next, init, id } = defineProps<{
@@ -61,11 +67,19 @@ onMounted(() => {
 const scroller = ref<any>();
 let videoContext: MaybeNull<UniApp.VideoContext> = null;
 const activeVideoId = ref(0);
-function showVideo(id: number, item) {
-    getCourseRead(id).then(() => item.viewCount++);
+const activeVideoUrl = ref("");
+async function showVideo(id: number, item: CourseListItem) {
+    if (item.isVip && user.vipLvl === 0) {
+        emit("forbid");
+        return;
+    }
+    const { data } = await getCourseRead(id);
+    console.log("viewUrl", data.viewUrl);
+    item.viewCount++;
+    activeVideoUrl.value = data.viewUrl;
     activeVideoId.value = id;
     nextTick(() => {
-        videoContext = uni.createVideoContext("video" + id, instance);
+        videoContext = uni.createVideoContext("courseVideo", instance);
         if (!videoContext) return;
         videoContext.requestFullScreen({ direction: 0 });
         videoContext.play();
@@ -161,6 +175,21 @@ function exitVideo(e) {
         margin-left: auto;
         text-align: right;
         color: #7b7379;
+    }
+}
+.vip-mark {
+    position: absolute;
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 12rpx;
+    right: 12rpx;
+    .diamond {
+        width: 48rpx;
     }
 }
 </style>

@@ -5,7 +5,7 @@
             <view class="title">恭喜您成为VIP</view>
             <view class="desc">{{ desc }}</view>
             <view class="btns">
-                <button class="close">我知道了</button>
+                <button class="close" @tap="close">我知道了</button>
             </view>
             <button class="close-icon" @tap="close">x</button>
         </view>

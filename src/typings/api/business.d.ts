@@ -176,3 +176,12 @@ interface GetIntegralRechargeListResult {
 interface RechargeIntegralResult {
     data: UniApp.RequestPaymentOptions;
 }
+
+interface GetVipUpgradeMsgResult {
+    data: {
+        createTime: string;
+        id: string;
+        isRead: string;
+        title: string;
+    };
+}

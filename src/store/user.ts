@@ -1,6 +1,7 @@
 import { getUserInfo } from "@/api/dsx/user";
 import { ref, reactive, toRaw } from "vue";
 import storage from "@/utils/storage";
+import { getCustomerQrcode } from "@/api/dsx/business";
 
 class User {
     private _userInfo = reactive<UserInfo>({
@@ -15,8 +16,10 @@ class User {
         giftsPoints: 0,
         unreadMsgCount: 0,
         agencyStatus: "",
-        agencyTime: ""
+        agencyTime: "",
+        vipLvl: 0
     });
+    private _qrCode = ref("");
     private _token = ref("");
     get logined() {
         return !!this._userInfo.username;
@@ -54,17 +57,25 @@ class User {
     get unreadMsgCount() {
         return this._userInfo.unreadMsgCount || 0;
     }
+    get vipLvl() {
+        return this._userInfo.vipLvl || 0;
+    }
     get token() {
         return this._token.value || storage.get("token") || "";
     }
     set token(token: string) {
         this._token.value = token;
     }
+    get qrCode() {
+        return this._qrCode.value || "";
+    }
     async initUserInfo() {
         const { data } = await getUserInfo();
         Object.keys(toRaw(this._userInfo)).forEach((key) => {
             this._userInfo[key] = data[key];
         });
+        const { data: qrCode } = await getCustomerQrcode();
+        this._qrCode.value = qrCode;
     }
 }
 
