@@ -4,6 +4,7 @@ interface FanInfo {
     username: string;
     createTime: string;
     avatar: string;
+    vipLvl: number;
 }
 interface GetFansListResult {
     rows: FanInfo[];

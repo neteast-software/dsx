@@ -3,12 +3,15 @@
     <view class="container wrap grey flex-column overflow-hidden">
         <scroll-view class="flex-rest-height" :scroll-y="true" :enable-flex="true" @scrolltolower="nextList">
             <view class="account flex-center" v-for="(fan, idx) in fansList" :key="idx">
-                <image v-if="fan.avatar" class="avatar" :src="fan.avatar" mode="aspectFill"></image>
-                <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
+                <view class="avatar-wrap relative">
+                    <image v-if="fan.avatar" class="avatar" :src="fan.avatar" mode="aspectFill"></image>
+                    <image v-else class="avatar" src="@/assets/imgs/avatar.png" mode="aspectFill"></image>
+                    <image v-if="fan.vipLvl" class="crown" src="@/assets/imgs/user-crown.png" mode="scaleToFill" />
+                </view>
                 <view class="message flex-rest-width">
                     <view class="message-item flex-center">
                         <view class="name">{{ fan.nickname }}</view>
-                        <view class="shopkeeper">店主</view>
+                        <view class="shopkeeper flex-shrink-0">店主</view>
                     </view>
                     <view class="tel">{{ fan.mobile }}</view>
                     <!-- <view class="stop">有效店铺数: 12</view> -->

@@ -99,6 +99,7 @@ function saveToAlbum(url: string) {
         width: 332rpx;
         height: 332rpx;
         border-radius: 20rpx;
+        overflow: hidden;
     }
 }
 </style>

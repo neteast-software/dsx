@@ -58,3 +58,11 @@
         }
     }
 }
+.crown {
+    position: absolute;
+    width: 78rpx;
+    height: 78rpx;
+    top: 0;
+    left: 50%;
+    transform: translateX(-30%) translateY(-52%);
+}

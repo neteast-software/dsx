@@ -24,7 +24,7 @@
         </swiper>
     </view>
     <Upgrade v-model="showForbidden"></Upgrade>
-    <Congratulation v-model="showCongratulation" @close="confirmUpgrade"></Congratulation>
+    <Congratulation v-model="showCongratulation" @close="confirmUpgrade" title="暂不支持观看"></Congratulation>
 </template>
 
 <script setup lang="ts">
