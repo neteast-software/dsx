@@ -18,13 +18,16 @@
                     :next="t.nextList"
                     :init="t.initList"
                     :id="ind"
+                    :bannerList="bannerList"
                     @forbid="showUpgrade"
+                    @showAd="showAd"
                 ></ItemList>
             </swiper-item>
         </swiper>
     </view>
-    <Upgrade v-model="showForbidden"></Upgrade>
-    <Congratulation v-model="showCongratulation" @close="confirmUpgrade" title="暂不支持观看"></Congratulation>
+    <Upgrade v-model="showForbidden" title="暂不支持观看"></Upgrade>
+    <Congratulation v-model="showCongratulation" @close="confirmUpgrade"></Congratulation>
+    <CourseAd v-model="showCourseAd"></CourseAd>
 </template>
 
 <script setup lang="ts">
@@ -38,7 +41,9 @@ import Upgrade from "@/components/upgrade.vue";
 import { onShow } from "@dcloudio/uni-app";
 
 import Congratulation from "@/components/congratulation.vue";
+import CourseAd from "@/components/courseAd.vue";
 import { useVipUpgrade } from "@/mixins/vip";
+import { getBannerList } from "@/api/dsx/business";
 const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
 onShow(checkVipUpgrade);
 
@@ -126,6 +131,24 @@ const showForbidden = ref(false);
 const showUpgrade = () => {
     showForbidden.value = true;
 };
+
+const bannerList = ref<BannerInfo[]>([]);
+async function initBanner() {
+    const { data } = await getBannerList("3");
+    bannerList.value = data;
+}
+onMounted(initBanner);
+
+// 星选直播广告
+const showCourseAd = ref(false);
+function showAd() {
+    showCourseAd.value = true;
+}
+// onMounted(() => {
+//     setTimeout(() => {
+//         showCourseAd.value = true;
+//     }, 200);
+// });
 </script>
 
 <style>

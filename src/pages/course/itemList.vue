@@ -7,6 +7,13 @@
         @refresherrefresh="reload()"
         @scrolltolower="nextPage()"
     >
+        <swiper class="swiper-box" autoplay indicator-dots>
+            <swiper-item v-for="banner in bannerList" :key="banner.id">
+                <view class="swiper-item" @tap="onClickSwiper">
+                    <image class="banner" :src="banner.image" mode="aspectFill" />
+                </view>
+            </swiper-item>
+        </swiper>
         <view class="items">
             <view class="item relative" v-for="(item, index) in list" :key="item.id" @tap="showVideo(item.id, item)">
                 <view class="vip-mark" v-if="item.isVip">
@@ -32,15 +39,17 @@ import { ref, nextTick, getCurrentInstance, onMounted } from "vue";
 import { getCourseRead } from "@/api/dsx/course";
 import user from "@/store/user";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
+import { getBannerList } from "@/api/dsx/business";
 
-const emit = defineEmits(["forbid"]);
+const emit = defineEmits(["forbid", "showAd"]);
 const topLoading = ref<boolean>(false);
 const nomore = ref<boolean>(false);
-const { list, next, init, id } = defineProps<{
+const { list, next, init, id, bannerList } = defineProps<{
     list: CourseListItem[];
     next: Function;
     init: Function;
     id: number;
+    bannerList: BannerInfo[];
 }>();
 async function reload() {
     await init({ id });
@@ -92,6 +101,11 @@ function exitVideo(e) {
     if (!videoContext) return;
     videoContext.seek(0);
     videoContext.pause();
+}
+
+function onClickSwiper() {
+    console.log("ontap");
+    emit("showAd");
 }
 </script>
 <style scoped lang="scss">
@@ -191,6 +205,22 @@ function exitVideo(e) {
     right: 12rpx;
     .diamond {
         width: 48rpx;
+    }
+}
+.swiper-box {
+    width: 100%;
+    height: 176rpx;
+    margin: 0 auto;
+    border-radius: 40rpx;
+    margin: 30rpx 0;
+}
+.swiper-item {
+    height: 100%;
+    border-radius: 40rpx;
+    overflow: hidden;
+    .banner {
+        width: 100%;
+        height: 100%;
     }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <uni-popup ref="guide" type="center">
+    <uni-popup ref="guide" type="center" @change="onChange">
         <view class="guide">
             <view class="title"> {{ props.title }} </view>
             <view class="desc">{{ props.text }} </view>
@@ -108,6 +108,9 @@ function openDialog() {
 }
 function closeDialog() {
     guide.value.close();
+}
+function onChange(e) {
+    actualModel.value = e.show;
 }
 defineExpose({
     show: () => {

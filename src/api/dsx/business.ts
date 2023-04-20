@@ -22,7 +22,7 @@ export function getMsgDetail(id: string | number) {
 }
 
 // 轮播图列表
-export function getBannerList(type: "1" | "2" = "1") {
+export function getBannerList(type: "1" | "2" | "3" = "1") {
     return http.get<GetBannerList>(`/mobile/carousel/list/${type}`);
 }
 

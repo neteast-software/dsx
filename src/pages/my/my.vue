@@ -3,12 +3,12 @@
         <image class="wrap-bg" src="@/assets/my/bg.svg" mode="widthFix"></image>
         <view :style="{ height: statusBarHeight + 'px' }"></view>
         <!-- #ifdef APP-PLUS -->
-        <view class="setting-app" @tap="toSetting">
+        <view class="setting-app relative" @tap="toSetting">
             <image class="setting-img" src="@/assets/icons/setting.png" mode="widthFix"></image
         ></view>
         <!-- #endif -->
         <!-- #ifdef MP-WEIXIN -->
-        <view class="setting" @tap="toSetting">
+        <view class="setting relative" @tap="toSetting">
             <image class="setting-img" src="@/assets/icons/setting.png" mode="widthFix"></image
         ></view>
         <!-- #endif -->
