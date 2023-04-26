@@ -140,6 +140,7 @@ interface GoodDetail {
     recommendReason: string;
     score: number;
     top: number;
+    deductionPoints: number;
 }
 interface GetGoodsDetailResult {
     data: GoodDetail;

@@ -97,7 +97,7 @@
         ></Dialog> -->
         <Dialog
             :show="isShowConfirm"
-            content="合成视频要扣除1个积分"
+            :content="deductionMessage"
             @cancel="hideConfirm"
             @confirm="toExport(goodInfo?.id, goodInfo?.description)"
         ></Dialog>
@@ -129,6 +129,10 @@ onLoad((options) => {
     initData(options?.id || 0);
 });
 const goodInfo = ref<GoodDetail>();
+const deductionMessage = computed(() => {
+    const deductionPoints = goodInfo.value?.deductionPoints || 1;
+    return `合成视频要扣除${deductionPoints}个积分`;
+});
 async function initData(id = 0) {
     const { data } = await getGoodsDetail(id);
     goodInfo.value = data;
