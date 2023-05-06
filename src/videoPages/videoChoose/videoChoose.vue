@@ -1,5 +1,5 @@
 <template>
-    <view>videoChoose</view>
+    <view class="flex-column h-full"> </view>
 </template>
 
 <script setup lang="ts"></script>

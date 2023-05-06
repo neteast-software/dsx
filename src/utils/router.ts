@@ -27,7 +27,7 @@ const routes = {
 } as const;
 
 type RouteName = keyof typeof routes;
-type RoutePath = (typeof routes)[RouteName];
+export type RoutePath = (typeof routes)[RouteName];
 type RouterQuery = Record<string, any>;
 interface RouterOption {
     query?: RouterQuery;

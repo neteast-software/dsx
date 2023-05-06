@@ -1,23 +1,26 @@
 <template>
-    <scroll-view class="stage" scroll-y @scroll="onScroll">
-        <template v-if="user.logined">
-            <!-- <status-bar></status-bar> -->
-            <view id="nav" style="position: sticky; top: 0; z-index: 9999">
-                <NavBar ext-class="indexNav">
-                    <Header></Header>
-                </NavBar>
-            </view>
-            <view class="item">
-                <search></search>
-                <Banner></Banner>
-                <iconsWrapper></iconsWrapper>
-                <Recommend></Recommend>
-            </view>
-            <view id="goods" class="h-full goodlist-wrap">
-                <GoodsList></GoodsList>
-            </view>
-        </template>
-    </scroll-view>
+    <view class="flex-column h-full">
+        <scroll-view class="stage flex-rest-height" scroll-y @scroll="onScroll">
+            <template v-if="user.logined">
+                <!-- <status-bar></status-bar> -->
+                <view id="nav" style="position: sticky; top: 0; z-index: 9999">
+                    <NavBar ext-class="indexNav">
+                        <Header></Header>
+                    </NavBar>
+                </view>
+                <view class="item">
+                    <search></search>
+                    <Banner></Banner>
+                    <iconsWrapper></iconsWrapper>
+                    <Recommend></Recommend>
+                </view>
+                <view id="goods" class="h-full goodlist-wrap">
+                    <GoodsList></GoodsList>
+                </view>
+            </template>
+        </scroll-view>
+        <tabbar :select="0"></tabbar>
+    </view>
     <user-guide
         v-model="showDialog"
         :confirm="true"
@@ -35,6 +38,7 @@ import Recommend from "./recommend.vue";
 import GoodsList from "./goods_list.vue";
 import NavBar from "@/components/navBar.vue";
 import Dialog from "@/components/dialog.vue";
+import tabbar from "@/components/tabbar.vue";
 import { provide, ref } from "vue";
 import { goDouyin } from "@/utils/util";
 import { getNodeInfo } from "@/utils/uniapi";
@@ -111,7 +115,7 @@ page {
 </style>
 <style scoped lang="scss">
 .stage {
-    height: 100%;
+    // height: 100%;
     // background-image: linear-gradient(180deg, rgba(253, 228, 216, 1) 1%, rgba(247, 248, 250, 1) 20%);
     // background-size: 100% 100%;
     // background-repeat: no-repeat;
