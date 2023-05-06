@@ -53,8 +53,8 @@ const tabBar: TabBar = {
         },
         {
             pagePath: "/videoPages/videoChoose/videoChoose",
-            iconPath: "/static/tabbar/course.png",
-            selectedIconPath: "/static/tabbar/course-active.png",
+            iconPath: "/static/tabbar/ai.png",
+            selectedIconPath: "/static/tabbar/ai.png",
             text: "AI视频",
             isTab: false
         },
