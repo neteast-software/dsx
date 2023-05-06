@@ -1,29 +1,32 @@
 <template>
-    <view class="stage">
-        <status-bar></status-bar>
-        <view class="nav">
-            <view
-                v-for="(item, index) in typeList"
-                :key="index"
-                :class="{ active: item.id == nav }"
-                @click="changeNav(item.id, index)"
-            >
-                {{ item.name }}
+    <view class="flex-column h-full">
+        <view class="stage flex-rest-width">
+            <status-bar></status-bar>
+            <view class="nav">
+                <view
+                    v-for="(item, index) in typeList"
+                    :key="index"
+                    :class="{ active: item.id == nav }"
+                    @click="changeNav(item.id, index)"
+                >
+                    {{ item.name }}
+                </view>
             </view>
+            <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
+                <swiper-item v-for="(t, ind) in dataList" :key="ind">
+                    <ItemList
+                        :list="t.list"
+                        :next="t.nextList"
+                        :init="t.initList"
+                        :id="ind"
+                        :bannerList="bannerList"
+                        @forbid="showUpgrade"
+                        @showAd="showAd"
+                    ></ItemList>
+                </swiper-item>
+            </swiper>
         </view>
-        <swiper class="swiper-box" :current="currentIndex" @change="swipChange" duration="220">
-            <swiper-item v-for="(t, ind) in dataList" :key="ind">
-                <ItemList
-                    :list="t.list"
-                    :next="t.nextList"
-                    :init="t.initList"
-                    :id="ind"
-                    :bannerList="bannerList"
-                    @forbid="showUpgrade"
-                    @showAd="showAd"
-                ></ItemList>
-            </swiper-item>
-        </swiper>
+        <tabbar :select="1"></tabbar>
     </view>
     <Upgrade v-model="showForbidden" title="暂不支持观看"></Upgrade>
     <Congratulation v-model="showCongratulation" @close="confirmUpgrade"></Congratulation>
@@ -34,6 +37,7 @@
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { reactive, onMounted, ref } from "vue";
 import statusBar from "@/components/statusBar.vue";
+import tabbar from "@/components/tabbar.vue";
 import { getTypeList, getCourseList } from "@/api/dsx/course";
 import { usePaginator } from "@/utils/util";
 import ItemList from "./itemList.vue";
@@ -159,7 +163,7 @@ page {
 <style scoped lang="scss">
 .stage {
     width: 100%;
-    height: 100%;
+    // height: 100%;
     overflow: hidden;
     background-color: #f7f8fa;
 }
