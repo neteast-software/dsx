@@ -114,7 +114,7 @@ export async function saveVideoToAlbum(url: string) {
     });
 }
 
-// 保存图片到相册
+// 保存网络图片到相册
 export async function saveImageToAlbum(url: string) {
     const res = await downloadFile(url);
     return new Promise<any>((resolve, reject) => {
@@ -124,6 +124,17 @@ export async function saveImageToAlbum(url: string) {
             fail: reject
         });
     });
+}
+
+// 保存本地图片到相册
+export function saveImageToLocal(url: string) {
+    return new Promise((resolve,reject) => {
+        uni.saveImageToPhotosAlbum({
+            filePath: url,
+            success: resolve,
+            fail: reject
+        });
+    })
 }
 
 // 获取节点信息

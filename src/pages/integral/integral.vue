@@ -94,6 +94,13 @@
             ></image>
         </view>
     </uni-popup>
+    <Dialog :show="isShowDialog" @cancel="closeDialog" @confirm="saveImage">
+        <view class="tip-content flex-column-center">
+            <view class="title">温馨提示</view>
+            <view class="tip">APP暂未开通支付，请前往微信小程序进行支付，点击确定保存图片。</view>
+            <image class="weapp-code" src="/static/weapp-dsx.jpg" mode="widthFix" />
+        </view>
+    </Dialog>
 </template>
 
 <script setup lang="ts">
@@ -105,9 +112,10 @@ import { usePaginator } from "@/utils/util";
 import user from "@/store/user";
 import { ref } from "vue";
 import { wxRequestPayment } from "@/weapp/utils";
-import { getNodeInfo } from "@/utils/uniapi";
+import { Toast, getNodeInfo, saveImageToLocal } from "@/utils/uniapi";
 import router from "@/utils/router";
 import { useDebounceFn } from "@vueuse/shared";
+import Dialog from "@/components/dialog.vue";
 // 初始化页面数据
 const { initList, list: integralList, nextList } = usePaginator<IntegralRecord>(getIntegralList);
 onShow(() => {
@@ -168,10 +176,27 @@ function closeRechargeList() {
     popup.value.close();
 }
 async function recharge(id = 1) {
+    // #ifdef APP-PLUS
+    showDialog();
+    return;
+    // #endif
     const { data } = await rechargeIntegral(id);
     await wxRequestPayment(data);
     closeRechargeList();
     router.push("paySuccess");
+}
+const isShowDialog = ref(false);
+function showDialog() {
+    isShowDialog.value = true;
+}
+function closeDialog() {
+    isShowDialog.value = false;
+}
+async function saveImage() {
+    await saveImageToLocal("/static/weapp-dsx.jpg");
+    Toast("保存成功");
+    closeDialog();
+    closeRechargeList();
 }
 </script>
 <style>

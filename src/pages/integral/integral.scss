@@ -75,7 +75,7 @@
     color: #2a2b2c;
     font-size: $uni-font-size-middle;
     position: sticky;
-    z-index: 999;
+    z-index: 64;
     .shape {
         margin-right: 17rpx;
         width: 4rpx;
@@ -246,4 +246,19 @@
     left: 0;
     width: 100%;
     z-index: 9999;
+}
+.weapp-code {
+    width: 300rpx;
+}
+.tip-content {
+    .title {
+        font-size: 42rpx;
+        margin-bottom: 20rpx;
+    }
+    .tip {
+        color: #7b7379;
+        font-size: 28rpx;
+        margin-bottom: 24rpx;
+        text-align: center;
+    }
 }

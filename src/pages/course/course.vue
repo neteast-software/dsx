@@ -41,7 +41,7 @@ import Upgrade from "@/components/upgrade.vue";
 import { onShow } from "@dcloudio/uni-app";
 
 import Congratulation from "@/components/congratulation.vue";
-import CourseAd from "@/components/courseAd.vue";
+import CourseAd from "@/components/CourseAd.vue";
 import { useVipUpgrade } from "@/mixins/vip";
 import { getBannerList } from "@/api/dsx/business";
 const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();

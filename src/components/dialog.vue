@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import uniPopup from "@dcloudio/uni-ui/lib/uni-popup/uni-popup.vue";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 const props = defineProps({
     show: {
         type: Boolean,
@@ -52,6 +52,11 @@ watch(
         }
     }
 );
+onMounted(() => {
+    if (props.show) {
+        openDialog();
+    }
+});
 const emit = defineEmits(["confirm", "cancel"]);
 const dialog = ref<any>(null);
 function closeDialog() {

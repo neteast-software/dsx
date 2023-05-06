@@ -1,7 +1,8 @@
 <template>
+    <page-meta page-style="background: #fff"></page-meta>
     <view class="container share">
         <image :src="shareImg" class="poster-img" mode="widthFix"> </image>
-        <image src="@/assets/imgs/code.png" class="code-img" mode="widthFix"></image>
+        <!-- <image src="@/assets/imgs/code.png" class="code-img" mode="widthFix"></image> -->
         <!-- <button class="share-btn">马上分享</button> -->
         <view class="share-code font-middle" @tap="copyToClipboard(user.inviteCode)"
             >点击复制您的邀请码：{{ user.inviteCode }}</view
@@ -90,6 +91,7 @@ function shareToTimeline(url: string) {
 }
 </script>
 
+<style></style>
 <style scoped lang="scss">
 @import "./share.scss";
 </style>
