@@ -21,11 +21,13 @@ const routes = {
     signSuccess: "/pages/signSuccess/signSuccess",
     videoPreview: "/pages/videoPreview/videoPreview",
     list: "/pages/list/list",
-    paySuccess: "/statusPages/paySuccess/paySuccess"
+    paySuccess: "/statusPages/paySuccess/paySuccess",
+    videoChoose: "/videoPages/videoChoose/videoChoose",
+    videoProcess: "/videoPages/videoProcess/videoProcess"
 } as const;
 
 type RouteName = keyof typeof routes;
-type RoutePath = typeof routes[RouteName];
+type RoutePath = (typeof routes)[RouteName];
 type RouterQuery = Record<string, any>;
 interface RouterOption {
     query?: RouterQuery;

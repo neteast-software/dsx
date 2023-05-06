@@ -22,6 +22,13 @@
             }
         },
         {
+            "path": "pages/aiVideo/aiVideo",
+            "style": {
+                "navigationBarTitleText": "AI视频",
+                "navigationStyle": "custom"
+            }
+        },
+        {
             "path": "pages/my/my",
             "style": {
                 "navigationBarTitleText": "我的",
@@ -205,6 +212,23 @@
                     }
                 }
             ]
+        },
+        {
+            "root": "videoPages",
+            "pages": [
+                {
+                    "path": "videoChoose/videoChoose",
+                    "style": {
+                        "navigationBarTitleText": "AI视频"
+                    }
+                },
+                {
+                    "path": "videoProcess/videoProcess",
+                    "style": {
+                        "navigationBarTitleText": "AI视频"
+                    }
+                }
+            ]
         }
     ],
     "tabBar": {
@@ -222,6 +246,12 @@
                 "iconPath": "static/tabbar/course.png",
                 "selectedIconPath": "static/tabbar/course-active.png",
                 "text": "省心学院"
+            },
+            {
+                "pagePath": "pages/aiVideo/aiVideo",
+                "iconPath": "static/tabbar/course.png",
+                "selectedIconPath": "static/tabbar/course-active.png",
+                "text": "AI视频"
             },
             {
                 "pagePath": "pages/my/my",
