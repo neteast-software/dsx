@@ -128,13 +128,13 @@ export async function saveImageToAlbum(url: string) {
 
 // 保存本地图片到相册
 export function saveImageToLocal(url: string) {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve, reject) => {
         uni.saveImageToPhotosAlbum({
             filePath: url,
             success: resolve,
             fail: reject
         });
-    })
+    });
 }
 
 // 获取节点信息
