@@ -8,6 +8,7 @@
             :title="title"
             :border="false"
             :background-color="backgroundColor"
+            :color="color"
             @clickLeft="back"
         ></uni-nav-bar>
     </view>
@@ -26,6 +27,10 @@ const props = defineProps({
     backgroundColor: {
         type: String,
         default: "#ffffff"
+    },
+    color: {
+        type: String,
+        default: "#000000"
     }
 });
 function back() {

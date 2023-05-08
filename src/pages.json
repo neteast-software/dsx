@@ -225,7 +225,8 @@
                 {
                     "path": "videoProcess/videoProcess",
                     "style": {
-                        "navigationBarTitleText": "AI视频"
+                        "navigationBarTitleText": "AI视频",
+                        "navigationStyle": "custom"
                     }
                 }
             ]
