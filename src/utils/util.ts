@@ -22,6 +22,7 @@ export function usePaginator<T>(requestFn: Function) {
     const pageSize = ref(10);
     const total = ref(0);
     const list: Ref<T[]> = ref([]);
+    const nomore = ref(false);
     async function initList(filter?: AnyObject) {
         const { rows, total: totalNum } = await requestList(1, filter);
         pageNum.value = 1;
@@ -29,12 +30,18 @@ export function usePaginator<T>(requestFn: Function) {
         list.value = rows;
     }
     async function nextList(filter?: AnyObject) {
-        console.log(231123213);
-        if (pageNum.value * pageSize.value >= total.value) return;
+        if (pageNum.value * pageSize.value >= total.value) {
+            nomore.value = true;
+            return;
+        }
+        uni.showLoading({
+            title: "加载中"
+        });
         const nextPage = pageNum.value + 1;
         const { rows } = await requestList(nextPage, filter);
         pageNum.value = nextPage;
         list.value = [...list.value, ...rows];
+        uni.hideLoading();
     }
     async function requestList(pageNum = 1, filter?: AnyObject) {
         const { rows, total } = await requestFn(pageNum, pageSize.value, filter);
@@ -42,6 +49,7 @@ export function usePaginator<T>(requestFn: Function) {
         return { rows: list, total };
     }
     return {
+        nomore,
         list,
         initList,
         nextList

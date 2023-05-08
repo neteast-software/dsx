@@ -2,13 +2,19 @@
     <view class="flex-column h-full bg-black">
         <nav-bar title="视频处理" background-color="#000000" color="#ffffff" />
         <view class="flex-rest-height flex-column">
-            <view class="bg-chooser flex-between">
+            <view class="bg-chooser flex-between" @tap="toVideoBackground">
                 <view class="left flex-center">
                     <image class="icon-frame" src="/videoPages/static/icons/frame-bg.svg" mode="widthFix" />
                     边框背景
                 </view>
                 <view class="right flex-center">
-                    更换背景图
+                    <view v-show="!selectedBackground?.url">更换背景图</view>
+                    <image
+                        v-show="selectedBackground?.url"
+                        class="thumb-background-image"
+                        :src="selectedBackground.url"
+                        mkde="widthFix"
+                    />
                     <uni-icons class="icon-forward" type="forward" size="20" color="#fff"></uni-icons>
                 </view>
             </view>
@@ -75,6 +81,7 @@ const { windowWidth, windowHeight } = uni.getSystemInfoSync();
 const ratio = windowWidth / 750;
 console.log("windowHeight", windowHeight);
 const isSmall = computed(() => windowHeight < 750);
+const selectedBackground = ref({ url: "" });
 // 初始化视频信息
 const mediaFile = ref<UniApp.MediaFile>();
 onReady(() => {
@@ -83,6 +90,7 @@ onReady(() => {
     if (typeof eventChannel.on !== "function") return;
     eventChannel.on("acceptVideoInfo", function (data: UniApp.MediaFile) {
         mediaFile.value = data;
+        console.log("acceptVideoInfo");
     });
 });
 // 初始化操作按钮
@@ -117,6 +125,15 @@ const onTouchMoveDebounce = useDebounceFn((e: TouchEvent) => {
 function onTouchEnd(e: TouchEvent) {
     _startY = 0;
     _moveY = 0;
+}
+async function toVideoBackground() {
+    await router.push("videoBackground", {
+        events: {
+            setBackground: function (data) {
+                selectedBackground.value = data;
+            }
+        }
+    });
 }
 </script>
 
