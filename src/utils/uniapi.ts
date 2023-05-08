@@ -71,9 +71,11 @@ export function chooseImageByAlbum() {
 }
 // 从相册选择视频
 export function chooseVideoByAlbum() {
-    return new Promise<UniApp.ChooseVideoSuccess>((resolve, reject) => {
-        uni.chooseVideo({
-            sourceType: ["camera", "album"],
+    return new Promise<UniApp.ChooseMediaSuccessCallbackResult>((resolve, reject) => {
+        uni.chooseMedia({
+            count: 1,
+            mediaType: ["video"],
+            sourceType: ["album"],
             success: resolve,
             fail: reject
         });

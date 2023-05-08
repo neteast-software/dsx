@@ -125,3 +125,18 @@ export function getCustomerQrcode() {
 export function getVipUpgradeMsg() {
     return http.get<GetVipUpgradeMsgResult>("/mobile/my/myVipMsg");
 }
+
+// 获取视频处理按钮列表
+export function getVideoProcessBtnList() {
+    return http.get<GetVideoProcessBtnListResult>("/mobile/magicMaterial/getButtonList");
+}
+
+// 上传视频
+export function uploadMagicVideo(file: string) {
+    return http.upload<UploadFileResult>("/mobile/magicMaterial/upload", file);
+}
+
+// 合成视频
+export function processMagicVideo(id: number) {
+    return http.get("/mobile/magicMaterial/synthesis");
+}

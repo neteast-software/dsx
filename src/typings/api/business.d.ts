@@ -187,3 +187,21 @@ interface GetVipUpgradeMsgResult {
         title: string;
     };
 }
+interface VideoProcessBtn {
+    createBy: string;
+    createTime: string;
+    updateBy: string;
+    updateTime: string;
+    remark: string;
+    id: number;
+    name: string;
+    delFlag: string;
+    icon: string;
+    buttonType: string;
+    defaultValue: string;
+    fieldName: string;
+    sort: number;
+}
+interface GetVideoProcessBtnListResult {
+    data: VideoProcessBtn[];
+}

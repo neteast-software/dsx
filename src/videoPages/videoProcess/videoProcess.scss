@@ -65,7 +65,7 @@
 }
 .op {
     .icon-wrap {
-        width: 122rpx;
+        width: 121rpx;
         height: 124rpx;
         background-color: #24252d;
         border: 1rpx solid #262931;
@@ -78,6 +78,7 @@
     .op-name {
         margin-top: 16rpx;
         font-size: 24rpx;
+        line-height: 32rpx;
         color: $uni-text-color-tip;
     }
 }
@@ -88,4 +89,43 @@
     padding: 0rpx 70rpx;
     font-size: 32rpx;
     margin: 0 auto;
+}
+.scroller {
+    max-height: 556rpx;
+    min-height: 172rpx;
+    &.isSmall {
+        height: 364rpx;
+    }
+}
+.stickers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32rpx 16rpx;
+    .sticker {
+        width: 159rpx;
+        height: 164rpx;
+        border-radius: 12rpx;
+        background: #24252d;
+        border: 1px solid #262931;
+    }
+    .img {
+        width: 106rpx;
+        height: 106rpx;
+    }
+}
+.check-btn-list {
+    margin: 0 82rpx;
+    margin-top: 60rpx;
+}
+.check-btn {
+    height: 90rpx;
+    border-radius: 999rpx;
+    background: #24252d;
+    border: 1px solid #262931;
+    &.no {
+        width: 105rpx;
+    }
+    &.yes {
+        width: 175rpx;
+    }
 }
