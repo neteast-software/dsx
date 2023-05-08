@@ -187,6 +187,18 @@ interface GetVipUpgradeMsgResult {
         title: string;
     };
 }
+interface BackgroundInfo {
+    id: number;
+    url: string;
+    name: string;
+}
+interface GetVideoBackgroundListResult {
+    data: {
+        rows: BackgroundInfo[];
+        total: number;
+        msg: string;
+    };
+}
 interface VideoProcessBtn {
     createBy: string;
     createTime: string;

@@ -228,6 +228,12 @@
                         "navigationBarTitleText": "AI视频",
                         "navigationStyle": "custom"
                     }
+                },
+                {
+                    "path": "videoBackground/videoBackground",
+                    "style": {
+                        "navigationBarTitleText": "AI视频"
+                    }
                 }
             ]
         }

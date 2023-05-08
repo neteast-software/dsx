@@ -1,0 +1,40 @@
+.background-list-container {
+    padding: 30rpx 0;
+    background-color: black;
+    min-height: 100%;
+    color: #fff;
+    .background-list-content {
+        margin-bottom: 20rpx;
+        display: grid;
+        grid-template-columns: 328rpx 328rpx;
+        grid-template-rows: auto;
+        grid-gap: 30rpx;
+        justify-content: center;
+        .background-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            width: 328rpx;
+            height: 536rpx;
+            .background-img {
+                width: 328rpx;
+                height: 459rpx;
+                border-radius: 20rpx;
+            }
+            .border-dashed {
+                border: 1px dashed #fff;
+            }
+            .background-text {
+                flex: auto;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    .scroll-tips {
+        text-align: center;
+        margin-bottom: 40rpx;
+    }
+}
