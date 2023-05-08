@@ -29,6 +29,7 @@ export function usePaginator<T>(requestFn: Function) {
         list.value = rows;
     }
     async function nextList(filter?: AnyObject) {
+        console.log(231123213);
         if (pageNum.value * pageSize.value >= total.value) return;
         const nextPage = pageNum.value + 1;
         const { rows } = await requestList(nextPage, filter);

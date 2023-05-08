@@ -73,6 +73,7 @@ export function chooseImageByAlbum() {
 export function chooseVideoByAlbum() {
     return new Promise<UniApp.ChooseVideoSuccess>((resolve, reject) => {
         uni.chooseVideo({
+            compressed: false,
             sourceType: ["camera", "album"],
             success: resolve,
             fail: reject

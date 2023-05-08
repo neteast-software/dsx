@@ -227,6 +227,12 @@
                     "style": {
                         "navigationBarTitleText": "AI视频"
                     }
+                },
+                {
+                    "path": "videoBackground/videoBackground",
+                    "style": {
+                        "navigationBarTitleText": "AI视频"
+                    }
                 }
             ]
         }
