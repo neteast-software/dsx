@@ -69,7 +69,16 @@ export function chooseImageByAlbum() {
         });
     });
 }
-
+// 从相册选择视频
+export function chooseVideoByAlbum() {
+    return new Promise<UniApp.ChooseVideoSuccess>((resolve, reject) => {
+        uni.chooseVideo({
+            sourceType: ["camera", "album"],
+            success: resolve,
+            fail: reject
+        });
+    });
+}
 // 分享到微信
 export function shareToWechat(
     imageUrl: string,
