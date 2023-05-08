@@ -69,6 +69,11 @@
     // justify-content: space-between;
 }
 .op {
+    &.active {
+        .icon-wrap {
+            border-color: #ea3598;
+        }
+    }
     .icon-wrap {
         width: 121rpx;
         height: 124rpx;

@@ -187,11 +187,12 @@ interface GetVipUpgradeMsgResult {
         title: string;
     };
 }
-interface BackgroundInfo {
+interface VideoMaterial {
     id: number;
     url: string;
     name: string;
 }
+interface BackgroundInfo extends VideoMaterial {}
 interface GetVideoBackgroundListResult {
     data: {
         rows: BackgroundInfo[];
@@ -216,4 +217,8 @@ interface VideoProcessBtn {
 }
 interface GetVideoProcessBtnListResult {
     data: VideoProcessBtn[];
+}
+interface StickerInfo extends VideoMaterial {
+    width: number;
+    height: number
 }

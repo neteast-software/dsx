@@ -126,8 +126,9 @@ export function getVipUpgradeMsg() {
     return http.get<GetVipUpgradeMsgResult>("/mobile/my/myVipMsg");
 }
 // 获取视频背景素材列表
-export function getVideoBackgroundList() {
-    return http.get<GetVideoBackgroundListResult>("/mobile/magicMaterial/getList/1");
+export function getVideoMaterialList(pageNum = 1, pageSize = 10, filter = { type: 1 }) {
+    const { type } = filter;
+    return http.get<GetVideoBackgroundListResult>(`/mobile/magicMaterial/getList/${type}`, { pageNum, pageSize });
 }
 
 // 获取视频处理按钮列表
@@ -136,11 +137,24 @@ export function getVideoProcessBtnList() {
 }
 
 // 上传视频
+interface UploadMagicVideoResult {
+    data: {
+        key: string;
+        videoUrl: string;
+    };
+}
 export function uploadMagicVideo(file: string) {
-    return http.upload<UploadFileResult>("/mobile/magicMaterial/upload", file);
+    return http.upload<UploadMagicVideoResult>("/mobile/magicMaterial/upload", file);
 }
 
 // 合成视频
-export function processMagicVideo(id: number) {
-    return http.get("/mobile/magicMaterial/synthesis");
+export function processMagicVideo(key: string, params: AnyObject = {}) {
+    const filterdParams = Object.keys(params).reduce((prev, cur) => {
+        if (params[cur]) {
+            prev[cur] = params[cur];
+        }
+        return prev;
+    }, {});
+    console.log(filterdParams);
+    return http.post(`/mobile/magicMaterial/synthesis/${key}`, filterdParams);
 }

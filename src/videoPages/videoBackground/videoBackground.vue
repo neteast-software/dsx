@@ -26,8 +26,8 @@ import router from "@/utils/router";
 import { usePaginator } from "@/utils/util";
 import { onReady } from "@dcloudio/uni-app";
 import { ref, nextTick, toRaw, getCurrentInstance } from "vue";
-import { getVideoBackgroundList } from "@/api/dsx/business";
-const { list: backgroundList, initList, nextList, nomore } = usePaginator<BackgroundInfo>(getVideoBackgroundList);
+import { getVideoMaterialList } from "@/api/dsx/business";
+const { list: backgroundList, initList, nextList, nomore } = usePaginator<BackgroundInfo>(getVideoMaterialList);
 let eventChannel: any = null;
 onReady(async () => {
     const _this = getCurrentInstance()?.proxy as any;
@@ -45,3 +45,4 @@ async function handleSelectBackground(selectedBackground) {
 <style scoped lang="scss">
 @import "./videoBackground.scss";
 </style>
+

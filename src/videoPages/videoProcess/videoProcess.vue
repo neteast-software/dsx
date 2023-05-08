@@ -23,7 +23,7 @@
             </view>
             <view class="drawer flex-column">
                 <view class="handler"></view>
-                <template v-if="true">
+                <template v-if="!showStickers">
                     <scroll-view
                         class="scroller"
                         :class="{ isSmall: isSmall }"
@@ -33,21 +33,36 @@
                         style="margin-bottom: 54rpx"
                     >
                         <view class="op-list">
-                            <view class="op flex-column-center flex-shrink-0" v-for="item in 13" :key="item">
+                            <view
+                                class="op flex-column-center flex-shrink-0"
+                                :class="{
+                                    active: btnForm[item.fieldName]?.id === item.id && btnForm[item.fieldName].value
+                                }"
+                                v-for="item in btnList"
+                                :key="item.id"
+                                @click="onClickBtn(item)"
+                            >
                                 <view class="icon-wrap flex-all-center">
-                                    <image class="icon-op" src="/videoPages/static/op/frame.svg" mode="scaleToFill" />
+                                    <image class="icon-op" :src="item.icon" mode="scaleToFill" />
                                 </view>
-                                <text class="op-name">魔法边框</text>
+                                <text class="op-name">{{ item.name }}</text>
                             </view>
                         </view>
                     </scroll-view>
-                    <button class="btn btn--primary btn--round upload-btn">上传并处理视频</button>
+                    <button class="btn btn--primary btn--round upload-btn" @tap="uploadAndProcess">
+                        上传并处理视频
+                    </button>
                 </template>
                 <template v-else>
                     <scroll-view class="scroller" :class="{ isSmall }" scroll-y>
                         <view class="stickers">
-                            <view class="sticker flex-all-center" v-for="item in 12" :key="item">
-                                <image class="img" src="/videoPages/static/icons/frame-bg.svg" mode="scaleToFill" />
+                            <view
+                                class="sticker flex-all-center"
+                                v-for="item in stickerList"
+                                :key="item.id"
+                                @tap="onClickSticker(item)"
+                            >
+                                <image class="img" :src="item.url" mode="scaleToFill" />
                             </view>
                         </view>
                     </scroll-view>
@@ -71,11 +86,14 @@ import router from "@/utils/router";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
 import { ref, getCurrentInstance } from "vue";
 import { onReady } from "@dcloudio/uni-app";
-import { getVideoProcessBtnList } from "@/api/dsx/business";
-import { getNodeInfo } from "@/utils/uniapi";
+import { getVideoProcessBtnList, getVideoMaterialList, uploadMagicVideo, processMagicVideo } from "@/api/dsx/business";
 import { useDebounceFn } from "@vueuse/core";
 import { on } from "events";
 import { computed } from "vue";
+import { reactive } from "vue";
+import { usePaginator } from "@/utils/util";
+import { toRaw } from "vue";
+const { list: stickerList, initList, nextList } = usePaginator<StickerInfo>(getVideoMaterialList, 30);
 
 const { windowWidth, windowHeight } = uni.getSystemInfoSync();
 const ratio = windowWidth / 750;
@@ -94,11 +112,66 @@ onReady(() => {
     });
 });
 // 初始化操作按钮
+const showStickers = ref(false);
+let oldSticker: any = null;
+const btnList = ref<VideoProcessBtn[]>([]);
+const btnForm = reactive<Record<string, any>>({});
 async function initBtnList() {
-    const data = await getVideoProcessBtnList();
-    console.log(data);
+    const { data } = await getVideoProcessBtnList();
+    btnList.value = data;
+    data.map((item) => {
+        btnForm[item.fieldName] = "";
+        if (item.fieldName === "sticker") {
+            initList({ type: item.id });
+        }
+    });
+    console.log(btnForm);
 }
 onReady(initBtnList);
+async function onClickBtn(btn: VideoProcessBtn) {
+    const { fieldName, buttonType, defaultValue } = btn;
+    if (buttonType !== "1") {
+        btnForm[fieldName] = { id: btn.id, value: btn.defaultValue };
+    } else if (fieldName === "sticker") {
+        console.log("请求", btn.id);
+        oldSticker = btnForm[fieldName];
+        showStickers.value = true;
+    }
+}
+function onClickSticker(sticker: StickerInfo) {
+    btnForm.sticker = {
+        id: sticker.id,
+        value: { url: sticker.url, width: sticker.width, height: sticker.height }
+    };
+    showStickers.value = false;
+}
+async function uploadAndProcess() {
+    const { data } = await uploadMagicVideo(mediaFile.value!.tempFilePath);
+    const { key } = data;
+    let params: AnyObject = {};
+    Object.entries(toRaw(btnForm)).map(([key, formValue]) => {
+        if (typeof formValue.value !== "object") {
+            params[key] = formValue.value;
+        } else {
+            Object.entries(formValue.value).map(([subkey, subvalue]) => {
+                const fullkey = `${key}_${subkey}`;
+                params[fullkey] = subvalue;
+            });
+        }
+    });
+    console.log("data", params);
+    processMagicVideo(key, params);
+}
+
+async function toVideoBackground() {
+    await router.push("videoBackground", {
+        events: {
+            setBackground: function (data) {
+                selectedBackground.value = data;
+            }
+        }
+    });
+}
 
 // 改变高度, 暂时不要
 const maxDrawerHeight = 445;
@@ -125,15 +198,6 @@ const onTouchMoveDebounce = useDebounceFn((e: TouchEvent) => {
 function onTouchEnd(e: TouchEvent) {
     _startY = 0;
     _moveY = 0;
-}
-async function toVideoBackground() {
-    await router.push("videoBackground", {
-        events: {
-            setBackground: function (data) {
-                selectedBackground.value = data;
-            }
-        }
-    });
 }
 </script>
 

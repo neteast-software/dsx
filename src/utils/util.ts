@@ -1,5 +1,5 @@
 import { isDef } from "./validator";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import type { Ref } from "@/typings/model";
 /**
  * 获取系统信息，存于变量中
@@ -17,12 +17,12 @@ export function getSystemInfoSync() {
  * 分页器
  */
 
-export function usePaginator<T>(requestFn: Function) {
+export function usePaginator<T>(requestFn: Function, _pageSize = 10) {
     const pageNum = ref(1);
-    const pageSize = ref(10);
+    const pageSize = ref(_pageSize);
     const total = ref(0);
     const list: Ref<T[]> = ref([]);
-    const nomore = ref(false);
+    const nomore = computed(() => pageNum.value * pageSize.value >= total.value);
     async function initList(filter?: AnyObject) {
         const { rows, total: totalNum } = await requestList(1, filter);
         pageNum.value = 1;
@@ -30,18 +30,11 @@ export function usePaginator<T>(requestFn: Function) {
         list.value = rows;
     }
     async function nextList(filter?: AnyObject) {
-        if (pageNum.value * pageSize.value >= total.value) {
-            nomore.value = true;
-            return;
-        }
-        uni.showLoading({
-            title: "加载中"
-        });
+        if (pageNum.value * pageSize.value >= total.value) return;
         const nextPage = pageNum.value + 1;
         const { rows } = await requestList(nextPage, filter);
         pageNum.value = nextPage;
         list.value = [...list.value, ...rows];
-        uni.hideLoading();
     }
     async function requestList(pageNum = 1, filter?: AnyObject) {
         const { rows, total } = await requestFn(pageNum, pageSize.value, filter);
