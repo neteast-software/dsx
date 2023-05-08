@@ -1,36 +1,36 @@
 {
-    "name" : "抖省心",
-    "appid" : "__UNI__ED86F18",
-    "description" : "",
-    "versionName" : "1.12.0",
-    "versionCode" : 110,
-    "transformPx" : false,
+    "name": "抖省心",
+    "appid": "__UNI__ED86F18",
+    "description": "",
+    "versionName": "1.12.0",
+    "versionCode": 110,
+    "transformPx": false,
     /* 5+App特有相关 */
-    "app-plus" : {
-        "usingComponents" : true,
-        "nvueStyleCompiler" : "uni-app",
-        "compilerVersion" : 3,
-        "darkmode" : false,
-        "splashscreen" : {
-            "alwaysShowBeforeRender" : true,
-            "waiting" : true,
-            "autoclose" : true,
-            "delay" : 0
+    "app-plus": {
+        "usingComponents": true,
+        "nvueStyleCompiler": "uni-app",
+        "compilerVersion": 3,
+        "darkmode": false,
+        "splashscreen": {
+            "alwaysShowBeforeRender": true,
+            "waiting": true,
+            "autoclose": true,
+            "delay": 0
         },
-        "compatible" : {
-            "ignoreVersion" : true
+        "compatible": {
+            "ignoreVersion": true
         },
         /* 模块配置 */
-        "modules" : {
-            "VideoPlayer" : {},
-            "Share" : {},
-            "Payment" : {}
+        "modules": {
+            "VideoPlayer": {},
+            "Share": {},
+            "Payment": {}
         },
         /* 应用发布信息 */
-        "distribute" : {
+        "distribute": {
             /* android打包配置 */
-            "android" : {
-                "permissions" : [
+            "android": {
+                "permissions": [
                     "<uses-feature android:name=\"android.hardware.camera\"/>",
                     "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
                     "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
@@ -48,86 +48,86 @@
                     "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
                     "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
                 ],
-                "minSdkVersion" : 21,
-                "schemes" : "dsx",
-                "abiFilters" : [ "arm64-v8a" ]
+                "minSdkVersion": 21,
+                "schemes": "dsx",
+                "abiFilters": ["arm64-v8a"]
             },
             /* ios打包配置 */
-            "ios" : {
-                "dSYMs" : false,
-                "urltypes" : "dsx"
+            "ios": {
+                "dSYMs": false,
+                "urltypes": "dsx"
             },
             /* SDK配置 */
-            "sdkConfigs" : {
-                "ad" : {},
-                "share" : {
-                    "weixin" : {
-                        "appid" : "wxcfcd8ef58007f8ab",
-                        "UniversalLinks" : ""
+            "sdkConfigs": {
+                "ad": {},
+                "share": {
+                    "weixin": {
+                        "appid": "wxcfcd8ef58007f8ab",
+                        "UniversalLinks": ""
                     }
                 },
-                "payment" : {
-                    "weixin" : {
-                        "__platform__" : [ "android" ],
-                        "appid" : "wxcfcd8ef58007f8ab",
-                        "UniversalLinks" : ""
+                "payment": {
+                    "weixin": {
+                        "__platform__": ["android"],
+                        "appid": "wxcfcd8ef58007f8ab",
+                        "UniversalLinks": ""
                     }
                 }
             },
-            "splashscreen" : {
-                "useOriginalMsgbox" : true
+            "splashscreen": {
+                "useOriginalMsgbox": true
             },
-            "icons" : {
-                "android" : {
-                    "hdpi" : "unpackage/res/icons/72x72.png",
-                    "xhdpi" : "unpackage/res/icons/96x96.png",
-                    "xxhdpi" : "unpackage/res/icons/144x144.png",
-                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+            "icons": {
+                "android": {
+                    "hdpi": "unpackage/res/icons/72x72.png",
+                    "xhdpi": "unpackage/res/icons/96x96.png",
+                    "xxhdpi": "unpackage/res/icons/144x144.png",
+                    "xxxhdpi": "unpackage/res/icons/192x192.png"
                 },
-                "ios" : {
-                    "appstore" : "unpackage/res/icons/1024x1024.png",
-                    "ipad" : {
-                        "app" : "unpackage/res/icons/76x76.png",
-                        "app@2x" : "unpackage/res/icons/152x152.png",
-                        "notification" : "unpackage/res/icons/20x20.png",
-                        "notification@2x" : "unpackage/res/icons/40x40.png",
-                        "proapp@2x" : "unpackage/res/icons/167x167.png",
-                        "settings" : "unpackage/res/icons/29x29.png",
-                        "settings@2x" : "unpackage/res/icons/58x58.png",
-                        "spotlight" : "unpackage/res/icons/40x40.png",
-                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                "ios": {
+                    "appstore": "unpackage/res/icons/1024x1024.png",
+                    "ipad": {
+                        "app": "unpackage/res/icons/76x76.png",
+                        "app@2x": "unpackage/res/icons/152x152.png",
+                        "notification": "unpackage/res/icons/20x20.png",
+                        "notification@2x": "unpackage/res/icons/40x40.png",
+                        "proapp@2x": "unpackage/res/icons/167x167.png",
+                        "settings": "unpackage/res/icons/29x29.png",
+                        "settings@2x": "unpackage/res/icons/58x58.png",
+                        "spotlight": "unpackage/res/icons/40x40.png",
+                        "spotlight@2x": "unpackage/res/icons/80x80.png"
                     },
-                    "iphone" : {
-                        "app@2x" : "unpackage/res/icons/120x120.png",
-                        "app@3x" : "unpackage/res/icons/180x180.png",
-                        "notification@2x" : "unpackage/res/icons/40x40.png",
-                        "notification@3x" : "unpackage/res/icons/60x60.png",
-                        "settings@2x" : "unpackage/res/icons/58x58.png",
-                        "settings@3x" : "unpackage/res/icons/87x87.png",
-                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
-                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    "iphone": {
+                        "app@2x": "unpackage/res/icons/120x120.png",
+                        "app@3x": "unpackage/res/icons/180x180.png",
+                        "notification@2x": "unpackage/res/icons/40x40.png",
+                        "notification@3x": "unpackage/res/icons/60x60.png",
+                        "settings@2x": "unpackage/res/icons/58x58.png",
+                        "settings@3x": "unpackage/res/icons/87x87.png",
+                        "spotlight@2x": "unpackage/res/icons/80x80.png",
+                        "spotlight@3x": "unpackage/res/icons/120x120.png"
                     }
                 }
             }
         },
-        "nativePlugins" : {
-            "Html5app-Tiktok" : {
-                "sdkclientKey" : "awx1x2eneuqx30q7",
-                "__plugin_info__" : {
-                    "name" : "Android 和 IOS 抖音 第三方授权登录 分享插件",
-                    "description" : "抖音 第三方授权 登录 分享图片视频，QQ交流群：891416757",
-                    "platforms" : "Android,iOS",
-                    "url" : "https://ext.dcloud.net.cn/plugin?id=1378",
-                    "android_package_name" : "uni.dsx",
-                    "ios_bundle_id" : "uni.dsx",
-                    "isCloud" : true,
-                    "bought" : 1,
-                    "pid" : "1378",
-                    "parameters" : {
-                        "sdkclientKey" : {
-                            "des" : "抖音应用 clientKey",
-                            "key" : "tiktok:clientkey",
-                            "value" : ""
+        "nativePlugins": {
+            "Html5app-Tiktok": {
+                "sdkclientKey": "awx1x2eneuqx30q7",
+                "__plugin_info__": {
+                    "name": "Android 和 IOS 抖音 第三方授权登录 分享插件",
+                    "description": "抖音 第三方授权 登录 分享图片视频，QQ交流群：891416757",
+                    "platforms": "Android,iOS",
+                    "url": "https://ext.dcloud.net.cn/plugin?id=1378",
+                    "android_package_name": "uni.dsx",
+                    "ios_bundle_id": "uni.dsx",
+                    "isCloud": true,
+                    "bought": 1,
+                    "pid": "1378",
+                    "parameters": {
+                        "sdkclientKey": {
+                            "des": "抖音应用 clientKey",
+                            "key": "tiktok:clientkey",
+                            "value": ""
                         }
                     }
                 }
@@ -135,27 +135,33 @@
         }
     },
     /* 快应用特有相关 */
-    "quickapp" : {},
+    "quickapp": {},
     /* 小程序特有相关 */
-    "mp-weixin" : {
-        "appid" : "wxb1113697b9ae810e",
-        "setting" : {
-            "urlCheck" : false,
-            "es6" : false
+    "mp-weixin": {
+        "appid": "wxb1113697b9ae810e",
+        "setting": {
+            "urlCheck": false,
+            "es6": false,
+            "postcss": false,
+            "minified": true
         },
-        "usingComponents" : true
+        "usingComponents": true,
+        "optimization": {
+            "subPackages": true
+        },
+        "lazyCodeLoading": "requiredComponents"
     },
-    "mp-alipay" : {
-        "usingComponents" : true
+    "mp-alipay": {
+        "usingComponents": true
     },
-    "mp-baidu" : {
-        "usingComponents" : true
+    "mp-baidu": {
+        "usingComponents": true
     },
-    "mp-toutiao" : {
-        "usingComponents" : true
+    "mp-toutiao": {
+        "usingComponents": true
     },
-    "uniStatistics" : {
-        "enable" : false
+    "uniStatistics": {
+        "enable": false
     },
-    "vueVersion" : "3"
+    "vueVersion": "3"
 }
