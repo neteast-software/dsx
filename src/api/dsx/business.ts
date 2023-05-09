@@ -148,6 +148,12 @@ export function uploadMagicVideo(file: string) {
 }
 
 // 合成视频
+interface ProcessMagicVideoResult {
+    data: {
+        task: string;
+        token: string;
+    };
+}
 export function processMagicVideo(key: string, params: AnyObject = {}) {
     const filterdParams = Object.keys(params).reduce((prev, cur) => {
         if (params[cur]) {
@@ -156,5 +162,5 @@ export function processMagicVideo(key: string, params: AnyObject = {}) {
         return prev;
     }, {});
     console.log(filterdParams);
-    return http.post(`/mobile/magicMaterial/synthesis/${key}`, filterdParams);
+    return http.post<ProcessMagicVideoResult>(`/mobile/magicMaterial/synthesis/${key}`, filterdParams);
 }

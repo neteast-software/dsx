@@ -19,7 +19,7 @@ export function douyinAuth() {
     });
 }
 
-export function douyinShareVideos(videos, title, hashtags = []) {
+export function douyinShareVideos(videos, title = '', hashtags = []) {
     return new Promise((resolve, reject) => {
         const info: AnyObject = { videos, hashtags, state };
         if (title) {

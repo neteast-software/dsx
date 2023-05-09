@@ -1,6 +1,7 @@
 import { isDef } from "./validator";
 import { computed, ref } from "vue";
 import type { Ref } from "@/typings/model";
+
 /**
  * 获取系统信息，存于变量中
  * 避免多次调用uni.getSystemInfoSync()

@@ -234,6 +234,13 @@
                     "style": {
                         "navigationBarTitleText": "AI视频"
                     }
+                },
+                {
+                    "path": "videoPlay/videoPlay",
+                    "style": {
+                        "navigationBarTitleText": "",
+                        "navigationBarBackgroundColor": "#000000"
+                    }
                 }
             ]
         }

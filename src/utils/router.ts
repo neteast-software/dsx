@@ -24,7 +24,8 @@ const routes = {
     paySuccess: "/statusPages/paySuccess/paySuccess",
     videoChoose: "/videoPages/videoChoose/videoChoose",
     videoProcess: "/videoPages/videoProcess/videoProcess",
-    videoBackground: "/videoPages/videoBackground/videoBackground"
+    videoBackground: "/videoPages/videoBackground/videoBackground",
+    videoPlay: "/videoPages/videoPlay/videoPlay"
 } as const;
 
 type RouteName = keyof typeof routes;

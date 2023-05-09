@@ -67,7 +67,9 @@ onLoad((options) => {
     const typeId = options?.typeId || "";
     goodId.value = options?.id || "";
     updateVideoStat(taskId, token);
-    initSortGoods(typeId);
+    if (typeId) {
+        initSortGoods(typeId);
+    }
 });
 const sortGoods = ref<GoodInfo[]>([]);
 async function initSortGoods(id: string) {
@@ -82,7 +84,11 @@ async function updateVideoStat(taskId: string, token: string) {
     if (data.status === 7) {
         videoUrl.value = data.data.res.fileUrl;
         clearTimer();
-        router.replace("videoPreview", { query: { url: videoUrl.value, id: goodId.value } });
+        if (goodId.value) {
+            router.replace("videoPreview", { query: { url: videoUrl.value, id: goodId.value } });
+        } else {
+            router.replace("videoPlay", { query: { url: videoUrl.value } });
+        }
         return;
     }
     timer.value = setTimeout(() => {

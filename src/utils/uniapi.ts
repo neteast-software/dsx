@@ -1,3 +1,6 @@
+import { useDebounceFn } from "@vueuse/core";
+import { douyinShareVideos } from "./douyin";
+
 type ToastType = "none" | "success" | "loading" | "error";
 type ToastOptions = { title: string; icon?: ToastType; duration?: number };
 type ToastFn = (params: ToastOptions | string) => void;
@@ -176,4 +179,54 @@ export function uniLogin(provider: "weixin" | "apple") {
             });
         });
     };
+}
+
+export const saveVideoToAlbumDebounce = useDebounceFn((url) => {
+    saveVideoToAlbum(url)
+        .then(() => {
+            Toast("保存成功");
+        })
+        .catch(() => {
+            Toast("保存失败");
+        });
+}, 600);
+
+export async function publishToDouyin(url: string) {
+    uni.showLoading({
+        title: "视频准备中",
+        mask: true
+    });
+    try {
+        let ar = url.split("/");
+        let filename = ar[ar.length - 1];
+        let ff = filename.split(".");
+        filename = ff[0] + new Date().getTime() + "." + ff[1];
+        let dtask = plus.downloader.createDownload(
+            url,
+            {
+                filename: "_downloads/" + filename
+            },
+            (d, status) => {
+                if (status == 200) {
+                    let savePath = plus.io.convertLocalFileSystemURL(d.filename as string);
+                    douyinShareVideos([savePath]).then(
+                        () => {
+                            uni.showToast({
+                                title: "分享抖音成功",
+                                duration: 2000
+                            });
+                        },
+                        () => {
+                            console.log("分享失败");
+                        }
+                    );
+                } else {
+                    console.log("下载文件失败");
+                }
+            }
+        );
+        dtask.start();
+    } finally {
+        uni.hideLoading();
+    }
 }
