@@ -232,7 +232,9 @@
                 {
                     "path": "videoBackground/videoBackground",
                     "style": {
-                        "navigationBarTitleText": "AI视频"
+                        "navigationBarTitleText": "边框背景",
+                        "navigationBarTextStyle": "white",
+                        "navigationBarBackgroundColor": "#000000"
                     }
                 },
                 {

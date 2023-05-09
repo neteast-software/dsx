@@ -144,8 +144,6 @@ onReady(() => {
     if (typeof eventChannel.on !== "function") return;
     eventChannel.on("acceptVideoInfo", function (data: UniApp.ChooseVideoSuccess) {
         mediaFile.value = data;
-        console.log("acceptVideoInfo");
-        console.log(mediaFile.value);
     });
 });
 // 初始化操作按钮

@@ -43,10 +43,12 @@ import { getVideoMaterialList } from "@/api/dsx/business";
 const { list: backgroundList, initList, nextList, nomore } = usePaginator<BackgroundInfo>(getVideoMaterialList);
 let eventChannel: any = null;
 onReady(async () => {
+    uni.showLoading({ title: "加载中..." });
     const _this = getCurrentInstance()?.proxy as any;
     eventChannel = _this.getOpenerEventChannel();
     console.log(eventChannel);
     await initList();
+    uni.hideLoading();
 });
 async function handleSelectBackground(selectedBackground) {
     if (typeof eventChannel.on !== "function") return;
