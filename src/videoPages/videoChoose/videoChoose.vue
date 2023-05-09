@@ -7,7 +7,7 @@
                 <text class="font-middle">视频消耗积分</text>
             </view>
             <view class="integra-context flex-center">
-                <view class="integra-text">2</view>
+                <view class="integra-text">{{ user.syntheticMagicIntegrals }}</view>
                 <view>/次</view>
             </view>
         </view>
@@ -48,6 +48,7 @@ import { Toast, chooseVideoByAlbum } from "@/utils/uniapi";
 import { toRaw } from "vue";
 import { ref } from "vue";
 import { onReady } from "@dcloudio/uni-app";
+import user from "@/store/user";
 
 const selectedVideo = ref<any>(null);
 

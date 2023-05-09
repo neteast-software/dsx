@@ -41,7 +41,13 @@ export function showModal(title: string, content: string, confirmColor = "#3594F
             content,
             showCancel,
             confirmColor,
-            success: resolve,
+            success: (res) => {
+                if (res.confirm) {
+                    resolve(res);
+                } else {
+                    reject();
+                }
+            },
             fail: reject
         });
     });

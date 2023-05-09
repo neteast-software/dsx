@@ -22,6 +22,7 @@ interface UserInfo {
     agencyTime: string;
     agencyStatus: string;
     vipLvl: number;
+    syntheticMagicIntegrals: number
 }
 interface GetUserInfoResult {
     data: UserInfo;

@@ -17,7 +17,8 @@ class User {
         unreadMsgCount: 0,
         agencyStatus: "",
         agencyTime: "",
-        vipLvl: 0
+        vipLvl: 0,
+        syntheticMagicIntegrals: 0
     });
     private _qrCode = ref("");
     private _token = ref("");
@@ -68,6 +69,9 @@ class User {
     }
     get qrCode() {
         return this._qrCode.value || "";
+    }
+    get syntheticMagicIntegrals() {
+        return this._userInfo.syntheticMagicIntegrals || 0;
     }
     async initUserInfo() {
         const { data } = await getUserInfo();

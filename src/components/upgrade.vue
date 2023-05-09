@@ -1,6 +1,6 @@
 <template>
     <uni-popup ref="guide" type="center" @change="onChange">
-        <view class="guide">
+        <cover-view class="guide">
             <view class="title">{{ title }}</view>
             <view class="desc">请联系客服提升VIP等级</view>
             <view class="QRcode relative">
@@ -11,7 +11,7 @@
                 <button class="close" @tap="saveToAlbum(user.qrCode)">保存图片</button>
             </view>
             <button class="close-icon" @tap="close">x</button>
-        </view>
+        </cover-view>
     </uni-popup>
 </template>
 
