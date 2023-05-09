@@ -216,36 +216,42 @@ const deductionMessage = computed(() => {
 });
 
 async function uploadAndProcess() {
-    uni.showLoading({ title: "视频上传中..." });
-    isShowConfirm.value = false;
-    const { data: uploadData } = await uploadMagicVideo(mediaFile.value!.tempFilePath);
-    const { key } = uploadData;
-    let params: AnyObject = {};
-    Object.entries(toRaw(btnForm)).map(([key, formValue]) => {
-        if (typeof formValue.value !== "object") {
-            params[key] = formValue.value;
-        } else {
-            Object.entries(formValue.value).map(([subkey, subvalue]) => {
-                const fullkey = `${key}_${subkey}`;
-                params[fullkey] = subvalue;
-            });
-        }
-    });
     try {
-    } catch (error) {}
-    const { data: processData } = await processMagicVideo(key, params).catch((err) => {
-        if (err === "forbidden") {
-            showUpgrade();
-            hideConfirm();
-        }
-        throw err;
-    });
-    const { task: taskId, token } = processData;
-    console.log("taskId", taskId);
-    console.log("token", token);
-    uni.hideLoading();
-    router.push("export", { query: { taskId, token } });
-    hideConfirm();
+        uni.showLoading({ title: "视频上传中..." });
+        isShowConfirm.value = false;
+        const { data: uploadData } = await uploadMagicVideo(mediaFile.value!.tempFilePath);
+        const { key } = uploadData;
+        let params: AnyObject = {};
+        Object.entries(toRaw(btnForm)).map(([key, formValue]) => {
+            if (typeof formValue.value !== "object") {
+                params[key] = formValue.value;
+            } else {
+                Object.entries(formValue.value).map(([subkey, subvalue]) => {
+                    const fullkey = `${key}_${subkey}`;
+                    params[fullkey] = subvalue;
+                });
+            }
+        });
+        try {
+        } catch (error) {}
+        const { data: processData } = await processMagicVideo(key, params).catch((err) => {
+            if (err === "forbidden") {
+                showUpgrade();
+                hideConfirm();
+            }
+            throw err;
+        });
+        const { task: taskId, token } = processData;
+        console.log("taskId", taskId);
+        console.log("token", token);
+        router.push("export", { query: { taskId, token } });
+        hideConfirm();
+    } catch (error) {
+        console.log(error);
+        Toast("系统繁忙，请稍后再试");
+    } finally {
+        uni.hideLoading();
+    }
 }
 
 async function toVideoBackground() {
