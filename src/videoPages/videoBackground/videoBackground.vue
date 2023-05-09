@@ -3,7 +3,7 @@
         <scroll-view class="scroller" scroll-y="true" @scrolltolower="nextList">
             <view class="background-list-content">
                 <view class="background-detail" @tap="handleSelectBackground({ url: '' })">
-                    <view class="background-img border-dashed" />
+                    <view class="background-media border-dashed" />
                     <view class="background-text">无背景</view>
                 </view>
                 <view
@@ -12,7 +12,20 @@
                     :key="item.id"
                     @tap="handleSelectBackground(item)"
                 >
-                    <image class="background-img" :src="item.url" mode="scaleToFill" />
+                    <video
+                        v-if="item.url.includes('.mp4')"
+                        :muted="true"
+                        :controls="false"
+                        :show-fullscreen-btn="false"
+                        :show-center-play-btn="false"
+                        :enable-progress-gesture="false"
+                        :loop="true"
+                        :autoplay="true"
+                        :src="item.url"
+                        object-fit="fill"
+                        class="background-media"
+                    ></video>
+                    <image v-else class="background-media" :src="item.url" mode="scaleToFill" />
                     <view class="background-text">{{ item.name }}</view>
                 </view>
             </view>
