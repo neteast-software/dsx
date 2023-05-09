@@ -19,14 +19,26 @@
                 </view>
             </view>
             <view class="video-preview flex-rest-height">
-                <image class="cover" :src="mediaFile?.thumbTempFilePath" mode="aspectFit" />
+                <!-- #ifdef MP-WEIXIN -->
+                <video class="cover" :src="mediaFile?.tempFilePath" mode="aspectFit"></video>
+                <!-- #endif -->
+                <!-- #ifdef APP-PLUS -->
+                <video
+                    id="myVideo"
+                    class="cover"
+                    autoplay
+                    :src="mediaFile?.tempFilePath"
+                    :muted="first"
+                    @timeupdate="pauseVideo"
+                    mode="aspectFit"
+                ></video>
+                <!-- #endif -->
             </view>
-            <view class="drawer flex-column">
+            <view class="drawer flex-column" :class="{ isSmall }">
                 <view class="handler"></view>
                 <template v-if="!showStickers">
                     <scroll-view
-                        class="scroller"
-                        :class="{ isSmall: isSmall }"
+                        class="scroller flex-rest-height"
                         scroll-y
                         :show-scrollbar="false"
                         enable-flex
@@ -59,7 +71,7 @@
                     <button class="btn btn--primary btn--round upload-btn" @tap="showConfirm">上传并处理视频</button>
                 </template>
                 <template v-else>
-                    <scroll-view class="scroller" :class="{ isSmall }" scroll-y>
+                    <scroll-view class="scroller flex-rest-height" scroll-y>
                         <view class="stickers">
                             <view
                                 class="sticker flex-all-center"
@@ -89,6 +101,7 @@
             @cancel="hideConfirm"
             @confirm="uploadAndProcess"
         ></Dialog>
+        <Upgrade v-model="showForbidden" title="暂不支持合成"></Upgrade>
     </view>
 </template>
 
@@ -107,6 +120,7 @@ import { usePaginator } from "@/utils/util";
 import { toRaw } from "vue";
 import user from "@/store/user";
 import { Toast } from "@/utils/uniapi";
+import Upgrade from "@/components/upgrade.vue";
 const { list: stickerList, initList, nextList } = usePaginator<StickerInfo>(getVideoMaterialList, 30);
 
 const { windowWidth, windowHeight } = uni.getSystemInfoSync();
@@ -115,12 +129,12 @@ console.log("windowHeight", windowHeight);
 const isSmall = computed(() => windowHeight < 750);
 const selectedBackground = ref({ url: "" });
 // 初始化视频信息
-const mediaFile = ref<UniApp.MediaFile>();
+const mediaFile = ref<UniApp.ChooseVideoSuccess>();
 onReady(() => {
     const _this = getCurrentInstance()?.proxy as any;
     const eventChannel = _this.getOpenerEventChannel();
     if (typeof eventChannel.on !== "function") return;
-    eventChannel.on("acceptVideoInfo", function (data: UniApp.MediaFile) {
+    eventChannel.on("acceptVideoInfo", function (data: UniApp.ChooseVideoSuccess) {
         mediaFile.value = data;
         console.log("acceptVideoInfo");
     });
@@ -206,10 +220,18 @@ async function uploadAndProcess() {
             });
         }
     });
-    console.log("data", params);
-    const { data: processData } = await processMagicVideo(key, params);
+    try {
+    } catch (error) {}
+    const { data: processData } = await processMagicVideo(key, params).catch((err) => {
+        if (err === "forbidden") {
+            showUpgrade();
+            hideConfirm();
+        }
+        throw err;
+    });
     const { task: taskId, token } = processData;
     router.push("export", { query: { taskId, token } });
+    hideConfirm();
 }
 
 async function toVideoBackground() {
@@ -221,6 +243,20 @@ async function toVideoBackground() {
         }
     });
 }
+
+const first = ref(false);
+function pauseVideo(e) {
+    if (!first.value && e.detail.currentTime) {
+        first.value = true;
+        const ctx = uni.createVideoContext("myVideo");
+        ctx.pause();
+    }
+}
+
+const showForbidden = ref(false);
+const showUpgrade = () => {
+    showForbidden.value = true;
+};
 
 // 改变高度, 暂时不要
 // const maxDrawerHeight = 445;

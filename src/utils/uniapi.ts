@@ -74,14 +74,20 @@ export function chooseImageByAlbum() {
 }
 // 从相册选择视频
 export function chooseVideoByAlbum() {
-    return new Promise<UniApp.ChooseMediaSuccessCallbackResult>((resolve, reject) => {
-        uni.chooseMedia({
-            count: 1,
-            mediaType: ["video"],
+    return new Promise<UniApp.ChooseVideoSuccess>((resolve, reject) => {
+        uni.chooseVideo({
             sourceType: ["album"],
+            compressed: false,
             success: resolve,
             fail: reject
         });
+        // uni.chooseMedia({
+        //     count: 1,
+        //     mediaType: ["video"],
+        //     sourceType: ["album"],
+        //     success: resolve,
+        //     fail: reject
+        // });
     });
 }
 // 分享到微信
