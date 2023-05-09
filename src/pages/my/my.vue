@@ -133,6 +133,8 @@ import { useVipUpgrade } from "@/mixins/vip";
 const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
 // import NavBar from "@/components/navBar.vue";
 // const defaultAvatar = new URL("@/assets/imgs/avatar.png", import.meta.url).href;
+uni.hideTabBar();
+
 const cache = ref("");
 const apply = ref<any>(null);
 onReady(async () => {

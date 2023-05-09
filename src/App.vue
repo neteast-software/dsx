@@ -3,7 +3,6 @@ import { onLaunch, onShow, onHide } from "@dcloudio/uni-app";
 import user from "./store/user";
 onLaunch(() => {
     console.log("App Launch");
-    uni.hideTabBar();
     user.initUserInfo();
 });
 onShow(() => {

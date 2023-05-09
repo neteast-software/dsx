@@ -50,6 +50,7 @@ import { useVipUpgrade } from "@/mixins/vip";
 import { getBannerList } from "@/api/dsx/business";
 const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
 onShow(checkVipUpgrade);
+uni.hideTabBar();
 
 const nav = ref<number>(0);
 const typeList = ref<TypeItem[]>([]);
