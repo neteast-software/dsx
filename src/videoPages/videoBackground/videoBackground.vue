@@ -1,6 +1,6 @@
 <template>
     <view class="background-list-container">
-        <scroll-view class="scroller" scroll-y="true" @scrolltolower="nextList">
+        <scroll-view class="scroller" scroll-y="true" @scrolltolower="nextList({ type: 1 })">
             <view class="background-list-content">
                 <view class="background-detail" @tap="handleSelectBackground({ url: '' })">
                     <view class="background-media border-dashed" />
@@ -50,12 +50,11 @@ onReady(async () => {
 });
 async function handleSelectBackground(selectedBackground) {
     if (typeof eventChannel.on !== "function") return;
-    eventChannel.emit("setBackground", selectedBackground);
-    const res = await router.back();
+    eventChannel.emit("setBackground", selectedBackground.url);
+    await router.back();
 }
 </script>
 
 <style scoped lang="scss">
 @import "./videoBackground.scss";
 </style>
-

@@ -8,22 +8,17 @@
                     边框背景
                 </view>
                 <view class="right flex-center">
-                    <view v-show="!selectedBackground?.url">更换背景图</view>
+                    <view v-show="!btnForm.bkg">更换背景图</view>
                     <video
-                        v-if="selectedBackground.url.includes('.mp4')"
+                        v-if="btnForm.bkg && btnForm.bkg.includes('.mp4')"
                         :controls="false"
                         :duration="0.1"
                         :show-play-btn="false"
                         :show-center-play-btn="false"
-                        :src="selectedBackground.url"
+                        :src="btnForm.bkg"
                         class="thumb-background-image"
                     ></video>
-                    <image
-                        v-show="selectedBackground?.url"
-                        class="thumb-background-image"
-                        :src="selectedBackground.url"
-                        mkde="widthFix"
-                    />
+                    <image v-show="btnForm?.bkg" class="thumb-background-image" :src="btnForm.bkg" mkde="widthFix" />
                     <uni-icons class="icon-forward" type="forward" size="20" color="#fff"></uni-icons>
                 </view>
             </view>
@@ -122,7 +117,6 @@ const { windowWidth, windowHeight } = uni.getSystemInfoSync();
 const ratio = windowWidth / 750;
 console.log("windowHeight", windowHeight);
 const isSmall = computed(() => windowHeight < 750);
-const selectedBackground = ref({ url: "" });
 // 初始化视频信息
 const mediaFile = ref<UniApp.MediaFile>();
 onReady(() => {
@@ -215,7 +209,6 @@ async function uploadAndProcess() {
             });
         }
     });
-    console.log("data", params);
     const { data: processData } = await processMagicVideo(key, params);
     const { task: taskId, token } = processData;
     router.push("export", { query: { taskId, token } });
@@ -224,8 +217,8 @@ async function uploadAndProcess() {
 async function toVideoBackground() {
     await router.push("videoBackground", {
         events: {
-            setBackground: function (data) {
-                selectedBackground.value = data;
+            setBackground: function (url) {
+                btnForm.bkg = url;
             }
         }
     });
