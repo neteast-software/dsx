@@ -221,11 +221,12 @@ const deductionMessage = computed(() => {
     return `合成视频要扣除${deductionPoints}个积分`;
 });
 
-function handleProcess() {
+async function handleProcess() {
     // #ifdef MP-WEIXIN
     showConfirm();
     // #endif
     // #ifdef APP-PLUS
+    await showModal("温馨提示", deductionMessage.value);
     uploadAndProcess();
     // #endif
 }
