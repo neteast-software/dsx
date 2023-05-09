@@ -13,9 +13,13 @@
                         v-if="btnForm.bkg?.value && btnForm.bkg?.value.includes('.mp4')"
                         :controls="false"
                         :duration="0.1"
+                        autoplay
+                        id="thumbVideo"
+                        :muted="true"
                         :show-play-btn="false"
                         :show-center-play-btn="false"
                         :src="btnForm.bkg?.value"
+                        @timeupdate="pauseVideo2"
                         class="thumb-background-image"
                     ></video>
                     <image
@@ -37,7 +41,7 @@
                     class="cover"
                     autoplay
                     :src="mediaFile?.tempFilePath"
-                    :muted="first"
+                    :muted="!first"
                     @timeupdate="pauseVideo"
                     mode="aspectFit"
                 ></video>
@@ -77,10 +81,14 @@
                             </view>
                         </view>
                     </scroll-view>
-                    <button class="btn btn--primary btn--round upload-btn" @tap="showConfirm">上传并处理视频</button>
+                    <button class="btn btn--primary btn--round upload-btn" @tap="handleProcess">上传并处理视频</button>
                 </template>
                 <template v-else>
-                    <scroll-view class="scroller flex-rest-height" scroll-y>
+                    <scroll-view
+                        class="scroller flex-rest-height"
+                        scroll-y
+                        @scrolltolower="nextList({ type: stickerId })"
+                    >
                         <view class="stickers">
                             <view
                                 class="sticker flex-all-center"
@@ -128,7 +136,7 @@ import { reactive } from "vue";
 import { usePaginator } from "@/utils/util";
 import { toRaw } from "vue";
 import user from "@/store/user";
-import { Toast } from "@/utils/uniapi";
+import { Toast, showModal } from "@/utils/uniapi";
 import Upgrade from "@/components/upgrade.vue";
 const { list: stickerList, initList, nextList } = usePaginator<StickerInfo>(getVideoMaterialList, 30);
 
@@ -151,7 +159,7 @@ onReady(() => {
 // 初始化操作按钮
 const showStickers = ref(false);
 let oldSticker: any = null;
-let stickerId = 0;
+const stickerId = ref(0);
 const btnList = ref<VideoProcessBtn[]>([]);
 const btnForm = reactive<Record<string, any>>({});
 async function initBtnList() {
@@ -160,7 +168,7 @@ async function initBtnList() {
     data.map((item) => {
         btnForm[item.fieldName] = "";
         if (item.fieldName === "sticker") {
-            stickerId = item.id;
+            stickerId.value = item.id;
             initList({ type: item.id });
         }
     });
@@ -185,7 +193,7 @@ function onClickSticker(sticker: StickerInfo) {
         btnForm.sticker = "";
     } else {
         btnForm.sticker = {
-            id: stickerId,
+            id: stickerId.value,
             cid: sticker.id,
             value: { url: sticker.url, width: sticker.width, height: sticker.height }
         };
@@ -211,13 +219,21 @@ function showConfirm() {
     isShowConfirm.value = true;
 }
 const deductionMessage = computed(() => {
-    const deductionPoints = 1;
+    const deductionPoints = user.syntheticMagicIntegrals;
     return `合成视频要扣除${deductionPoints}个积分`;
 });
 
+function handleProcess() {
+    // #ifdef MP-WEIXIN
+    showConfirm();
+    // #endif
+    // #ifdef APP-PLUS
+    uploadAndProcess();
+    // #endif
+}
 async function uploadAndProcess() {
+    await showModal("温馨提示", deductionMessage.value);
     uni.showLoading({ title: "视频上传中..." });
-    isShowConfirm.value = false;
     const { data: uploadData } = await uploadMagicVideo(mediaFile.value!.tempFilePath);
     const { key } = uploadData;
     let params: AnyObject = {};
@@ -235,17 +251,18 @@ async function uploadAndProcess() {
     } catch (error) {}
     const { data: processData } = await processMagicVideo(key, params).catch((err) => {
         if (err === "forbidden") {
+            // #ifdef MP-WEIXIN
             showUpgrade();
-            hideConfirm();
+            // #endif
+            // #ifdef APP-PLUS
+            showModal("暂不支持合成", "请联系客服提升VIP等级");
+            // #endif
         }
         throw err;
     });
     const { task: taskId, token } = processData;
-    console.log("taskId", taskId);
-    console.log("token", token);
     uni.hideLoading();
     router.push("export", { query: { taskId, token } });
-    hideConfirm();
 }
 
 async function toVideoBackground() {
@@ -262,6 +279,14 @@ const first = ref(false);
 function pauseVideo(e) {
     if (!first.value && e.detail.currentTime) {
         first.value = true;
+        const ctx = uni.createVideoContext("myVideo");
+        ctx.pause();
+    }
+}
+const first2 = ref(false);
+function pauseVideo2(e) {
+    if (!first2.value && e.detail.currentTime) {
+        first2.value = true;
         const ctx = uni.createVideoContext("myVideo");
         ctx.pause();
     }
