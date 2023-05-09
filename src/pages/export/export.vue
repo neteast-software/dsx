@@ -101,6 +101,7 @@ function clearTimer() {
     }
 }
 onUnload(() => {
+    console.log("退出");
     clearTimer();
 });
 

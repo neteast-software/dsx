@@ -69,6 +69,7 @@ async function toHandleVideo() {
             }
         });
         res.eventChannel.emit("acceptVideoInfo", toRaw(selectedVideo.value));
+        selectedVideo.value = null;
     }
 }
 const first = ref(false);

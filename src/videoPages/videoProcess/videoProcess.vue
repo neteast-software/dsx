@@ -59,7 +59,7 @@
                     >
                         <view class="op-list">
                             <view
-                                class="op flex-column-center flex-shrink-0"
+                                class="op flex-column-center flex-shrink-0 relative"
                                 :class="{
                                     active: btnForm[item.fieldName]?.id === item.id && btnForm[item.fieldName].value
                                 }"
@@ -75,7 +75,12 @@
                                     />
                                 </view>
                                 <view v-else class="icon-wrap flex-all-center">
-                                    <image class="icon-op" :src="item.icon" mode="scaleToFill" />
+                                    <view class="img-wrap relative">
+                                        <view v-if="extractTag(item.name)" class="tag">{{
+                                            extractTag(item.name)
+                                        }}</view>
+                                        <image class="icon-op" :src="item.icon" mode="scaleToFill" />
+                                    </view>
                                 </view>
                                 <text class="op-name">{{ item.name }}</text>
                             </view>
@@ -133,7 +138,7 @@ import { getVideoProcessBtnList, getVideoMaterialList, uploadMagicVideo, process
 import { useDebounceFn } from "@vueuse/core";
 import { computed } from "vue";
 import { reactive } from "vue";
-import { usePaginator } from "@/utils/util";
+import { timeoutPromise, usePaginator } from "@/utils/util";
 import { toRaw } from "vue";
 import user from "@/store/user";
 import { Toast, showModal } from "@/utils/uniapi";
@@ -160,6 +165,14 @@ let oldSticker: any = null;
 const stickerId = ref(0);
 const btnList = ref<VideoProcessBtn[]>([]);
 const btnForm = reactive<Record<string, any>>({});
+// 魔法幻影正则, 匹配“魔法幻影1”
+const moreg = /^魔法幻影([0-9])$/;
+function extractTag(str: string) {
+    const m = str.match(moreg);
+    console.log("匹配", m);
+    return m && m[1];
+}
+extractTag("魔法幻影1");
 async function initBtnList() {
     const { data } = await getVideoProcessBtnList();
     btnList.value = data;
@@ -170,7 +183,6 @@ async function initBtnList() {
             initList({ type: item.id });
         }
     });
-    console.log(btnForm);
 }
 onReady(initBtnList);
 async function onClickBtn(btn: VideoProcessBtn) {
@@ -230,11 +242,50 @@ async function handleProcess() {
     uploadAndProcess();
     // #endif
 }
+function handleForbid() {
+    // #ifdef MP-WEIXIN
+    showUpgrade();
+    // #endif
+    // #ifdef APP-PLUS
+    showModal("暂不支持合成", "请联系客服提升VIP等级");
+    // #endif
+    hideConfirm();
+}
+// 重试获取token
+let retryCount = 0;
+
+async function getVideoProcessToken(key: string, params: AnyObject) {
+    try {
+        const { data } = await processMagicVideo(key, params);
+        const { task: taskId, token } = data;
+        retryCount = 0;
+        return { taskId, token };
+    } catch (error) {
+        if (error === "forbidden") {
+            handleForbid();
+            return;
+        }
+        if (error !== "retry") return;
+        if (retryCount < 10) {
+            await timeoutPromise(100);
+            retryCount++;
+            return await getVideoProcessToken(key, params);
+        } else {
+            Toast("获取合成视频token失败");
+            retryCount = 0;
+        }
+    }
+}
 async function uploadAndProcess() {
     try {
         uni.showLoading({ title: "视频上传中..." });
         isShowConfirm.value = false;
-        const { data: uploadData } = await uploadMagicVideo(mediaFile.value!.tempFilePath);
+        const { data: uploadData } = await uploadMagicVideo(mediaFile.value!.tempFilePath).catch((err) => {
+            if (err === "forbidden") {
+                handleForbid();
+            }
+            throw err;
+        });
         const { key } = uploadData;
         let params: AnyObject = {};
         Object.entries(toRaw(btnForm)).map(([key, formValue]) => {
@@ -247,23 +298,12 @@ async function uploadAndProcess() {
                 });
             }
         });
-        try {
-        } catch (error) {}
-        const { data: processData } = await processMagicVideo(key, params).catch((err) => {
-            if (err === "forbidden") {
-                showUpgrade();
-                hideConfirm();
-            }
-            throw err;
-        });
-        const { task: taskId, token } = processData;
-        console.log("taskId", taskId);
-        console.log("token", token);
+        const { taskId, token } = await getVideoProcessToken(key, params);
         router.push("export", { query: { taskId, token } });
         hideConfirm();
     } catch (error) {
         console.log(error);
-        Toast("系统繁忙，请稍后再试");
+        Toast("合成失败");
     } finally {
         uni.hideLoading();
     }

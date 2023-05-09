@@ -45,6 +45,14 @@
         height: 660rpx;
     }
 }
+.tag {
+    position: absolute;
+    color: #fff;
+    right: 0;
+    top: 0;
+    transform: translateX(100%) translateY(-50%);
+    font-size: 24rpx;
+}
 .handler {
     position: absolute;
     width: 72rpx;
