@@ -1,4 +1,5 @@
 <template>
+    <page-meta page-style="height: 100%"></page-meta>
     <view class="wrap small grey">
         <view class="integra-tip" v-if="!selectedVideo?.thumbTempFilePath">
             <view class="flex-center">

@@ -51,6 +51,7 @@ import Congratulation from "@/components/congratulation.vue";
 import { useVipUpgrade } from "@/mixins/vip";
 const { showCongratulation, checkVipUpgrade, confirmUpgrade } = useVipUpgrade();
 onShow(checkVipUpgrade);
+uni.hideTabBar();
 
 const showDialog = ref(false);
 provide("showDialog", showDialog);
