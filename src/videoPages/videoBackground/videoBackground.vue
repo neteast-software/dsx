@@ -15,10 +15,14 @@
                     <video
                         v-if="item.url.includes('.mp4')"
                         :muted="true"
+                        :controls="false"
                         :show-fullscreen-btn="false"
+                        :show-center-play-btn="false"
+                        :enable-progress-gesture="false"
                         :loop="true"
                         :autoplay="true"
                         :src="item.url"
+                        object-fit="fill"
                         class="background-media"
                     ></video>
                     <image v-else class="background-media" :src="item.url" mode="scaleToFill" />
@@ -45,26 +49,7 @@ onReady(async () => {
     await initList();
 });
 async function handleSelectBackground(selectedBackground) {
-    if (selectedBackground.url.includes(".mp4")) {
-        const uploadTask = uni.downloadFile({
-            url: selectedBackground.url,
-            success: (res) => {
-                console.log(1111);
-                if (res.statusCode === 200) {
-                    console.log("下载成功");
-                    console.log(res);
-                }
-            },
-            fail: (err) => {
-                console.log(err);
-            }
-        });
-        uploadTask.onProgressUpdate((res) => {
-            console.log("下载进度" + res.progress);
-        });
-    }
     if (typeof eventChannel.on !== "function") return;
-
     eventChannel.emit("setBackground", selectedBackground);
     const res = await router.back();
 }
