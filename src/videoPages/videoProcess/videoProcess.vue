@@ -9,6 +9,15 @@
                 </view>
                 <view class="right flex-center">
                     <view v-show="!selectedBackground?.url">更换背景图</view>
+                    <video
+                        v-if="selectedBackground.url.includes('.mp4')"
+                        :controls="false"
+                        :duration="0.1"
+                        :show-play-btn="false"
+                        :show-center-play-btn="false"
+                        :src="selectedBackground.url"
+                        class="thumb-background-image"
+                    ></video>
                     <image
                         v-show="selectedBackground?.url"
                         class="thumb-background-image"
