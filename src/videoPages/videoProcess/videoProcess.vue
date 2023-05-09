@@ -8,17 +8,22 @@
                     边框背景
                 </view>
                 <view class="right flex-center">
-                    <view v-show="!btnForm.bkg">更换背景图</view>
+                    <view v-show="!btnForm.bkg?.value">更换背景图</view>
                     <video
-                        v-if="btnForm.bkg && btnForm.bkg.includes('.mp4')"
+                        v-if="btnForm.bkg?.value && btnForm.bkg?.value.includes('.mp4')"
                         :controls="false"
                         :duration="0.1"
                         :show-play-btn="false"
                         :show-center-play-btn="false"
-                        :src="btnForm.bkg"
+                        :src="btnForm.bkg?.value"
                         class="thumb-background-image"
                     ></video>
-                    <image v-show="btnForm?.bkg" class="thumb-background-image" :src="btnForm.bkg" mkde="widthFix" />
+                    <image
+                        v-show="btnForm.bkg?.value"
+                        class="thumb-background-image"
+                        :src="btnForm.bkg?.value"
+                        mkde="widthFix"
+                    />
                     <uni-icons class="icon-forward" type="forward" size="20" color="#fff"></uni-icons>
                 </view>
             </view>
@@ -126,6 +131,7 @@ onReady(() => {
     eventChannel.on("acceptVideoInfo", function (data: UniApp.MediaFile) {
         mediaFile.value = data;
         console.log("acceptVideoInfo");
+        console.log(mediaFile.value);
     });
 });
 // 初始化操作按钮
@@ -196,6 +202,8 @@ const deductionMessage = computed(() => {
 });
 
 async function uploadAndProcess() {
+    uni.showLoading({ title: "视频上传中..." });
+    isShowConfirm.value = false;
     const { data: uploadData } = await uploadMagicVideo(mediaFile.value!.tempFilePath);
     const { key } = uploadData;
     let params: AnyObject = {};
@@ -211,6 +219,9 @@ async function uploadAndProcess() {
     });
     const { data: processData } = await processMagicVideo(key, params);
     const { task: taskId, token } = processData;
+    console.log("taskId", taskId);
+    console.log("token", token);
+    uni.hideLoading();
     router.push("export", { query: { taskId, token } });
 }
 
@@ -218,7 +229,7 @@ async function toVideoBackground() {
     await router.push("videoBackground", {
         events: {
             setBackground: function (url) {
-                btnForm.bkg = url;
+                btnForm.bkg = { value: url };
             }
         }
     });
