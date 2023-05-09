@@ -88,7 +88,6 @@ class Requestor {
                 if (this.interceptor.response && typeof this.interceptor.response === "function") {
                     try {
                         const response = await this.interceptor.response(res, context);
-                        console.log("response", response);
                         return resolve(response as T);
                     } catch (error) {
                         return reject(error);
