@@ -126,8 +126,8 @@ export function getVipUpgradeMsg() {
     return http.get<GetVipUpgradeMsgResult>("/mobile/my/myVipMsg");
 }
 // 获取视频背景素材列表
-export function getVideoBackgroundList() {
-    return http.get<GetVideoBackgroundListResult>("/mobile/magicMaterial/getList/1");
+export function getVideoBackgroundList(pageNum: number) {
+    return http.get<GetVideoBackgroundListResult>(`/mobile/magicMaterial/getList/1?pageNum=${pageNum}`);
 }
 
 // 获取视频处理按钮列表

@@ -3,7 +3,7 @@
         <scroll-view class="scroller" scroll-y="true" @scrolltolower="nextList">
             <view class="background-list-content">
                 <view class="background-detail" @tap="handleSelectBackground({ url: '' })">
-                    <view class="background-img border-dashed" />
+                    <view class="background-media border-dashed" />
                     <view class="background-text">无背景</view>
                 </view>
                 <view
@@ -12,7 +12,16 @@
                     :key="item.id"
                     @tap="handleSelectBackground(item)"
                 >
-                    <image class="background-img" :src="item.url" mode="scaleToFill" />
+                    <video
+                        v-if="item.url.includes('.mp4')"
+                        :muted="true"
+                        :show-fullscreen-btn="false"
+                        :loop="true"
+                        :autoplay="true"
+                        :src="item.url"
+                        class="background-media"
+                    ></video>
+                    <image v-else class="background-media" :src="item.url" mode="scaleToFill" />
                     <view class="background-text">{{ item.name }}</view>
                 </view>
             </view>
@@ -36,7 +45,26 @@ onReady(async () => {
     await initList();
 });
 async function handleSelectBackground(selectedBackground) {
+    if (selectedBackground.url.includes(".mp4")) {
+        const uploadTask = uni.downloadFile({
+            url: selectedBackground.url,
+            success: (res) => {
+                console.log(1111);
+                if (res.statusCode === 200) {
+                    console.log("下载成功");
+                    console.log(res);
+                }
+            },
+            fail: (err) => {
+                console.log(err);
+            }
+        });
+        uploadTask.onProgressUpdate((res) => {
+            console.log("下载进度" + res.progress);
+        });
+    }
     if (typeof eventChannel.on !== "function") return;
+
     eventChannel.emit("setBackground", selectedBackground);
     const res = await router.back();
 }
