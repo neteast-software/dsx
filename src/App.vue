@@ -13,9 +13,10 @@ onHide(() => {
     console.log("App Hide");
 });
 </script>
-<style>
+<style lang="scss">
 page {
     height: 100%;
     background-color: #fff;
+    color: $uni-text-color;
 }
 </style>

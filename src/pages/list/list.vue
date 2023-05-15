@@ -1,5 +1,5 @@
 <template>
-    <view class="flex-column h-full">
+    <view class="flex-column h-full" style="background-color: #fff">
         <nav-bar :title="title"></nav-bar>
         <scroll-view
             v-if="goodList.length"
@@ -32,6 +32,11 @@ onLoad((options) => {
 });
 </script>
 
+<style>
+page {
+    background-color: #fff;
+}
+</style>
 <style scoped lang="scss">
 @import "./list.scss";
 </style>

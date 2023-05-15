@@ -169,7 +169,6 @@ const btnForm = reactive<Record<string, any>>({});
 const moreg = /^魔法幻影([0-9])$/;
 function extractTag(str: string) {
     const m = str.match(moreg);
-    console.log("匹配", m);
     return m && m[1];
 }
 extractTag("魔法幻影1");

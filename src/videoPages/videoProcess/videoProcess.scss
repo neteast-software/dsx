@@ -82,6 +82,7 @@
     // justify-content: space-between;
 }
 .op {
+    flex-grow: 0;
     &.active {
         .icon-wrap {
             border-color: #ea3598;

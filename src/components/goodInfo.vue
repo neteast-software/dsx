@@ -95,6 +95,7 @@ function toDouyin() {
     position: relative;
     display: flex;
     margin-bottom: 50rpx;
+    color: $uni-text-color;
     .cover {
         width: 160rpx;
         height: 160rpx;
