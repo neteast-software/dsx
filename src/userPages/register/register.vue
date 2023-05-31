@@ -12,7 +12,7 @@
                     </uni-forms-item>
                 </view>
                 <view class="item-wrap" style="padding-right: 200rpx">
-                    <uni-forms-item class="item verify" name="captcha">
+                    <uni-forms-item class="item" name="captcha">
                         <input class="form-input" type="text" v-model="formData.captcha" placeholder="请输入验证码" />
                     </uni-forms-item>
                     <view v-if="countDown" class="btn-obtain" style="color: #7b7379">剩余{{ countDown }}s</view>
