@@ -63,14 +63,14 @@
                 "share" : {
                     "weixin" : {
                         "appid" : "wxcfcd8ef58007f8ab",
-                        "UniversalLinks" : ""
+                        "UniversalLinks" : "https://www.huoyuanyouxuan.com/"
                     }
                 },
                 "payment" : {
                     "weixin" : {
                         "__platform__" : [ "android" ],
                         "appid" : "wxcfcd8ef58007f8ab",
-                        "UniversalLinks" : ""
+                        "UniversalLinks" : "https://www.huoyuanyouxuan.com/"
                     }
                 }
             },
