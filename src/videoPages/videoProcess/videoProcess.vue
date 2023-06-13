@@ -121,7 +121,7 @@
             :show="isShowConfirm"
             :content="deductionMessage"
             @cancel="hideConfirm"
-            @confirm="uploadAndProcess"
+            @confirm="uploadAndProcessThrottle"
         ></Dialog>
         <Upgrade v-model="showForbidden" title="暂不支持合成"></Upgrade>
     </view>
@@ -135,7 +135,7 @@ import Dialog from "@/components/dialog.vue";
 import { ref, getCurrentInstance } from "vue";
 import { onReady } from "@dcloudio/uni-app";
 import { getVideoProcessBtnList, getVideoMaterialList, uploadMagicVideo, processMagicVideo } from "@/api/dsx/business";
-import { useDebounceFn } from "@vueuse/core";
+import { useDebounceFn, useThrottleFn } from "@vueuse/core";
 import { computed } from "vue";
 import { reactive } from "vue";
 import { timeoutPromise, usePaginator } from "@/utils/util";
@@ -262,9 +262,12 @@ async function getVideoProcessToken(key: string, params: AnyObject) {
     } catch (error) {
         if (error === "forbidden") {
             handleForbid();
-            return;
+            throw error;
         }
-        if (error !== "retry") return;
+        if (error !== "retry") {
+            retryCount = 0;
+            throw error;
+        }
         if (retryCount < 10) {
             await timeoutPromise(100);
             retryCount++;
@@ -272,9 +275,18 @@ async function getVideoProcessToken(key: string, params: AnyObject) {
         } else {
             Toast("获取合成视频token失败");
             retryCount = 0;
+            throw new Error("获取合成视频token失败");
         }
     }
 }
+function timeoutReject(timeout: number) {
+    return new Promise((_, reject) => {
+        setTimeout(() => {
+            reject("timeout");
+        }, timeout);
+    });
+}
+const uploadAndProcessThrottle = useThrottleFn(uploadAndProcess, 800);
 async function uploadAndProcess() {
     try {
         uni.showLoading({ title: "视频上传中..." });
@@ -297,12 +309,12 @@ async function uploadAndProcess() {
                 });
             }
         });
-        const { taskId, token } = await getVideoProcessToken(key, params);
+        const { taskId, token } = await Promise.race([getVideoProcessToken(key, params), timeoutReject(30000)]);
         router.push("export", { query: { taskId, token } });
         hideConfirm();
     } catch (error) {
-        console.log(error);
         Toast("合成失败");
+        uni.hideLoading();
     } finally {
         uni.hideLoading();
     }
