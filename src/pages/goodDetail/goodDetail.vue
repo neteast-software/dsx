@@ -185,9 +185,11 @@ async function getVideoProcessToken(id) {
         if (error === "forbidden") {
             showUpgrade.value = true;
             hideConfirm();
-            return;
+            throw error;
         }
-        if (error !== "retry") return;
+        if (error !== "retry") {
+            throw error;
+        }
         if (retryCount < 10) {
             await timeoutPromise(100);
             retryCount++;
@@ -195,6 +197,7 @@ async function getVideoProcessToken(id) {
         } else {
             Toast("获取合成视频token失败");
             retryCount = 0;
+            throw new Error("获取合成视频token失败");
         }
     }
 }
@@ -205,6 +208,7 @@ async function toExport(id = 0, description = "") {
         hideConfirm();
         router.push("export", { query: { id, description, taskId, token, typeId: goodInfo.value?.productType } });
     } finally {
+        retryCount = 0;
         uni.hideLoading();
     }
 }

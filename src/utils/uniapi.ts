@@ -1,5 +1,6 @@
 import { useDebounceFn } from "@vueuse/core";
 import { douyinShareVideos } from "./douyin";
+import logger from "@/weapp/logger";
 
 type ToastType = "none" | "success" | "loading" | "error";
 type ToastOptions = { title: string; icon?: ToastType; duration?: number };
@@ -67,6 +68,23 @@ export function showModal(title: string, content: string, confirmColor = "#3594F
 //     });
 // }
 
+// 获取是否授权
+export function getSetting(scope: keyof UniApp.AuthSetting) {
+    return new Promise<void>((resolve, reject) => {
+        // #ifdef APP-PLUS
+        resolve();
+        // #endif
+        // #ifdef MP-WEIXIN
+        uni.getSetting({
+            success: (res) => {
+                res.authSetting[scope] ? resolve() : reject();
+            },
+            fail: reject
+        });
+        // #endif
+    });
+}
+
 // 从相册选择图片
 export function chooseImageByAlbum() {
     return new Promise<UniApp.ChooseImageSuccessCallbackResult>((resolve, reject) => {
@@ -130,12 +148,22 @@ export function downloadFile(url: string) {
 
 // 保存视频到相册
 export async function saveVideoToAlbum(url: string) {
-    const res = await downloadFile(url);
+    const res = await downloadFile(url).catch((error) => {
+        logger.error("下载的时候报错", error, url);
+        return Promise.reject(error);
+    });
     return new Promise<any>((resolve, reject) => {
         uni.saveVideoToPhotosAlbum({
             filePath: res.tempFilePath,
             success: resolve,
-            fail: reject
+            fail: (err) => {
+                getSetting("scope.writePhotosAlbum").catch(async (error) => {
+                    await showModal("提示", "去授权保存到相册权限");
+                    uni.openSetting();
+                });
+                logger.error("保存到相册时候报错", err, res.tempFilePath);
+                reject(err);
+            }
         });
     });
 }

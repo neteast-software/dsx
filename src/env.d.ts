@@ -7,4 +7,8 @@ declare module "*.vue" {
     export default component;
 }
 
+declare class wx {
+    static getRealtimeLogManager(): any;
+}
+
 declare module "@dcloudio/uni-ui";
