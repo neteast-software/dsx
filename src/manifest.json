@@ -2,8 +2,8 @@
     "name" : "dsx",
     "appid" : "__UNI__ED86F18",
     "description" : "",
-    "versionName" : "1.18.0",
-    "versionCode" : 180,
+    "versionName" : "1.19.0",
+    "versionCode" : 190,
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {

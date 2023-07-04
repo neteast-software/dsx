@@ -87,12 +87,15 @@ async function showVideo(id: number, item: CourseListItem) {
     item.viewCount++;
     activeVideoUrl.value = data.viewUrl;
     activeVideoId.value = id;
-    nextTick(() => {
+    await nextTick();
+    setTimeout(() => {
         videoContext = uni.createVideoContext("courseVideo", instance);
         if (!videoContext) return;
         videoContext.requestFullScreen({ direction: 0 });
         videoContext.play();
-    });
+    }, 20);
+    // nextTick(() => {
+    // });
 }
 
 function exitVideo(e) {
