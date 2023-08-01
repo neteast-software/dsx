@@ -1,7 +1,15 @@
+.wrap {
+    display: flex;
+    flex-direction: column;
+}
 .header {
     justify-content: space-between;
     margin-top: 40rpx;
     margin-bottom: 70rpx;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 999;
     &.weapp {
         margin-top: 4rpx;
         justify-content: flex-start;
@@ -42,3 +50,7 @@
 //         height: 160rpx;
 //     }
 // }
+.list {
+    height: 0;
+    flex: 1;
+}

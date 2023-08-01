@@ -24,6 +24,7 @@ export function usePaginator<T>(requestFn: Function, _pageSize = 10) {
     const total = ref(0);
     const list: Ref<T[]> = ref([]);
     const nomore = computed(() => pageNum.value * pageSize.value >= total.value);
+    const loading = ref(false);
     async function initList(filter?: AnyObject) {
         const { rows, total: totalNum } = await requestList(1, filter);
         pageNum.value = 1;
@@ -38,7 +39,12 @@ export function usePaginator<T>(requestFn: Function, _pageSize = 10) {
         list.value = [...list.value, ...rows];
     }
     async function requestList(pageNum = 1, filter?: AnyObject) {
-        const { rows, total } = await requestFn(pageNum, pageSize.value, filter);
+        loading.value = true;
+        const p = requestFn(pageNum, pageSize.value, filter);
+        p.finally(() => {
+            loading.value = false;
+        });
+        const { rows, total } = await p;
         const list: Array<T> = rows || [];
         return { rows: list, total };
     }
@@ -46,7 +52,8 @@ export function usePaginator<T>(requestFn: Function, _pageSize = 10) {
         nomore,
         list,
         initList,
-        nextList
+        nextList,
+        loading
     };
 }
 

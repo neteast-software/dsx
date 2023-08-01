@@ -11,7 +11,7 @@
         </view>
         <!-- #endif -->
         <!-- #ifdef MP-WEIXIN -->
-        <view class="header flex-center weapp">
+        <view class="header flex-center weapp" :style="{ top: `${statusBarHeight}px` }">
             <view class="back-wrap" @tap="back">
                 <uni-icons type="back" size="24"></uni-icons>
             </view>
@@ -21,19 +21,24 @@
             </view>
         </view>
         <!-- #endif -->
-        <good-info v-for="good in goodList" :key="good.id" :good-info="good"></good-info>
+        <scroll-view class="list" :scroll-y="true" @scrolltolower="nextList">
+            <good-info v-for="good in goodList" :key="good.id" :good-info="good"></good-info>
+            <Empty v-if="!loading && !goodList.length"></Empty>
+        </scroll-view>
     </view>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import statusBar from "@/components/statusBar.vue";
 import { usePaginator } from "@/utils/util";
 import { getSearchGoodsList } from "@/api/dsx/business";
 import GoodInfo from "@/components/goodInfo.vue";
 import router from "@/utils/router";
 import uniIcons from "@dcloudio/uni-ui/lib/uni-icons/uni-icons.vue";
-const { list: goodList, initList, nextList } = usePaginator<GoodInfo>(getSearchGoodsList);
+import { statusBarHeight } from "@/utils/systemInfo";
+import Empty from "@/components/empty.vue";
+const { list: goodList, initList, nextList, loading } = usePaginator<GoodInfo>(getSearchGoodsList);
 const keyword = ref("");
 function resetKeyword() {
     keyword.value = "";
@@ -42,6 +47,13 @@ function resetKeyword() {
 function back() {
     router.back();
 }
+watch(loading, (isLoading) => {
+    if (!isLoading) {
+        uni.hideLoading();
+    } else {
+        uni.showLoading({ title: "加载中" });
+    }
+});
 </script>
 
 <style scoped lang="scss">
